@@ -2,11 +2,12 @@ package developen.common.subject.mvc;
 
 import java.io.Serializable;
 
+import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.View;
 
 @View
-public class SubjectView implements Serializable{
+public class SubjectView implements Serializable, Search{
 
 
 	private static final long serialVersionUID = 4234813721853738184L;
@@ -93,6 +94,23 @@ public class SubjectView implements Serializable{
 	public void setDocument(Long document) {
 		
 		this.document = document;
+		
+	}
+
+
+	public Object[] toColumns() {
+
+		
+		return new Object[]{ 
+				
+				getIdentifier(), 
+				
+				getDocument(), 
+				
+				getDenomination(), 
+				
+		};
+
 		
 	}
 	

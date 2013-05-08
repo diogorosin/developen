@@ -1,9 +1,6 @@
 package developen.client.subject.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import developen.client.framework.mvc.SelectionTransformer;
+import developen.client.framework.mvc.SearchController;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Equal;
@@ -12,39 +9,26 @@ import developen.common.subject.mvc.Person;
 import developen.common.subject.mvc.Subject;
 
 
-public class PersonSearchController extends SubjectSearchController {
+public class PersonSearchController extends SearchController {
 
-
-	public PersonSearchController(){
-				
-		
-		setSelectionTransformer(new SelectionTransformer() {
-
-			public List<Object> transform(List<Object> result) throws Exception {
-
-				List<Object> persons = new ArrayList<Object>();
-
-				for (Object row : result) 
-
-					persons.add((Person)row);
-
-				return persons;
-
-			}
-
-		});
-
-		
-	}
-
-
+	
+	public static final String ACTIVE_PROPERTY = "Active";
+	
+	
 	public PersonSearchModel getModel(){
 
 		return (PersonSearchModel) super.getModel();
 
 	}
 
+	
+	public void changeActiveProperty(Boolean newValue){
 
+		setModelProperty(PersonSearchController.ACTIVE_PROPERTY, newValue);
+
+	}
+
+	
 	public ColumnQuery buildQuery(){
 
 

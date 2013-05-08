@@ -1,9 +1,5 @@
 package developen.client.application.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import developen.client.framework.mvc.SelectionTransformer;
 import developen.client.subject.mvc.PersonSearchController;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
@@ -13,33 +9,9 @@ import developen.common.subject.mvc.Person;
 import developen.common.subject.mvc.Subject;
 import developen.common.subject.mvc.SystemPerson;
 
-
 public class SystemPersonSearchController extends PersonSearchController {
 
 
-	public SystemPersonSearchController(){
-		
-		
-		setSelectionTransformer(new SelectionTransformer() {
-
-			public List<Object> transform(List<Object> result) throws Exception {
-
-				List<Object> subjects = new ArrayList<Object>();
-
-				for (Object row : result) 
-
-					subjects.add((SystemPerson)row);
-
-				return subjects;
-
-			}
-
-		});
-
-		
-	}
-	
-	
 	public SystemPersonSearchModel getModel(){
 
 		return (SystemPersonSearchModel) super.getModel();

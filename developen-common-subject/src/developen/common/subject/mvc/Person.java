@@ -1,10 +1,11 @@
 package developen.common.subject.mvc;
 
+import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Table;
 
 @Table
-public class Person extends Subject {
+public class Person extends Subject implements Search {
 
 	
 	private static final long serialVersionUID = 4687517692307945584L;
@@ -32,5 +33,22 @@ public class Person extends Subject {
 		
 	}
 	
+
+	public Object[] toColumns() {
+
+		
+		return new Object[]{ 
+				
+				getIdentifier(), 
+				
+				getCpf(), 
+				
+				getDenomination(), 
+				
+		};
+
+		
+	}
+
 	
 }

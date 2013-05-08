@@ -1,9 +1,5 @@
 package developen.client.subject.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import developen.client.framework.mvc.SelectionTransformer;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Equal;
@@ -15,27 +11,7 @@ import developen.common.subject.mvc.Subject;
 public class CompanySearchController extends SubjectSearchController {
 
 
-	public CompanySearchController(){
-
-		
-		setSelectionTransformer(new SelectionTransformer() {
-
-			public List<Object> transform(List<Object> result) throws Exception {
-
-				List<Object> companies = new ArrayList<Object>();
-
-				for (Object row : result) 
-
-					companies.add((Company)row);
-
-				return companies;
-
-			}
-
-		});
-
-		
-	}
+	public static final String ACTIVE_PROPERTY = "Active";
 
 	
 	public CompanySearchModel getModel(){
@@ -44,7 +20,14 @@ public class CompanySearchController extends SubjectSearchController {
 
 	}
 	
+	
+	public void changeActiveProperty(Boolean newValue){
 
+		setModelProperty(PersonSearchController.ACTIVE_PROPERTY, newValue);
+
+	}
+
+	
 	public ColumnQuery buildQuery(){
 		
 
@@ -100,7 +83,7 @@ public class CompanySearchController extends SubjectSearchController {
 
 				query.add(new Like(new Column(
 
-						"denomination", 
+						"denomination",
 
 						Subject.class), 
 

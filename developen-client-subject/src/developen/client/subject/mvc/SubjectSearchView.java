@@ -1,18 +1,12 @@
 package developen.client.subject.mvc;
 
 import java.awt.Dimension;
-import java.beans.PropertyChangeEvent;
-import java.util.List;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
-import developen.client.subject.factory.SubjectFormatFactory;
-import developen.common.framework.mvc.SearchState;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -22,7 +16,6 @@ import developen.common.subject.i18n.CpfOrCnpjTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.i18n.SubjectTag;
-import developen.common.subject.mvc.SubjectView;
 
 public class SubjectSearchView extends TableSearchView {
 
@@ -52,107 +45,6 @@ public class SubjectSearchView extends TableSearchView {
 		super(controller);
 
 		setSize(new Dimension(600,600));
-
-
-	}
-
-	@SuppressWarnings("unchecked")
-	public void modelPropertyChanged(PropertyChangeEvent evt) {
-
-
-		if (evt.getPropertyName().equals("ModelState")){
-
-			SearchState newValue = (SearchState) evt.getNewValue();
-
-			if ((newValue.equals(SearchState.CANCELED)) 
-
-					|| (newValue.equals(SearchState.SELECTED))){
-
-				getScrollPane().getVerticalScrollBar().setValue(0);
-
-				setSearchFieldVisible(false);
-
-				setVisible(false);
-
-				getDesktopPane().remove(this);
-
-				dispose();
-
-			} else 
-
-				if (newValue.equals(SearchState.BROWSING))
-
-					if (getResultComponent() != null){
-
-						SwingUtilities.invokeLater(new Runnable() {
-
-							public void run() {
-
-								getResultComponent().requestFocus();
-
-							}
-
-						});
-
-					}
-
-		} else 
-
-			if (evt.getPropertyName().equals(SearchController.SEARCH_PROPERTY)){
-
-				getSearchField().setText((String) evt.getNewValue());
-
-				setSearchFieldVisible(false);
-
-			} else {
-
-				if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
-
-					final int[] selectedRows = getResultComponent().getSelectedRows();
-
-					getResultComponent().clear();
-
-					List<SubjectView> list = (List<SubjectView>) evt.getNewValue();
-
-					if (evt.getNewValue() != null && list.size() > 0) {
-
-						DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
-
-						for (SubjectView s : list)
-
-							model.addRow(new Object[]{
-
-									s.getIdentifier(),
-
-									s.getType().toUpperCase().equals("J") 
-
-									? SubjectFormatFactory.formatCNPJ(s.getDocument()) 
-
-											: SubjectFormatFactory.formatCPF(s.getDocument()),
-
-											s.getDenomination()
-
-							});
-
-						if (selectedRows.length > 0)
-
-							for (int sel : selectedRows)
-
-								if (sel <= getResultComponent().getRowCount())
-
-									getResultComponent().addRowSelectionInterval(sel, sel);
-
-						if (getResultComponent().getSelectedRow() == -1 
-
-								&& getResultComponent().getModel().getRowCount() > 0)
-
-							getResultComponent().setRowSelectionInterval(0, 0);
-
-					}
-
-				}
-
-			}
 
 
 	}
@@ -237,6 +129,7 @@ public class SubjectSearchView extends TableSearchView {
 
 	}
 
+	
 	public Column getDenominationColumn(){
 
 

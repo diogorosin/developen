@@ -12,12 +12,6 @@ import developen.common.subject.mvc.SystemCompany;
 public class SystemCompanySearchController extends CompanySearchController {
 
 	
-	public SystemCompanySearchController(){
-
-
-	}
-
-	
 	public SystemCompanySearchModel getModel(){
 
 		return (SystemCompanySearchModel) super.getModel();

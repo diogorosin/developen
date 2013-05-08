@@ -7,12 +7,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.table.DefaultTableModel;
 
 import developen.common.framework.messenger.Messenger;
+import developen.common.framework.mvc.Search;
 import developen.common.framework.widget.Table;
 
 
@@ -102,7 +106,7 @@ public abstract class TableSearchView extends SearchView {
 					getSearchField().setChecked(false);
 
 				} else 
- 
+
 					if ((e.getKeyCode() == KeyEvent.VK_DOWN 
 
 					|| e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) 
@@ -142,6 +146,51 @@ public abstract class TableSearchView extends SearchView {
 			}
 
 		});
+
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public void modelPropertyChanged(PropertyChangeEvent evt) {
+
+
+		super.modelPropertyChanged(evt);
+
+		if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
+
+			final int[] selectedRows = getResultComponent().getSelectedRows();
+
+			getResultComponent().clear();
+
+			List<Search> list = (List<Search>) evt.getNewValue();
+
+			if (evt.getNewValue() != null && list.size() > 0) {
+
+				DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
+
+				for (Search s : list)
+
+					model.addRow(s.toColumns());
+
+				if (selectedRows.length > 0)
+
+					for (int sel : selectedRows)
+
+						if (sel <= getResultComponent().getRowCount())
+
+							getResultComponent().addRowSelectionInterval(sel, sel);
+
+				if (getResultComponent().getSelectedRow() == -1 
+
+						&& getResultComponent().getModel().getRowCount() > 0)
+
+					getResultComponent().setRowSelectionInterval(0, 0);
+
+			}
+
+
+		}
+
 
 	}
 

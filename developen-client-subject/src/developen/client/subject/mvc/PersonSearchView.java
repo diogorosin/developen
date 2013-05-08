@@ -1,23 +1,42 @@
 package developen.client.subject.mvc;
 
 import java.awt.Dimension;
-import java.beans.PropertyChangeEvent;
-import java.util.List;
 
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 import developen.client.framework.mvc.SearchController;
-import developen.client.subject.factory.SubjectFormatFactory;
-import developen.common.framework.mvc.SearchState;
+import developen.client.framework.mvc.TableSearchView;
+import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.widget.Column;
+import developen.common.framework.widget.Table;
+import developen.common.framework.widget.UneditableTableModel;
+import developen.common.subject.i18n.CpfTag;
+import developen.common.subject.i18n.DenominationTag;
+import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.i18n.PersonTag;
-import developen.common.subject.mvc.Person;
 
-public class PersonSearchView extends SubjectSearchView {
+public class PersonSearchView extends TableSearchView {
 
 
 	private static final long serialVersionUID = 1440272769596534492L;
+
+	public static final int IDENTIFIER_COLUMN_INDEX = 0;
+
+	public static final int DOCUMENT_COLUMN_INDEX = 1;
+	
+	public static final int DENOMINATION_COLUMN_INDEX = 2;
+
+	protected UneditableTableModel tableModel;
+
+	protected Table recordTable;
+
+	protected Column identifierColumn;
+
+	protected Column documentColumn;
+
+	protected Column denominationColumn;
 
 
 	public PersonSearchView(SearchController controller) {
@@ -30,99 +49,96 @@ public class PersonSearchView extends SubjectSearchView {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	public void modelPropertyChanged(PropertyChangeEvent evt) {
+
+	protected Table getResultComponent() {
 
 
-		if (evt.getPropertyName().equals("ModelState")){
+		if (recordTable == null){
 
-			SearchState newValue = (SearchState) evt.getNewValue();
+			recordTable = new Table(getTableModel());
 
-			if ((newValue.equals(SearchState.CANCELED)) 
+			recordTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-					|| (newValue.equals(SearchState.SELECTED))){
+			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setPreferredWidth(100);
 
-				getScrollPane().getVerticalScrollBar().setValue(0);
+			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setMaxWidth(100);
 
-				setSearchFieldVisible(false);
+			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setCellRenderer(
+					
+					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
-				setVisible(false);
+			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setPreferredWidth(150);
 
-				getDesktopPane().remove(this);
+			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setMaxWidth(150);
 
-				dispose();
+			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setCellRenderer(
+					
+					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
-			} else 
+		}
 
-				if (newValue.equals(SearchState.BROWSING))
+		return recordTable;
 
-					if (getResultComponent() != null){
 
-						SwingUtilities.invokeLater(new Runnable() {
+	}
 
-							public void run() {
 
-								getResultComponent().requestFocus();
+	public UneditableTableModel getTableModel(){
 
-							}
 
-						});
+		if (tableModel == null){
 
-					}
+			tableModel = new UneditableTableModel();
 
-		} else 
+			tableModel.addColumn(getIdentifierColumn());
 
-			if (evt.getPropertyName().equals(SearchController.SEARCH_PROPERTY)){
+			tableModel.addColumn(getDocumentColumn());
 
-				getSearchField().setText((String) evt.getNewValue());
+			tableModel.addColumn(getDenominationColumn());
 
-				setSearchFieldVisible(false);
+		}
 
-			} else {
+		return tableModel;
 
-				if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
 
-					final int[] selectedRows = getResultComponent().getSelectedRows();
+	}
 
-					getResultComponent().clear();
 
-					List<Person> list = (List<Person>) evt.getNewValue();
+	public Column getIdentifierColumn(){
 
-					if (evt.getNewValue() != null && list.size() > 0) {
 
-						DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
+		if (identifierColumn == null)
 
-						for (Person p : list)
+			identifierColumn = new Column(new IdentifierTag(), IDENTIFIER_COLUMN_INDEX);
 
-							model.addRow(new Object[]{
+		return identifierColumn;
 
-									p.getIdentifier(),
 
-									SubjectFormatFactory.formatCPF(p.getCpf()),
+	}
 
-									p.getDenomination()
 
-							});
+	public Column getDocumentColumn(){
 
-						if (selectedRows.length > 0)
 
-							for (int sel : selectedRows)
+		if (documentColumn == null)
 
-								if (sel <= getResultComponent().getRowCount())
+			documentColumn = new Column(new CpfTag(), DOCUMENT_COLUMN_INDEX);
 
-									getResultComponent().addRowSelectionInterval(sel, sel);
+		return documentColumn;
 
-						if (getResultComponent().getSelectedRow() == -1 
 
-								&& getResultComponent().getModel().getRowCount() > 0)
+	}
 
-							getResultComponent().setRowSelectionInterval(0, 0);
+	
+	public Column getDenominationColumn(){
 
-					}
 
-				}
+		if (denominationColumn == null)
 
-			}
+			denominationColumn = new Column(new DenominationTag(), DENOMINATION_COLUMN_INDEX);
+
+		return denominationColumn;
+
 
 	}
 
