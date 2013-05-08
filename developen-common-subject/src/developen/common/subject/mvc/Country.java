@@ -1,0 +1,140 @@
+package developen.common.subject.mvc;
+
+import developen.common.framework.mvc.Model;
+import developen.common.persistence.annotation.Column;
+import developen.common.persistence.annotation.Identifier;
+import developen.common.persistence.annotation.Table;
+
+@Table
+public class Country extends Model{
+	
+	
+	private static final long serialVersionUID = -680187333503380526L;
+
+	@Identifier(sequence=true)
+	private Long identifier;
+
+	@Column
+	private String denomination;
+
+	@Column
+	private String acronym;
+
+	
+	public Long getIdentifier() {
+		
+		return identifier;
+		
+	}
+
+	
+	public void setIdentifier(Long newValue) {
+		
+
+		Long oldValue = this.identifier;
+		
+		this.identifier = newValue;
+		
+		firePropertyChange("Identifier", oldValue, newValue);
+
+		
+	}
+
+
+	public String getDenomination() {
+		
+		return denomination;
+		
+	}
+
+
+	public void setDenomination(String newValue) {
+		
+
+		String oldValue = this.denomination;
+		
+		this.denomination = newValue;
+		
+		firePropertyChange("Denomination", oldValue, newValue);
+
+		
+	}
+
+
+	public String getAcronym() {
+		
+		return acronym;
+		
+	}
+	
+	
+	public void setAcronym(String newValue) {
+		
+		
+		String oldValue = this.acronym;
+		
+		this.acronym = newValue;
+		
+		firePropertyChange("Acronym", oldValue, newValue);
+		
+		
+	}
+
+	
+	public int hashCode() {
+		
+		
+		final int prime = 31;
+		
+		int result = 1;
+		
+		result = prime * result
+				
+				+ ((identifier == null) ? 0 : identifier.hashCode());
+		
+		return result;
+		
+		
+	}
+
+
+	public boolean equals(Object obj) {
+		
+		
+		if (this == obj)
+			
+			return true;
+		
+		if (obj == null)
+			
+			return false;
+		
+		if (getClass() != obj.getClass())
+			
+			return false;
+		
+		Country other = (Country) obj;
+		
+		if (identifier == null) {
+			
+			if (other.identifier != null)
+				
+				return false;
+			
+		} else if (!identifier.equals(other.identifier))
+			
+			return false;
+		
+		return true;
+		
+		
+	}
+	
+
+	public String toString(){
+
+		return getDenomination(); 
+
+	}
+
+}

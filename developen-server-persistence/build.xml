@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-server-persistence" name="Create Runnable Jar for Project developen-server-persistence with libraries in sub-folder">
+    <target name="developen-server-persistence">
+    	<mkdir dir="/home/diogo/server/source"/>
+    	<jar destfile="/home/diogo/server/source/developen-server-persistence.jar">
+            <fileset dir="/home/diogo/workspace/developen-server-persistence/bin"/>
+        </jar>
+   	</target>
+</project>

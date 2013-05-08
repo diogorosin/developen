@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-client-osm" name="Create Runnable Jar for Project developen-client-osm with libraries in sub-folder">
+    <target name="developen-client-osm">
+        <mkdir dir="/home/diogo/client"/>
+        <mkdir dir="/home/diogo/client/source"/>
+        <mkdir dir="/home/diogo/client/application"/>
+        <jar destfile="/home/diogo/client/application/developen-client-osm.jar">
+            <manifest>
+                <attribute name="Main-Class" value="developen.client.osm.Client"/>
+                <attribute name="Class-Path" value="
+            		.
+                	../source/developen-client-application.jar
+                	../source/developen-client-commercial.jar
+                	../source/developen-client-engineer.jar
+                	../source/developen-client-framework.jar
+                	../source/developen-client-persistence.jar
+                	../source/developen-client-subject.jar
+                	../source/developen-common-commercial.jar 
+                	../source/developen-common-engineer.jar 
+                	../source/developen-common-framework.jar 
+                	../source/developen-common-persistence.jar
+                	../source/developen-common-subject.jar 
+            	"/>
+            </manifest>
+            <fileset dir="/home/diogo/workspace/developen-client-osm/bin"/>
+        </jar>
+    </target>
+</project>

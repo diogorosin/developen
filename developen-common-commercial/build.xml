@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-common-commercial" name="Create Runnable Jar for Project developen-common-commercial with libraries in sub-folder">
+    <target name="developen-common-commercial">
+    	<mkdir dir="/home/diogo/server/source"/>
+    	<mkdir dir="/home/diogo/client/source"/>
+        <jar destfile="/home/diogo/server/source/developen-common-commercial.jar">
+            <fileset dir="/home/diogo/workspace/developen-common-commercial/bin"/>
+        </jar>
+        <copy overwrite="yes" file="/home/diogo/server/source/developen-common-commercial.jar" todir="/home/diogo/client/source"/>
+    </target>
+</project>

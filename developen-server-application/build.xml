@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-server-application" name="Create Runnable Jar for Project developen-server-application with libraries in sub-folder">
+    <target name="developen-server-application">
+    	<mkdir dir="/home/diogo/server"/>
+    	<mkdir dir="/home/diogo/server/application"/>
+    	<jar destfile="/home/diogo/server/application/developen-server-application.jar">
+            <manifest>
+                <attribute name="Main-Class" value="developen.server.application.Server"/>
+                <attribute name="Class-Path" value="
+                	. 
+                    ../configuration/
+                    ../source/developen-common-framework.jar
+                	../source/developen-common-subject.jar 
+                	../source/developen-common-engineer.jar 
+                	../source/developen-common-commercial.jar 
+                	../source/developen-common-persistence.jar
+                	../source/developen-server-persistence.jar
+                	../source/postgresql-9.1-902.jdbc4.jar
+                	"/>
+            </manifest>
+            <fileset dir="/home/diogo/workspace/developen-server-application/bin"/>
+        </jar>
+   	</target>
+</project>
