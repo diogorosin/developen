@@ -16,13 +16,13 @@ import developen.common.framework.messenger.Messenger;
 import developen.common.framework.widget.Table;
 
 
-public abstract class TableSearchView<E> extends SearchView<E> {
+public abstract class TableSearchView extends SearchView {
 
 
 	private static final long serialVersionUID = -3407326248053126030L;
 
 
-	public TableSearchView(SearchController<E> controller) {
+	public TableSearchView(SearchController controller) {
 
 		super(controller);
 

@@ -14,7 +14,7 @@ import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Limit;
 import developen.common.persistence.session.Session;
 
-public abstract class SearchController<E> extends Controller {
+public abstract class SearchController extends Controller {
 
 
 	public static final String RESULTED_ROWS_PROPERTY = "ResultedRows";
@@ -23,9 +23,9 @@ public abstract class SearchController<E> extends Controller {
 
 	public static final int PAGE_SIZE = 50;
 
-	private List<SearchListener<E>> registeredSearchListeners;
+	private List<SearchListener> registeredSearchListeners;
 
-	private SelectionTransformer<E> selectionTransformer;
+	private SelectionTransformer selectionTransformer;
 
 
 	private void changeModelState(SearchState modelState) {
@@ -35,12 +35,12 @@ public abstract class SearchController<E> extends Controller {
 	}
 
 
-	private List<SearchListener<E>> getRegisteredSearchListeners(){
+	private List<SearchListener> getRegisteredSearchListeners(){
 
 
 		if (registeredSearchListeners == null)
 
-			registeredSearchListeners = new ArrayList<SearchListener<E>>();
+			registeredSearchListeners = new ArrayList<SearchListener>();
 
 		return registeredSearchListeners;
 
@@ -48,34 +48,34 @@ public abstract class SearchController<E> extends Controller {
 	}
 
 
-	public void addSearchListener(SearchListener<E> listener) {
+	public void addSearchListener(SearchListener listener) {
 
 		getRegisteredSearchListeners().add(listener);
 
 	}
 
 
-	public void removeSearchListener(SearchListener<E> listener) {
+	public void removeSearchListener(SearchListener listener) {
 
 		getRegisteredSearchListeners().remove(listener);
 
 	}
 
 
-	public SelectionTransformer<E> getSelectionTransformer() {
+	public SelectionTransformer getSelectionTransformer() {
 
 
 		if (selectionTransformer == null){
 
-			selectionTransformer = new SelectionTransformer<E>() {
+			selectionTransformer = new SelectionTransformer() {
 
-				public List<E> transform(List<E> selection) {
+				public List<Object> transform(List<Object> selection) {
 
-					List<E> oldList = selection;
+					List<Object> oldList = selection;
 					
-					List<E> newList = new ArrayList<E>();
+					List<Object> newList = new ArrayList<Object>();
 					
-					for (E object : oldList)
+					for (Object object : oldList)
 						
 						newList.add(object);
 					
@@ -93,29 +93,28 @@ public abstract class SearchController<E> extends Controller {
 	}
 
 
-	public void setSelectionTransformer(SelectionTransformer<E> selectionTransformer) {
+	public void setSelectionTransformer(SelectionTransformer selectionTransformer) {
 
 		this.selectionTransformer = selectionTransformer;
 
 	}
 
 
-	@SuppressWarnings("unchecked")
-	public SearchModel<E> getModel(){
+	public SearchModel getModel(){
 
-		return (SearchModel<E>) super.getModel();
+		return (SearchModel) super.getModel();
 
 	}
 
 
-	public void setModel(SearchModel<E> model){
+	public void setModel(SearchModel model){
 
 		super.setModel(model);
 
 	}
 
 
-	public E find(String s) throws Exception{
+	public Object find(String s) throws Exception{
 
 
 		changeSearchProperty(s);
@@ -134,7 +133,7 @@ public abstract class SearchController<E> extends Controller {
 	}
 
 
-	public void changeResultedRowsProperty(List<E> newValue){
+	public void changeResultedRowsProperty(List<Object> newValue){
 
 		setModelProperty(SearchController.RESULTED_ROWS_PROPERTY, newValue);
 
@@ -181,7 +180,7 @@ public abstract class SearchController<E> extends Controller {
 	protected void onSelect(int[] rows) throws Exception {
 
 
-		List<E> list = new ArrayList<E>();
+		List<Object> list = new ArrayList<Object>();
 
 		for (int i : rows)
 
@@ -189,9 +188,9 @@ public abstract class SearchController<E> extends Controller {
 
 		list = getSelectionTransformer().transform(list);
 
-		SearchEvent<E> evt = new SearchEvent<E>(list);
+		SearchEvent evt = new SearchEvent(list);
 
-		for (SearchListener<E> searchListener : getRegisteredSearchListeners())
+		for (SearchListener searchListener : getRegisteredSearchListeners())
 
 			searchListener.onSearchConfirmed(evt);
 
@@ -225,9 +224,9 @@ public abstract class SearchController<E> extends Controller {
 	protected void onCancel() throws Exception {
 
 
-		SearchEvent<E> evt = new SearchEvent<E>(null);
+		SearchEvent evt = new SearchEvent(null);
 
-		for (SearchListener<E> searchListener : getRegisteredSearchListeners())
+		for (SearchListener searchListener : getRegisteredSearchListeners())
 
 			searchListener.onSearchCanceled(evt);
 
@@ -333,7 +332,6 @@ public abstract class SearchController<E> extends Controller {
 	public abstract ColumnQuery buildQuery();
 
 
-	@SuppressWarnings("unchecked")
 	public void more() throws Exception {
 
 
@@ -343,19 +341,19 @@ public abstract class SearchController<E> extends Controller {
 
 		Session session = DPA.getSessionFactory().createSession(); 
 
-		List<E> rows = (List<E>) session.list(query);
+		List<Object> rows = (List<Object>) session.list(query);
 
 		session.close();
 
 		if (rows != null && rows.size() > 0) {
 
-			List<E> resultedRows = new ArrayList<E>();
+			List<Object> resultedRows = new ArrayList<Object>();
 
-			for (E row : getModel().getResultedRows())
+			for (Object row : getModel().getResultedRows())
 
 				resultedRows.add(row);
 
-			for (E row : rows)
+			for (Object row : rows)
 
 				resultedRows.add(row);
 

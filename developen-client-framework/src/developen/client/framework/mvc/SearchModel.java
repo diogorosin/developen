@@ -7,24 +7,24 @@ import java.util.List;
 import developen.common.framework.mvc.Model;
 import developen.common.framework.mvc.SearchState;
 
-public class SearchModel<E> extends Model {
+public class SearchModel extends Model {
 
 	
 	private static final long serialVersionUID = -3514256580384385853L;
 
-	private List<E> resultedRows;
+	private List<Object> resultedRows;
 	
 	private String search;
 	
 	private SearchState modelState;
 
 	
-	public List<E> getResultedRows(){
+	public List<Object> getResultedRows(){
 		
 		
 		if (resultedRows == null)
 			
-			resultedRows = new ArrayList<E>();
+			resultedRows = new ArrayList<Object>();
 		
 		return resultedRows;
 		
@@ -32,10 +32,10 @@ public class SearchModel<E> extends Model {
 	}
 
 	
-	public void setResultedRows(List<E> newValue){
+	public void setResultedRows(List<Object> newValue){
 		
 		
-		List<E> oldValue = this.resultedRows;
+		List<Object> oldValue = this.resultedRows;
 		
 		this.resultedRows = newValue;
 		

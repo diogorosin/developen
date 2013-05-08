@@ -1,12 +1,12 @@
 package developen.client.framework.search;
 
-public class SearchAdapter<E> implements SearchListener<E> {
+public class SearchAdapter implements SearchListener {
 
 	
-	public void onSearchConfirmed(SearchEvent<E> event) throws Exception {}
+	public void onSearchConfirmed(SearchEvent event) throws Exception {}
 
 	
-	public void onSearchCanceled(SearchEvent<E> event) throws Exception {}
+	public void onSearchCanceled(SearchEvent event) throws Exception {}
 	
 
 }

@@ -5,7 +5,7 @@ import javax.swing.JDesktopPane;
 import developen.client.framework.search.Search;
 
 
-public interface DBField<E> extends DBComponent {
+public interface DBField extends DBComponent {
 
 	
 	public boolean isPrimaryKey();
@@ -20,9 +20,9 @@ public interface DBField<E> extends DBComponent {
 	
 	public void setFixedValue(boolean fixedValue);
 
-	public Search<E> getSearch();
+	public Search getSearch();
 
-	public void setSearch(Search<E> search);
+	public void setSearch(Search search);
 	
 	public JDesktopPane getDesktopPane();
 	

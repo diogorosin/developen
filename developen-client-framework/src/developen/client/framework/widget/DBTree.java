@@ -10,12 +10,12 @@ import developen.client.framework.mvc.SelectionTransformer;
 import developen.common.framework.widget.Tree;
 
 
-public class DBTree<E> extends Tree implements DBComponent {
+public class DBTree extends Tree implements DBComponent {
 
 
 	private static final long serialVersionUID = 6948187132585650055L;
 	
-	private SelectionTransformer<E> selectionTransformer;
+	private SelectionTransformer selectionTransformer;
 	
 	private List<DefaultMutableTreeNode> nodes;
 	
@@ -56,14 +56,14 @@ public class DBTree<E> extends Tree implements DBComponent {
 	}
 
 	
-	public SelectionTransformer<E> getSelectionTransformer() {
+	public SelectionTransformer getSelectionTransformer() {
 
 		
 		if (selectionTransformer == null){
 			
-			selectionTransformer = new SelectionTransformer<E>() {
+			selectionTransformer = new SelectionTransformer() {
 				
-				public List<E> transform(List<E> selection) {
+				public List<Object> transform(List<Object> selection) {
 
 					return selection;
 
@@ -79,7 +79,7 @@ public class DBTree<E> extends Tree implements DBComponent {
 	}
 
 	
-	public void setSelectionTransformer(SelectionTransformer<E> resultTransformer) {
+	public void setSelectionTransformer(SelectionTransformer resultTransformer) {
 
 		this.selectionTransformer = resultTransformer;
 

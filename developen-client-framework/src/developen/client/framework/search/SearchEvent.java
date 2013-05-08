@@ -3,27 +3,27 @@ package developen.client.framework.search;
 import java.util.List;
 
 
-public class SearchEvent<E> {
+public class SearchEvent {
 	
 	
-	private List<E> selectedRows;
+	private List<Object> selectedRows;
 
 	
-	public SearchEvent(List<E> selectedRows){
+	public SearchEvent(List<Object> selectedRows){
 		
 		this.selectedRows = selectedRows;
 		
 	}
 	
 	
-	public List<E> getSelectedRows() {
+	public List<Object> getSelectedRows() {
 		
 		return selectedRows;
 		
 	}
 	
 
-	public void setSelectedRows(List<E> selectedRows) {
+	public void setSelectedRows(List<Object> selectedRows) {
 		
 		this.selectedRows = selectedRows;
 		

@@ -37,7 +37,7 @@ import developen.common.framework.widget.ExtendedLayout;
 import developen.common.framework.widget.InternalFrame;
 import developen.common.framework.widget.SearchField;
 
-public abstract class SearchView<E> extends InternalFrame implements CheckListener, SystemPersonListener {
+public abstract class SearchView extends InternalFrame implements CheckListener, SystemPersonListener {
 
 
 	private static final long serialVersionUID = -8901109365984063505L;
@@ -63,7 +63,7 @@ public abstract class SearchView<E> extends InternalFrame implements CheckListen
 	private CancelAction cancelAction;
 	
 
-	public SearchView(SearchController<E> controller) {
+	public SearchView(SearchController controller) {
 
 		super(controller);
 
@@ -173,15 +173,14 @@ public abstract class SearchView<E> extends InternalFrame implements CheckListen
 	}
 
 	
-	@SuppressWarnings("unchecked")
-	public SearchController<E> getController(){
+	public SearchController getController(){
 
-		return (SearchController<E>) super.getController();
+		return (SearchController) super.getController();
 
 	}
 
 	
-	public void setController(SearchController<E> controller){
+	public void setController(SearchController controller){
 
 		super.setController(controller);
 

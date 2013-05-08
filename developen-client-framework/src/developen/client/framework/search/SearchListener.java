@@ -1,13 +1,13 @@
 package developen.client.framework.search;
 
 
-public abstract interface SearchListener<E> {
+public abstract interface SearchListener {
 
 	
-	public void onSearchConfirmed(SearchEvent<E> event) throws Exception;
+	public void onSearchConfirmed(SearchEvent event) throws Exception;
 	
 	
-	public void onSearchCanceled(SearchEvent<E> event) throws Exception;
+	public void onSearchCanceled(SearchEvent event) throws Exception;
 	
 	
 }

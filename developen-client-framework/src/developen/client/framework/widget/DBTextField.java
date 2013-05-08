@@ -13,7 +13,7 @@ import developen.client.framework.search.Search;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.TextField;
 
-public class DBTextField<E> extends TextField implements DBField<E>{
+public class DBTextField extends TextField implements DBField{
 
 
 	private static final long serialVersionUID = 5254764103720680641L;
@@ -26,7 +26,7 @@ public class DBTextField<E> extends TextField implements DBField<E>{
 	
 	private boolean fixedValue;
 
-	private Search<E> search;
+	private Search search;
 
 	private Condition condition;
 
@@ -139,14 +139,14 @@ public class DBTextField<E> extends TextField implements DBField<E>{
 	}
 
 	
-	public Search<E> getSearch() {
+	public Search getSearch() {
 
 		return search;
 
 	}
 
 	
-	public void setSearch(Search<E> search) {
+	public void setSearch(Search search) {
 
 		
 		this.search = search;

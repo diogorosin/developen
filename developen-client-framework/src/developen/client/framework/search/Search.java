@@ -18,26 +18,26 @@ import developen.common.framework.widget.InternalFrame;
 import developen.common.framework.widget.InternalFramePosition;
 
 
-public abstract class Search<E> implements View {
+public abstract class Search implements View {
 
 	
-	protected SearchView<E> view;
+	protected SearchView view;
 	
-	protected SearchController<E> controller;
+	protected SearchController controller;
 	
-	protected SearchModel<E> model;
+	protected SearchModel model;
 
 	private DBField component;
 	
 
-	public E findBy() throws Exception{
+	public Object findBy() throws Exception{
 
 		
 		String s = getComponent().getFindByString();
 
 		if (!s.isEmpty())
 			
-			return (E) getController().find(s);
+			return getController().find(s);
 
 		return null;
 		
@@ -45,12 +45,12 @@ public abstract class Search<E> implements View {
 	}
 
 	
-	public E findBy(String s) throws Exception{
+	public Object findBy(String s) throws Exception{
 
 		
 		if (!s.isEmpty())
 			
-			return (E) getController().find(s);
+			return getController().find(s);
 
 		return null;
 
@@ -58,14 +58,14 @@ public abstract class Search<E> implements View {
 	}
 
 	
-	public void addSearchListener(SearchListener<E> listener) {
+	public void addSearchListener(SearchListener listener) {
 
 		getController().addSearchListener(listener);
 
 	}
 
 
-	public void removeSearchListener(SearchListener<E> listener) {
+	public void removeSearchListener(SearchListener listener) {
 
 		getController().removeSearchListener(listener);
 
@@ -193,21 +193,21 @@ public abstract class Search<E> implements View {
 	}
 
 
-	public SearchView<E> getView(){
+	public SearchView getView(){
 
 		return view;
 
 	}	
 
 	
-	public SearchController<E> getController(){
+	public SearchController getController(){
 
 		return controller;
 
 	}	
 
 	
-	public SearchModel<E> getModel(){
+	public SearchModel getModel(){
 
 		return model;
 

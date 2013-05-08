@@ -2,8 +2,8 @@ package developen.client.framework.mvc;
 
 import java.util.List;
 
-public interface SelectionTransformer<E> {
+public interface SelectionTransformer {
 	
-	public List<E> transform(List<E> selection) throws Exception; 
+	public List<Object> transform(List<Object> selection) throws Exception; 
 
 }
