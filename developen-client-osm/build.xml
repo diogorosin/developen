@@ -22,7 +22,7 @@
                 	../source/developen-common-subject.jar 
             	"/>
             </manifest>
-            <fileset dir="/home/diogo/workspace/developen-client-osm/bin"/>
+            <fileset dir="/home/diogo/git/developen/developen-client-osm/bin"/>
         </jar>
     </target>
 </project>

@@ -18,7 +18,7 @@
                 	../source/postgresql-9.1-902.jdbc4.jar
                 	"/>
             </manifest>
-            <fileset dir="/home/diogo/workspace/developen-server-application/bin"/>
+            <fileset dir="/home/diogo/git/developen/developen-server-application/bin"/>
         </jar>
    	</target>
 </project>

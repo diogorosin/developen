@@ -4,7 +4,7 @@
     	<mkdir dir="/home/diogo/server/source"/>
     	<mkdir dir="/home/diogo/client/source"/>
         <jar destfile="/home/diogo/server/source/developen-common-framework.jar">
-            <fileset dir="/home/diogo/workspace/developen-common-framework/bin"/>
+            <fileset dir="/home/diogo/git/developen/developen-common-framework/bin"/>
         </jar>
         <copy overwrite="yes" file="/home/diogo/server/source/developen-common-framework.jar" todir="/home/diogo/client/source"/>
     </target>
