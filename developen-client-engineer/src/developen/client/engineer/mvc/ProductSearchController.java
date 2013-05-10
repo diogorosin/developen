@@ -1,9 +1,5 @@
 package developen.client.engineer.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import developen.client.framework.mvc.SelectionTransformer;
 import developen.common.engineer.mvc.Product;
 import developen.common.engineer.mvc.Progeny;
 import developen.common.persistence.query.Column;
@@ -13,29 +9,6 @@ import developen.common.persistence.query.Like;
 
 public class ProductSearchController extends ProgenySearchController {
 	
-	
-	public ProductSearchController(){
-
-
-		setSelectionTransformer(new SelectionTransformer() {
-
-			public List<Object> transform(List<Object> result) throws Exception {
-
-				List<Object> products = new ArrayList<Object>();
-
-				for (Object row : result)
-
-					products.add((Product)row);
-
-				return products;
-
-			}
-
-		});
-
-
-	}
-
 	
 	public ProductSearchModel getModel(){
 

@@ -1,21 +1,15 @@
 package developen.client.commercial.mvc;
 
 import java.awt.Dimension;
-import java.beans.PropertyChangeEvent;
-import java.util.List;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.OrderTag;
-import developen.common.commercial.mvc.Order;
 import developen.common.engineer.i18n.FromTag;
 import developen.common.engineer.i18n.ToTag;
-import developen.common.framework.mvc.SearchState;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -55,101 +49,6 @@ public class OrderSearchView extends TableSearchView {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	public void modelPropertyChanged(PropertyChangeEvent evt) {
-
-
-		if (evt.getPropertyName().equals("ModelState")){
-
-			SearchState newValue = (SearchState) evt.getNewValue();
-
-			if ((newValue.equals(SearchState.CANCELED)) 
-
-					|| (newValue.equals(SearchState.SELECTED))){
-
-				getScrollPane().getVerticalScrollBar().setValue(0);
-
-				setSearchFieldVisible(false);
-
-				setVisible(false);
-
-				getDesktopPane().remove(this);
-
-				dispose();
-
-			} else 
-
-				if (newValue.equals(SearchState.BROWSING))
-
-					if (getResultComponent() != null){
-
-						SwingUtilities.invokeLater(new Runnable() {
-
-							public void run() {
-
-								getResultComponent().requestFocus();
-
-							}
-
-						});
-
-					}
-
-		} else 
-
-			if (evt.getPropertyName().equals(SearchController.SEARCH_PROPERTY)){
-
-				getSearchField().setText((String) evt.getNewValue());
-
-				setSearchFieldVisible(false);
-
-			} else {		
-
-				if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
-
-					final int[] selectedRows = getResultComponent().getSelectedRows();
-
-					getResultComponent().clear();
-
-					List<Order> list = (List<Order>) evt.getNewValue();
-
-					if (evt.getNewValue() != null && list.size() > 0) {
-
-						DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
-
-						for (Order s : list)
-
-							model.addRow(new Object[]{
-
-									s.getIdentifier(),
-
-									s.getFrom(),
-									
-									s.getTo(),
-
-							});
-
-						if (selectedRows.length > 0)
-
-							for (int sel : selectedRows)
-
-								if (sel <= getResultComponent().getRowCount())
-
-									getResultComponent().addRowSelectionInterval(sel, sel);
-
-						if (getResultComponent().getSelectedRow() == -1 && getResultComponent().getModel().getRowCount() > 0)
-
-							getResultComponent().setRowSelectionInterval(0, 0);
-
-					}
-
-				}
-
-			}
-
-
-	}
-
 	
 	protected Table getResultComponent() {
 
@@ -179,7 +78,6 @@ public class OrderSearchView extends TableSearchView {
 			recordTable.getColumnModel().getColumn(TO_COLUMN_INDEX).setCellRenderer(
 					
 					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
-
 
 		}
 		

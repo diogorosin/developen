@@ -1,11 +1,7 @@
 package developen.client.engineer.mvc;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import developen.client.framework.mvc.SearchController;
-import developen.client.framework.mvc.SelectionTransformer;
 import developen.common.engineer.mvc.Progeny;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
@@ -17,29 +13,6 @@ public class ProgenySearchController extends SearchController {
 
 
 	public static final String ACTIVE_PROPERTY = "Active";
-
-
-	public ProgenySearchController(){
-
-
-		setSelectionTransformer(new SelectionTransformer() {
-
-			public List<Object> transform(List<Object> result) throws Exception {
-
-				List<Object> progenies = new ArrayList<Object>();
-
-				for (Object row : result)
-
-					progenies.add((Progeny)row);
-
-				return progenies;
-
-			}
-
-		});
-
-
-	}
 
 
 	public ProgenySearchModel getModel(){

@@ -162,7 +162,7 @@ public class SubjectView implements Serializable, Search{
 				
 				getDenomination(),
 				
-				getCity().toUpperCase(),
+				getCity(),
 				
 				getState(),
 				

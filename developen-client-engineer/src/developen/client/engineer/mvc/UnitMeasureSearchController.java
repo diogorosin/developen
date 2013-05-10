@@ -1,10 +1,6 @@
 package developen.client.engineer.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import developen.client.framework.mvc.SearchController;
-import developen.client.framework.mvc.SelectionTransformer;
 import developen.common.engineer.mvc.UnitMeasure;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
@@ -13,29 +9,6 @@ import developen.common.persistence.query.Like;
 
 public class UnitMeasureSearchController extends SearchController {
 	
-	
-	public UnitMeasureSearchController(){
-
-
-		setSelectionTransformer(new SelectionTransformer() {
-
-			public List<Object> transform(List<Object> result) throws Exception {
-
-				List<Object> units = new ArrayList<Object>();
-
-				for (Object row : result)
-
-					units.add((UnitMeasure)row);
-
-				return units;
-
-			}
-
-		});
-
-
-	}
-
 	
 	public UnitMeasureSearchModel getModel(){
 

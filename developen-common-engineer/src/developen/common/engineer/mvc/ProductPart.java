@@ -98,7 +98,15 @@ public class ProductPart extends Model implements Search, ListEditor{
 
 	public Object[] toColumns() {
 
-		return new Object[]{ getIdentifier().getPart(), getAmount() };
+		
+		return new Object[]{ 
+				
+				getIdentifier().getPart(), 
+				
+				getAmount() 
+				
+		};
+		
 
 	}
 

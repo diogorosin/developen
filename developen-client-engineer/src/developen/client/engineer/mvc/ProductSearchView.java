@@ -15,6 +15,7 @@ public class ProductSearchView extends ProgenySearchView {
 		super(controller);
 
 	}
+	
 
 	public Tag getInternalFrameTitle() {
 

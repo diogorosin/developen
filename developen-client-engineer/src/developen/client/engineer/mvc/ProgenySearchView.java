@@ -1,13 +1,9 @@
 package developen.client.engineer.mvc;
 
 import java.awt.Dimension;
-import java.beans.PropertyChangeEvent;
-import java.util.List;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
@@ -15,8 +11,6 @@ import developen.common.engineer.i18n.DenominationTag;
 import developen.common.engineer.i18n.IdentifierTag;
 import developen.common.engineer.i18n.ProgenyTag;
 import developen.common.engineer.i18n.UnitMeasureShortTag;
-import developen.common.engineer.mvc.Progeny;
-import developen.common.framework.mvc.SearchState;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -34,6 +28,8 @@ public class ProgenySearchView extends TableSearchView {
 
 	public static final int UNIT_MEASURE_COLUMN_INDEX = 2;
 
+	protected UneditableTableModel tableModel;
+
 	protected Table recordTable;
 
 	protected Column identifierColumn;
@@ -42,8 +38,6 @@ public class ProgenySearchView extends TableSearchView {
 
 	protected Column unitMeasureColumn;
 
-	protected UneditableTableModel tableModel;
-
 
 	public ProgenySearchView(SearchController controller) {
 
@@ -51,101 +45,6 @@ public class ProgenySearchView extends TableSearchView {
 		super(controller);
 
 		setSize(new Dimension(600, 600));
-
-
-	}
-
-	@SuppressWarnings("unchecked")
-	public void modelPropertyChanged(PropertyChangeEvent evt) {
-
-
-		if (evt.getPropertyName().equals("ModelState")){
-
-			SearchState newValue = (SearchState) evt.getNewValue();
-
-			if ((newValue.equals(SearchState.CANCELED)) 
-
-					|| (newValue.equals(SearchState.SELECTED))){
-
-				getScrollPane().getVerticalScrollBar().setValue(0);
-
-				setSearchFieldVisible(false);
-
-				setVisible(false);
-
-				getDesktopPane().remove(this);
-
-				dispose();
-
-			} else 
-
-				if (newValue.equals(SearchState.BROWSING))
-
-					if (getResultComponent() != null){
-
-						SwingUtilities.invokeLater(new Runnable() {
-
-							public void run() {
-
-								getResultComponent().requestFocus();
-
-							}
-
-						});
-
-					}
-
-		} else 
-
-			if (evt.getPropertyName().equals(SearchController.SEARCH_PROPERTY)){
-
-				getSearchField().setText((String) evt.getNewValue());
-
-				setSearchFieldVisible(false);
-
-			} else {		
-
-				if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
-
-					final int[] selectedRows = getResultComponent().getSelectedRows();
-
-					getResultComponent().clear();
-
-					List<Progeny> list = (List<Progeny>) evt.getNewValue();
-
-					if (evt.getNewValue() != null && list.size() > 0) {
-
-						DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
-
-						for (Progeny s : list)
-
-							model.addRow(new Object[]{
-
-									s.getIdentifier(),
-
-									s.getDenomination(),
-
-									s.getUnitMeasure().getAcronym().toUpperCase()
-
-							});
-
-						if (selectedRows.length > 0)
-
-							for (int sel : selectedRows)
-
-								if (sel <= getResultComponent().getRowCount())
-
-									getResultComponent().addRowSelectionInterval(sel, sel);
-
-						if (getResultComponent().getSelectedRow() == -1 && getResultComponent().getModel().getRowCount() > 0)
-
-							getResultComponent().setRowSelectionInterval(0, 0);
-
-					}
-
-				}
-
-			}
 
 
 	}

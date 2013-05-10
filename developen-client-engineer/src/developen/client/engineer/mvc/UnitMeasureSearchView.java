@@ -1,13 +1,9 @@
 package developen.client.engineer.mvc;
 
 import java.awt.Dimension;
-import java.beans.PropertyChangeEvent;
-import java.util.List;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
@@ -16,8 +12,6 @@ import developen.common.engineer.i18n.DenominationTag;
 import developen.common.engineer.i18n.GroupTag;
 import developen.common.engineer.i18n.IdentifierTag;
 import developen.common.engineer.i18n.UnitMeasureTag;
-import developen.common.engineer.mvc.UnitMeasure;
-import developen.common.framework.mvc.SearchState;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -56,104 +50,6 @@ public class UnitMeasureSearchView extends TableSearchView {
 		super(controller);
 
 		setSize(new Dimension(600, 600));
-
-
-	}
-
-
-	@SuppressWarnings("unchecked")
-	public void modelPropertyChanged(PropertyChangeEvent evt) {
-
-
-		if (evt.getPropertyName().equals("ModelState")){
-
-			SearchState newValue = (SearchState) evt.getNewValue();
-
-			if ((newValue.equals(SearchState.CANCELED)) 
-
-					|| (newValue.equals(SearchState.SELECTED))){
-
-				getScrollPane().getVerticalScrollBar().setValue(0);
-
-				setSearchFieldVisible(false);
-
-				setVisible(false);
-
-				getDesktopPane().remove(this);
-
-				dispose();
-
-			} else 
-
-				if (newValue.equals(SearchState.BROWSING))
-
-					if (getResultComponent() != null){
-
-						SwingUtilities.invokeLater(new Runnable() {
-
-							public void run() {
-
-								getResultComponent().requestFocus();
-
-							}
-
-						});
-
-					}
-
-		} else 
-
-			if (evt.getPropertyName().equals(SearchController.SEARCH_PROPERTY)){
-
-				getSearchField().setText((String) evt.getNewValue());
-
-				setSearchFieldVisible(false);
-
-			} else {		
-
-				if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
-
-					final int[] selectedRows = getResultComponent().getSelectedRows();
-
-					getResultComponent().clear();
-
-					List<UnitMeasure> list = (List<UnitMeasure>) evt.getNewValue();
-
-					if (evt.getNewValue() != null && list.size() > 0) {
-
-						DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
-
-						for (UnitMeasure u : list)
-
-							model.addRow(new Object[]{
-
-									u.getIdentifier(),
-
-									u.getDenomination(),
-									
-									u.getAcronym(),
-									
-									u.getUnitMeasureGroup()
-
-							});
-
-						if (selectedRows.length > 0)
-
-							for (int sel : selectedRows)
-
-								if (sel <= getResultComponent().getRowCount())
-
-									getResultComponent().addRowSelectionInterval(sel, sel);
-
-						if (getResultComponent().getSelectedRow() == -1 && getResultComponent().getModel().getRowCount() > 0)
-
-							getResultComponent().setRowSelectionInterval(0, 0);
-
-					}
-
-				}
-
-			}
 
 
 	}
