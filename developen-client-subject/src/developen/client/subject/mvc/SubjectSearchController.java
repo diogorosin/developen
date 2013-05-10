@@ -1,10 +1,18 @@
 package developen.client.subject.mvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import developen.client.framework.mvc.SearchController;
+import developen.client.framework.mvc.SelectionTransformer;
+import developen.common.framework.messenger.Messenger;
+import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Equal;
 import developen.common.persistence.query.Like;
+import developen.common.persistence.session.Session;
+import developen.common.subject.mvc.Subject;
 import developen.common.subject.mvc.SubjectView;
 
 
@@ -17,6 +25,51 @@ public class SubjectSearchController extends SearchController {
 	public SubjectSearchModel getModel(){
 
 		return (SubjectSearchModel) super.getModel();
+
+	}
+
+
+	public SelectionTransformer getSelectionTransformer() {
+
+
+		if (selectionTransformer == null){
+
+			selectionTransformer = new SelectionTransformer() {
+
+				public List<Object> transform(List<Object> selection) {
+
+					List<Object> oldList = selection;
+
+					List<Object> newList = new ArrayList<Object>();
+
+					for (Object object : oldList){
+
+						try{
+
+							Session s = DPA.getSessionFactory().createSession();
+
+							newList.add(s.read(Subject.class, ((SubjectView) object).getIdentifier()));
+
+							s.close();
+
+						} catch (Exception e) {
+
+							Messenger.show(e);
+
+						} 
+
+					}
+
+					return newList;
+
+				}
+
+			};
+
+		}
+
+		return selectionTransformer;
+
 
 	}
 

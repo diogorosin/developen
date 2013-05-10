@@ -170,7 +170,7 @@ public abstract class TableSearchView extends SearchView {
 
 				for (Search s : list)
 
-					model.addRow(s.toColumns());
+					model.addRow(objectToColumns(s));
 
 				if (selectedRows.length > 0)
 
@@ -195,6 +195,15 @@ public abstract class TableSearchView extends SearchView {
 	}
 
 
+	protected Object[] objectToColumns(Search object){
+		
+		
+		return object.toColumns();
+		
+		
+	}
+	
+	
 	protected int[] getSelectedRows() {
 
 		return getResultComponent().getSelectedRows();

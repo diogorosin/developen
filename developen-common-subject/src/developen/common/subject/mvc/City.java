@@ -1,13 +1,14 @@
 package developen.common.subject.mvc;
 
 import developen.common.framework.mvc.Model;
+import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Identifier;
 import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.Table;
 
 @Table
-public class City extends Model {
+public class City extends Model implements Search{
 
 
 	private static final long serialVersionUID = 4504937078334056995L;
@@ -92,6 +93,25 @@ public class City extends Model {
 				+ " (" + getState().getCountry().getDenomination() + ")"; 
 
 
+	}
+
+
+	public Object[] toColumns() {
+
+		
+		return new Object[]{
+				
+				getIdentifier(),
+				
+				getDenomination(),
+				
+				getState().getAcronym(),
+				
+				getState().getCountry()
+				
+		};
+		
+		
 	}
 
 

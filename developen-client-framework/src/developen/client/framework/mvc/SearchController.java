@@ -25,7 +25,7 @@ public abstract class SearchController extends Controller {
 
 	private List<SearchListener> registeredSearchListeners;
 
-	private SelectionTransformer selectionTransformer;
+	protected SelectionTransformer selectionTransformer;
 
 
 	private void changeModelState(SearchState modelState) {

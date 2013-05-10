@@ -1,21 +1,27 @@
 package developen.client.subject.mvc;
 
 import java.awt.Dimension;
+import java.util.Vector;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
+import developen.client.subject.factory.SubjectFormatFactory;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
 import developen.common.framework.widget.Table;
 import developen.common.framework.widget.UneditableTableModel;
+import developen.common.subject.i18n.CityTag;
+import developen.common.subject.i18n.CountryTag;
 import developen.common.subject.i18n.CpfOrCnpjTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
+import developen.common.subject.i18n.StateTag;
 import developen.common.subject.i18n.SubjectTag;
+import developen.common.subject.i18n.TypeTag;
 
 public class SubjectSearchView extends TableSearchView {
 
@@ -24,9 +30,17 @@ public class SubjectSearchView extends TableSearchView {
 
 	public static final int IDENTIFIER_COLUMN_INDEX = 0;
 
-	public static final int DOCUMENT_COLUMN_INDEX = 1;
+	public static final int TYPE_COLUMN_INDEX = 1;
+
+	public static final int DOCUMENT_COLUMN_INDEX = 2;
+
+	public static final int DENOMINATION_COLUMN_INDEX = 3;
 	
-	public static final int DENOMINATION_COLUMN_INDEX = 2;
+	public static final int CITY_COLUMN_INDEX = 4;
+	
+	public static final int STATE_COLUMN_INDEX = 5;
+	
+	public static final int COUNTRY_COLUMN_INDEX = 6;
 
 	protected UneditableTableModel tableModel;
 
@@ -34,9 +48,17 @@ public class SubjectSearchView extends TableSearchView {
 
 	protected Column identifierColumn;
 
+	protected Column typeColumn;
+
 	protected Column documentColumn;
 
 	protected Column denominationColumn;
+	
+	protected Column cityColumn;
+	
+	protected Column stateColumn;
+	
+	protected Column countryColumn;
 
 
 	public SubjectSearchView(SearchController controller) {
@@ -44,7 +66,7 @@ public class SubjectSearchView extends TableSearchView {
 
 		super(controller);
 
-		setSize(new Dimension(600,600));
+		setSize(new Dimension(900,600));
 
 
 	}
@@ -64,17 +86,37 @@ public class SubjectSearchView extends TableSearchView {
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setMaxWidth(100);
 
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setCellRenderer(
-					
+
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
+
+			recordTable.getColumnModel().getColumn(TYPE_COLUMN_INDEX).setPreferredWidth(50);
+
+			recordTable.getColumnModel().getColumn(TYPE_COLUMN_INDEX).setMaxWidth(50);
 
 			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setPreferredWidth(150);
 
 			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setMaxWidth(150);
 
 			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setCellRenderer(
-					
-					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
+					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));			
+
+			recordTable.getColumnModel().getColumn(CITY_COLUMN_INDEX).setPreferredWidth(150);
+			
+			recordTable.getColumnModel().getColumn(CITY_COLUMN_INDEX).setMaxWidth(150);
+
+			recordTable.getColumnModel().getColumn(STATE_COLUMN_INDEX).setPreferredWidth(60);
+
+			recordTable.getColumnModel().getColumn(STATE_COLUMN_INDEX).setMaxWidth(60);
+			
+			recordTable.getColumnModel().getColumn(STATE_COLUMN_INDEX).setMinWidth(60);
+			
+			recordTable.getColumnModel().getColumn(COUNTRY_COLUMN_INDEX).setPreferredWidth(40);
+
+			recordTable.getColumnModel().getColumn(COUNTRY_COLUMN_INDEX).setMaxWidth(40);
+			
+			recordTable.getColumnModel().getColumn(STATE_COLUMN_INDEX).setMinWidth(40);
+			
 		}
 
 		return recordTable;
@@ -88,13 +130,43 @@ public class SubjectSearchView extends TableSearchView {
 
 		if (tableModel == null){
 
-			tableModel = new UneditableTableModel();
+			tableModel = new UneditableTableModel(){
+
+				private static final long serialVersionUID = 7342817944988061299L;
+
+				public Object getValueAt(int x, int y){
+
+					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
+
+					if (y==DOCUMENT_COLUMN_INDEX) {
+
+						return row.elementAt(TYPE_COLUMN_INDEX).equals("J") ? 
+
+								SubjectFormatFactory.formatCNPJ((Long)row.elementAt(y)) :
+
+									SubjectFormatFactory.formatCPF((Long)row.elementAt(y));
+
+					} else
+
+						return row.elementAt(y);
+
+				}
+
+			};
 
 			tableModel.addColumn(getIdentifierColumn());
+
+			tableModel.addColumn(getTypeColumn());
 
 			tableModel.addColumn(getDocumentColumn());
 
 			tableModel.addColumn(getDenominationColumn());
+			
+			tableModel.addColumn(getCityColumn());
+			
+			tableModel.addColumn(getStateColumn());
+			
+			tableModel.addColumn(getCountryColumn());
 
 		}
 
@@ -117,6 +189,19 @@ public class SubjectSearchView extends TableSearchView {
 	}
 
 
+	public Column getTypeColumn(){
+
+
+		if (typeColumn == null)
+
+			typeColumn = new Column(new TypeTag(), TYPE_COLUMN_INDEX);
+
+		return typeColumn;
+
+
+	}
+
+
 	public Column getDocumentColumn(){
 
 
@@ -129,7 +214,7 @@ public class SubjectSearchView extends TableSearchView {
 
 	}
 
-	
+
 	public Column getDenominationColumn(){
 
 
@@ -143,6 +228,45 @@ public class SubjectSearchView extends TableSearchView {
 	}
 
 
+	public Column getCityColumn(){
+
+
+		if (cityColumn == null)
+
+			cityColumn = new Column(new CityTag(), CITY_COLUMN_INDEX);
+
+		return cityColumn;
+
+
+	}
+
+	
+	public Column getStateColumn(){
+
+
+		if (stateColumn == null)
+
+			stateColumn = new Column(new StateTag(), STATE_COLUMN_INDEX);
+
+		return stateColumn;
+
+
+	}
+
+	
+	public Column getCountryColumn(){
+
+
+		if (countryColumn == null)
+
+			countryColumn = new Column(new CountryTag(), COUNTRY_COLUMN_INDEX);
+
+		return countryColumn;
+
+
+	}
+
+	
 	public Tag getInternalFrameTitle() {
 
 		return new SubjectTag(); 

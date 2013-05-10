@@ -1,12 +1,9 @@
 package developen.client.subject.mvc;
 
 import java.awt.Dimension;
-import java.beans.PropertyChangeEvent;
-import java.util.List;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
@@ -20,14 +17,31 @@ import developen.common.subject.i18n.CountryTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.i18n.StateTag;
-import developen.common.subject.mvc.City;
 
 public class CitySearchView extends TableSearchView {
 
 	
 	private static final long serialVersionUID = 7462748626991975438L;
 	
-	private Table recordTable;
+	public static final int IDENTIFIER_COLUMN_INDEX = 0;
+
+	public static final int DENOMINATION_COLUMN_INDEX = 1;
+	
+	public static final int STATE_COLUMN_INDEX = 2;
+	
+	public static final int COUNTRY_COLUMN_INDEX = 3;
+
+	protected UneditableTableModel tableModel;
+
+	protected Table recordTable;
+
+	protected Column identifierColumn;
+
+	protected Column denominationColumn;
+	
+	protected Column stateColumn;
+	
+	protected Column countryColumn;
 	
 
 	public CitySearchView(SearchController controller) {
@@ -40,101 +54,29 @@ public class CitySearchView extends TableSearchView {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	public void modelPropertyChanged(PropertyChangeEvent evt) {
-
-		
-		super.modelPropertyChanged(evt);
-
-		if (evt.getPropertyName() == SearchController.RESULTED_ROWS_PROPERTY){
-
-			int[] selectedRows = getResultComponent().getSelectedRows();
-
-			getResultComponent().clear();
-
-			List<City> list = (List<City>) evt.getNewValue();
-
-			if (evt.getNewValue() != null && list.size() > 0) {
-
-				DefaultTableModel model = (DefaultTableModel) getResultComponent().getModel();
-
-				for (City city : list){
-
-					model.addRow(new String[]{
-							
-							String.valueOf(city.getIdentifier()),
-							
-							city.getDenomination().toUpperCase(),
-							
-							city.getState().getAcronym().toUpperCase(),
-							
-							city.getState().getCountry().getDenomination().toUpperCase()});
-					
-				}
-
-				if (selectedRows.length > 0)
-					
-					for (int sel : selectedRows)
-						
-						if (sel <= getResultComponent().getRowCount())
-							
-							getResultComponent().addRowSelectionInterval(sel, sel);
-
-				if (getResultComponent().getSelectedRow() == -1 
-						
-						&& getResultComponent().getModel().getRowCount() > 0)
-					
-					getResultComponent().setRowSelectionInterval(0, 0);
-
-
-			}
-
-		} 
-		
-
-	}
-
 	
 	protected Table getResultComponent() {
 
 		
 		if (recordTable == null){
 
-			UneditableTableModel columns = new UneditableTableModel();
-
-			Column column0 = new Column(new IdentifierTag(), 0);
+			recordTable = new Table(getTableModel());
 			
-			Column column1 = new Column(new DenominationTag(), 1);
+			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setPreferredWidth(100);
 			
-			Column column2 = new Column(new StateTag(), 2);
+			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setMaxWidth(100);
 			
-			Column column3 = new Column(new CountryTag(), 3);
-
-			columns.addColumn(column0);
-			
-			columns.addColumn(column1);
-			
-			columns.addColumn(column2);
-			
-			columns.addColumn(column3);
-
-			recordTable = new Table(columns);
-			
-			recordTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-			
-			recordTable.getColumnModel().getColumn(0).setMaxWidth(100);
-			
-			recordTable.getColumnModel().getColumn(0).setCellRenderer(
+			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setCellRenderer(
 					
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
-			recordTable.getColumnModel().getColumn(2).setPreferredWidth(70);
+			recordTable.getColumnModel().getColumn(STATE_COLUMN_INDEX).setPreferredWidth(70);
 			
-			recordTable.getColumnModel().getColumn(2).setMaxWidth(70);
+			recordTable.getColumnModel().getColumn(STATE_COLUMN_INDEX).setMaxWidth(70);
 
-			recordTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+			recordTable.getColumnModel().getColumn(COUNTRY_COLUMN_INDEX).setPreferredWidth(70);
 			
-			recordTable.getColumnModel().getColumn(3).setMaxWidth(70);
+			recordTable.getColumnModel().getColumn(COUNTRY_COLUMN_INDEX).setMaxWidth(70);
 
 			recordTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -146,7 +88,82 @@ public class CitySearchView extends TableSearchView {
 	}
 
 	
-	public Tag getInternalFrameTitle() {
+	public UneditableTableModel getTableModel(){
+
+
+		if (tableModel == null){
+
+			tableModel = new UneditableTableModel();
+			
+			tableModel.addColumn(getIdentifierColumn());
+
+			tableModel.addColumn(getDenominationColumn());
+			
+			tableModel.addColumn(getStateColumn());
+			
+			tableModel.addColumn(getCountryColumn());
+
+		}
+
+		return tableModel;
+
+
+	}
+
+
+	public Column getIdentifierColumn(){
+
+
+		if (identifierColumn == null)
+
+			identifierColumn = new Column(new IdentifierTag(), IDENTIFIER_COLUMN_INDEX);
+
+		return identifierColumn;
+
+
+	}
+
+
+	public Column getDenominationColumn(){
+
+
+		if (denominationColumn == null)
+
+			denominationColumn = new Column(new DenominationTag(), DENOMINATION_COLUMN_INDEX);
+
+		return denominationColumn;
+
+
+	}
+
+
+	public Column getStateColumn(){
+
+
+		if (stateColumn == null)
+
+			stateColumn = new Column(new StateTag(), STATE_COLUMN_INDEX);
+
+		return stateColumn;
+
+
+	}
+
+	
+	public Column getCountryColumn(){
+
+
+		if (countryColumn == null)
+
+			countryColumn = new Column(new CountryTag(), COUNTRY_COLUMN_INDEX);
+
+		return countryColumn;
+
+
+	}
+
+	
+    public Tag getInternalFrameTitle() {
 
 		return new CityTag();
 
