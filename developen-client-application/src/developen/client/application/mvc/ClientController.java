@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import developen.client.framework.mvc.SystemPersonEvent;
 import developen.client.framework.mvc.SystemPersonListener;
+import developen.common.framework.exception.NotYetImplementedException;
+import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
 import developen.common.subject.mvc.PersonCompany;
 import developen.common.subject.mvc.SystemCompany;
@@ -188,20 +190,31 @@ public class ClientController extends Controller {
 	}
 
 
-	private void onAfterHelp() throws Exception{}
-
-	
-	private void onHelp() throws Exception{
-
-
-	}
-
-	
 	private void onBeforeHelp() throws Exception{
 
 		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.HELPING);
 
 	}
+
+
+	private void onHelp() throws Exception{
+
+		
+		try {
+			
+			throw new NotYetImplementedException();
+			
+		} catch (NotYetImplementedException e) {
+
+			Messenger.show(e);
+			
+		}
+
+		
+	}
+
+	
+	private void onAfterHelp() throws Exception{}
 
 	
 }

@@ -63,9 +63,9 @@ public class OrderView extends EntryView {
 
 	private DBIdentifierField identifierField;
 
-	private DBTextField fromField;
+	protected DBTextField fromField;
 
-	private DBTextField toField;
+	protected DBTextField toField;
 
 	private TabbedPane tabbedPane;
 

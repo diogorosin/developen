@@ -6,6 +6,8 @@ import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
 import developen.common.commercial.i18n.OrderTag;
+import developen.common.framework.exception.NotYetImplementedException;
+import developen.common.framework.messenger.Messenger;
 
 public class PurchaseOrderEntryAction extends ApplicationAction {
 
@@ -21,6 +23,17 @@ public class PurchaseOrderEntryAction extends ApplicationAction {
 
 	
 	public void actionPerformed(ActionEvent arg0) {
+		
+		
+		try {
+			
+			throw new NotYetImplementedException();
+			
+		} catch (NotYetImplementedException e) {
+
+			Messenger.show(e);
+			
+		}
 		
 		
 	}

@@ -11,6 +11,7 @@ import developen.client.osm.Client;
 import developen.common.commercial.i18n.OrderTag;
 import developen.common.commercial.mvc.SaleOrder;
 import developen.common.framework.widget.InternalFramePosition;
+import developen.common.subject.mvc.SystemCompany;
 
 public class SaleOrderEntryAction extends ApplicationAction {
 
@@ -30,7 +31,15 @@ public class SaleOrderEntryAction extends ApplicationAction {
 		
 		SaleOrder model = new SaleOrder();
 		
-		SaleOrderController controller = new SaleOrderController();
+		SaleOrderController controller = new SaleOrderController(){
+
+			public SystemCompany getSystemCompany() {
+
+				return Client.getClientModel().getSystemCompany();
+				
+			}
+			
+		};
 		
 		controller.setModel(model);
 		
