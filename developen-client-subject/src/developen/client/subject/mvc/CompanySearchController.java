@@ -1,5 +1,6 @@
 package developen.client.subject.mvc;
 
+import developen.client.framework.mvc.SearchController;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Equal;
@@ -8,7 +9,7 @@ import developen.common.subject.mvc.Company;
 import developen.common.subject.mvc.Subject;
 
 
-public class CompanySearchController extends SubjectSearchController {
+public class CompanySearchController extends SearchController {
 
 
 	public static final String ACTIVE_PROPERTY = "Active";

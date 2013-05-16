@@ -7,7 +7,9 @@ import developen.common.framework.utils.Tag;
 
 public class SystemCompanySearchView extends CompanySearchView {
 
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 3429171322054677147L;
+
 	
 	public SystemCompanySearchView(SearchController controller) {
 
@@ -15,10 +17,12 @@ public class SystemCompanySearchView extends CompanySearchView {
 
 	}
 
+	
 	public Tag getInternalFrameTitle() {
 
 		return new SystemCompanyTag(); 
 
 	}
 
+	
 }

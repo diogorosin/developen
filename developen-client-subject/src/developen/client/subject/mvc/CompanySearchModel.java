@@ -1,7 +1,9 @@
 package developen.client.subject.mvc;
 
+import developen.client.framework.mvc.SearchModel;
 
-public class CompanySearchModel extends SubjectSearchModel {
+
+public class CompanySearchModel extends SearchModel {
 
 	
 	private static final long serialVersionUID = -1009783526264223616L;
