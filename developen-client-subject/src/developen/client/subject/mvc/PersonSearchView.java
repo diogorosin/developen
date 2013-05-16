@@ -1,12 +1,14 @@
 package developen.client.subject.mvc;
 
 import java.awt.Dimension;
+import java.util.Vector;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
+import developen.client.subject.factory.SubjectFormatFactory;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -25,7 +27,7 @@ public class PersonSearchView extends TableSearchView {
 	public static final int IDENTIFIER_COLUMN_INDEX = 0;
 
 	public static final int DOCUMENT_COLUMN_INDEX = 1;
-	
+
 	public static final int DENOMINATION_COLUMN_INDEX = 2;
 
 	protected UneditableTableModel tableModel;
@@ -56,7 +58,7 @@ public class PersonSearchView extends TableSearchView {
 		if (recordTable == null){
 
 			recordTable = new Table(getTableModel());
-
+			
 			recordTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setPreferredWidth(100);
@@ -64,7 +66,7 @@ public class PersonSearchView extends TableSearchView {
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setMaxWidth(100);
 
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setCellRenderer(
-					
+
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
 			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setPreferredWidth(150);
@@ -72,7 +74,7 @@ public class PersonSearchView extends TableSearchView {
 			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setMaxWidth(150);
 
 			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setCellRenderer(
-					
+
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
 		}
@@ -88,7 +90,25 @@ public class PersonSearchView extends TableSearchView {
 
 		if (tableModel == null){
 
-			tableModel = new UneditableTableModel();
+			tableModel = new UneditableTableModel(){
+
+				private static final long serialVersionUID = 7342817944988061299L;
+
+				public Object getValueAt(int x, int y){
+
+					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
+
+					if (y==DOCUMENT_COLUMN_INDEX) {
+
+						return	SubjectFormatFactory.formatCPF((Long)row.elementAt(y));
+
+					} else
+
+						return row.elementAt(y);
+
+				}
+
+			};
 
 			tableModel.addColumn(getIdentifierColumn());
 
@@ -129,7 +149,7 @@ public class PersonSearchView extends TableSearchView {
 
 	}
 
-	
+
 	public Column getDenominationColumn(){
 
 

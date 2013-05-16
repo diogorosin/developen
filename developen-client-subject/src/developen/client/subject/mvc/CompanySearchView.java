@@ -1,11 +1,14 @@
 package developen.client.subject.mvc;
 
 import java.awt.Dimension;
+import java.util.Vector;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import developen.client.framework.mvc.SearchController;
+import developen.client.framework.mvc.TableSearchView;
+import developen.client.subject.factory.SubjectFormatFactory;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -16,7 +19,7 @@ import developen.common.subject.i18n.CompanyTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
 
-public class CompanySearchView extends SubjectSearchView {
+public class CompanySearchView extends TableSearchView {
 
 
 	private static final long serialVersionUID = -1400375353828363381L;
@@ -55,7 +58,7 @@ public class CompanySearchView extends SubjectSearchView {
 		if (recordTable == null){
 
 			recordTable = new Table(getTableModel());
-
+			
 			recordTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setPreferredWidth(100);
@@ -87,7 +90,25 @@ public class CompanySearchView extends SubjectSearchView {
 
 		if (tableModel == null){
 
-			tableModel = new UneditableTableModel();
+			tableModel = new UneditableTableModel(){
+
+				private static final long serialVersionUID = 7342817944988061299L;
+
+				public Object getValueAt(int x, int y){
+
+					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
+
+					if (y==DOCUMENT_COLUMN_INDEX) {
+
+						return SubjectFormatFactory.formatCNPJ((Long)row.elementAt(y));
+
+					} else
+
+						return row.elementAt(y);
+
+				}
+
+			};
 
 			tableModel.addColumn(getIdentifierColumn());
 
