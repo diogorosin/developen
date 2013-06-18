@@ -2,7 +2,7 @@ package developen.client.osm.mvc;
 
 import developen.client.application.action.ApplicationAction;
 import developen.client.application.i18n.AdministratorTag;
-import developen.client.application.i18n.DevelOpenClientTag;
+import developen.client.application.i18n.DevelOpenCloudTag;
 import developen.client.application.i18n.ModulesTag;
 import developen.client.application.i18n.ParameterizationTag;
 import developen.client.application.i18n.SecurityTag;
@@ -96,7 +96,7 @@ public class WorldClientView extends ClientView{
 		if (menuHierarchy == null){
 
 			menuHierarchy = new Object[]{
-					new DevelOpenClientTag(),
+					new DevelOpenCloudTag(),
 
 					new Object[]{
 						new ModulesTag(),
@@ -181,7 +181,7 @@ public class WorldClientView extends ClientView{
 	
 	public Tag getCaption(){
 		
-		return new DevelOpenClientTag();
+		return new DevelOpenCloudTag();
 		
 	}
 

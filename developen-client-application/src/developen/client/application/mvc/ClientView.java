@@ -16,7 +16,7 @@ import javax.swing.JInternalFrame;
 
 import developen.client.application.action.ApplicationAction;
 import developen.client.application.i18n.AdministratorTag;
-import developen.client.application.i18n.DevelOpenClientTag;
+import developen.client.application.i18n.DevelOpenCloudTag;
 import developen.client.application.i18n.HelpTag;
 import developen.client.application.i18n.IdiomTag;
 import developen.client.application.i18n.ModulesTag;
@@ -94,7 +94,7 @@ public abstract class ClientView extends Frame {
 		if (menuHierarchy == null){
 
 			menuHierarchy = new Object[]{
-					new DevelOpenClientTag(),
+					new DevelOpenCloudTag(),
 
 					new Object[]{
 						new ModulesTag(),
@@ -156,7 +156,7 @@ public abstract class ClientView extends Frame {
 			
 		});
 		
-		setIconImage(new DevelOpenClientTag().getLargeIcon().getImage());
+		setIconImage(new DevelOpenCloudTag().getLargeIcon().getImage());
 		
 		setLayout(new BorderLayout());
 		
