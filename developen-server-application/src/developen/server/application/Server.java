@@ -42,23 +42,23 @@ public class Server {
 
 			controller.addView(view);
 
-			if (SystemTray.isSupported())
-
-				SystemTray.getSystemTray().add(view);
-
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 
 			Naming.bind(Service.SERVICE_NAME, new ServiceImpl(controller));
 
 			controller.ready();
 			
+			if (SystemTray.isSupported())
+
+				SystemTray.getSystemTray().add(view);
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
 
 		}		
 
-
+		
 	}
 
 

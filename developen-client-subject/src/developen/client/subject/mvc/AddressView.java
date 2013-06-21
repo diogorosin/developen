@@ -19,8 +19,10 @@ import developen.client.subject.widget.DBPostalCodeField;
 import developen.common.framework.mvc.View;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
+import developen.common.subject.i18n.AdressTag;
 import developen.common.subject.i18n.CityTag;
 import developen.common.subject.i18n.ComplementTag;
+import developen.common.subject.i18n.ContactTag;
 import developen.common.subject.i18n.DistrictTag;
 import developen.common.subject.i18n.EmailTag;
 import developen.common.subject.i18n.NumberTag;
@@ -61,6 +63,8 @@ public class AddressView extends DBRowLayout implements View, CheckListener {
 		
 		setController(controller);
 		
+		addSeparator(new AdressTag());
+		
 		add(getPlayAreaField());
 		
 		add(getNumberField());
@@ -72,6 +76,8 @@ public class AddressView extends DBRowLayout implements View, CheckListener {
 		add(getCityField());
 		
 		add(getComplementField());
+		
+		addSeparator(new ContactTag());
 		
 		add(getPhoneField());
 		

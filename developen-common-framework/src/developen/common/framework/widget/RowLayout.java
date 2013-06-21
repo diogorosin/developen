@@ -1,14 +1,20 @@
 package developen.common.framework.widget;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import developen.common.framework.utils.Tag;
 
 public class RowLayout extends JPanel {
 
@@ -159,6 +165,45 @@ public class RowLayout extends JPanel {
 
 		this.labelWidth = labelWidth;
 
+	}
+
+	
+	public void addSeparator(Tag tag){
+		
+
+		GridBagConstraints cons = new GridBagConstraints();
+		
+		cons.insets = new Insets(4,0,4,12);
+		
+		cons.anchor = GridBagConstraints.NORTHEAST;
+		
+		cons.fill = GridBagConstraints.NONE;
+		
+		cons.weightx = 0;
+		
+		cons.fill = GridBagConstraints.BOTH;
+		
+		cons.anchor = GridBagConstraints.CENTER;
+		
+		cons.gridwidth = GridBagConstraints.REMAINDER;
+		
+		Label label = new Label(tag);
+		
+		label.setHorizontalAlignment(JLabel.LEFT);
+		
+		label.setHorizontalTextPosition(JLabel.LEFT);
+		
+		label.setVerticalTextPosition(JLabel.BOTTOM);
+		
+		label.setForeground(Color.GRAY);
+		
+		label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+
+		label.setLayout(new BorderLayout());
+		
+		add(label, cons);
+
+		
 	}
 
 	
