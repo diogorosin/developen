@@ -34,8 +34,8 @@ import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Button;
-import developen.common.framework.widget.ButtonLayout;
-import developen.common.framework.widget.ButtonLayoutAligment;
+import developen.common.framework.widget.ButtonPanel;
+import developen.common.framework.widget.ButtonPanelAligment;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.dpa.DPA;
@@ -112,12 +112,12 @@ public abstract class SystemPersonView extends PersonView {
 	}
 
 
-	public ButtonLayout getButtonLayout(){
+	public ButtonPanel getButtonPanel(){
 
 
-		ButtonLayout b = super.getButtonLayout();
+		ButtonPanel b = super.getButtonPanel();
 
-		b.add(getNewPasswordButton(), ButtonLayoutAligment.LEFT);
+		b.add(getNewPasswordButton(), ButtonPanelAligment.LEFT);
 
 		return b;
 

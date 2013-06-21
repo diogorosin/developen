@@ -27,17 +27,17 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.AllwaysEnabledCondition;
 import developen.client.framework.widget.DBPasswordField;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Button;
-import developen.common.framework.widget.ButtonLayout;
-import developen.common.framework.widget.ButtonLayoutAligment;
+import developen.common.framework.widget.ButtonPanel;
+import developen.common.framework.widget.ButtonPanelAligment;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
 import developen.common.subject.mvc.SystemPerson;
 
@@ -46,9 +46,9 @@ public class LoginView extends InternalFrame implements CheckListener {
 
 	private static final long serialVersionUID = -6528146745629365633L;
 	
-	private ExtendedLayout centerLayout;
+	private ExtendedPanel centerLayout;
 	
-	private ButtonLayout buttonLayout;
+	private ButtonPanel buttonLayout;
 	
 	private Button cancelButton;
 	
@@ -186,7 +186,7 @@ public class LoginView extends InternalFrame implements CheckListener {
 	
 		setSize(new Dimension(550,300));
 		
-		DBRowLayout l = new DBRowLayout();
+		DBRowPanel l = new DBRowPanel();
 		
 		l.add(getSystemPersonField());
 		
@@ -284,12 +284,12 @@ public class LoginView extends InternalFrame implements CheckListener {
 	}
 
 	
-	public ExtendedLayout getCenterLayout() {
+	public ExtendedPanel getCenterLayout() {
 
 		
 		if (centerLayout == null)
 			
-			centerLayout = new ExtendedLayout();
+			centerLayout = new ExtendedPanel();
 		
 		return centerLayout;
 		
@@ -297,16 +297,16 @@ public class LoginView extends InternalFrame implements CheckListener {
 	}
 
 	
-	protected ButtonLayout getButtonLayout() {
+	protected ButtonPanel getButtonLayout() {
 
 		
 		if (buttonLayout == null){
 			
-			buttonLayout = new ButtonLayout();
+			buttonLayout = new ButtonPanel();
 			
-			buttonLayout.add(getLoginButton(), ButtonLayoutAligment.RIGHT);
+			buttonLayout.add(getLoginButton(), ButtonPanelAligment.RIGHT);
 			
-			buttonLayout.add(getCancelButton(), ButtonLayoutAligment.RIGHT);
+			buttonLayout.add(getCancelButton(), ButtonPanelAligment.RIGHT);
 			
 		}
 		

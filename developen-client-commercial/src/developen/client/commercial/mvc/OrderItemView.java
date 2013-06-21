@@ -10,7 +10,7 @@ import developen.client.commercial.widget.DBOrderItemPKField;
 import developen.client.framework.mvc.ListEditorController;
 import developen.client.framework.mvc.ListEditorView;
 import developen.client.framework.widget.DBNumberField;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.EditingOrIncludingListEditorCondition;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.ItemTag;
@@ -21,7 +21,7 @@ import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 
 public class OrderItemView extends ListEditorView implements CheckListener {
 
@@ -58,10 +58,10 @@ public class OrderItemView extends ListEditorView implements CheckListener {
 	}
 
 
-	public ExtendedLayout getNorthLayout(){
+	public ExtendedPanel getNorthLayout(){
 
 
-		ExtendedLayout l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthLayout();
 
 		l.add(getIdentifierField());
 
@@ -71,14 +71,14 @@ public class OrderItemView extends ListEditorView implements CheckListener {
 	}
 
 
-	public ExtendedLayout getCenterLayout(){
+	public ExtendedPanel getCenterLayout(){
 
 
-		ExtendedLayout l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterLayout();
 
 		l.setBorder(BorderFactory.createTitledBorder(""));
 
-		DBRowLayout r = new DBRowLayout(100);
+		DBRowPanel r = new DBRowPanel(100);
 
 		r.add(getAmountField());
 

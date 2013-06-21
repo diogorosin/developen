@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 
-public class ExtendedLayout extends JPanel {
+public class ExtendedPanel extends JPanel {
 
 	
 	private static final long serialVersionUID = -418214394819979216L;
@@ -17,14 +17,14 @@ public class ExtendedLayout extends JPanel {
 	private Insets insets = new Insets(5, 5, 5, 5);
 	
 	
-	public ExtendedLayout(){
+	public ExtendedPanel(){
 
 		setLayout(new GridBagLayout());
 
 	}
 
 	
-	public ExtendedLayout(Insets insets){
+	public ExtendedPanel(Insets insets){
 
 		
 		setLayout(new GridBagLayout());

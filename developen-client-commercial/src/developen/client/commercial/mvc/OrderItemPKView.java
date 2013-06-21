@@ -11,7 +11,7 @@ import developen.client.engineer.search.ProgenySearch;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.OrderTag;
@@ -22,7 +22,7 @@ import developen.common.framework.mvc.View;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 
-public class OrderItemPKView extends DBRowLayout implements View, CheckListener{
+public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 
 
 	private static final long serialVersionUID = -6800871769407844131L;

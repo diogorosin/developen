@@ -17,7 +17,7 @@ import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBComboBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBNumberField;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
 import developen.common.engineer.i18n.ActiveTag;
@@ -33,7 +33,7 @@ import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
@@ -57,7 +57,7 @@ public class ProgenyView extends EntryView {
 
 	private TabbedPane tabbedPane;
 
-	private DBRowLayout basicTab;
+	private DBRowPanel basicTab;
 
 	private DBNumberField priceField;
 	
@@ -78,12 +78,12 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public ExtendedLayout getNorthLayout(){
+	public ExtendedPanel getNorthPanel(){
 
 
-		ExtendedLayout l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthPanel();
 
-		DBRowLayout northPanel = new DBRowLayout();
+		DBRowPanel northPanel = new DBRowPanel();
 
 		northPanel.add(getIdentifierField());
 
@@ -99,10 +99,10 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public ExtendedLayout getCenterLayout(){
+	public ExtendedPanel getCenterPanel(){
 
 
-		ExtendedLayout l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.add(getTabbedPane());
 
@@ -131,12 +131,12 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public DBRowLayout getBasicTab(){
+	public DBRowPanel getBasicTab(){
 
 
 		if (basicTab == null){
 
-			basicTab = new DBRowLayout(180);
+			basicTab = new DBRowPanel(180);
 
 			basicTab.setName(new BasicTag().toString());
 			

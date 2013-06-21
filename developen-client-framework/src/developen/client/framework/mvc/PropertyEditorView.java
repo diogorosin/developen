@@ -20,9 +20,9 @@ import developen.client.framework.i18n.EntryTag;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.PropertyEditorState;
 import developen.common.framework.widget.Button;
-import developen.common.framework.widget.ButtonLayout;
-import developen.common.framework.widget.ButtonLayoutAligment;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ButtonPanel;
+import developen.common.framework.widget.ButtonPanelAligment;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
 
 public abstract class PropertyEditorView extends InternalFrame {
@@ -30,11 +30,11 @@ public abstract class PropertyEditorView extends InternalFrame {
 
 	private static final long serialVersionUID = -7289956168048606628L;
 	
-	private ExtendedLayout centerLayout;
+	private ExtendedPanel centerLayout;
 	
-	private ExtendedLayout northLayout;
+	private ExtendedPanel northLayout;
 	
-	private ButtonLayout buttonLayout;
+	private ButtonPanel buttonLayout;
 
 	private Button confirmButton;
 	
@@ -182,12 +182,12 @@ public abstract class PropertyEditorView extends InternalFrame {
 	}
 
 	
-	public ExtendedLayout getCenterLayout() {
+	public ExtendedPanel getCenterLayout() {
 
 		
 		if (centerLayout == null)
 			
-			centerLayout = new ExtendedLayout();
+			centerLayout = new ExtendedPanel();
 		
 		return centerLayout;
 		
@@ -195,12 +195,12 @@ public abstract class PropertyEditorView extends InternalFrame {
 	}
 	
 	
-	public ExtendedLayout getNorthLayout(){
+	public ExtendedPanel getNorthLayout(){
 
 		
 		if (northLayout==null)
 			
-			northLayout = new ExtendedLayout();
+			northLayout = new ExtendedPanel();
 			
 		return northLayout;
 		
@@ -208,16 +208,16 @@ public abstract class PropertyEditorView extends InternalFrame {
 	}
 
 	
-	protected ButtonLayout getButtonLayout() {
+	protected ButtonPanel getButtonLayout() {
 
 		
 		if (buttonLayout == null){
 			
-			buttonLayout = new ButtonLayout();
+			buttonLayout = new ButtonPanel();
 			
-			buttonLayout.add(getConfirmButton(), ButtonLayoutAligment.RIGHT);
+			buttonLayout.add(getConfirmButton(), ButtonPanelAligment.RIGHT);
 			
-			buttonLayout.add(getCancelButton(), ButtonLayoutAligment.RIGHT);
+			buttonLayout.add(getCancelButton(), ButtonPanelAligment.RIGHT);
 			
 		}
 		

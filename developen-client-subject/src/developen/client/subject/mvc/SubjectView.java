@@ -13,12 +13,12 @@ import developen.client.framework.search.Search;
 import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBFormattedTextField;
 import developen.client.framework.widget.DBIdentifierField;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.subject.widget.DBAddressField;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.subject.i18n.ActiveTag;
 import developen.common.subject.i18n.AdressContactTag;
@@ -41,6 +41,8 @@ public abstract class SubjectView extends EntryView {
 
 	private DBCheckBox fieldActive;
 
+	private DBRowPanel headerPanel;
+	
 	private TabbedPane tabbedPane;
 
 	private JPanel addressTab;
@@ -64,22 +66,12 @@ public abstract class SubjectView extends EntryView {
 	}
 
 
-	public ExtendedLayout getNorthLayout(){
+	public ExtendedPanel getNorthPanel(){
 
 
-		ExtendedLayout l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthPanel();
 
-		DBRowLayout northPanel = new DBRowLayout();
-
-		northPanel.add(getIdentifierField());
-
-		northPanel.add(getDocumentField());
-
-		northPanel.add(getDenominationField());
-
-		northPanel.add(getFieldActive());
-
-		l.add(northPanel);
+		l.add(getHeaderPanel());
 
 		return l;
 
@@ -87,10 +79,33 @@ public abstract class SubjectView extends EntryView {
 	}
 
 	
-	public ExtendedLayout getCenterLayout(){
+	public DBRowPanel getHeaderPanel(){
+		
+		
+		if (headerPanel == null){
+			
+			headerPanel = new DBRowPanel();
+
+			headerPanel.add(getIdentifierField());
+
+			headerPanel.add(getDocumentField());
+
+			headerPanel.add(getDenominationField());
+
+			headerPanel.add(getFieldActive());
+			
+		}
+	
+		return headerPanel;
+		
+		
+	}
+	
+	
+	public ExtendedPanel getCenterPanel(){
 
 		
-		ExtendedLayout l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.add(getTabbedPane());
 

@@ -21,10 +21,10 @@ import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Button;
-import developen.common.framework.widget.ButtonLayout;
-import developen.common.framework.widget.ButtonLayoutAligment;
+import developen.common.framework.widget.ButtonPanel;
+import developen.common.framework.widget.ButtonPanelAligment;
 import developen.common.framework.widget.CheckListener;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
 
 
@@ -33,11 +33,11 @@ public abstract class EntryView extends InternalFrame implements CheckListener, 
 
 	private static final long serialVersionUID = -4370820176822925904L;
 
-	private ExtendedLayout northLayout;
+	private ExtendedPanel northPanel;
 
-	private ExtendedLayout centerLayout;
+	private ExtendedPanel centerPanel;
 
-	private ButtonLayout buttonLayout;
+	private ButtonPanel buttonPanel;
 
 	private Button cancelButton;
 
@@ -168,11 +168,11 @@ public abstract class EntryView extends InternalFrame implements CheckListener, 
 
 		getContentPane().setLayout(new BorderLayout());
 
-		getContentPane().add(getNorthLayout(), BorderLayout.NORTH);
+		getContentPane().add(getNorthPanel(), BorderLayout.NORTH);
 
-		getContentPane().add(getCenterLayout(), BorderLayout.CENTER);
+		getContentPane().add(getCenterPanel(), BorderLayout.CENTER);
 
-		getContentPane().add(getButtonLayout(), BorderLayout.SOUTH);
+		getContentPane().add(getButtonPanel(), BorderLayout.SOUTH);
 
 		buildInterface();
 
@@ -295,48 +295,48 @@ public abstract class EntryView extends InternalFrame implements CheckListener, 
 	}
 
 
-	public ExtendedLayout getNorthLayout() {
+	public ExtendedPanel getNorthPanel() {
 
 
-		if (northLayout == null)
+		if (northPanel == null)
 
-			northLayout = new ExtendedLayout();
+			northPanel = new ExtendedPanel();
 
-		return northLayout;
-
-
-	}
-
-
-	public ExtendedLayout getCenterLayout() {
-
-
-		if (centerLayout == null)
-
-			centerLayout = new ExtendedLayout();
-
-		return centerLayout;
+		return northPanel;
 
 
 	}
 
 
-	protected ButtonLayout getButtonLayout() {
+	public ExtendedPanel getCenterPanel() {
 
 
-		if (buttonLayout == null){
+		if (centerPanel == null)
 
-			buttonLayout = new ButtonLayout();
+			centerPanel = new ExtendedPanel();
 
-			buttonLayout.add(getSaveButton(), ButtonLayoutAligment.RIGHT);
+		return centerPanel;
 
-			buttonLayout.add(getDeleteButton(), ButtonLayoutAligment.RIGHT);
 
-			buttonLayout.add(getCancelButton(), ButtonLayoutAligment.RIGHT);
+	}
+
+
+	protected ButtonPanel getButtonPanel() {
+
+
+		if (buttonPanel == null){
+
+			buttonPanel = new ButtonPanel();
+
+			buttonPanel.add(getSaveButton(), ButtonPanelAligment.RIGHT);
+
+			buttonPanel.add(getDeleteButton(), ButtonPanelAligment.RIGHT);
+
+			buttonPanel.add(getCancelButton(), ButtonPanelAligment.RIGHT);
 
 		}
 
-		return buttonLayout;
+		return buttonPanel;
 
 
 	}

@@ -11,7 +11,7 @@ import javax.swing.JInternalFrame;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.subject.search.CitySearch;
 import developen.client.subject.widget.DBPhoneField;
@@ -30,7 +30,7 @@ import developen.common.subject.i18n.PlayAreaTag;
 import developen.common.subject.i18n.WebSiteTag;
 import developen.common.subject.mvc.City;
 
-public class AddressView extends DBRowLayout implements View, CheckListener {
+public class AddressView extends DBRowPanel implements View, CheckListener {
 
 
 	private static final long serialVersionUID = -7233755248665259252L;

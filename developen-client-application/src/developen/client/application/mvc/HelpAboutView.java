@@ -22,9 +22,9 @@ import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Button;
-import developen.common.framework.widget.ButtonLayout;
-import developen.common.framework.widget.ButtonLayoutAligment;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ButtonPanel;
+import developen.common.framework.widget.ButtonPanelAligment;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
 import developen.common.framework.widget.Label;
 
@@ -33,9 +33,9 @@ public class HelpAboutView extends InternalFrame {
 	
 	private static final long serialVersionUID = 620267952342629888L;
 
-	private ExtendedLayout centerLayout;
+	private ExtendedPanel centerLayout;
 	
-	private ButtonLayout buttonLayout;
+	private ButtonPanel buttonLayout;
 	
 	private Button cancelButton;	
 	
@@ -170,12 +170,12 @@ public class HelpAboutView extends InternalFrame {
 	}
 
 	
-	public ExtendedLayout getCenterLayout() {
+	public ExtendedPanel getCenterLayout() {
 
 		
 		if (centerLayout == null){
 			
-			centerLayout = new ExtendedLayout();
+			centerLayout = new ExtendedPanel();
 			
 			centerLayout.add(getInfoLabel());
 			
@@ -187,14 +187,14 @@ public class HelpAboutView extends InternalFrame {
 	}
 	
 
-	protected ButtonLayout getButtonLayout() {
+	protected ButtonPanel getButtonLayout() {
 
 		
 		if (buttonLayout == null){
 			
-			buttonLayout = new ButtonLayout();
+			buttonLayout = new ButtonPanel();
 			
-			buttonLayout.add(getCancelButton(), ButtonLayoutAligment.RIGHT);
+			buttonLayout.add(getCancelButton(), ButtonPanelAligment.RIGHT);
 			
 		}
 		

@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 import developen.common.framework.utils.Tag;
 
-public class RowLayout extends JPanel {
+public class RowPanel extends JPanel {
 
 	
 	private static final long serialVersionUID = -5551618573256246879L;
@@ -24,14 +24,14 @@ public class RowLayout extends JPanel {
 	private int labelWidth = 100;
 
 	
-	public RowLayout(){
+	public RowPanel(){
 
 		setLayout(new GridBagLayout());
 
 	}
 
 	
-	public RowLayout(int labelWidth){
+	public RowPanel(int labelWidth){
 
 		
 		setLayout(new GridBagLayout());

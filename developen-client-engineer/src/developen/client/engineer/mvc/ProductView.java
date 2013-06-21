@@ -23,7 +23,7 @@ import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBComboBox;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.EditingOrIncludingCondition;
 import developen.common.engineer.i18n.CompositionTag;
 import developen.common.engineer.i18n.ProductTag;
@@ -37,7 +37,7 @@ import developen.common.framework.messenger.Question;
 import developen.common.framework.messenger.SimplifiedQuestion;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.dpa.DPA;
@@ -71,10 +71,10 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public ExtendedLayout getCenterLayout(){
+	public ExtendedPanel getCenterPanel(){
 
 
-		ExtendedLayout l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.add(getTabbedPane());
 
@@ -97,10 +97,10 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBRowLayout getBasicTab(){
+	public DBRowPanel getBasicTab(){
 
 
-		DBRowLayout t = super.getBasicTab();
+		DBRowPanel t = super.getBasicTab();
 		
 		t.add(getProductTypeComboBox());
 

@@ -10,22 +10,22 @@ import javax.swing.SwingConstants;
 
 import developen.common.framework.widget.Label;
 import developen.common.framework.widget.Nameable;
-import developen.common.framework.widget.RowLayout;
+import developen.common.framework.widget.RowPanel;
 
-public class DBRowLayout extends RowLayout {
+public class DBRowPanel extends RowPanel {
 
 	
 	private static final long serialVersionUID = 1073210692637667197L;
 
 	
-	public DBRowLayout(){
+	public DBRowPanel(){
 
 		super();
 		
 	}
 
 	
-	public DBRowLayout(int labelWidth){
+	public DBRowPanel(int labelWidth){
 
 		super(labelWidth);
 		

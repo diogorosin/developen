@@ -25,7 +25,7 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBDateField;
 import developen.client.framework.widget.DBIdentifierField;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.client.subject.search.SubjectSearch;
@@ -45,7 +45,7 @@ import developen.common.framework.mvc.View;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.type.AllwaysDiferentList;
@@ -98,12 +98,12 @@ public class OrderView extends EntryView {
 	}
 
 
-	public ExtendedLayout getNorthLayout(){
+	public ExtendedPanel getNorthPanel(){
 
 
-		ExtendedLayout l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthPanel();
 
-		DBRowLayout northPanel = new DBRowLayout(120);
+		DBRowPanel northPanel = new DBRowPanel(120);
 
 		northPanel.add(getIdentifierField());
 
@@ -121,10 +121,10 @@ public class OrderView extends EntryView {
 	}
 
 
-	public ExtendedLayout getCenterLayout(){
+	public ExtendedPanel getCenterPanel(){
 
 
-		ExtendedLayout l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.add(getTabbedPane());
 

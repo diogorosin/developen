@@ -9,7 +9,7 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 
-public class ButtonLayout extends JPanel{
+public class ButtonPanel extends JPanel{
 
 
 	private static final long serialVersionUID = 2811646104378019371L;
@@ -21,7 +21,7 @@ public class ButtonLayout extends JPanel{
 	private JPanel west;
 
 
-	public ButtonLayout(){
+	public ButtonPanel(){
 
 
 		setLayout(new BorderLayout());
@@ -83,7 +83,7 @@ public class ButtonLayout extends JPanel{
 	}
 
 
-	public void add(Button button, ButtonLayoutAligment aligment){
+	public void add(Button button, ButtonPanelAligment aligment){
 
 
 		switch (aligment) {

@@ -10,7 +10,7 @@ import developen.client.engineer.widget.DBUnitMeasureConversionPKField;
 import developen.client.framework.mvc.ListEditorController;
 import developen.client.framework.mvc.ListEditorView;
 import developen.client.framework.widget.DBNumberField;
-import developen.client.framework.widget.DBRowLayout;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.EditingOrIncludingListEditorCondition;
 import developen.common.engineer.i18n.ConversionTag;
 import developen.common.engineer.i18n.ValueTag;
@@ -18,7 +18,7 @@ import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
-import developen.common.framework.widget.ExtendedLayout;
+import developen.common.framework.widget.ExtendedPanel;
 
 public class UnitMeasureConversionView extends ListEditorView implements CheckListener {
 
@@ -51,10 +51,10 @@ public class UnitMeasureConversionView extends ListEditorView implements CheckLi
 	}
 
 	
-	public ExtendedLayout getNorthLayout(){
+	public ExtendedPanel getNorthLayout(){
 
 		
-		ExtendedLayout l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthLayout();
 
 		l.add(getIdentifierField());
 		
@@ -64,14 +64,14 @@ public class UnitMeasureConversionView extends ListEditorView implements CheckLi
 	}
 	
 
-	public ExtendedLayout getCenterLayout(){
+	public ExtendedPanel getCenterLayout(){
 
 		
-		ExtendedLayout l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterLayout();
 
 		l.setBorder(BorderFactory.createTitledBorder(""));
 		
-		DBRowLayout r = new DBRowLayout(100);
+		DBRowPanel r = new DBRowPanel(100);
 		
 		r.add(getValueField());
 		

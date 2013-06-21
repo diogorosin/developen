@@ -1,6 +1,6 @@
 package developen.common.framework.widget;
 
-public enum ButtonLayoutAligment {
+public enum ButtonPanelAligment {
 
 	LEFT,
 	
