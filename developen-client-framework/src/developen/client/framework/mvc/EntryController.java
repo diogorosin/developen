@@ -154,11 +154,11 @@ public abstract class EntryController extends Controller {
 	protected void onRefresh() throws Exception{
 
 
-		Session session = DPA.getSessionFactory().createSession(); 
+		Session session = DPA.getSessionFactory().createSession();
 
 		Object newObject = session.read(
 
-				getModel().getClass(), 
+				getModel().getClass(),
 
 				SessionUtils.getIdentifier(getModel()));
 
@@ -176,9 +176,7 @@ public abstract class EntryController extends Controller {
 
 				for(Field field : myClass.getDeclaredFields()){
 
-					if (field.isAnnotationPresent(Column.class)
-
-							|| field.isAnnotationPresent(ManyToOne.class)
+					if (field.isAnnotationPresent(Column.class) 
 
 							|| field.isAnnotationPresent(OneToMany.class)){
 
@@ -186,37 +184,19 @@ public abstract class EntryController extends Controller {
 
 						Method setter = null;
 
-						if (field.isAnnotationPresent(ManyToOne.class)){
+						setter = myClass.getMethod(
 
-							Class<?> cast = field.getAnnotation(ManyToOne.class).cast();
+								"set" + field.getName().substring(0, 1).toUpperCase() +
 
-							if (cast!=Object.class)
+								field.getName().substring(1)
 
-								setter = myClass.getDeclaredMethod("set" + field.getName().substring(0, 1).toUpperCase() +
-
-										field.getName().substring(1), new Class[] { cast });
-
-							else
-
-								setter = myClass.getDeclaredMethod("set" + field.getName().substring(0, 1).toUpperCase() +
-
-										field.getName().substring(1), new Class[] { field.getType() });
-
-						} else 
-
-							setter = myClass.getMethod(
-
-									"set" + field.getName().substring(0, 1).toUpperCase() +
-
-									field.getName().substring(1)
-
-									, new Class[]{field.getType()});
+								, new Class[]{field.getType()});
 
 						setter.invoke(getModel(), field.get(newObject));
 
 					} else {
 
-						if (field.isAnnotationPresent(OneToOne.class)){
+						if (field.isAnnotationPresent(ManyToOne.class)) {
 
 							field.setAccessible(true);
 
@@ -226,42 +206,126 @@ public abstract class EntryController extends Controller {
 
 							if (oldValue==null){
 
-								Method setter = myClass.getMethod(
+								Method setter = null;
 
-										"set" + field.getName().substring(0, 1).toUpperCase() +
+								Class<?> cast = field.getAnnotation(ManyToOne.class).cast();
 
-										field.getName().substring(1)
+								if (cast!=Object.class)
 
-										, new Class[]{field.getType()});
+									setter = myClass.getDeclaredMethod("set" + field.getName().substring(0, 1).toUpperCase() +
 
+											field.getName().substring(1)
+
+											, new Class[] { cast });
+
+								else
+
+									setter = myClass.getDeclaredMethod("set" + field.getName().substring(0, 1).toUpperCase() +
+
+											field.getName().substring(1)
+
+											, new Class[] { field.getType() });
 
 								setter.invoke(getModel(), field.get(newObject));
 
 							} else {
 
+
+
+
+
+
+
 								Class<?> oldValueClass = oldValue.getClass();
 
-								for (Field oldValueClassField : oldValueClass.getDeclaredFields()) {
+								while (oldValueClass.isAnnotationPresent(Table.class)){
 
-									if (oldValueClassField.isAnnotationPresent(Column.class)
+									for (Field oldValueClassField : oldValueClass.getDeclaredFields()) {
 
-											|| oldValueClassField.isAnnotationPresent(Identifier.class)
+										if (oldValueClassField.isAnnotationPresent(Column.class)
 
-											|| oldValueClassField.isAnnotationPresent(ManyToOne.class)
+												|| oldValueClassField.isAnnotationPresent(Identifier.class)
 
-											|| oldValueClassField.isAnnotationPresent(OneToMany.class)){
+												|| oldValueClassField.isAnnotationPresent(ManyToOne.class)
 
-										oldValueClassField.setAccessible(true);
+												|| oldValueClassField.isAnnotationPresent(OneToMany.class)){
 
-										Method setter = oldValueClass.getMethod(
+											oldValueClassField.setAccessible(true);
 
-												"set" + oldValueClassField.getName().substring(0, 1).toUpperCase() +
+											Method setter = oldValueClass.getDeclaredMethod(
 
-												oldValueClassField.getName().substring(1)
+													"set" + oldValueClassField.getName().substring(0, 1).toUpperCase() +
 
-												, new Class[]{oldValueClassField.getType()});
+													oldValueClassField.getName().substring(1)
 
-										setter.invoke(oldValue, oldValueClassField.get(newValue));
+													, new Class[]{oldValueClassField.getType()});
+
+											setter.invoke(oldValue, oldValueClassField.get(newValue));
+
+										}
+
+									}
+									
+									oldValueClass = oldValueClass.getSuperclass();
+									
+								}								
+
+
+
+
+
+
+							}
+
+						} else {
+
+							if (field.isAnnotationPresent(OneToOne.class)){
+
+								field.setAccessible(true);
+
+								Object newValue = field.get(newObject);
+
+								Object oldValue = field.get(getModel());
+
+								if (oldValue==null){
+
+									Method setter = myClass.getMethod(
+
+											"set" + field.getName().substring(0, 1).toUpperCase() +
+
+											field.getName().substring(1)
+
+											, new Class[]{field.getType()});
+
+									setter.invoke(getModel(), field.get(newObject));
+
+								} else {
+
+									Class<?> oldValueClass = oldValue.getClass();
+
+									for (Field oldValueClassField : oldValueClass.getDeclaredFields()) {
+
+										if (oldValueClassField.isAnnotationPresent(Column.class)
+
+												|| oldValueClassField.isAnnotationPresent(Identifier.class)
+
+												|| oldValueClassField.isAnnotationPresent(ManyToOne.class)
+
+												|| oldValueClassField.isAnnotationPresent(OneToMany.class)){
+
+											oldValueClassField.setAccessible(true);
+
+											Method setter = oldValueClass.getMethod(
+
+													"set" + oldValueClassField.getName().substring(0, 1).toUpperCase() +
+
+													oldValueClassField.getName().substring(1)
+
+													, new Class[]{oldValueClassField.getType()});
+
+											setter.invoke(oldValue, oldValueClassField.get(newValue));
+
+										}
 
 									}
 

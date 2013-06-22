@@ -1,17 +1,18 @@
 package developen.client.subject.mvc;
 
+import java.awt.Dimension;
 import java.text.ParseException;
 
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.subject.search.PersonSearch;
 import developen.client.subject.widget.DBCPFField;
-import developen.client.subject.widget.DBRGField;
+import developen.client.subject.widget.DBRgField;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.framework.widget.ExtendedPanel;
 import developen.common.subject.i18n.PersonTag;
 import developen.common.subject.mvc.Person;
 
@@ -22,7 +23,7 @@ public class PersonView extends SubjectView {
 
 	private DBCPFField cpfField;
 
-	private DBRGField rgField;
+	private DBRgField rgField;
 
 
 	public PersonView(PersonController controller){
@@ -31,7 +32,14 @@ public class PersonView extends SubjectView {
 
 	}
 
+	
+	public void buildInterface() {
 
+		setSize(new Dimension(WIDTH,600));
+
+	}
+
+	
 	public Tag getInternalFrameTitle() {
 
 		return new PersonTag();
@@ -59,20 +67,29 @@ public class PersonView extends SubjectView {
 	}
 
 	
+	public DBRowPanel getHeaderPanel(){
+		
+		
+		if (headerPanel == null){
+			
+			headerPanel = new DBRowPanel();
+
+			headerPanel.add(getIdentifierField());
+
+			headerPanel.add(getDocumentField());
+			
+			headerPanel.add(getRgField());
+
+			headerPanel.add(getDenominationField());
+
+			headerPanel.add(getFieldActive());
+			
+		}
 	
-	public ExtendedPanel getNorthPanel(){
-
-
-		ExtendedPanel l = super.getNorthPanel();
-
-		l.add(getHeaderPanel());
-
-		return l;
-
-
+		return headerPanel;
+		
 	}
 
-	
 	
 	public DBCPFField getDocumentField() {
 
@@ -101,12 +118,22 @@ public class PersonView extends SubjectView {
 	}
 
 
-	public DBRGField getRGField(){
+	public DBRgField getRgField(){
 
 
-		if (rgField == null)
+		if (rgField == null) {
 
-			rgField = new DBRGField();
+			rgField = new DBRgField(getController().getModel().getRg());
+			
+			getController().addView(rgField.getNumberField());
+			
+			getController().addView(rgField.getOrganizationComboBox());
+			
+			getController().addView(rgField.getStateComboBox());
+			
+			getController().addView(rgField);
+			
+		}
 
 		return rgField;
 
@@ -131,6 +158,7 @@ public class PersonView extends SubjectView {
 			});
 
 		}
+		
 		return identifierSearch;
 
 

@@ -224,7 +224,6 @@ public class AddressView extends DBRowPanel implements View, CheckListener {
 		
 		if (districtField==null){
 
-			
 			districtField = new DBTextField(new DistrictTag(), AddressController.DISTRICT_PROPERTY);
 			
 			districtField.setColumns(30);
@@ -233,7 +232,6 @@ public class AddressView extends DBRowPanel implements View, CheckListener {
 			
 			getController().addView(districtField);
 			
-
 		}
 		
 		return districtField;

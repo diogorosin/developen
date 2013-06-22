@@ -3,39 +3,32 @@ package developen.common.subject.mvc;
 import developen.common.framework.mvc.Model;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Identifier;
-import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.Table;
 
 @Table
-public class State extends Model {
-
-
-	private static final long serialVersionUID = -6353919483378662260L;
+public class Organization extends Model{
 	
-	@Identifier(sequence=true)
-	private Long identifier;
 	
+	private static final long serialVersionUID = -680187333503380526L;
+
+	@Identifier
+	private String identifier;
+
 	@Column
 	private String denomination;
-	
-	@Column
-	private String acronym;
-	
-	@ManyToOne
-	private Country country;
 
 	
-	public Long getIdentifier() {
+	public String getIdentifier() {
 		
 		return identifier;
 		
 	}
 
 	
-	public void setIdentifier(Long newValue) {
+	public void setIdentifier(String newValue) {
 		
 
-		Long oldValue = this.identifier;
+		String oldValue = this.identifier;
 		
 		this.identifier = newValue;
 		
@@ -64,47 +57,7 @@ public class State extends Model {
 		
 	}
 
-
-	public String getAcronym() {
-		
-		return acronym;
-		
-	}
 	
-	
-	public void setAcronym(String newValue) {
-		
-		
-		String oldValue = this.acronym;
-		
-		this.acronym = newValue;
-		
-		firePropertyChange("Acronym", oldValue, newValue);
-		
-		
-	}
-
-	
-	public Country getCountry() {
-		
-		return country;
-		
-	}
-
-
-	public void setCountry(Country newValue) {
-		
-
-		Country oldValue = this.country;
-		
-		this.country = newValue;
-		
-		firePropertyChange("Country", oldValue, newValue);
-
-		
-	}
-
-
 	public int hashCode() {
 		
 		
@@ -137,7 +90,7 @@ public class State extends Model {
 			
 			return false;
 		
-		State other = (State) obj;
+		Organization other = (Organization) obj;
 		
 		if (identifier == null) {
 			
@@ -153,11 +106,11 @@ public class State extends Model {
 		
 		
 	}
-	
+
 
 	public String toString(){
 
-		return getAcronym();
+		return getIdentifier();
 
 	}
 

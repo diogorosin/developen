@@ -58,6 +58,7 @@ public class DBAddressField extends JComponent {
 			
 			getView().getPlayAreaField().requestFocus();
 
+		
 	}
 
 	

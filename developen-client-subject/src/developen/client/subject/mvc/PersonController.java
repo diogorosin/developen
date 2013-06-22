@@ -96,6 +96,14 @@ public class PersonController extends SubjectController {
 		
 		setModelProperty(PersonController.CPF_PROPERTY, null);
 		
+		getModel().getRg().setIdentifier(null);
+		
+		getModel().getRg().setNumber(null);
+		
+		getModel().getRg().setOrganization(null);
+		
+		getModel().getRg().setState(null);
+		
 		
 	}
 
@@ -107,8 +115,16 @@ public class PersonController extends SubjectController {
 
 		setModelProperty(PersonController.CPF_PROPERTY, null);
 		
+		getModel().getRg().setIdentifier(null);
+		
+		getModel().getRg().setNumber(null);
+		
+		getModel().getRg().setOrganization(null);
+		
+		getModel().getRg().setState(null);
+
 		
 	}
-
+	
 	
 }

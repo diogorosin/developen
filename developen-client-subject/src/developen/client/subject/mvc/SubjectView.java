@@ -41,7 +41,7 @@ public abstract class SubjectView extends EntryView {
 
 	private DBCheckBox fieldActive;
 
-	private DBRowPanel headerPanel;
+	protected DBRowPanel headerPanel;
 	
 	private TabbedPane tabbedPane;
 
