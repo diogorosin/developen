@@ -2,6 +2,7 @@ package developen.common.subject.mvc;
 
 import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
+import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.OneToOne;
 import developen.common.persistence.annotation.Table;
 
@@ -12,24 +13,36 @@ public class Company extends Subject implements Search {
 
 	private static final long serialVersionUID = 2674088322733329923L;
 	
-	@Column
-	private Long cnpj;
+	@OneToOne
+	private Cnpj cnpj;
 
 	@OneToOne
 	private Ie ie;
 	
+	@Column
+	private String fancyName;
 	
-	public Long getCnpj() {
+	@ManyToOne
+	private Cnae cnae;
+
+	
+	public Cnpj getCnpj() {
+
+		
+		if (cnpj==null)
+			
+			cnpj = new Cnpj();
 		
 		return cnpj;
+
 		
 	}
 
 	
-	public void setCnpj(Long newValue) {
+	public void setCnpj(Cnpj newValue) {
 		
 		
-		Long oldValue = this.cnpj;
+		Cnpj oldValue = this.cnpj;
 		
 		this.cnpj = newValue;
 		
@@ -62,6 +75,46 @@ public class Company extends Subject implements Search {
 		firePropertyChange("Ie", oldValue, newValue);
 
 
+	}
+
+	
+	public String getFancyName() {
+		
+		return fancyName;
+		
+	}
+
+
+	public void setFancyName(String newValue) {
+		
+
+		String oldValue = this.fancyName;
+		
+		this.fancyName = newValue;
+		
+		firePropertyChange("FancyName", oldValue, newValue);
+
+		
+	}
+
+
+	public Cnae getCnae() {
+		
+		return cnae;
+		
+	}
+
+
+	public void setCnae(Cnae newValue) {
+		
+
+		Cnae oldValue = this.cnae;
+		
+		this.cnae = newValue;
+		
+		firePropertyChange("Cnae", oldValue, newValue);
+
+		
 	}
 
 	

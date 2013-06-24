@@ -18,6 +18,7 @@ import developen.common.subject.i18n.CpfTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.i18n.PersonTag;
+import developen.common.subject.mvc.Cpf;
 
 public class PersonSearchView extends TableSearchView {
 
@@ -26,7 +27,7 @@ public class PersonSearchView extends TableSearchView {
 
 	public static final int IDENTIFIER_COLUMN_INDEX = 0;
 
-	public static final int DOCUMENT_COLUMN_INDEX = 1;
+	public static final int CPF_COLUMN_INDEX = 1;
 
 	public static final int DENOMINATION_COLUMN_INDEX = 2;
 
@@ -36,7 +37,7 @@ public class PersonSearchView extends TableSearchView {
 
 	protected Column identifierColumn;
 
-	protected Column documentColumn;
+	protected Column cpfColumn;
 
 	protected Column denominationColumn;
 
@@ -69,11 +70,11 @@ public class PersonSearchView extends TableSearchView {
 
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setPreferredWidth(150);
+			recordTable.getColumnModel().getColumn(CPF_COLUMN_INDEX).setPreferredWidth(150);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setMaxWidth(150);
+			recordTable.getColumnModel().getColumn(CPF_COLUMN_INDEX).setMaxWidth(150);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setCellRenderer(
+			recordTable.getColumnModel().getColumn(CPF_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
@@ -98,9 +99,9 @@ public class PersonSearchView extends TableSearchView {
 
 					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
 
-					if (y==DOCUMENT_COLUMN_INDEX) {
+					if (y==CPF_COLUMN_INDEX) {
 
-						return	SubjectFormatFactory.formatCPF((Long)row.elementAt(y));
+						return	SubjectFormatFactory.formatCPF(((Cpf)row.elementAt(y)).getNumber());
 
 					} else
 
@@ -112,7 +113,7 @@ public class PersonSearchView extends TableSearchView {
 
 			tableModel.addColumn(getIdentifierColumn());
 
-			tableModel.addColumn(getDocumentColumn());
+			tableModel.addColumn(getCpfColumn());
 
 			tableModel.addColumn(getDenominationColumn());
 
@@ -137,14 +138,14 @@ public class PersonSearchView extends TableSearchView {
 	}
 
 
-	public Column getDocumentColumn(){
+	public Column getCpfColumn(){
 
 
-		if (documentColumn == null)
+		if (cpfColumn == null)
 
-			documentColumn = new Column(new CpfTag(), DOCUMENT_COLUMN_INDEX);
+			cpfColumn = new Column(new CpfTag(), CPF_COLUMN_INDEX);
 
-		return documentColumn;
+		return cpfColumn;
 
 
 	}

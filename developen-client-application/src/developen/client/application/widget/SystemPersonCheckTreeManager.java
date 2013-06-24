@@ -11,8 +11,8 @@ import javax.swing.tree.TreePath;
 import developen.client.application.mvc.SystemPersonController;
 import developen.common.framework.widget.Action;
 import developen.common.framework.widget.CheckTreeManager;
-import developen.common.subject.mvc.PersonAction;
-import developen.common.subject.mvc.PersonActionPK;
+import developen.common.subject.mvc.SystemPersonSystemAction;
+import developen.common.subject.mvc.SystemPersonSystemActionPK;
 import developen.common.subject.mvc.SystemAction;
 
 public class SystemPersonCheckTreeManager extends CheckTreeManager {
@@ -69,11 +69,11 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 
 		TreePath[] checkedPaths = getSelectionModel().getSelectionPaths();
 		
-		ArrayList<PersonAction> personActions = new ArrayList<PersonAction>();
+		ArrayList<SystemPersonSystemAction> personActions = new ArrayList<SystemPersonSystemAction>();
 
 		for (TreePath treePath : checkedPaths)
 			
-			for (PersonAction personAction : getPersonActionsFromPath(treePath))
+			for (SystemPersonSystemAction personAction : getPersonActionsFromPath(treePath))
 				
 				personActions.add(personAction);
 
@@ -105,10 +105,10 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 	} 
 
 	
-	public List<PersonAction> getPersonActionsFromPath(TreePath path){
+	public List<SystemPersonSystemAction> getPersonActionsFromPath(TreePath path){
 
 		
-		List<PersonAction> newList = new ArrayList<PersonAction>();
+		List<SystemPersonSystemAction> newList = new ArrayList<SystemPersonSystemAction>();
 
 		DefaultMutableTreeNode node1 = (DefaultMutableTreeNode) path.getLastPathComponent();
 
@@ -148,9 +148,9 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 														
 														newList.add(
 																
-																new PersonAction(
+																new SystemPersonSystemAction(
 																		
-																		new PersonActionPK(getController().getModel(),
+																		new SystemPersonSystemActionPK(getController().getModel(),
 																				
 																				new SystemAction(node6.getUserObject().getClass().getName()))));
 
@@ -164,9 +164,9 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 												
 												newList.add(
 														
-														new PersonAction(
+														new SystemPersonSystemAction(
 																
-																new PersonActionPK(getController().getModel(),
+																new SystemPersonSystemActionPK(getController().getModel(),
 																		
 																		new SystemAction(node5.getUserObject().getClass().getName()))));
 
@@ -180,9 +180,9 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 										
 										newList.add(
 												
-												new PersonAction(
+												new SystemPersonSystemAction(
 														
-														new PersonActionPK(getController().getModel(),
+														new SystemPersonSystemActionPK(getController().getModel(),
 																
 																new SystemAction(node4.getUserObject().getClass().getName()))));
 
@@ -196,9 +196,9 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 								
 								newList.add(
 										
-										new PersonAction(
+										new SystemPersonSystemAction(
 												
-												new PersonActionPK(getController().getModel(),
+												new SystemPersonSystemActionPK(getController().getModel(),
 														
 														new SystemAction(node3.getUserObject().getClass().getName()))));
 
@@ -212,9 +212,9 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 						
 						newList.add(
 								
-								new PersonAction(
+								new SystemPersonSystemAction(
 										
-										new PersonActionPK(getController().getModel(),
+										new SystemPersonSystemActionPK(getController().getModel(),
 												
 												new SystemAction(node2.getUserObject().getClass().getName()))));
 
@@ -228,9 +228,9 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 				
 				newList.add(
 						
-						new PersonAction(
+						new SystemPersonSystemAction(
 								
-								new PersonActionPK(getController().getModel(),
+								new SystemPersonSystemActionPK(getController().getModel(),
 										
 										new SystemAction(node1.getUserObject().getClass().getName()))));
 

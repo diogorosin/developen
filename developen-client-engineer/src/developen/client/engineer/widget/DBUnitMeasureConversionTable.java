@@ -62,6 +62,8 @@ public class DBUnitMeasureConversionTable extends JComponent implements DBCompon
 
 	private String propertyName;
 
+	private boolean fixedValue;
+	
 	private Condition condition;
 
 	private UnitMeasureConversion model;
@@ -496,6 +498,20 @@ public class DBUnitMeasureConversionTable extends JComponent implements DBCompon
 		this.addAction = addAction;
 
 	}
+	
+
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
 
 
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}
+
+	
 }

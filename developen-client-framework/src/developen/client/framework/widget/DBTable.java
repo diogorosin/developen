@@ -15,6 +15,8 @@ public class DBTable<E extends Search> extends Table implements DBComponent {
 
 	private String propertyName;
 
+	private boolean fixedValue;
+
 	private Condition condition;
 
 
@@ -117,4 +119,18 @@ public class DBTable<E extends Search> extends Table implements DBComponent {
 	}
 
 
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}
+
+	
 }

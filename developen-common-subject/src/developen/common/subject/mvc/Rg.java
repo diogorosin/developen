@@ -24,7 +24,6 @@ public class Rg extends Model {
 	@ManyToOne
 	private State state;
 
-	
 
 	public Long getIdentifier() {
 		

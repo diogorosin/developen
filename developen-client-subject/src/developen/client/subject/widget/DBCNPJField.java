@@ -32,8 +32,6 @@ public class DBCNPJField extends DBFormattedTextField {
 		
 		setFocusLostBehavior(JFormattedTextField.PERSIST);
 		
-		//setColumns(18);
-		
 		setPreferredSize(new Dimension(150,24));
 		
 

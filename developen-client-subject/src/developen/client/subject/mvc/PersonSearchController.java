@@ -11,24 +11,24 @@ import developen.common.subject.mvc.Subject;
 
 public class PersonSearchController extends SearchController {
 
-	
+
 	public static final String ACTIVE_PROPERTY = "Active";
-	
-	
+
+
 	public PersonSearchModel getModel(){
 
 		return (PersonSearchModel) super.getModel();
 
 	}
 
-	
+
 	public void changeActiveProperty(Boolean newValue){
 
 		setModelProperty(PersonSearchController.ACTIVE_PROPERTY, newValue);
 
 	}
 
-	
+
 	public ColumnQuery buildQuery(){
 
 
@@ -60,25 +60,13 @@ public class PersonSearchController extends SearchController {
 
 				Long number = Long.valueOf(getModel().getSearch());
 
-				if (number > 999999)
+				query.add(new Equal(
 
-					query.add(new Equal(
+						new Column("identifier", 
 
-							new Column("cpf", 
+								Subject.class), 
 
-									Person.class), 
-
-									number));
-
-				else
-
-					query.add(new Equal(
-
-							new Column("identifier", 
-
-									Subject.class), 
-
-									number));
+								number));
 
 			} else 
 

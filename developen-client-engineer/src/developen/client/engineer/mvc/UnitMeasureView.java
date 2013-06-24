@@ -671,7 +671,7 @@ public class UnitMeasureView extends EntryView {
 
 					else
 
-						if (e.getPropertyName().equals(ProductController.PARTS_PROPERTY))
+						if (e.getPropertyName().equals(UnitMeasureController.CONVERSIONS_PROPERTY))
 
 							setEnabled((e.getNewValue()!=null && ((List<Object>)e.getNewValue()).size() > 0) &&
 

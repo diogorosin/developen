@@ -18,6 +18,7 @@ import developen.common.subject.i18n.CnpjTag;
 import developen.common.subject.i18n.CompanyTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
+import developen.common.subject.mvc.Cnpj;
 
 public class CompanySearchView extends TableSearchView {
 
@@ -26,7 +27,7 @@ public class CompanySearchView extends TableSearchView {
 
 	public static final int IDENTIFIER_COLUMN_INDEX = 0;
 
-	public static final int DOCUMENT_COLUMN_INDEX = 1;
+	public static final int CNPJ_COLUMN_INDEX = 1;
 	
 	public static final int DENOMINATION_COLUMN_INDEX = 2;
 
@@ -36,7 +37,7 @@ public class CompanySearchView extends TableSearchView {
 
 	protected Column identifierColumn;
 
-	protected Column documentColumn;
+	protected Column cnpjColumn;
 
 	protected Column denominationColumn;
 
@@ -69,11 +70,11 @@ public class CompanySearchView extends TableSearchView {
 					
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setPreferredWidth(150);
+			recordTable.getColumnModel().getColumn(CNPJ_COLUMN_INDEX).setPreferredWidth(150);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setMaxWidth(150);
+			recordTable.getColumnModel().getColumn(CNPJ_COLUMN_INDEX).setMaxWidth(150);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setCellRenderer(
+			recordTable.getColumnModel().getColumn(CNPJ_COLUMN_INDEX).setCellRenderer(
 					
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
@@ -98,9 +99,9 @@ public class CompanySearchView extends TableSearchView {
 
 					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
 
-					if (y==DOCUMENT_COLUMN_INDEX) {
+					if (y==CNPJ_COLUMN_INDEX) {
 
-						return SubjectFormatFactory.formatCNPJ((Long)row.elementAt(y));
+						return SubjectFormatFactory.formatCNPJ(((Cnpj)row.elementAt(y)).getNumber());
 
 					} else
 
@@ -112,7 +113,7 @@ public class CompanySearchView extends TableSearchView {
 
 			tableModel.addColumn(getIdentifierColumn());
 
-			tableModel.addColumn(getDocumentColumn());
+			tableModel.addColumn(getCnpjColumn());
 
 			tableModel.addColumn(getDenominationColumn());
 
@@ -137,14 +138,14 @@ public class CompanySearchView extends TableSearchView {
 	}
 
 
-	public Column getDocumentColumn(){
+	public Column getCnpjColumn(){
 
 
-		if (documentColumn == null)
+		if (cnpjColumn == null)
 
-			documentColumn = new Column(new CnpjTag(), DOCUMENT_COLUMN_INDEX);
+			cnpjColumn = new Column(new CnpjTag(), CNPJ_COLUMN_INDEX);
 
-		return documentColumn;
+		return cnpjColumn;
 
 
 	}

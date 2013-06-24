@@ -32,7 +32,7 @@ public class SubjectSearchView extends TableSearchView {
 
 	public static final int TYPE_COLUMN_INDEX = 1;
 
-	public static final int DOCUMENT_COLUMN_INDEX = 2;
+	public static final int CPF_OR_CNPJ_COLUMN_INDEX = 2;
 
 	public static final int DENOMINATION_COLUMN_INDEX = 3;
 	
@@ -50,7 +50,7 @@ public class SubjectSearchView extends TableSearchView {
 
 	protected Column typeColumn;
 
-	protected Column documentColumn;
+	protected Column cpfOrCnpjColumn;
 
 	protected Column denominationColumn;
 	
@@ -93,11 +93,11 @@ public class SubjectSearchView extends TableSearchView {
 
 			recordTable.getColumnModel().getColumn(TYPE_COLUMN_INDEX).setMaxWidth(50);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setPreferredWidth(150);
+			recordTable.getColumnModel().getColumn(CPF_OR_CNPJ_COLUMN_INDEX).setPreferredWidth(150);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setMaxWidth(150);
+			recordTable.getColumnModel().getColumn(CPF_OR_CNPJ_COLUMN_INDEX).setMaxWidth(150);
 
-			recordTable.getColumnModel().getColumn(DOCUMENT_COLUMN_INDEX).setCellRenderer(
+			recordTable.getColumnModel().getColumn(CPF_OR_CNPJ_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));			
 
@@ -138,7 +138,7 @@ public class SubjectSearchView extends TableSearchView {
 
 					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
 
-					if (y==DOCUMENT_COLUMN_INDEX) {
+					if (y==CPF_OR_CNPJ_COLUMN_INDEX) {
 
 						return row.elementAt(TYPE_COLUMN_INDEX).equals("J") ? 
 
@@ -158,7 +158,7 @@ public class SubjectSearchView extends TableSearchView {
 
 			tableModel.addColumn(getTypeColumn());
 
-			tableModel.addColumn(getDocumentColumn());
+			tableModel.addColumn(getCpfOrCnpjColumn());
 
 			tableModel.addColumn(getDenominationColumn());
 			
@@ -202,14 +202,14 @@ public class SubjectSearchView extends TableSearchView {
 	}
 
 
-	public Column getDocumentColumn(){
+	public Column getCpfOrCnpjColumn(){
 
 
-		if (documentColumn == null)
+		if (cpfOrCnpjColumn == null)
 
-			documentColumn = new Column(new CpfOrCnpjTag(), DOCUMENT_COLUMN_INDEX);
+			cpfOrCnpjColumn = new Column(new CpfOrCnpjTag(), CPF_OR_CNPJ_COLUMN_INDEX);
 
-		return documentColumn;
+		return cpfOrCnpjColumn;
 
 
 	}

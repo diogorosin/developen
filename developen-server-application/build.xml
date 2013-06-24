@@ -14,6 +14,8 @@
                 	../source/developen-common-engineer.jar 
                 	../source/developen-common-commercial.jar 
                 	../source/developen-common-persistence.jar
+                	../source/developen-common-finance.jar
+                	../source/developen-common-fiscal.jar
                 	../source/developen-server-persistence.jar
                 	../source/postgresql-9.1-902.jdbc4.jar
                 	"/>

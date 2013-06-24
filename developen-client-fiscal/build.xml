@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-client-fiscal" name="Create Runnable Jar for Project developen-client-fiscal with libraries in sub-folder">
+    <target name="developen-client-fiscal">
+    	<mkdir dir="/home/diogo/client/source"/>
+        <jar destfile="/home/diogo/client/source/developen-client-fiscal.jar">
+            <fileset dir="/home/diogo/git/developen/developen-client-fiscal/bin"/>
+        </jar>
+    </target>
+</project>

@@ -40,9 +40,9 @@ import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
-import developen.common.subject.mvc.PersonAction;
-import developen.common.subject.mvc.PersonCompany;
-import developen.common.subject.mvc.PersonCompanyPK;
+import developen.common.subject.mvc.SystemPersonSystemAction;
+import developen.common.subject.mvc.SystemPersonSystemCompany;
+import developen.common.subject.mvc.SystemPersonSystemCompanyPK;
 import developen.common.subject.mvc.SystemCompany;
 import developen.common.subject.mvc.SystemPerson;
 
@@ -53,7 +53,7 @@ public abstract class SystemPersonView extends PersonView {
 
 	private SystemPersonDBTree menuTree;
 
-	private DBListView<PersonCompany> companyList;
+	private DBListView<SystemPersonSystemCompany> systemCompanyList;
 
 	private JSplitPane systemPersonTab;
 
@@ -61,17 +61,17 @@ public abstract class SystemPersonView extends PersonView {
 
 	private NewPasswordAction newPasswordAction;
 
-	private JPanel companyPanel;
+	private JPanel systemCompanyPanel;
 
-	private ToolBar companyToolBar;
+	private ToolBar systemCompanyToolBar;
 
 	private JPanel menuPanel;
 
 	private ToolBar menuToolBar;
 
-	private AddAction addCompanyAction;
+	private AddAction addSystemCompanyAction;
 
-	private RemoveAction removeCompanyAction;
+	private RemoveAction removeSystemCompanyAction;
 
 	private ExpandAction expandAction;
 
@@ -130,7 +130,7 @@ public abstract class SystemPersonView extends PersonView {
 
 		if (systemPersonTab==null){
 
-			systemPersonTab = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMenuPanel(), getCompanyPanel());
+			systemPersonTab = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, getMenuPanel(), getSystemCompanyPanel());
 
 			systemPersonTab.setName(new AccessControlTag().toString());
 
@@ -197,7 +197,7 @@ public abstract class SystemPersonView extends PersonView {
 
 					getMenuHierarchy(), 
 
-					SystemPersonController.ACTIONS_PROPERTY, 
+					SystemPersonController.SYSTEM_ACTIONS_PROPERTY, 
 
 					(SystemPersonController) getController());
 
@@ -217,7 +217,7 @@ public abstract class SystemPersonView extends PersonView {
 
 						for (Object object : oldList) {
 
-							PersonAction personAction = (PersonAction) object;
+							SystemPersonSystemAction personAction = (SystemPersonSystemAction) object;
 
 							newList.add(personAction.getIdentifier().getSystemAction().getIdentifier());
 
@@ -238,65 +238,65 @@ public abstract class SystemPersonView extends PersonView {
 
 	}
 
-	public JPanel getCompanyPanel(){
+	public JPanel getSystemCompanyPanel(){
 
 
-		if (companyPanel == null){
+		if (systemCompanyPanel == null){
 
-			companyPanel = new JPanel(new BorderLayout());
+			systemCompanyPanel = new JPanel(new BorderLayout());
 
-			companyPanel.add(getCompanyToolBar(), BorderLayout.NORTH);
+			systemCompanyPanel.add(getSystemCompanyToolBar(), BorderLayout.NORTH);
 
-			companyPanel.add(new JScrollPane(getCompanyList()), BorderLayout.CENTER);
+			systemCompanyPanel.add(new JScrollPane(getSystemCompanyList()), BorderLayout.CENTER);
 
 		}
-		return companyPanel;
+		return systemCompanyPanel;
 
 
 	}
 
 
-	public ToolBar getCompanyToolBar(){
+	public ToolBar getSystemCompanyToolBar(){
 
 
-		if (companyToolBar == null){
+		if (systemCompanyToolBar == null){
 
-			companyToolBar = new ToolBar();
+			systemCompanyToolBar = new ToolBar();
 
-			companyToolBar.add(getAddCompanyAction());
+			systemCompanyToolBar.add(getAddSystemCompanyAction());
 
-			companyToolBar.add(getRemoveCompanyAction());
+			systemCompanyToolBar.add(getRemoveSystemCompanyAction());
 
-			companyToolBar.setFloatable(false);
+			systemCompanyToolBar.setFloatable(false);
 
-			companyToolBar.setBorder(BorderFactory.createEmptyBorder());
+			systemCompanyToolBar.setBorder(BorderFactory.createEmptyBorder());
 
-			companyToolBar.setFocusable(false);
+			systemCompanyToolBar.setFocusable(false);
 
 		}
 
-		return companyToolBar;
+		return systemCompanyToolBar;
 
 
 	}
 
 
-	public DBListView<PersonCompany> getCompanyList(){
+	public DBListView<SystemPersonSystemCompany> getSystemCompanyList(){
 
 
-		if (companyList==null){
+		if (systemCompanyList==null){
 
-			companyList = new DBListView<PersonCompany>(
+			systemCompanyList = new DBListView<SystemPersonSystemCompany>(
 
-					new DefaultListModel<PersonCompany>(),
+					new DefaultListModel<SystemPersonSystemCompany>(),
 
-					SystemPersonController.COMPANIES_PROPERTY);
+					SystemPersonController.SYSTEM_COMPANIES_PROPERTY);
 
-			getController().addView(companyList);
+			getController().addView(systemCompanyList);
 
 		}
 
-		return companyList;
+		return systemCompanyList;
 
 
 	}
@@ -393,12 +393,12 @@ public abstract class SystemPersonView extends PersonView {
 	}
 
 
-	public AddAction getAddCompanyAction() {
+	public AddAction getAddSystemCompanyAction() {
 
 
-		if (addCompanyAction==null){
+		if (addSystemCompanyAction==null){
 
-			addCompanyAction = new AddAction() {
+			addSystemCompanyAction = new AddAction() {
 
 				private static final long serialVersionUID = 1L;
 
@@ -416,25 +416,25 @@ public abstract class SystemPersonView extends PersonView {
 
 					try {
 
-						List<PersonCompany> allCompanies = new ArrayList<PersonCompany>();
+						List<SystemPersonSystemCompany> allCompanies = new ArrayList<SystemPersonSystemCompany>();
 						
 						Session session = DPA.getSessionFactory().createSession();
 						
 						for (Object object : session.list(SystemCompany.class))
 
-							allCompanies.add(new PersonCompany(new PersonCompanyPK(getController().getModel(), ((SystemCompany) object))));
+							allCompanies.add(new SystemPersonSystemCompany(new SystemPersonSystemCompanyPK(getController().getModel(), ((SystemCompany) object))));
 
 						session.close();
 						
-						List<PersonCompany> popupMenuOptions = new ArrayList<PersonCompany>();
+						List<SystemPersonSystemCompany> popupMenuOptions = new ArrayList<SystemPersonSystemCompany>();
 
-						for (PersonCompany company : allCompanies)
+						for (SystemPersonSystemCompany company : allCompanies)
 
 							popupMenuOptions.add(company);
 
-						for (PersonCompany popupMenuCompany : allCompanies) {
+						for (SystemPersonSystemCompany popupMenuCompany : allCompanies) {
 
-							for (PersonCompany personCompany : getController().getModel().getCompanies()) {
+							for (SystemPersonSystemCompany personCompany : getController().getModel().getSystemCompanies()) {
 
 								if (popupMenuCompany.equals(personCompany))
 
@@ -448,15 +448,15 @@ public abstract class SystemPersonView extends PersonView {
 
 							JPopupMenu popupMenu = new JPopupMenu();
 
-							for (PersonCompany personCompany : popupMenuOptions)
+							for (SystemPersonSystemCompany personCompany : popupMenuOptions)
 
 								popupMenu.add(new MyAction(personCompany));
 
-							popupMenu.show(getCompanyToolBar(), 
+							popupMenu.show(getSystemCompanyToolBar(), 
 
-									getCompanyToolBar().getX(), 
+									getSystemCompanyToolBar().getX(), 
 
-									getCompanyToolBar().getY() + getCompanyToolBar().getSize().height);
+									getSystemCompanyToolBar().getY() + getSystemCompanyToolBar().getSize().height);
 
 						}
 
@@ -470,22 +470,22 @@ public abstract class SystemPersonView extends PersonView {
 
 			};
 
-			getController().addView(addCompanyAction);
+			getController().addView(addSystemCompanyAction);
 
 		}
 
-		return addCompanyAction;
+		return addSystemCompanyAction;
 
 
 	}
 
 
-	public RemoveAction getRemoveCompanyAction() {
+	public RemoveAction getRemoveSystemCompanyAction() {
 
 
-		if (removeCompanyAction==null){
+		if (removeSystemCompanyAction==null){
 
-			removeCompanyAction = new RemoveAction() {
+			removeSystemCompanyAction = new RemoveAction() {
 
 				private static final long serialVersionUID = 1L;
 
@@ -498,15 +498,15 @@ public abstract class SystemPersonView extends PersonView {
 
 								|| e.getNewValue().equals(EntryState.INCLUDING)) 
 
-								&& ((getController().getModel().getCompanies()!=null) &&
+								&& ((getController().getModel().getSystemCompanies()!=null) &&
 
-										(getController().getModel().getCompanies().size() > 0)));
+										(getController().getModel().getSystemCompanies().size() > 0)));
 
 					else
 
-						if (e.getPropertyName().equals(SystemPersonController.COMPANIES_PROPERTY))
+						if (e.getPropertyName().equals(SystemPersonController.SYSTEM_COMPANIES_PROPERTY))
 
-							setEnabled((e.getNewValue()!=null && ((List<PersonCompany>)e.getNewValue()).size() > 0) &&
+							setEnabled((e.getNewValue()!=null && ((List<SystemPersonSystemCompany>)e.getNewValue()).size() > 0) &&
 
 									(getController().isEditing() || getController().isIncluding()));
 
@@ -515,36 +515,36 @@ public abstract class SystemPersonView extends PersonView {
 				public void actionPerformed(ActionEvent e) {
 
 
-					List<PersonCompany> companiesOfPerson = getController().getModel().getCompanies();
+					List<SystemPersonSystemCompany> companiesOfPerson = getController().getModel().getSystemCompanies();
 
-					List<PersonCompany> companiesToRemove = getCompanyList().getSelectedValuesList();
+					List<SystemPersonSystemCompany> companiesToRemove = getSystemCompanyList().getSelectedValuesList();
 
-					List<PersonCompany> companiesToSender = new ArrayList<PersonCompany>();
+					List<SystemPersonSystemCompany> companiesToSender = new ArrayList<SystemPersonSystemCompany>();
 
-					for (PersonCompany personCompany : companiesOfPerson)
+					for (SystemPersonSystemCompany personCompany : companiesOfPerson)
 
 						companiesToSender.add(personCompany);
 
-					for (PersonCompany personCompany : companiesOfPerson) 
+					for (SystemPersonSystemCompany personCompany : companiesOfPerson) 
 
-						for (PersonCompany companyToRemove : companiesToRemove) 
+						for (SystemPersonSystemCompany companyToRemove : companiesToRemove) 
 
 							if (personCompany.equals(companyToRemove))
 
 								companiesToSender.remove(personCompany);
 
-					getController().changeCompaniesProperty(companiesToSender);
+					getController().changeSystemCompaniesProperty(companiesToSender);
 
 
 				}
 
 			};
 
-			getController().addView(removeCompanyAction);
+			getController().addView(removeSystemCompanyAction);
 
 		}
 
-		return removeCompanyAction;
+		return removeSystemCompanyAction;
 
 
 	}
@@ -636,10 +636,10 @@ public abstract class SystemPersonView extends PersonView {
 
 		private static final long serialVersionUID = -7819952502492061888L;
 		
-		private PersonCompany personCompany;
+		private SystemPersonSystemCompany personCompany;
 		
 
-		public MyAction(PersonCompany company){
+		public MyAction(SystemPersonSystemCompany company){
 
 			
 			this.putValue(AbstractAction.NAME, company.toString());
@@ -657,14 +657,14 @@ public abstract class SystemPersonView extends PersonView {
 		}
 
 		
-		public PersonCompany getPersonCompany() {
+		public SystemPersonSystemCompany getPersonCompany() {
 
 			return personCompany;
 
 		}
 
 		
-		public void setPersonCompany(PersonCompany personCompany) {
+		public void setPersonCompany(SystemPersonSystemCompany personCompany) {
 
 			this.personCompany = personCompany;
 
@@ -674,17 +674,17 @@ public abstract class SystemPersonView extends PersonView {
 		public void actionPerformed(ActionEvent e) {
 
 			
-			List<PersonCompany> companiesOfPerson = new ArrayList<PersonCompany>();
+			List<SystemPersonSystemCompany> companiesOfPerson = new ArrayList<SystemPersonSystemCompany>();
 
-			if (getController().getModel().getCompanies() != null)
+			if (getController().getModel().getSystemCompanies() != null)
 				
-				for (PersonCompany personCompany : getController().getModel().getCompanies())
+				for (SystemPersonSystemCompany personCompany : getController().getModel().getSystemCompanies())
 					
 					companiesOfPerson.add(personCompany);
 
 			companiesOfPerson.add(getPersonCompany());
 			
-			getController().changeCompaniesProperty(companiesOfPerson);
+			getController().changeSystemCompaniesProperty(companiesOfPerson);
 			
 
 		}

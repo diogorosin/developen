@@ -8,10 +8,11 @@ import developen.client.application.action.ApplicationAction;
 import developen.client.commercial.mvc.SaleOrderController;
 import developen.client.commercial.mvc.SaleOrderView;
 import developen.client.osm.Client;
-import developen.common.commercial.i18n.OrderTag;
+import developen.common.commercial.i18n.SaleOrderTag;
 import developen.common.commercial.mvc.SaleOrder;
 import developen.common.framework.widget.InternalFramePosition;
 import developen.common.subject.mvc.SystemCompany;
+import developen.common.subject.mvc.SystemPerson;
 
 public class SaleOrderEntryAction extends ApplicationAction {
 
@@ -21,7 +22,7 @@ public class SaleOrderEntryAction extends ApplicationAction {
 
 	public SaleOrderEntryAction(JDesktopPane desktop) {
 
-		super(new OrderTag(), desktop);
+		super(new SaleOrderTag(), desktop);
 
 	}
 
@@ -36,6 +37,12 @@ public class SaleOrderEntryAction extends ApplicationAction {
 			public SystemCompany getSystemCompany() {
 
 				return Client.getClientModel().getSystemCompany();
+				
+			}
+
+			public SystemPerson getSystemPerson() {
+
+				return Client.getClientModel().getSystemPerson();
 				
 			}
 			

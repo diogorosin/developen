@@ -54,6 +54,27 @@ public class SubjectFormatFactory extends FormatFactory {
 
 	}
 
+	
+	public static MaskFormatter getCNAEFormatter(){
+
+		
+		MaskFormatter mask = null;
+		
+		try {
+			
+			mask = new MaskFormatter("##.##-#-##");
+			
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+			
+		}
+		return mask;
+		
+
+	}
+
+	
 	public static Long getCPFAsLong(String cpf){
 
 		
@@ -176,6 +197,13 @@ public class SubjectFormatFactory extends FormatFactory {
 		
 		return newCNPJ;
 		
+
+	}
+	
+
+	public static String formatCNAE(String cnae){
+		
+		return SubjectFormatFactory.format(cnae, getCNAEFormatter().getMask());
 
 	}
 	

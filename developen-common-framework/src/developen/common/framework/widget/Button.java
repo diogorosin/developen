@@ -1,9 +1,12 @@
 package developen.common.framework.widget;
 
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.LanguageChangeListener;
@@ -71,7 +74,23 @@ public class Button extends JButton implements LanguageChangeListener {
 		
 		setPreferredSize(new Dimension(100,26));
 		
+		registerKeyboardAction(getActionForKeyStroke(
+				
+                KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false)),
+                
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false),
+                
+                JComponent.WHEN_FOCUSED);
 
+		registerKeyboardAction(getActionForKeyStroke(
+				
+                KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true)),
+                
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
+                
+                JComponent.WHEN_FOCUSED);
+
+		
 	}
 
 	

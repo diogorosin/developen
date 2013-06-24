@@ -2,7 +2,6 @@ package developen.client.commercial.mvc;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import developen.client.framework.mvc.EntryController;
@@ -14,7 +13,6 @@ import developen.common.framework.exception.NotNullException;
 import developen.common.framework.exception.OutOfRangeException;
 import developen.common.subject.i18n.NumberTag;
 import developen.common.subject.mvc.Subject;
-import developen.common.subject.mvc.SystemPerson;
 
 public class OrderController extends EntryController {
 
@@ -27,15 +25,7 @@ public class OrderController extends EntryController {
 	
 	public static final String ITEMS_PROPERTY = "Items";
 
-	public static final String CREATEDBY_PROPERTY = "CreatedBy";
-	
-	public static final String CREATEDIN_PROPERTY = "CreatedIn";
-	
-	public static final String MODIFIEDBY_PROPERTY = "ModifiedBy";
-	
-	public static final String MODIFIEDIN_PROPERTY = "ModifiedIn";
-	
-	
+
 	public Order getModel(){
 		
 		return (Order) super.getModel();
@@ -97,34 +87,6 @@ public class OrderController extends EntryController {
 	}
 
 	
-	public void changeCreatedByProperty(SystemPerson newValue) throws Exception{
-		
-		setModelProperty(OrderController.CREATEDBY_PROPERTY, newValue);
-
-	}
-	
-	
-	public void changeCreatedInProperty(Date newValue) throws Exception{
-
-		setModelProperty(OrderController.CREATEDIN_PROPERTY, newValue);
-		
-	}
-
-	
-	public void changeModifiedByProperty(SystemPerson newValue) throws Exception{
-
-		setModelProperty(OrderController.MODIFIEDBY_PROPERTY, newValue);		
-
-	}
-	
-	
-	public void changeModifiedInProperty(Date newValue) throws Exception{
-		
-		setModelProperty(OrderController.MODIFIEDIN_PROPERTY, newValue);
-		
-	}
-
-
 	public void onClear() throws Exception{
 
 	
@@ -138,14 +100,6 @@ public class OrderController extends EntryController {
 		
 		setModelProperty(OrderController.ITEMS_PROPERTY, null);
 		
-		setModelProperty(OrderController.CREATEDIN_PROPERTY, null);
-		
-		setModelProperty(OrderController.MODIFIEDIN_PROPERTY, null);
-		
-		setModelProperty(OrderController.CREATEDBY_PROPERTY, null);
-		
-		setModelProperty(OrderController.MODIFIEDBY_PROPERTY, null);
-
 		
 	}
 	
@@ -157,14 +111,6 @@ public class OrderController extends EntryController {
 		
 		setModelProperty(OrderController.ITEMS_PROPERTY, new ArrayList<OrderItem>());
 		
-		setModelProperty(OrderController.CREATEDIN_PROPERTY, null);
-		
-		setModelProperty(OrderController.MODIFIEDIN_PROPERTY, null);
-		
-		setModelProperty(OrderController.CREATEDBY_PROPERTY, null);
-		
-		setModelProperty(OrderController.MODIFIEDBY_PROPERTY, null);
-
 		
 	}
 

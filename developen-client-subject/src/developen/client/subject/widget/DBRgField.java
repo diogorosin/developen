@@ -14,8 +14,9 @@ import developen.client.framework.widget.DBComboBox;
 import developen.client.framework.widget.DBComponent;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
-import developen.client.subject.mvc.RgController;
+import developen.common.framework.exception.NotNullException;
 import developen.common.framework.messenger.Messenger;
+import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
@@ -23,6 +24,7 @@ import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
+import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.i18n.OrganizationTag;
 import developen.common.subject.i18n.RgOrganStateTag;
 import developen.common.subject.i18n.RgTag;
@@ -47,6 +49,8 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 	private Tag caption;
 
+	private boolean fixedValue;
+	
 	private Condition condition;
 
 
@@ -61,7 +65,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 		controller.setModel(model);
 
-		setPreferredSize(new Dimension(342,24));
+		setPreferredSize(new Dimension(350,24));
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
@@ -97,8 +101,6 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 			numberField = new DBTextField(new RgTag(), RgController.NUMBER_PROPERTY);
 
 			numberField.setPreferredSize(new Dimension(150,24));
-
-			numberField.setColumns(14);
 
 			numberField.addCheckListener(this);
 
@@ -139,7 +141,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 			}
 
-			organizationComboBox.setPreferredSize(new Dimension(88,24));
+			organizationComboBox.setPreferredSize(new Dimension(75,24));
 
 			organizationComboBox.setCondition(new EditingOrIncludingCondition());
 
@@ -198,7 +200,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 			}
 
-			stateComboBox.setPreferredSize(new Dimension(88,24));
+			stateComboBox.setPreferredSize(new Dimension(75,24));
 
 			stateComboBox.setCondition(new EditingOrIncludingCondition());
 
@@ -294,6 +296,20 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 	}
 
 
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}
+
+	
 	public Condition getCondition(){
 
 
@@ -314,4 +330,66 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 	}
 
 
+	class RgController extends Controller {
+
+
+		public static final String IDENTIFIER_PROPERTY = "Identifier";
+
+		public static final String NUMBER_PROPERTY = "Number";
+
+		public static final String ORGANIZATION_PROPERTY = "Organization";
+
+		public static final String STATE_PROPERTY = "State";
+
+
+		public Rg getModel(){
+
+			return (Rg) super.getModel();
+
+		}
+
+
+		public void changeIdentifierProperty(Integer newValue) throws Exception {
+
+
+			if (newValue==null)
+
+				throw new NotNullException(new IdentifierTag());
+
+			setModelProperty(IDENTIFIER_PROPERTY, newValue);
+
+
+		}
+
+
+		public void changeNumberProperty(String newValue) throws Exception {
+
+
+			if (newValue==null || newValue.isEmpty())
+
+				throw new NotNullException(new RgTag());
+
+			setModelProperty(NUMBER_PROPERTY, newValue);
+
+
+		}
+
+
+		public void changeOrganizationProperty(Organization newValue) {
+
+			setModelProperty(ORGANIZATION_PROPERTY, newValue);
+
+		}
+
+
+		public void changeStateProperty(State newValue) {
+
+			setModelProperty(STATE_PROPERTY, newValue);
+			
+		}
+
+
+	}
+	
+	
 }

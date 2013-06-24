@@ -10,13 +10,15 @@ import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBComponent;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
-import developen.client.subject.mvc.IeController;
-import developen.client.subject.mvc.RgController;
+import developen.client.subject.widget.DBRgField.RgController;
+import developen.common.framework.exception.NotNullException;
+import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
+import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.i18n.IeTag;
 import developen.common.subject.mvc.Ie;
 
@@ -33,6 +35,8 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 
 	private Tag caption;
 
+	private boolean fixedValue;
+	
 	private Condition condition;
 
 
@@ -57,20 +61,6 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 	}
 
 
-	public IeController getController() {
-
-		return controller;
-
-	}
-
-
-	public void setController(IeController controller) {
-
-		this.controller = controller;
-
-	}
-
-
 	public DBTextField getNumberField() {
 
 
@@ -80,11 +70,9 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 
 			numberField.setPreferredSize(new Dimension(150,24));
 
-//			numberField.setColumns(14);
-
 			numberField.addCheckListener(this);
 
-			getController().addView(numberField);
+			controller.addView(numberField);
 
 		}
 
@@ -117,7 +105,7 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 
 		if (event.getCheckable() == getNumberField())
 
-			getController().changeNumberProperty(getNumberField().getText());
+			controller.changeNumberProperty(getNumberField().getText());
 
 
 	}
@@ -158,6 +146,20 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 	}
 
 
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}
+
+	
 	public Condition getCondition(){
 
 
@@ -177,5 +179,49 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 
 	}
 
+	
+	class IeController extends Controller {
 
+
+		public static final String IDENTIFIER_PROPERTY = "Identifier";
+
+		public static final String NUMBER_PROPERTY = "Number";
+
+
+		public Ie getModel(){
+
+			return (Ie) super.getModel();
+
+		}
+
+
+		public void changeIdentifierProperty(Integer newValue) throws Exception {
+
+
+			if (newValue==null)
+
+				throw new NotNullException(new IdentifierTag());
+
+			setModelProperty(IDENTIFIER_PROPERTY, newValue);
+
+
+		}
+
+
+		public void changeNumberProperty(String newValue) throws Exception {
+
+
+			if (newValue==null || newValue.isEmpty())
+
+				throw new NotNullException(new IeTag());
+
+			setModelProperty(NUMBER_PROPERTY, newValue);
+
+
+		}
+
+
+	}
+	
+	
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-common-finance" name="Create Runnable Jar for Project developen-common-finance with libraries in sub-folder">
+    <target name="developen-common-finance">
+    	<mkdir dir="/home/diogo/server/source"/>
+    	<mkdir dir="/home/diogo/client/source"/>
+        <jar destfile="/home/diogo/server/source/developen-common-finance.jar">
+            <fileset dir="/home/diogo/git/developen/developen-common-finance/bin"/>
+        </jar>
+        <copy overwrite="yes" file="/home/diogo/server/source/developen-common-finance.jar" todir="/home/diogo/client/source"/>
+    </target>
+</project>

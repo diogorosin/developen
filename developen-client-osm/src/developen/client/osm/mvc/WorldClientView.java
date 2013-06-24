@@ -13,20 +13,26 @@ import developen.client.osm.action.CompanyEntryAction;
 import developen.client.osm.action.ExitAction;
 import developen.client.osm.action.HelpAboutAction;
 import developen.client.osm.action.HelpAction;
+import developen.client.osm.action.InputCfopEntryAction;
+import developen.client.osm.action.OutputCfopEntryAction;
+import developen.client.osm.action.PurchaseOrderEntryAction;
 import developen.client.osm.action.LogoutAction;
+import developen.client.osm.action.SaleOrderEntryAction;
+import developen.client.osm.action.PaymentConditionEntryAction;
 import developen.client.osm.action.PersonEntryAction;
 import developen.client.osm.action.ProductEntryAction;
-import developen.client.osm.action.PurchaseOrderEntryAction;
-import developen.client.osm.action.SaleOrderEntryAction;
+import developen.client.osm.action.ReceiptConditionEntryAction;
 import developen.client.osm.action.SystemCompanyEntryAction;
 import developen.client.osm.action.SystemPersonEntryAction;
 import developen.client.osm.action.UnitMeasureEntryAction;
 import developen.client.osm.i18n.CommercialModuleTag;
 import developen.client.osm.i18n.EngineerModuleTag;
 import developen.client.osm.i18n.EntriesTag;
-import developen.client.osm.i18n.PurchasesTag;
-import developen.client.osm.i18n.SalesTag;
+import developen.client.osm.i18n.FinanceModuleTag;
+import developen.client.osm.i18n.FiscalModuleTag;
 import developen.client.osm.i18n.SubjectModuleTag;
+import developen.common.commercial.i18n.InputTag;
+import developen.common.commercial.i18n.OutputTag;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.EnglishUSARadioButtonMenuItem;
 import developen.common.framework.widget.Menu;
@@ -40,10 +46,18 @@ public class WorldClientView extends ClientView{
 
 	private Menu modulesCommercialMenu;
 	
-	private Menu modulesCommercialSalesMenu;
+	private Menu modulesCommercialOutputMenu;
 	
-	private Menu modulesCommercialPurchasesMenu;
+	private Menu modulesCommercialInputMenu;
 	
+	private Menu modulesFinanceMenu;
+	
+	private Menu modulesFinanceEntriesMenu;
+
+	private Menu modulesFiscalMenu;
+
+	private Menu modulesFiscalEntriesMenu;
+
 	private Menu modulesEngineerMenu;
 	
 	private Menu modulesEngineerEntriesMenu;
@@ -81,8 +95,16 @@ public class WorldClientView extends ClientView{
 	protected SaleOrderEntryAction saleOrderEntryAction;
 
 	protected PurchaseOrderEntryAction purchaseOrderEntryAction;
-	
 
+	protected ReceiptConditionEntryAction receiptConditionEntryAction;
+	
+	protected PaymentConditionEntryAction paymentConditionEntryAction;
+	
+	protected InputCfopEntryAction inputCfopEntryAction;
+	
+	protected OutputCfopEntryAction outputCfopEntryAction;
+
+	
 	public WorldClientView(ClientController controller) {
 
 		super(controller);
@@ -105,16 +127,44 @@ public class WorldClientView extends ClientView{
 							new CommercialModuleTag(),	
 
 							new Object[]{
-								new SalesTag(),
+								new OutputTag(),
 
 								getSaleOrderEntryAction()
 
 							},
 							
 							new Object[]{
-								new PurchasesTag(),
+								new InputTag(),
 
 								getPurchaseOrderEntryAction()
+
+							}
+
+						},
+
+						new Object[]{
+							new FinanceModuleTag(),	
+
+							new Object[]{
+								new EntriesTag(),
+
+								getReceiptConditionEntryAction(),
+								
+								getPaymentConditionEntryAction()
+
+							}
+
+						},
+
+						new Object[]{
+							new FiscalModuleTag(),	
+
+							new Object[]{
+								new EntriesTag(),
+
+								getInputCfopEntryAction(),
+								
+								getOutputCfopEntryAction()
 
 							}
 
@@ -212,6 +262,10 @@ public class WorldClientView extends ClientView{
 			
 			modulesMenu.add(getModulesCommercialMenu());
 			
+			modulesMenu.add(getModulesFinanceMenu());
+
+			modulesMenu.add(getModulesFiscalMenu());
+
 			modulesMenu.add(getModulesEngineerMenu());
 			
 			modulesMenu.add(getModulesSubjectMenu());
@@ -237,9 +291,9 @@ public class WorldClientView extends ClientView{
 			
 			modulesCommercialMenu = new Menu(new CommercialModuleTag());
 			
-			modulesCommercialMenu.add(getModulesCommercialSalesMenu());
+			modulesCommercialMenu.add(getModulesCommercialOutputMenu());
 			
-			modulesCommercialMenu.add(getModulesCommercialPurchasesMenu());
+			modulesCommercialMenu.add(getModulesCommercialInputMenu());
 			
 		}
 		
@@ -249,35 +303,107 @@ public class WorldClientView extends ClientView{
 	}
 	
 	
-	private Menu getModulesCommercialSalesMenu() {
+	private Menu getModulesCommercialOutputMenu() {
 
 		
-		if (modulesCommercialSalesMenu==null){
+		if (modulesCommercialOutputMenu==null){
 			
-			modulesCommercialSalesMenu = new Menu(new SalesTag());
+			modulesCommercialOutputMenu = new Menu(new OutputTag());
 			
-			modulesCommercialSalesMenu.add(getSaleOrderEntryAction());
+			modulesCommercialOutputMenu.add(getSaleOrderEntryAction());
 			
 		}
 		
-		return modulesCommercialSalesMenu;
+		return modulesCommercialOutputMenu;
 		
 		
 	}
 
 	
-	private Menu getModulesCommercialPurchasesMenu() {
+	private Menu getModulesCommercialInputMenu() {
 
 		
-		if (modulesCommercialPurchasesMenu==null){
+		if (modulesCommercialInputMenu==null){
 			
-			modulesCommercialPurchasesMenu = new Menu(new PurchasesTag());
+			modulesCommercialInputMenu = new Menu(new InputTag());
 			
-			modulesCommercialPurchasesMenu.add(getPurchaseOrderEntryAction());
+			modulesCommercialInputMenu.add(getPurchaseOrderEntryAction());
 			
 		}
 		
-		return modulesCommercialPurchasesMenu;
+		return modulesCommercialInputMenu;
+		
+		
+	}
+
+	
+	private Menu getModulesFinanceMenu() {
+	
+		
+		if (modulesFinanceMenu==null){
+			
+			modulesFinanceMenu = new Menu(new FinanceModuleTag());
+			
+			modulesFinanceMenu.add(getModulesFinanceEntriesMenu());
+			
+		}
+		
+		return modulesFinanceMenu;
+		
+		
+	}
+
+	
+	private Menu getModulesFinanceEntriesMenu() {
+
+	
+		if (modulesFinanceEntriesMenu==null){
+			
+			modulesFinanceEntriesMenu = new Menu(new EntriesTag());
+			
+			modulesFinanceEntriesMenu.add(getReceiptConditionEntryAction());
+			
+			modulesFinanceEntriesMenu.add(getPaymentConditionEntryAction());
+			
+		}
+		
+		return modulesFinanceEntriesMenu;
+		
+		
+	}
+
+	
+	private Menu getModulesFiscalMenu() {
+	
+		
+		if (modulesFiscalMenu==null){
+			
+			modulesFiscalMenu = new Menu(new FiscalModuleTag());
+			
+			modulesFiscalMenu.add(getModulesFiscalEntriesMenu());
+			
+		}
+		
+		return modulesFiscalMenu;
+		
+		
+	}
+
+	
+	private Menu getModulesFiscalEntriesMenu() {
+
+	
+		if (modulesFiscalEntriesMenu==null){
+			
+			modulesFiscalEntriesMenu = new Menu(new EntriesTag());
+			
+			modulesFiscalEntriesMenu.add(getInputCfopEntryAction());
+			
+			modulesFiscalEntriesMenu.add(getOutputCfopEntryAction());
+			
+		}
+		
+		return modulesFiscalEntriesMenu;
 		
 		
 	}
@@ -573,4 +699,72 @@ public class WorldClientView extends ClientView{
 	}
 
 
+	protected ApplicationAction getReceiptConditionEntryAction() {
+
+		
+		if (receiptConditionEntryAction==null){
+			
+			receiptConditionEntryAction = new ReceiptConditionEntryAction(getDesktop());
+			
+			getController().addView(receiptConditionEntryAction);
+			
+		}	
+		
+		return receiptConditionEntryAction;
+		
+		
+	}
+
+	
+	protected ApplicationAction getPaymentConditionEntryAction() {
+
+		
+		if (paymentConditionEntryAction==null){
+			
+			paymentConditionEntryAction = new PaymentConditionEntryAction(getDesktop());
+			
+			getController().addView(paymentConditionEntryAction);
+			
+		}	
+		
+		return paymentConditionEntryAction;
+		
+		
+	}
+
+	
+	protected ApplicationAction getInputCfopEntryAction() {
+
+		
+		if (inputCfopEntryAction==null){
+			
+			inputCfopEntryAction = new InputCfopEntryAction(getDesktop());
+			
+			getController().addView(inputCfopEntryAction);
+			
+		}	
+		
+		return inputCfopEntryAction;
+		
+		
+	}
+
+	
+	protected ApplicationAction getOutputCfopEntryAction() {
+
+		
+		if (outputCfopEntryAction==null){
+			
+			outputCfopEntryAction = new OutputCfopEntryAction(getDesktop());
+			
+			getController().addView(outputCfopEntryAction);
+			
+		}	
+		
+		return outputCfopEntryAction;
+		
+		
+	}
+
+	
 }

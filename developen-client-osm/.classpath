@@ -13,5 +13,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-engineer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-subject"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-finance"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-finance"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-fiscal"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-fiscal"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

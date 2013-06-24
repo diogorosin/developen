@@ -7,7 +7,7 @@ import developen.common.framework.mvc.ListEditorState;
 public class EditingOrIncludingListEditorCondition extends Condition {
 
 
-	boolean latestState = true;
+	private boolean latestState = true;
 
 
 	public boolean analyse(PropertyChangeEvent event, DBComponent component) {
@@ -19,18 +19,36 @@ public class EditingOrIncludingListEditorCondition extends Condition {
 
 				if (((DBField) component).isPrimaryKey())
 
-					latestState = true;
+					setLatestState(true);
 
 				else
 
-					latestState = event.getNewValue().equals(ListEditorState.INCLUDING) || event.getNewValue().equals(ListEditorState.EDITING);
+					setLatestState(event.getNewValue().equals(ListEditorState.INCLUDING) 
+
+							|| event.getNewValue().equals(ListEditorState.EDITING));
 
 			} else 
 
-				latestState = event.getNewValue().equals(ListEditorState.INCLUDING) || event.getNewValue().equals(ListEditorState.EDITING);
+				setLatestState(event.getNewValue().equals(ListEditorState.INCLUDING) 
+
+						|| event.getNewValue().equals(ListEditorState.EDITING));
+
+		return isLatestState();
+
+
+	}
+
+
+	public boolean isLatestState() {
 
 		return latestState;
 
+	}
+
+
+	public void setLatestState(boolean latestState) {
+
+		this.latestState = latestState;
 
 	}
 

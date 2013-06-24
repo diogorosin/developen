@@ -3,7 +3,6 @@ package developen.client.commercial.mvc;
 
 import developen.client.framework.mvc.SearchController;
 import developen.common.commercial.mvc.Order;
-import developen.common.engineer.mvc.Progeny;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Equal;
@@ -46,7 +45,7 @@ public class OrderSearchController extends SearchController {
 
 						new Column("identifier", 
 
-								Progeny.class), 
+								Order.class), 
 
 								number));
 

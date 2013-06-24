@@ -8,7 +8,7 @@ import javax.swing.JDesktopPane;
 import developen.client.application.mvc.ClientController;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.PrivilegedAction;
-import developen.common.subject.mvc.PersonAction;
+import developen.common.subject.mvc.SystemPersonSystemAction;
 import developen.common.subject.mvc.SystemPerson;
 
 public abstract class ApplicationAction extends PrivilegedAction {
@@ -38,11 +38,11 @@ public abstract class ApplicationAction extends PrivilegedAction {
 
 			SystemPerson systemPerson  = (SystemPerson) e.getNewValue();
 
-			if (systemPerson != null && systemPerson.getActions() != null){
+			if (systemPerson != null && systemPerson.getSystemActions() != null){
 
-				List<PersonAction> actions = systemPerson.getActions();
+				List<SystemPersonSystemAction> actions = systemPerson.getSystemActions();
 				
-				for (PersonAction personAction : actions) {
+				for (SystemPersonSystemAction personAction : actions) {
 
 					setEnabled(getClass().getName().equals(personAction.getIdentifier().getSystemAction().getIdentifier()));
 					

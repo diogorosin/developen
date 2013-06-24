@@ -1,7 +1,6 @@
 package developen.common.subject.mvc;
 
 import developen.common.framework.mvc.Search;
-import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.OneToOne;
 import developen.common.persistence.annotation.Table;
 
@@ -11,24 +10,30 @@ public class Person extends Subject implements Search {
 
 	private static final long serialVersionUID = 4687517692307945584L;
 
-	@Column
-	private Long cpf;
+	@OneToOne
+	private Cpf cpf;
 
 	@OneToOne
 	private Rg rg;
+		
 
+	public Cpf getCpf() {
 
-	public Long getCpf() {
-
+		
+		if (cpf==null)
+			
+			cpf = new Cpf();
+		
 		return cpf;
 
+		
 	}
 
 
-	public void setCpf(Long newValue) {
+	public void setCpf(Cpf newValue) {
 
 
-		Long oldValue = this.cpf;
+		Cpf oldValue = this.cpf;
 
 		this.cpf = newValue;
 
@@ -71,7 +76,7 @@ public class Person extends Subject implements Search {
 
 				getIdentifier(), 
 
-				getCpf(), 
+				getCpf(),
 
 				getDenomination(), 
 

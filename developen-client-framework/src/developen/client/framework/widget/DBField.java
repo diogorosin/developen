@@ -16,10 +16,6 @@ public interface DBField extends DBComponent {
 
 	public void setForeignKey(boolean foreignKey);
 
-	public boolean isFixedValue();
-	
-	public void setFixedValue(boolean fixedValue);
-
 	public Search getSearch();
 
 	public void setSearch(Search search);

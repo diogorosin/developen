@@ -12,6 +12,8 @@ public class DBCheckBox extends CheckBox implements DBComponent {
 	
 	private String propertyName;
 	
+	private boolean fixedValue;
+
 	private Condition condition;
 
 	
@@ -88,4 +90,18 @@ public class DBCheckBox extends CheckBox implements DBComponent {
 	}
 	
 
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}
+
+	
 }

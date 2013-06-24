@@ -1,19 +1,36 @@
 package developen.client.commercial.mvc;
 
+import java.awt.Dimension;
+
+import developen.client.application.search.SystemPersonSearch;
+import developen.client.commercial.search.SaleOrderSearch;
+import developen.client.framework.exception.ManyRecordsFoundException;
+import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
-import developen.client.subject.search.SubjectSearch;
 import developen.common.commercial.i18n.SaleOrderTag;
-import developen.common.engineer.i18n.FromTag;
+import developen.common.commercial.i18n.SellerTag;
+import developen.common.commercial.mvc.SaleOrder;
 import developen.common.framework.utils.Tag;
-import developen.common.subject.mvc.Subject;
+import developen.common.framework.widget.CheckEvent;
+import developen.common.subject.mvc.SystemPerson;
 
-public class SaleOrderView extends OrderView {
+public class SaleOrderView extends OutputOrderView {
 
 
 	private static final long serialVersionUID = -6224324717586281048L;
+
+	private DBTextField seller;
+
+
+	public SaleOrderController getController(){
+
+		return (SaleOrderController) super.getController();		
+
+	}
 
 
 	public SaleOrderView(SaleOrderController controller) {
@@ -29,124 +46,103 @@ public class SaleOrderView extends OrderView {
 
 	}
 
+	
+	public DBRowPanel getHeaderPanel(){
+		
+	
+		DBRowPanel r = super.getHeaderPanel();
+		
+		r.add(getSellerField());
+		
+		return r;
+		
+		
+	}
+	
+	
+	public Search getIdentifierSearch(){
 
-	public DBTextField getFromField() {
 
+		if (identifierSearch == null){
 
-		if (fromField == null){
+			identifierSearch = new SaleOrderSearch();
 
-			SubjectSearch fromSearch = new SubjectSearch(true);
-
-			fromSearch.addSearchListener(new SearchAdapter(){
+			identifierSearch.addSearchListener(new SearchAdapter(){
 
 				public void onSearchConfirmed(SearchEvent event) throws Exception {
 
-					getController().changeFromProperty((Subject) event.getSelectedRows().get(0));
+					getController().changeIdentifierProperty(((SaleOrder)event.getSelectedRows().get(0)).getIdentifier());
 
 				}
 
 			});
 
-			fromField = new DBTextField(new FromTag(), OrderController.FROM_PROPERTY);
-
-			fromField.setCondition(new NeverEnabledCondition());
-
-			fromField.setSearch(fromSearch);
-
-			fromField.addCheckListener(this);
-
-			fromField.setColumns(30);
-			
-			getController().addView(fromField);
-
 		}
 
-		return fromField;
+		return identifierSearch;
 
 
 	}
 
-	
-//	public DBTextField getToField() {
-//
-//
-//		if (systemCompanyField == null){
-//
-//			SystemCompanySearch toSearch = new SystemCompanySearch(true);
-//
-//			toSearch.addSearchListener(new SearchAdapter(){
-//
-//				public void onSearchConfirmed(SearchEvent event) throws Exception {
-//
-//					getController().changeToProperty((Subject) event.getSelectedRows().get(0));
-//
-//				}
-//
-//			});
-//
-//			systemCompanyField = new DBTextField(new SystemCompanyTag(), OrderController.TO_PROPERTY);
-//
-//			systemCompanyField.setSearch(toSearch);
-//
-//			systemCompanyField.setFixedValue(true);
-//
-//			systemCompanyField.setCondition(new NeverEnabledCondition());
-//
-//			systemCompanyField.addCheckListener(this);
-//
-//			systemCompanyField.setColumns(30);
-//
-//			getController().addView(systemCompanyField);
-//
-//		}
-//
-//		return systemCompanyField;
-//
-//
-//	}
+
+	public DBTextField getSellerField() {
 
 
-//	public void modelPropertyChanged(PropertyChangeEvent evt) {
-//
-//
-//		super.modelPropertyChanged(evt);
-//
-//		if (evt.getPropertyName().equals("ModelState")){
-//
-//			EntryState newValue = (EntryState) evt.getNewValue();
-//
-//			if (newValue.equals(EntryState.INCLUDING)){
-//
-//				Component component = this;
-//
-//				while (component != null){
-//
-//					if (component instanceof AuditProvider){
-//
-//						try {
-//							
-//							getController().changeToProperty((Subject)((AuditProvider)component).getOrganization());
-//							
-//						} catch (Exception e) {
-//
-//							e.printStackTrace();
-//							
-//						}
-//
-//						break;
-//
-//					}
-//
-//					component = component.getParent();
-//
-//				}
-//
-//			} 
-//
-//		}
-//
-//
-//	}
+		if (seller == null){
+
+			SystemPersonSearch sellerSearch = new SystemPersonSearch(true);
+
+			sellerSearch.addSearchListener(new SearchAdapter(){
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeSellerProperty((SystemPerson) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			seller = new DBTextField(new SellerTag(), SaleOrderController.SELLER_PROPERTY);
+
+			seller.setSearch(sellerSearch);
+
+			seller.setCondition(new NeverEnabledCondition());
+
+			seller.addCheckListener(this);
+
+			seller.setPreferredSize(new Dimension(300,24));
+
+			getController().addView(seller);
+
+		}
+
+		return seller;
+
+
+	}
+
+
+	public void onCheck(CheckEvent event) throws Exception {
+
+		
+		super.onCheck(event);
+
+		if (event.getCheckable() == getSellerField()){
+
+			try{
+
+				getController().changeSellerProperty((SystemPerson) getSellerField().getSearch().findBy());
+
+			} catch (ManyRecordsFoundException e) {
+
+				getSellerField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+			}
+
+		} 
+		
+
+	}
 
 
 }

@@ -38,7 +38,7 @@ import developen.common.framework.widget.MenuBar;
 import developen.common.framework.widget.PortugueseBrazilRadioButtonMenuItem;
 import developen.common.framework.widget.ToolBar;
 import developen.common.subject.mvc.Idiom;
-import developen.common.subject.mvc.PersonCompany;
+import developen.common.subject.mvc.SystemPersonSystemCompany;
 import developen.common.subject.mvc.SystemCompany;
 import developen.common.subject.mvc.SystemPerson;
 
@@ -209,7 +209,7 @@ public abstract class ClientView extends Frame {
 					
 					model.removeAllElements();
 
-					for (PersonCompany company : systemPerson.getCompanies())
+					for (SystemPersonSystemCompany company : systemPerson.getSystemCompanies())
 						
 						model.addElement(company.getIdentifier().getSystemCompany());
 

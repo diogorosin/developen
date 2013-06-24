@@ -21,6 +21,8 @@ public class DBTree extends Tree implements DBComponent {
 	
 	private String propertyName;
 	
+	private boolean fixedValue;
+
 	private Condition condition;
 	
 
@@ -202,5 +204,19 @@ public class DBTree extends Tree implements DBComponent {
 
 	}
 
+
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}
 	
+
 }

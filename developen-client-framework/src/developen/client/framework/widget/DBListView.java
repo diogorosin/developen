@@ -15,6 +15,8 @@ public class DBListView<E> extends ListView<E> implements DBComponent{
 	
 	private String propertyName;
 	
+	private boolean fixedValue;
+
 	private Condition condition;
 	
 
@@ -101,6 +103,20 @@ public class DBListView<E> extends ListView<E> implements DBComponent{
 
 		this.condition = condition;
 
+	}
+
+	
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
 	}
 
 	

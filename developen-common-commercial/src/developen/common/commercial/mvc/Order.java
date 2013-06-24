@@ -1,19 +1,16 @@
 package developen.common.commercial.mvc;
 
-import java.util.Date;
 import java.util.List;
 
 import developen.common.framework.mvc.Entry;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.Model;
 import developen.common.framework.mvc.Search;
-import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Identifier;
 import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.OneToMany;
 import developen.common.persistence.annotation.Table;
 import developen.common.subject.mvc.Subject;
-import developen.common.subject.mvc.SystemPerson;
 
 
 @Table
@@ -35,18 +32,6 @@ public class Order extends Model implements Entry, Search{
 
 	@OneToMany(mappedBy="order")
 	private List<OrderItem> items;
-
-	@ManyToOne
-	private SystemPerson createdBy;
-
-	@ManyToOne
-	private SystemPerson modifiedBy;
-
-	@Column
-	private Date createdIn;
-
-	@Column
-	private Date modifiedIn;
 
 
 	public Long getIdentifier() {
@@ -125,86 +110,6 @@ public class Order extends Model implements Entry, Search{
 	public List<OrderItem> getItems() {
 
 		return items;
-
-	}
-
-
-	public void setCreatedBy(SystemPerson newValue) {
-
-
-		SystemPerson oldValue = this.createdBy;
-
-		this.createdBy = newValue;
-
-		firePropertyChange("CreatedBy", oldValue, newValue);
-
-
-	}
-
-
-	public SystemPerson getCreatedBy() {
-
-		return createdBy;
-
-	}
-
-
-	public void setModifiedBy(SystemPerson newValue) {
-
-
-		SystemPerson oldValue = this.modifiedBy;
-
-		this.modifiedBy = newValue;
-
-		firePropertyChange("ModifiedBy", oldValue, newValue);
-
-
-	}
-
-
-	public SystemPerson getModifiedBy() {
-
-		return modifiedBy;
-
-	}
-
-
-	public void setCreatedIn(Date newValue) {
-
-
-		Date oldValue = this.createdIn;
-
-		this.createdIn = newValue;
-
-		firePropertyChange("CreatedIn", oldValue, newValue);
-
-
-	}
-
-
-	public Date getCreatedIn() {
-
-		return createdIn;
-
-	}
-
-
-	public void setModifiedIn(Date newValue) {
-
-
-		Date oldValue = this.modifiedIn;
-
-		this.modifiedIn = newValue;
-
-		firePropertyChange("ModifiedIn", oldValue, newValue);
-
-
-	}
-
-
-	public Date getModifiedIn() {
-
-		return modifiedIn;
 
 	}
 

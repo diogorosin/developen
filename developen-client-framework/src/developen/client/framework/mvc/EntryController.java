@@ -148,7 +148,13 @@ public abstract class EntryController extends Controller {
 	}
 
 
-	protected void onBeforeRefresh() throws Exception{};
+	protected void onBeforeRefresh() throws Exception{
+		
+		
+		
+		
+		
+	};
 
 
 	protected void onRefresh() throws Exception{
@@ -169,7 +175,7 @@ public abstract class EntryController extends Controller {
 			throw new RecordNotFoundException();
 
 		else{
-
+			
 			Class<?> myClass = newObject.getClass();
 
 			while (myClass.isAnnotationPresent(Table.class)){
@@ -230,12 +236,6 @@ public abstract class EntryController extends Controller {
 
 							} else {
 
-
-
-
-
-
-
 								Class<?> oldValueClass = oldValue.getClass();
 
 								while (oldValueClass.isAnnotationPresent(Table.class)){
@@ -269,11 +269,6 @@ public abstract class EntryController extends Controller {
 									oldValueClass = oldValueClass.getSuperclass();
 									
 								}								
-
-
-
-
-
 
 							}
 

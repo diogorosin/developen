@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-common-fiscal" name="Create Runnable Jar for Project developen-common-fiscal with libraries in sub-folder">
+    <target name="developen-common-fiscal">
+    	<mkdir dir="/home/diogo/server/source"/>
+    	<mkdir dir="/home/diogo/client/source"/>
+        <jar destfile="/home/diogo/server/source/developen-common-fiscal.jar">
+            <fileset dir="/home/diogo/git/developen/developen-common-fiscal/bin"/>
+        </jar>
+        <copy overwrite="yes" file="/home/diogo/server/source/developen-common-fiscal.jar" todir="/home/diogo/client/source"/>
+    </target>
+</project>

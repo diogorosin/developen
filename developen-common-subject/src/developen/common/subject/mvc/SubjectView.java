@@ -25,7 +25,7 @@ public class SubjectView implements Serializable, Search{
 	private String type;
 	
 	@Column
-	private Long document;
+	private Long cpfOrCnpj;
 	
 	@Column
 	private String city;
@@ -93,16 +93,16 @@ public class SubjectView implements Serializable, Search{
 	}
 
 	
-	public Long getDocument() {
+	public Long getCpfOrCnpj() {
 		
-		return document;
+		return cpfOrCnpj;
 		
 	}
 
 	
-	public void setDocument(Long document) {
+	public void setCpfOrCnpj(Long document) {
 		
-		this.document = document;
+		this.cpfOrCnpj = document;
 		
 	}
 
@@ -158,7 +158,7 @@ public class SubjectView implements Serializable, Search{
 				
 				getType(),
 				
-				getDocument(),
+				getCpfOrCnpj(),
 				
 				getDenomination(),
 				

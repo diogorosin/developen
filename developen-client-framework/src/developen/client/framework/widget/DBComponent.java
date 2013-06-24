@@ -13,5 +13,9 @@ public interface DBComponent extends View {
 	
 	public void setCondition(Condition condition);
 
+	public boolean isFixedValue();
+	
+	public void setFixedValue(boolean fixedValue);
+
 	
 }

@@ -21,15 +21,13 @@ import developen.client.framework.i18n.QuestionOnBeforeDeleteTag;
 import developen.client.framework.mvc.EntryView;
 import developen.client.framework.mvc.ListEditorAdapter;
 import developen.client.framework.mvc.ListEditorEvent;
+import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
-import developen.client.framework.widget.DBDateField;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
-import developen.client.framework.widget.NeverEnabledCondition;
-import developen.client.subject.search.SubjectSearch;
-import developen.common.commercial.i18n.IssueTag;
+import developen.client.subject.search.SystemPersonSearch;
 import developen.common.commercial.i18n.ItemsTag;
 import developen.common.commercial.i18n.OrderTag;
 import developen.common.commercial.mvc.Order;
@@ -63,9 +61,9 @@ public class OrderView extends EntryView {
 
 	private DBIdentifierField identifierField;
 
-	protected DBTextField fromField;
+	private DBTextField fromField;
 
-	protected DBTextField toField;
+	private DBTextField toField;
 
 	private TabbedPane tabbedPane;
 
@@ -81,7 +79,9 @@ public class OrderView extends EntryView {
 
 	private DBOrderItemTable orderItemTable;
 
-	private DBDateField issueField;
+	protected Search identifierSearch;
+
+	protected DBRowPanel headerPanel;
 
 
 	public OrderView(OrderController controller) {
@@ -103,19 +103,30 @@ public class OrderView extends EntryView {
 
 		ExtendedPanel l = super.getNorthPanel();
 
-		DBRowPanel northPanel = new DBRowPanel(120);
-
-		northPanel.add(getIdentifierField());
-
-//		northPanel.add(getIssueField());
-
-		northPanel.add(getFromField());
-
-		northPanel.add(getToField());
-
-		l.add(northPanel);
+		l.add(getHeaderPanel());
 
 		return l;
+
+
+	}
+
+
+	public DBRowPanel getHeaderPanel(){
+
+
+		if (headerPanel==null){
+			
+			headerPanel = new DBRowPanel();
+
+			headerPanel.add(getIdentifierField());
+
+			headerPanel.add(getFromField());
+
+			headerPanel.add(getToField());
+
+		}
+		
+		return headerPanel;
 
 
 	}
@@ -268,27 +279,15 @@ public class OrderView extends EntryView {
 
 		if (identifierField == null){
 
-			OrderSearch identifierSearch = new OrderSearch();
-
-			identifierSearch.addSearchListener(new SearchAdapter(){
-
-				public void onSearchConfirmed(SearchEvent event) throws Exception {
-
-					getController().changeIdentifierProperty(((Order)event.getSelectedRows().get(0)).getIdentifier());
-
-				}
-
-			});
-
 			identifierField = new DBIdentifierField(new NumberTag(), OrderController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(identifierSearch);
+			identifierField.setSearch(getIdentifierSearch());
 
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setColumns(7);
+			identifierField.setPreferredSize(new Dimension(75,24));
 
 			getController().addView(identifierField);
 
@@ -300,24 +299,26 @@ public class OrderView extends EntryView {
 	}
 
 
-	public DBDateField getIssueField() {
+	public Search getIdentifierSearch(){
 
 
-		if (issueField == null){
+		if (identifierSearch == null){
 
-			issueField = new DBDateField(new IssueTag(), OrderController.CREATEDIN_PROPERTY);
+			identifierSearch = new OrderSearch();
 
-			issueField.addCheckListener(this);
+			identifierSearch.addSearchListener(new SearchAdapter(){
 
-			issueField.setColumns(7);
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
 
-			issueField.setCondition(new NeverEnabledCondition());
+					getController().changeIdentifierProperty(((Order)event.getSelectedRows().get(0)).getIdentifier());
 
-			getController().addView(issueField);
+				}
+
+			});
 
 		}
 
-		return issueField;
+		return identifierSearch;
 
 
 	}
@@ -328,7 +329,7 @@ public class OrderView extends EntryView {
 
 		if (fromField == null){
 
-			SubjectSearch fromSearch = new SubjectSearch(true);
+			SystemPersonSearch fromSearch = new SystemPersonSearch(true);
 
 			fromSearch.addSearchListener(new SearchAdapter(){
 
@@ -346,7 +347,7 @@ public class OrderView extends EntryView {
 
 			fromField.addCheckListener(this);
 
-			fromField.setColumns(30);
+			fromField.setPreferredSize(new Dimension(300,24));
 
 			getController().addView(fromField);
 
@@ -363,7 +364,7 @@ public class OrderView extends EntryView {
 
 		if (toField == null){
 
-			SubjectSearch toSearch = new SubjectSearch(true);
+			SystemPersonSearch toSearch = new SystemPersonSearch(true);
 
 			toSearch.addSearchListener(new SearchAdapter(){
 
@@ -381,7 +382,7 @@ public class OrderView extends EntryView {
 
 			toField.addCheckListener(this);
 
-			toField.setColumns(30);
+			toField.setPreferredSize(new Dimension(300,24));
 
 			getController().addView(toField);
 

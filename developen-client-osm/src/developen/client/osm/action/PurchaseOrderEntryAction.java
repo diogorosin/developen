@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
-import developen.common.commercial.i18n.OrderTag;
+import developen.common.commercial.i18n.PurchaseOrderTag;
 import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
 
@@ -17,7 +17,7 @@ public class PurchaseOrderEntryAction extends ApplicationAction {
 
 	public PurchaseOrderEntryAction(JDesktopPane desktop) {
 
-		super(new OrderTag(), desktop);
+		super(new PurchaseOrderTag(), desktop);
 
 	}
 

@@ -18,10 +18,10 @@ public class SystemPerson extends Person {
 	private String password;
 	
 	@OneToMany(mappedBy="systemPerson")
-	private List<PersonAction> actions;
+	private List<SystemPersonSystemAction> systemActions;
 	
 	@OneToMany(mappedBy="systemPerson")
-	private List<PersonCompany> companies;
+	private List<SystemPersonSystemCompany> systemCompanies;
 
 	@ManyToOne
 	private SystemCompany lastLoggedSystemCompany;
@@ -50,41 +50,41 @@ public class SystemPerson extends Person {
 	}
 
 	
-	public List<PersonAction> getActions() {
+	public List<SystemPersonSystemAction> getSystemActions() {
 		
-		return actions;
+		return systemActions;
 		
 	}
 	
 
-	public void setActions(List<PersonAction> newValue) {
+	public void setSystemActions(List<SystemPersonSystemAction> newValue) {
 	
 		
-		List<PersonAction> oldValue = this.actions;
+		List<SystemPersonSystemAction> oldValue = this.systemActions;
 		
-		this.actions = newValue;
+		this.systemActions = newValue;
 		
-		firePropertyChange("Actions", oldValue, newValue);
+		firePropertyChange("SystemActions", oldValue, newValue);
 		
 		
 	}
 
 	
-	public List<PersonCompany> getCompanies() {
+	public List<SystemPersonSystemCompany> getSystemCompanies() {
 		
-		return companies;
+		return systemCompanies;
 		
 	}
 
 	
-	public void setCompanies(List<PersonCompany> newValue) {
+	public void setSystemCompanies(List<SystemPersonSystemCompany> newValue) {
 	
 		
-		List<PersonCompany> oldValue = this.companies;
+		List<SystemPersonSystemCompany> oldValue = this.systemCompanies;
 		
-		this.companies = newValue;
+		this.systemCompanies = newValue;
 		
-		firePropertyChange("Companies", oldValue, newValue);
+		firePropertyChange("SystemCompanies", oldValue, newValue);
 		
 		
 	}

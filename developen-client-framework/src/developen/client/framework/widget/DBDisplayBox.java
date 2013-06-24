@@ -12,6 +12,8 @@ public class DBDisplayBox extends DisplayBox implements DBComponent {
 	
 	private String propertyName;
 	
+	private boolean fixedValue;
+
 	private Condition condition;
 	
 
@@ -74,6 +76,20 @@ public class DBDisplayBox extends DisplayBox implements DBComponent {
 
 		this.condition = condition;
 
+	}
+
+	
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
 	}
 
 	

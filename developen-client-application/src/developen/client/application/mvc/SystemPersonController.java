@@ -23,9 +23,9 @@ import developen.common.framework.utils.TagParam;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
 import developen.common.subject.mvc.Idiom;
-import developen.common.subject.mvc.PersonAction;
-import developen.common.subject.mvc.PersonCompany;
-import developen.common.subject.mvc.PersonCompanyPK;
+import developen.common.subject.mvc.SystemPersonSystemAction;
+import developen.common.subject.mvc.SystemPersonSystemCompany;
+import developen.common.subject.mvc.SystemPersonSystemCompanyPK;
 import developen.common.subject.mvc.SystemCompany;
 import developen.common.subject.mvc.SystemPerson;
 
@@ -33,11 +33,11 @@ import developen.common.subject.mvc.SystemPerson;
 public class SystemPersonController extends PersonController {
 
 	
-	public static final String COMPANIES_PROPERTY = "Companies";
+	public static final String SYSTEM_COMPANIES_PROPERTY = "SystemCompanies";
+	
+	public static final String SYSTEM_ACTIONS_PROPERTY = "SystemActions";
 	
 	public static final String PASSWORD_PROPERTY = "Password";
-	
-	public static final String ACTIONS_PROPERTY = "Actions";
 	
 	public static final String IDIOM_PROPERTY = "Idiom";
 	
@@ -51,9 +51,9 @@ public class SystemPersonController extends PersonController {
 	}
 
 	
-	public void changeCompaniesProperty(List<PersonCompany> newValue){
+	public void changeSystemCompaniesProperty(List<SystemPersonSystemCompany> newValue){
 
-		setModelProperty(SystemPersonController.COMPANIES_PROPERTY, newValue);
+		setModelProperty(SystemPersonController.SYSTEM_COMPANIES_PROPERTY, newValue);
 
 	}
 	
@@ -65,9 +65,9 @@ public class SystemPersonController extends PersonController {
 	}
 	
 
-	public void changeActionsProperty(List<PersonAction> newValue) throws Exception{
+	public void changeActionsProperty(List<SystemPersonSystemAction> newValue) throws Exception{
 
-		setModelProperty(SystemPersonController.ACTIONS_PROPERTY, newValue);
+		setModelProperty(SystemPersonController.SYSTEM_ACTIONS_PROPERTY, newValue);
 
 	}
 
@@ -84,7 +84,7 @@ public class SystemPersonController extends PersonController {
 	
 		super.onBeforeSave();
 
-		if (getModel().getCompanies()==null || getModel().getCompanies().size()==0)
+		if (getModel().getSystemCompanies()==null || getModel().getSystemCompanies().size()==0)
 
 			throw new NotNullException(new SystemCompaniesTag());
 
@@ -113,11 +113,11 @@ public class SystemPersonController extends PersonController {
 	
 		super.onClear();
 		
-		setModelProperty(SystemPersonController.COMPANIES_PROPERTY, null);
+		setModelProperty(SystemPersonController.SYSTEM_COMPANIES_PROPERTY, null);
+		
+		setModelProperty(SystemPersonController.SYSTEM_ACTIONS_PROPERTY, null);
 		
 		setModelProperty(SystemPersonController.PASSWORD_PROPERTY, null);
-		
-		setModelProperty(SystemPersonController.ACTIONS_PROPERTY, null);
 		
 		setModelProperty(SystemPersonController.IDIOM_PROPERTY, null);
 		
@@ -130,19 +130,19 @@ public class SystemPersonController extends PersonController {
 		
 		super.onInclude();
 
-		List<PersonCompany> allCompanies = new ArrayList<PersonCompany>();
+		List<SystemPersonSystemCompany> allCompanies = new ArrayList<SystemPersonSystemCompany>();
 
 		Session session = DPA.getSessionFactory().createSession();
 		
 		for (Object object : session.list(SystemCompany.class))
 			
-			allCompanies.add(new PersonCompany(new PersonCompanyPK(getModel(), ((SystemCompany) object))));
+			allCompanies.add(new SystemPersonSystemCompany(new SystemPersonSystemCompanyPK(getModel(), ((SystemCompany) object))));
 		
 		session.close();
 		
-		setModelProperty(SystemPersonController.COMPANIES_PROPERTY, allCompanies);
+		setModelProperty(SystemPersonController.SYSTEM_COMPANIES_PROPERTY, allCompanies);
 		
-		setModelProperty(SystemPersonController.ACTIONS_PROPERTY, new ArrayList<PersonAction>());
+		setModelProperty(SystemPersonController.SYSTEM_ACTIONS_PROPERTY, new ArrayList<SystemPersonSystemAction>());
 		
 		setModelProperty(SystemPersonController.PASSWORD_PROPERTY, null);
 		

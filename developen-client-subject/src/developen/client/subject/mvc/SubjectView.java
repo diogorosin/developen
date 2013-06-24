@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import developen.client.framework.mvc.EntryView;
 import developen.client.framework.search.Search;
 import developen.client.framework.widget.DBCheckBox;
-import developen.client.framework.widget.DBFormattedTextField;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
@@ -84,11 +83,9 @@ public abstract class SubjectView extends EntryView {
 		
 		if (headerPanel == null){
 			
-			headerPanel = new DBRowPanel(120);
+			headerPanel = new DBRowPanel();
 
 			headerPanel.add(getIdentifierField());
-
-			headerPanel.add(getDocumentField());
 
 			headerPanel.add(getDenominationField());
 
@@ -158,7 +155,7 @@ public abstract class SubjectView extends EntryView {
 
 			identifierField.setSearch(getIdentifierSearch());
 
-			identifierField.setColumns(6);
+			identifierField.setPreferredSize(new Dimension(75,24));
 
 			getController().addView(identifierField);
 
@@ -179,7 +176,7 @@ public abstract class SubjectView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setColumns(30);
+			denominationField.setPreferredSize(new Dimension(400,24));
 
 			getController().addView(denominationField);
 
@@ -189,9 +186,6 @@ public abstract class SubjectView extends EntryView {
 
 
 	}
-
-
-	public abstract DBFormattedTextField getDocumentField();
 
 
 	public DBCheckBox getFieldActive() {
@@ -241,6 +235,7 @@ public abstract class SubjectView extends EntryView {
 
 	}
 
+
 	public JPanel getAddressTab(){
 
 		
@@ -267,23 +262,23 @@ public abstract class SubjectView extends EntryView {
 			
 			addressField = new DBAddressField(getController().getModel().getAddress());
 			
-			getController().addView(addressField.getView().getPlayAreaField());
+			getController().addView(addressField.getPlayAreaField());
 			
-			getController().addView(addressField.getView().getNumberField());
+			getController().addView(addressField.getNumberField());
 			
-			getController().addView(addressField.getView().getDistrictField());
+			getController().addView(addressField.getDistrictField());
 			
-			getController().addView(addressField.getView().getComplementField());
+			getController().addView(addressField.getComplementField());
 			
-			getController().addView(addressField.getView().getPostalCodeField());
+			getController().addView(addressField.getPostalCodeField());
 			
-			getController().addView(addressField.getView().getCityField());
+			getController().addView(addressField.getCityField());
 			
-			getController().addView(addressField.getView().getPhoneField());
+			getController().addView(addressField.getPhoneField());
 			
-			getController().addView(addressField.getView().getEmailField());
+			getController().addView(addressField.getEmailField());
 			
-			getController().addView(addressField.getView().getWebSiteField());
+			getController().addView(addressField.getWebSiteField());
 			
 		}
 		

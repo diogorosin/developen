@@ -73,6 +73,8 @@ public class DBOrderItemTable extends JComponent implements DBComponent{
 
 	private String propertyName;
 
+	private boolean fixedValue;
+
 	private Condition condition;
 
 	private OrderItem model;
@@ -567,4 +569,18 @@ public class DBOrderItemTable extends JComponent implements DBComponent{
 	}
 
 
+	public boolean isFixedValue() {
+		
+		return fixedValue;
+		
+	}
+
+
+	public void setFixedValue(boolean fixedValue) {
+		
+		this.fixedValue = fixedValue;
+		
+	}	
+
+	
 }

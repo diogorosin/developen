@@ -7,7 +7,7 @@ import developen.client.framework.mvc.SystemPersonListener;
 import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
-import developen.common.subject.mvc.PersonCompany;
+import developen.common.subject.mvc.SystemPersonSystemCompany;
 import developen.common.subject.mvc.SystemCompany;
 import developen.common.subject.mvc.SystemPerson;
 
@@ -175,7 +175,7 @@ public class ClientController extends Controller {
 		
 		if (loggedCompany==null)
 			
-			loggedCompany = ((PersonCompany)systemPerson.getCompanies().get(0)).getIdentifier().getSystemCompany();
+			loggedCompany = ((SystemPersonSystemCompany)systemPerson.getSystemCompanies().get(0)).getIdentifier().getSystemCompany();
 		
 		changeSystemCompanyProperty(loggedCompany);
 		
