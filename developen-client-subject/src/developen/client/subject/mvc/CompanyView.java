@@ -1,12 +1,15 @@
 package developen.client.subject.mvc;
 
+import java.awt.Dimension;
 import java.text.ParseException;
 
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
+import developen.client.framework.widget.DBRowPanel;
 import developen.client.subject.search.CompanySearch;
 import developen.client.subject.widget.DBCNPJField;
+import developen.client.subject.widget.DBIeField;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
@@ -20,10 +23,20 @@ public class CompanyView extends SubjectView {
 	
 	private DBCNPJField cnpjField;
 	
-
+	private DBIeField ieField;
+	
+	
 	public CompanyView(CompanyController controller){
 
 		super(controller);
+
+	}
+
+	
+	
+	public void buildInterface() {
+
+		setSize(new Dimension(WIDTH,HEIGHT+50));
 
 	}
 
@@ -46,6 +59,49 @@ public class CompanyView extends SubjectView {
 
 		return (CompanyController) super.getController();
 
+	}
+
+	
+	public DBRowPanel getHeaderPanel(){
+		
+		
+		if (headerPanel == null){
+			
+			headerPanel = new DBRowPanel(120);
+
+			headerPanel.add(getIdentifierField());
+
+			headerPanel.add(getDocumentField());
+			
+			headerPanel.add(getIeField());
+
+			headerPanel.add(getDenominationField());
+
+			headerPanel.add(getFieldActive());
+			
+		}
+	
+		return headerPanel;
+		
+	}
+
+	
+	public DBIeField getIeField(){
+
+
+		if (ieField == null) {
+
+			ieField = new DBIeField(getController().getModel().getIe());
+			
+			getController().addView(ieField.getNumberField());
+			
+			getController().addView(ieField);
+			
+		}
+
+		return ieField;
+
+		
 	}
 
 	

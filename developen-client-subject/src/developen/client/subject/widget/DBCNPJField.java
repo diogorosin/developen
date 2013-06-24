@@ -1,6 +1,7 @@
 package developen.client.subject.widget;
 
 
+import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.text.ParseException;
 
@@ -31,7 +32,9 @@ public class DBCNPJField extends DBFormattedTextField {
 		
 		setFocusLostBehavior(JFormattedTextField.PERSIST);
 		
-		setColumns(18);
+		//setColumns(18);
+		
+		setPreferredSize(new Dimension(150,24));
 		
 
 	}

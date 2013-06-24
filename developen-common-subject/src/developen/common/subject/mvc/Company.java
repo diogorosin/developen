@@ -2,6 +2,7 @@ package developen.common.subject.mvc;
 
 import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
+import developen.common.persistence.annotation.OneToOne;
 import developen.common.persistence.annotation.Table;
 
 
@@ -14,6 +15,9 @@ public class Company extends Subject implements Search {
 	@Column
 	private Long cnpj;
 
+	@OneToOne
+	private Ie ie;
+	
 	
 	public Long getCnpj() {
 		
@@ -32,6 +36,32 @@ public class Company extends Subject implements Search {
 		firePropertyChange("Cnpj", oldValue, newValue);
 
 		
+	}
+
+	
+	public Ie getIe() {
+
+		
+		if (ie==null)
+			
+			ie = new Ie();
+		
+		return ie;
+
+		
+	}
+
+
+	public void setIe(Ie newValue) {
+
+
+		Ie oldValue = this.ie;
+
+		this.ie = newValue;
+
+		firePropertyChange("Ie", oldValue, newValue);
+
+
 	}
 
 	

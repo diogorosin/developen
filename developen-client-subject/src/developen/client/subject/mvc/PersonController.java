@@ -3,6 +3,8 @@ package developen.client.subject.mvc;
 import developen.common.framework.exception.InvalidValueException;
 import developen.common.framework.exception.NotNullException;
 import developen.common.subject.i18n.CpfTag;
+import developen.common.subject.i18n.OrganizationTag;
+import developen.common.subject.i18n.StateTag;
 import developen.common.subject.mvc.Person;
 
 public class PersonController extends SubjectController {
@@ -126,5 +128,22 @@ public class PersonController extends SubjectController {
 		
 	}
 	
+
+	protected void onBeforeSave() throws Exception{
+
+
+		super.onBeforeSave();
+		
+		if (getModel().getRg().getOrganization()==null)
+			
+			throw new NotNullException(new OrganizationTag()); 
+
+		if (getModel().getRg().getState()==null)
+			
+			throw new NotNullException(new StateTag()); 
+
+		
+	}
+
 	
 }

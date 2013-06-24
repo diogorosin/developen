@@ -23,8 +23,8 @@ import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
-import developen.common.subject.i18n.NumberTag;
 import developen.common.subject.i18n.OrganizationTag;
+import developen.common.subject.i18n.RgOrganStateTag;
 import developen.common.subject.i18n.RgTag;
 import developen.common.subject.mvc.Organization;
 import developen.common.subject.mvc.Rg;
@@ -53,7 +53,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 	public DBRgField(Rg model){
 
 
-		setCaption(new RgTag());
+		setCaption(new RgOrganStateTag());
 
 		controller = new RgController();
 
@@ -94,7 +94,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 		if (numberField==null){
 
-			numberField = new DBTextField(new NumberTag(), RgController.NUMBER_PROPERTY);
+			numberField = new DBTextField(new RgTag(), RgController.NUMBER_PROPERTY);
 
 			numberField.setPreferredSize(new Dimension(150,24));
 

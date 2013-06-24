@@ -3,26 +3,20 @@ package developen.client.subject.mvc;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.subject.i18n.IdentifierTag;
-import developen.common.subject.i18n.RgTag;
-import developen.common.subject.mvc.Organization;
-import developen.common.subject.mvc.Rg;
-import developen.common.subject.mvc.State;
+import developen.common.subject.i18n.IeTag;
+import developen.common.subject.mvc.Ie;
 
-public class RgController extends Controller {
+public class IeController extends Controller {
 
 
 	public static final String IDENTIFIER_PROPERTY = "Identifier";
 
 	public static final String NUMBER_PROPERTY = "Number";
 
-	public static final String ORGANIZATION_PROPERTY = "Organization";
 
-	public static final String STATE_PROPERTY = "State";
+	public Ie getModel(){
 
-
-	public Rg getModel(){
-
-		return (Rg) super.getModel();
+		return (Ie) super.getModel();
 
 	}
 
@@ -45,25 +39,11 @@ public class RgController extends Controller {
 
 		if (newValue==null || newValue.isEmpty())
 
-			throw new NotNullException(new RgTag());
+			throw new NotNullException(new IeTag());
 
 		setModelProperty(NUMBER_PROPERTY, newValue);
 
 
-	}
-
-
-	public void changeOrganizationProperty(Organization newValue) {
-
-		setModelProperty(ORGANIZATION_PROPERTY, newValue);
-
-	}
-
-
-	public void changeStateProperty(State newValue) {
-
-		setModelProperty(STATE_PROPERTY, newValue);
-		
 	}
 
 

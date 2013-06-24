@@ -35,7 +35,7 @@ public class PersonView extends SubjectView {
 	
 	public void buildInterface() {
 
-		setSize(new Dimension(WIDTH,600));
+		setSize(new Dimension(WIDTH,HEIGHT+50));
 
 	}
 
@@ -72,7 +72,7 @@ public class PersonView extends SubjectView {
 		
 		if (headerPanel == null){
 			
-			headerPanel = new DBRowPanel();
+			headerPanel = new DBRowPanel(120);
 
 			headerPanel.add(getIdentifierField());
 

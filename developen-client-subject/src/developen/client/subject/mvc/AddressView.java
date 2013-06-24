@@ -59,7 +59,7 @@ public class AddressView extends DBRowPanel implements View, CheckListener {
 	public AddressView(AddressController controller){
 
 	
-		super();
+		super(120);
 		
 		setController(controller);
 		

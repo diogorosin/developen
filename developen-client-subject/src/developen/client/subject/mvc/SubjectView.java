@@ -84,7 +84,7 @@ public abstract class SubjectView extends EntryView {
 		
 		if (headerPanel == null){
 			
-			headerPanel = new DBRowPanel();
+			headerPanel = new DBRowPanel(120);
 
 			headerPanel.add(getIdentifierField());
 
