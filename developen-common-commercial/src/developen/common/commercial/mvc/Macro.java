@@ -1,4 +1,4 @@
-package developen.common.fiscal.mvc;
+package developen.common.commercial.mvc;
 
 import developen.common.framework.mvc.Entry;
 import developen.common.framework.mvc.EntryState;
@@ -9,80 +9,80 @@ import developen.common.persistence.annotation.Identifier;
 import developen.common.persistence.annotation.Table;
 
 @Table
-public class Cfop extends Model implements Entry, Search {
+public class Macro extends Model implements Entry, Search{
+
 	
-	
-	private static final long serialVersionUID = -8181689005224492847L;
+	private static final long serialVersionUID = 7490607156220905408L;
 
 	private EntryState modelState;
 
-	@Identifier
+	@Identifier(sequence=true)
 	private Long identifier;
-
+	
 	@Column
 	private String denomination;
-
+	
 	@Column
-	private String note;
+	private Boolean active;
 
 	
 	public Long getIdentifier() {
-
+		
 		return identifier;
-
+		
 	}
 
-
+	
 	public void setIdentifier(Long newValue) {
-
-
+		
+		
 		Long oldValue = this.identifier;
-
+		
 		this.identifier = newValue;
-
+		
 		firePropertyChange("Identifier", oldValue, newValue);
-
-
+		
+		
 	}
 
-
+	
 	public String getDenomination() {
-
+		
 		return denomination;
-
+		
 	}
 
 
 	public void setDenomination(String newValue) {
-
-
+		
+		
 		String oldValue = this.denomination;
-
+		
 		this.denomination = newValue;
-
+		
 		firePropertyChange("Denomination", oldValue, newValue);
 
+		
+	}
+	
 
+	public Boolean getActive() {
+		
+		return active;
+		
 	}
 
-
-	public String getNote() {
-
-		return note;
-
-	}
-
-
-	public void setNote(String newValue) {
-
-
-		String oldValue = this.note;
-
-		this.note = newValue;
-
-		firePropertyChange("Note", oldValue, newValue);
-
-
+	
+	public void setActive(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.active;
+		
+		this.active = newValue;
+		
+		firePropertyChange("Active", oldValue, newValue);
+		
+		
 	}
 
 	
@@ -98,7 +98,7 @@ public class Cfop extends Model implements Entry, Search {
 
 	}
 
-
+	
 	public EntryState getModelState() {
 
 		return modelState;
@@ -106,18 +106,10 @@ public class Cfop extends Model implements Entry, Search {
 	}
 
 
-	public String toString(){
+	public String toString (){
 
-		
-		return getIdentifier().toString().substring(0, 1) + 
-				
-				"." + 
-				
-				getIdentifier().toString().substring(1, 4)   
-				
-				+ "   " + getDenomination();
+		return getDenomination();
 
-		
 	}
 
 
@@ -127,7 +119,7 @@ public class Cfop extends Model implements Entry, Search {
 		return new Object[]{
 
 				getIdentifier(),
-
+				
 				getDenomination()
 
 		};
@@ -168,7 +160,7 @@ public class Cfop extends Model implements Entry, Search {
 			
 			return false;
 		
-		Cfop other = (Cfop) obj;
+		Macro other = (Macro) obj;
 		
 		if (identifier == null) {
 			
@@ -185,5 +177,5 @@ public class Cfop extends Model implements Entry, Search {
 		
 	}
 
-
+	
 }

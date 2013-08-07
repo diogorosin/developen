@@ -15,6 +15,7 @@ import developen.client.osm.action.HelpAboutAction;
 import developen.client.osm.action.HelpAction;
 import developen.client.osm.action.InputCfopEntryAction;
 import developen.client.osm.action.OutputCfopEntryAction;
+import developen.client.osm.action.OutputMacroEntryAction;
 import developen.client.osm.action.PurchaseOrderEntryAction;
 import developen.client.osm.action.LogoutAction;
 import developen.client.osm.action.SaleOrderEntryAction;
@@ -45,6 +46,8 @@ public class WorldClientView extends ClientView{
 	private static final long serialVersionUID = 2176404851166695386L;
 
 	private Menu modulesCommercialMenu;
+	
+	private Menu modulesCommercialEntriesMenu;
 	
 	private Menu modulesCommercialOutputMenu;
 	
@@ -92,6 +95,8 @@ public class WorldClientView extends ClientView{
 	
 	protected UnitMeasureEntryAction unitMeasureEntryAction;
 	
+	protected OutputMacroEntryAction outputMacroEntryAction;
+	
 	protected SaleOrderEntryAction saleOrderEntryAction;
 
 	protected PurchaseOrderEntryAction purchaseOrderEntryAction;
@@ -125,6 +130,13 @@ public class WorldClientView extends ClientView{
 
 						new Object[]{
 							new CommercialModuleTag(),	
+
+							new Object[]{
+								new EntriesTag(),
+
+								getOutputMacroEntryAction()
+
+							},
 
 							new Object[]{
 								new OutputTag(),
@@ -291,6 +303,8 @@ public class WorldClientView extends ClientView{
 			
 			modulesCommercialMenu = new Menu(new CommercialModuleTag());
 			
+			modulesCommercialMenu.add(getModulesCommercialEntriesMenu());
+			
 			modulesCommercialMenu.add(getModulesCommercialOutputMenu());
 			
 			modulesCommercialMenu.add(getModulesCommercialInputMenu());
@@ -302,6 +316,23 @@ public class WorldClientView extends ClientView{
 		
 	}
 	
+	
+	private Menu getModulesCommercialEntriesMenu() {
+
+		
+		if (modulesCommercialEntriesMenu==null){
+			
+			modulesCommercialEntriesMenu = new Menu(new EntriesTag());
+			
+			modulesCommercialEntriesMenu.add(getOutputMacroEntryAction());
+			
+		}
+		
+		return modulesCommercialEntriesMenu;
+		
+		
+	}
+
 	
 	private Menu getModulesCommercialOutputMenu() {
 
@@ -660,6 +691,23 @@ public class WorldClientView extends ClientView{
 		}	
 		
 		return unitMeasureEntryAction;
+		
+		
+	}
+
+	
+	protected ApplicationAction getOutputMacroEntryAction() {
+
+		
+		if (outputMacroEntryAction==null){
+			
+			outputMacroEntryAction = new OutputMacroEntryAction(getDesktop());
+			
+			getController().addView(outputMacroEntryAction);
+			
+		}	
+		
+		return outputMacroEntryAction;
 		
 		
 	}

@@ -38,19 +38,21 @@ public class Server {
 
 			controller.setModel(model);
 
-			ServerView view = new ServerView(controller);
+			if (SystemTray.isSupported()){
 
-			controller.addView(view);
+				ServerView view = new ServerView(controller);
+
+				SystemTray.getSystemTray().add(view);
+
+				controller.addView(view);
+
+			}
 
 			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 
 			Naming.bind(Service.SERVICE_NAME, new ServiceImpl(controller));
 
 			controller.ready();
-			
-			if (SystemTray.isSupported())
-
-				SystemTray.getSystemTray().add(view);
 
 		} catch (Exception e) {
 
@@ -58,7 +60,7 @@ public class Server {
 
 		}		
 
-		
+
 	}
 
 
