@@ -8,5 +8,5 @@ public interface ChangePassword {
 	
 	public ChangePasswordState getModelState();
 
-
+ 
 }
