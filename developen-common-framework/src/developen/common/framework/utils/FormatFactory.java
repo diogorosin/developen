@@ -121,4 +121,41 @@ public class FormatFactory {
 	}
 
 	
+	public static String format(String value, String mask) {
+
+		
+		String data = "";
+
+		for ( int i = 0; i < value.length(); i++ )  {
+			
+			char c = value.charAt(i);
+			
+			if (Character.isDigit( c ))  
+				
+				data += c; 
+			
+		}
+
+		int indMask = mask.length();
+		
+		int indField = data.length();
+
+		for ( ; indField > 0 && indMask > 0; ) 
+			
+			if (mask.charAt(--indMask) == '#') 
+				
+				indField--;
+			
+		String result = "";
+
+		for (; indMask < mask.length(); indMask++)
+			
+			result += ((mask.charAt(indMask) == '#') ? data.charAt(indField++) : mask.charAt(indMask));
+
+		return result;
+		
+
+	}
+
+	
 }

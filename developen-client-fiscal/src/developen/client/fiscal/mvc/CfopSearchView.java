@@ -1,10 +1,12 @@
 package developen.client.fiscal.mvc;
 
 import java.awt.Dimension;
+import java.util.Vector;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import developen.client.fiscal.factory.FiscalFormatFactory;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.fiscal.i18n.CfopTag;
@@ -75,7 +77,25 @@ public class CfopSearchView extends TableSearchView {
 
 		if (tableModel == null){
 
-			tableModel = new UneditableTableModel();
+			tableModel = new UneditableTableModel(){
+
+				private static final long serialVersionUID = -6009581642122493961L;
+
+				public Object getValueAt(int x, int y){
+
+					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
+
+					if (y==IDENTIFIER_COLUMN_INDEX) {
+
+						return FiscalFormatFactory.formatCFOP((Long)row.elementAt(y));
+
+					} else
+
+						return row.elementAt(y);
+
+				}
+
+			};
 
 			tableModel.addColumn(getIdentifierColumn());
 
