@@ -116,7 +116,7 @@ public class OrderView extends EntryView {
 
 		if (headerPanel==null){
 			
-			headerPanel = new DBRowPanel();
+			headerPanel = new DBRowPanel(120);
 
 			headerPanel.add(getIdentifierField());
 
@@ -347,7 +347,7 @@ public class OrderView extends EntryView {
 
 			fromField.addCheckListener(this);
 
-			fromField.setPreferredSize(new Dimension(300,24));
+			fromField.setPreferredSize(new Dimension(400,24));
 
 			getController().addView(fromField);
 
@@ -382,7 +382,7 @@ public class OrderView extends EntryView {
 
 			toField.addCheckListener(this);
 
-			toField.setPreferredSize(new Dimension(300,24));
+			toField.setPreferredSize(new Dimension(400,24));
 
 			getController().addView(toField);
 

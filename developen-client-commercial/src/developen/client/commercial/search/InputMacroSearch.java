@@ -2,9 +2,9 @@ package developen.client.commercial.search;
 
 
 
-import developen.client.commercial.mvc.OutputMacroSearchController;
-import developen.client.commercial.mvc.OutputMacroSearchModel;
-import developen.client.commercial.mvc.OutputMacroSearchView;
+import developen.client.commercial.mvc.InputMacroSearchController;
+import developen.client.commercial.mvc.InputMacroSearchModel;
+import developen.client.commercial.mvc.InputMacroSearchView;
 import developen.client.framework.search.Search;
 
 public class InputMacroSearch extends Search {
@@ -13,25 +13,25 @@ public class InputMacroSearch extends Search {
 	public InputMacroSearch(Boolean active){
 		
 		
-		model = new OutputMacroSearchModel();
+		model = new InputMacroSearchModel();
 		
-		controller = new OutputMacroSearchController();
+		controller = new InputMacroSearchController();
 		
-		view = new OutputMacroSearchView(controller);
+		view = new InputMacroSearchView(controller);
 		
 		controller.addView(view);
 		
 		controller.setModel(model);
 		
-		((OutputMacroSearchController)controller).changeActiveProperty(active);
+		((InputMacroSearchController)controller).changeActiveProperty(active);
 		
 		
 	}
 	
 	
-	public OutputMacroSearchController getController(){
+	public InputMacroSearchController getController(){
 		
-		return (OutputMacroSearchController) controller;
+		return (InputMacroSearchController) controller;
 		
 	}
 	

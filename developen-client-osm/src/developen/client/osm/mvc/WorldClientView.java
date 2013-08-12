@@ -14,15 +14,18 @@ import developen.client.osm.action.ExitAction;
 import developen.client.osm.action.HelpAboutAction;
 import developen.client.osm.action.HelpAction;
 import developen.client.osm.action.InputCfopEntryAction;
+import developen.client.osm.action.InputMacroEntryAction;
+import developen.client.osm.action.InputOrderEntryAction;
+import developen.client.osm.action.LogoutAction;
 import developen.client.osm.action.OutputCfopEntryAction;
 import developen.client.osm.action.OutputMacroEntryAction;
-import developen.client.osm.action.PurchaseOrderEntryAction;
-import developen.client.osm.action.LogoutAction;
-import developen.client.osm.action.SaleOrderEntryAction;
+import developen.client.osm.action.OutputOrderEntryAction;
 import developen.client.osm.action.PaymentConditionEntryAction;
 import developen.client.osm.action.PersonEntryAction;
 import developen.client.osm.action.ProductEntryAction;
+import developen.client.osm.action.PurchaseOrderEntryAction;
 import developen.client.osm.action.ReceiptConditionEntryAction;
+import developen.client.osm.action.SaleOrderEntryAction;
 import developen.client.osm.action.SystemCompanyEntryAction;
 import developen.client.osm.action.SystemPersonEntryAction;
 import developen.client.osm.action.UnitMeasureEntryAction;
@@ -31,9 +34,8 @@ import developen.client.osm.i18n.EngineerModuleTag;
 import developen.client.osm.i18n.EntriesTag;
 import developen.client.osm.i18n.FinanceModuleTag;
 import developen.client.osm.i18n.FiscalModuleTag;
+import developen.client.osm.i18n.MovementsTag;
 import developen.client.osm.i18n.SubjectModuleTag;
-import developen.common.commercial.i18n.InputTag;
-import developen.common.commercial.i18n.OutputTag;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.EnglishUSARadioButtonMenuItem;
 import developen.common.framework.widget.Menu;
@@ -49,9 +51,7 @@ public class WorldClientView extends ClientView{
 	
 	private Menu modulesCommercialEntriesMenu;
 	
-	private Menu modulesCommercialOutputMenu;
-	
-	private Menu modulesCommercialInputMenu;
+	private Menu modulesCommercialMovementsMenu;
 	
 	private Menu modulesFinanceMenu;
 	
@@ -97,9 +97,15 @@ public class WorldClientView extends ClientView{
 	
 	protected OutputMacroEntryAction outputMacroEntryAction;
 	
+	protected InputMacroEntryAction inputMacroEntryAction;
+
 	protected SaleOrderEntryAction saleOrderEntryAction;
 
 	protected PurchaseOrderEntryAction purchaseOrderEntryAction;
+
+	protected OutputOrderEntryAction outputOrderEntryAction;
+
+	protected InputOrderEntryAction inputOrderEntryAction;
 
 	protected ReceiptConditionEntryAction receiptConditionEntryAction;
 	
@@ -108,7 +114,7 @@ public class WorldClientView extends ClientView{
 	protected InputCfopEntryAction inputCfopEntryAction;
 	
 	protected OutputCfopEntryAction outputCfopEntryAction;
-
+	
 	
 	public WorldClientView(ClientController controller) {
 
@@ -134,21 +140,18 @@ public class WorldClientView extends ClientView{
 							new Object[]{
 								new EntriesTag(),
 
+								getInputMacroEntryAction(),
+
 								getOutputMacroEntryAction()
 
 							},
 
 							new Object[]{
-								new OutputTag(),
+								new MovementsTag(),
 
-								getSaleOrderEntryAction()
-
-							},
-							
-							new Object[]{
-								new InputTag(),
-
-								getPurchaseOrderEntryAction()
+								getInputOrderEntryAction(),
+								
+								getOutputOrderEntryAction()
 
 							}
 
@@ -305,9 +308,7 @@ public class WorldClientView extends ClientView{
 			
 			modulesCommercialMenu.add(getModulesCommercialEntriesMenu());
 			
-			modulesCommercialMenu.add(getModulesCommercialOutputMenu());
-			
-			modulesCommercialMenu.add(getModulesCommercialInputMenu());
+			modulesCommercialMenu.add(getModulesCommercialMovementsMenu());
 			
 		}
 		
@@ -324,6 +325,8 @@ public class WorldClientView extends ClientView{
 			
 			modulesCommercialEntriesMenu = new Menu(new EntriesTag());
 			
+			modulesCommercialEntriesMenu.add(getInputMacroEntryAction());
+			
 			modulesCommercialEntriesMenu.add(getOutputMacroEntryAction());
 			
 		}
@@ -334,35 +337,20 @@ public class WorldClientView extends ClientView{
 	}
 
 	
-	private Menu getModulesCommercialOutputMenu() {
+	private Menu getModulesCommercialMovementsMenu() {
 
 		
-		if (modulesCommercialOutputMenu==null){
+		if (modulesCommercialMovementsMenu==null){
 			
-			modulesCommercialOutputMenu = new Menu(new OutputTag());
+			modulesCommercialMovementsMenu = new Menu(new MovementsTag());
 			
-			modulesCommercialOutputMenu.add(getSaleOrderEntryAction());
+			modulesCommercialMovementsMenu.add(getInputOrderEntryAction());
+			
+			modulesCommercialMovementsMenu.add(getOutputOrderEntryAction());
 			
 		}
 		
-		return modulesCommercialOutputMenu;
-		
-		
-	}
-
-	
-	private Menu getModulesCommercialInputMenu() {
-
-		
-		if (modulesCommercialInputMenu==null){
-			
-			modulesCommercialInputMenu = new Menu(new InputTag());
-			
-			modulesCommercialInputMenu.add(getPurchaseOrderEntryAction());
-			
-		}
-		
-		return modulesCommercialInputMenu;
+		return modulesCommercialMovementsMenu;
 		
 		
 	}
@@ -713,6 +701,23 @@ public class WorldClientView extends ClientView{
 	}
 
 
+	protected ApplicationAction getInputMacroEntryAction() {
+
+		
+		if (inputMacroEntryAction==null){
+			
+			inputMacroEntryAction = new InputMacroEntryAction(getDesktop());
+			
+			getController().addView(inputMacroEntryAction);
+			
+		}	
+		
+		return inputMacroEntryAction;
+		
+		
+	}
+
+	
 	protected ApplicationAction getSaleOrderEntryAction() {
 
 		
@@ -747,6 +752,40 @@ public class WorldClientView extends ClientView{
 	}
 
 
+	protected ApplicationAction getOutputOrderEntryAction() {
+
+		
+		if (outputOrderEntryAction==null){
+			
+			outputOrderEntryAction = new OutputOrderEntryAction(getDesktop());
+			
+			getController().addView(outputOrderEntryAction);
+			
+		}	
+		
+		return outputOrderEntryAction;
+		
+		
+	}
+	
+	
+	protected ApplicationAction getInputOrderEntryAction() {
+
+		
+		if (inputOrderEntryAction==null){
+			
+			inputOrderEntryAction = new InputOrderEntryAction(getDesktop());
+			
+			getController().addView(inputOrderEntryAction);
+			
+		}	
+		
+		return inputOrderEntryAction;
+		
+		
+	}
+
+	
 	protected ApplicationAction getReceiptConditionEntryAction() {
 
 		

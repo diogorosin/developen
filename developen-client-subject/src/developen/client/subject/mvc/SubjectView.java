@@ -21,8 +21,8 @@ import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.subject.i18n.ActiveTag;
 import developen.common.subject.i18n.AdressContactTag;
-import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
+import developen.common.subject.i18n.NameTag;
 import developen.common.subject.i18n.SubjectTag;
 
 public abstract class SubjectView extends EntryView {
@@ -172,7 +172,7 @@ public abstract class SubjectView extends EntryView {
 
 		if (denominationField == null){
 
-			denominationField = new DBTextField(new DenominationTag(), SubjectController.DENOMINATION_PROPERTY);
+			denominationField = new DBTextField(new NameTag(), SubjectController.DENOMINATION_PROPERTY);
 
 			denominationField.addCheckListener(this);
 
