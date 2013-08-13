@@ -25,6 +25,24 @@ public class Macro extends Model implements Entry, Search{
 	@Column
 	private Boolean active;
 
+	@Column
+	private Boolean icms;
+	
+	@Column
+	private Boolean ipi;
+	
+	@Column
+	private Boolean pisCofins;
+	
+	@Column
+	private Boolean iss;
+	
+	@Column
+	private Boolean stock;
+
+	@Column
+	private Boolean finance;
+
 	
 	public Long getIdentifier() {
 		
@@ -86,6 +104,126 @@ public class Macro extends Model implements Entry, Search{
 	}
 
 	
+	public Boolean getIcms() {
+		
+		return icms;
+		
+	}
+
+	
+	public void setIcms(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.icms;
+		
+		this.icms = newValue;
+		
+		firePropertyChange("Icms", oldValue, newValue);
+		
+		
+	}
+
+	
+	public Boolean getIpi() {
+		
+		return ipi;
+		
+	}
+
+	
+	public void setIpi(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.ipi;
+		
+		this.ipi = newValue;
+		
+		firePropertyChange("Ipi", oldValue, newValue);
+		
+		
+	}
+
+	
+	public Boolean getPisCofins() {
+		
+		return pisCofins;
+		
+	}
+
+	
+	public void setPisCofins(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.pisCofins;
+		
+		this.pisCofins = newValue;
+		
+		firePropertyChange("PisCofins", oldValue, newValue);
+		
+		
+	}
+
+	
+	public Boolean getIss() {
+		
+		return iss;
+		
+	}
+
+	
+	public void setIss(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.iss;
+		
+		this.iss = newValue;
+		
+		firePropertyChange("Iss", oldValue, newValue);
+		
+		
+	}
+
+	
+	public Boolean getStock() {
+		
+		return stock;
+		
+	}
+
+	
+	public void setStock(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.stock;
+		
+		this.stock = newValue;
+		
+		firePropertyChange("Stock", oldValue, newValue);
+		
+		
+	}
+
+	
+	public Boolean getFinance() {
+		
+		return finance;
+		
+	}
+
+	
+	public void setFinance(Boolean newValue) {
+		
+		
+		Boolean oldValue = this.finance;
+		
+		this.finance = newValue;
+		
+		firePropertyChange("Finance", oldValue, newValue);
+		
+		
+	}
+
+	
 	public void setModelState(EntryState state) {
 
 
@@ -120,7 +258,11 @@ public class Macro extends Model implements Entry, Search{
 
 				getIdentifier(),
 				
-				getDenomination()
+				getDenomination(),
+				
+				getStock(),
+				
+				getFinance()
 
 		};
 

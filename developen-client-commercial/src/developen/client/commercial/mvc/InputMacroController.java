@@ -1,7 +1,7 @@
 package developen.client.commercial.mvc;
 
+import developen.common.commercial.mvc.InputCfop;
 import developen.common.commercial.mvc.InputMacro;
-import developen.common.fiscal.mvc.InputCfop;
 
 public class InputMacroController extends MacroController {
 

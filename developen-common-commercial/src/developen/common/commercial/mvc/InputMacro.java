@@ -1,6 +1,5 @@
 package developen.common.commercial.mvc;
 
-import developen.common.fiscal.mvc.InputCfop;
 import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.Table;
 

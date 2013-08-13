@@ -14,7 +14,6 @@ import developen.client.subject.widget.DBCnpjField;
 import developen.client.subject.widget.DBIeField;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.framework.widget.TabbedPane;
 import developen.common.subject.i18n.CnaeTag;
 import developen.common.subject.i18n.CompanyNameTag;
 import developen.common.subject.i18n.CompanyTag;
@@ -35,8 +34,6 @@ public class CompanyView extends SubjectView {
 	private DBTextField fancyNameField;
 
 	private DBTextField cnaeField;
-
-	private DBRowPanel fiscalTab;
 
 
 	public CompanyView(CompanyController controller){
@@ -100,34 +97,17 @@ public class CompanyView extends SubjectView {
 	}
 
 
-	public TabbedPane getTabbedPane(){
+	public DBRowPanel getPreferencesTab(){
 
+		
+		DBRowPanel r = super.getPreferencesTab();
+		
+		r.addSeparator(new FiscalTag());
+		
+		r.add(getCnaeField());
 
-		TabbedPane t = super.getTabbedPane();
-
-		t.add(getFiscalTab());
-
-		return t;
-
-
-	}
-
-
-	public DBRowPanel getFiscalTab(){
-
-
-		if (fiscalTab==null){
-
-			fiscalTab = new DBRowPanel(100);
-
-			fiscalTab.add(getCnaeField());
-
-			fiscalTab.setName(new FiscalTag().toString());
-
-		}
-
-		return fiscalTab;
-
+		return r;
+		
 
 	}
 

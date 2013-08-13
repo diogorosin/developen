@@ -33,6 +33,9 @@ public class Progeny extends Model implements Entry, Search{
 
 	@ManyToOne
 	private UnitMeasure unitMeasure;
+	
+	@ManyToOne
+	private Icms icms;
 
 
 	public Long getIdentifier() {
@@ -143,6 +146,26 @@ public class Progeny extends Model implements Entry, Search{
 		this.unitMeasure = newValue;
 
 		firePropertyChange("UnitMeasure", oldValue, newValue);
+
+
+	}
+
+
+	public Icms getIcms() {
+
+		return icms;
+
+	}
+
+
+	public void setIcms(Icms newValue) {
+
+
+		Icms oldValue = this.icms;
+
+		this.icms = newValue;
+
+		firePropertyChange("Icms", oldValue, newValue);
 
 
 	}

@@ -53,15 +53,15 @@ public class OrderItemView extends ListEditorView implements CheckListener {
 
 	public void buildInterface() {
 
-		setSize(new Dimension(600,250));
+		setSize(new Dimension(650,250));
 
 	}
 
 
-	public ExtendedPanel getNorthLayout(){
+	public ExtendedPanel getNorthPanel(){
 
 
-		ExtendedPanel l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthPanel();
 
 		l.add(getIdentifierField());
 
@@ -71,10 +71,10 @@ public class OrderItemView extends ListEditorView implements CheckListener {
 	}
 
 
-	public ExtendedPanel getCenterLayout(){
+	public ExtendedPanel getCenterPanel(){
 
 
-		ExtendedPanel l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.setBorder(BorderFactory.createTitledBorder(""));
 

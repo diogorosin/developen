@@ -1,13 +1,14 @@
 package developen.common.subject.mvc;
 
 import developen.common.framework.mvc.Model;
+import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Identifier;
 import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.Table;
 
 @Table
-public class State extends Model {
+public class State extends Model implements Search{
 
 
 	private static final long serialVersionUID = -6353919483378662260L;
@@ -105,6 +106,32 @@ public class State extends Model {
 	}
 
 
+	public String toString(){
+
+		return getDenomination();
+
+	}
+
+
+	public Object[] toColumns() {
+
+		
+		return new Object[]{
+				
+				getIdentifier(),
+				
+				getDenomination(),
+				
+				getAcronym(),
+
+				getCountry()
+				
+		};
+		
+		
+	}
+
+	
 	public int hashCode() {
 		
 		
@@ -155,11 +182,4 @@ public class State extends Model {
 	}
 	
 
-	public String toString(){
-
-		return getAcronym();
-
-	}
-
-	
 }

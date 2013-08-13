@@ -32,11 +32,11 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 
 	private static final long serialVersionUID = -4370820176822925904L;
 
-	private ExtendedPanel northLayout;
+	private ExtendedPanel northPanel;
 
-	private ExtendedPanel centerLayout;
+	private ExtendedPanel centerPanel;
 
-	private ButtonPanel buttonLayout;
+	private ButtonPanel buttonPanel;
 
 	private Button cancelButton;
 
@@ -167,11 +167,11 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 
 		getContentPane().setLayout(new BorderLayout());
 
-		getContentPane().add(getNorthLayout(), BorderLayout.NORTH);
+		getContentPane().add(getNorthPanel(), BorderLayout.NORTH);
 
-		getContentPane().add(getCenterLayout(), BorderLayout.CENTER);
+		getContentPane().add(getCenterPanel(), BorderLayout.CENTER);
 
-		getContentPane().add(getButtonLayout(), BorderLayout.SOUTH);
+		getContentPane().add(getButtonPanel(), BorderLayout.SOUTH);
 
 		buildInterface();
 
@@ -231,48 +231,48 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 	}
 
 
-	public ExtendedPanel getNorthLayout() {
+	public ExtendedPanel getNorthPanel() {
 
 
-		if (northLayout == null)
+		if (northPanel == null)
 
-			northLayout = new ExtendedPanel();
+			northPanel = new ExtendedPanel();
 
-		return northLayout;
-
-
-	}
-
-
-	public ExtendedPanel getCenterLayout() {
-
-
-		if (centerLayout == null)
-
-			centerLayout = new ExtendedPanel();
-
-		return centerLayout;
+		return northPanel;
 
 
 	}
 
 
-	protected ButtonPanel getButtonLayout() {
+	public ExtendedPanel getCenterPanel() {
 
 
-		if (buttonLayout == null){
+		if (centerPanel == null)
 
-			buttonLayout = new ButtonPanel();
+			centerPanel = new ExtendedPanel();
 
-			buttonLayout.add(getSaveButton(), ButtonPanelAligment.RIGHT);
+		return centerPanel;
 
-			buttonLayout.add(getDeleteButton(), ButtonPanelAligment.RIGHT);
 
-			buttonLayout.add(getCancelButton(), ButtonPanelAligment.RIGHT);
+	}
+
+
+	protected ButtonPanel getButtonPanel() {
+
+
+		if (buttonPanel == null){
+
+			buttonPanel = new ButtonPanel();
+
+			buttonPanel.add(getSaveButton(), ButtonPanelAligment.RIGHT);
+
+			buttonPanel.add(getDeleteButton(), ButtonPanelAligment.RIGHT);
+
+			buttonPanel.add(getCancelButton(), ButtonPanelAligment.RIGHT);
 
 		}
 
-		return buttonLayout;
+		return buttonPanel;
 
 
 	}

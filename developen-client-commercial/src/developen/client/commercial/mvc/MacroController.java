@@ -16,6 +16,18 @@ public class MacroController extends EntryController {
 
 	public static final String ACTIVE_PROPERTY = "Active";
 	
+	public static final String ICMS_PROPERTY = "Icms";
+	
+	public static final String IPI_PROPERTY = "Ipi";
+	
+	public static final String PIS_COFINS_PROPERTY = "PisCofins";
+	
+	public static final String ISS_PROPERTY = "Iss";
+	
+	public static final String STOCK_PROPERTY = "Stock";
+	
+	public static final String FINANCE_PROPERTY = "Finance";
+	
 
 	public Macro getModel(){
 
@@ -65,6 +77,48 @@ public class MacroController extends EntryController {
 	}
 
 	
+	public void changeIcmsProperty(Boolean newValue) {
+
+		setModelProperty(MacroController.ICMS_PROPERTY, newValue);
+
+	}
+
+
+	public void changeIpiProperty(Boolean newValue) {
+
+		setModelProperty(MacroController.IPI_PROPERTY, newValue);
+
+	}
+
+
+	public void changePisCofinsProperty(Boolean newValue) {
+
+		setModelProperty(MacroController.PIS_COFINS_PROPERTY, newValue);
+
+	}
+	
+	
+	public void changeIssProperty(Boolean newValue) {
+
+		setModelProperty(MacroController.ISS_PROPERTY, newValue);
+
+	}
+	
+	
+	public void changeStockProperty(Boolean newValue) {
+
+		setModelProperty(MacroController.STOCK_PROPERTY, newValue);
+
+	}
+	
+	
+	public void changeFinanceProperty(Boolean newValue) {
+
+		setModelProperty(MacroController.FINANCE_PROPERTY, newValue);
+
+	}
+	
+
 	public void onClear() throws Exception{
 
 
@@ -76,6 +130,18 @@ public class MacroController extends EntryController {
 
 		setModelProperty(MacroController.ACTIVE_PROPERTY, new Boolean(false));
 		
+		setModelProperty(MacroController.ICMS_PROPERTY, new Boolean(false));
+		
+		setModelProperty(MacroController.IPI_PROPERTY, new Boolean(false));
+		
+		setModelProperty(MacroController.PIS_COFINS_PROPERTY, new Boolean(false));
+		
+		setModelProperty(MacroController.ISS_PROPERTY, new Boolean(false));
+		
+		setModelProperty(MacroController.STOCK_PROPERTY, new Boolean(false));
+		
+		setModelProperty(MacroController.FINANCE_PROPERTY, new Boolean(false));
+		
 
 	}
 
@@ -86,6 +152,18 @@ public class MacroController extends EntryController {
 		super.onInclude();
 		
 		setModelProperty(MacroController.ACTIVE_PROPERTY, new Boolean(true));
+		
+		setModelProperty(MacroController.ICMS_PROPERTY, new Boolean(true));
+		
+		setModelProperty(MacroController.IPI_PROPERTY, new Boolean(true));
+		
+		setModelProperty(MacroController.PIS_COFINS_PROPERTY, new Boolean(true));
+		
+		setModelProperty(MacroController.ISS_PROPERTY, new Boolean(false));
+		
+		setModelProperty(MacroController.STOCK_PROPERTY, new Boolean(true));
+		
+		setModelProperty(MacroController.FINANCE_PROPERTY, new Boolean(true));
 
 
 	}

@@ -8,9 +8,6 @@ import developen.common.subject.mvc.Person;
 public class PersonController extends SubjectController {
 
 	
-	public static final String COMPANIES_PROPERTY = "Companies";
-
-
 	public Person getModel(){
 
 		return (Person) super.getModel();
@@ -35,8 +32,6 @@ public class PersonController extends SubjectController {
 		
 		getModel().getRg().setState(null);
 		
-		setModelProperty(PersonController.COMPANIES_PROPERTY, null);
-
 		
 	}
 

@@ -13,6 +13,7 @@ import developen.client.osm.action.CompanyEntryAction;
 import developen.client.osm.action.ExitAction;
 import developen.client.osm.action.HelpAboutAction;
 import developen.client.osm.action.HelpAction;
+import developen.client.osm.action.IcmsEntryAction;
 import developen.client.osm.action.InputCfopEntryAction;
 import developen.client.osm.action.InputMacroEntryAction;
 import developen.client.osm.action.InputOrderEntryAction;
@@ -25,6 +26,7 @@ import developen.client.osm.action.PersonEntryAction;
 import developen.client.osm.action.ProductEntryAction;
 import developen.client.osm.action.PurchaseOrderEntryAction;
 import developen.client.osm.action.ReceiptConditionEntryAction;
+import developen.client.osm.action.RuleEntryAction;
 import developen.client.osm.action.SaleOrderEntryAction;
 import developen.client.osm.action.SystemCompanyEntryAction;
 import developen.client.osm.action.SystemPersonEntryAction;
@@ -36,6 +38,7 @@ import developen.client.osm.i18n.FinanceModuleTag;
 import developen.client.osm.i18n.FiscalModuleTag;
 import developen.client.osm.i18n.MovementsTag;
 import developen.client.osm.i18n.SubjectModuleTag;
+import developen.common.engineer.i18n.TributesTag;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.EnglishUSARadioButtonMenuItem;
 import developen.common.framework.widget.Menu;
@@ -64,6 +67,8 @@ public class WorldClientView extends ClientView{
 	private Menu modulesEngineerMenu;
 	
 	private Menu modulesEngineerEntriesMenu;
+	
+	private Menu modulesEngineerEntriesTributesMenu;
 
 	private Menu modulesSubjectMenu;
 	
@@ -94,6 +99,10 @@ public class WorldClientView extends ClientView{
 	protected ProductEntryAction productEntryAction;
 	
 	protected UnitMeasureEntryAction unitMeasureEntryAction;
+	
+	protected IcmsEntryAction icmsEntryAction;
+	
+	protected RuleEntryAction ruleEntryAction;
 	
 	protected OutputMacroEntryAction outputMacroEntryAction;
 	
@@ -193,7 +202,16 @@ public class WorldClientView extends ClientView{
 
 								getProductEntryAction(),
 								
-								getUnitMeasureEntryAction()
+								getUnitMeasureEntryAction(),
+								
+								new Object[]{
+									new TributesTag(),
+
+									getIcmsEntryAction(),
+									
+									getRuleEntryAction()
+
+								}
 
 							}
 
@@ -456,6 +474,10 @@ public class WorldClientView extends ClientView{
 			
 			modulesEngineerEntriesMenu.add(getUnitMeasureEntryAction());
 			
+			modulesEngineerEntriesMenu.addSeparator();
+			
+			modulesEngineerEntriesMenu.add(getModulesEngineerEntriesTributesMenu());
+			
 		}
 		
 		return modulesEngineerEntriesMenu;
@@ -464,6 +486,27 @@ public class WorldClientView extends ClientView{
 	}
 
 
+	private Menu getModulesEngineerEntriesTributesMenu() {
+
+		
+		if (modulesEngineerEntriesTributesMenu==null){
+			
+			modulesEngineerEntriesTributesMenu = new Menu(new TributesTag());
+			
+			modulesEngineerEntriesTributesMenu.add(getIcmsEntryAction());
+			
+			modulesEngineerEntriesTributesMenu.addSeparator();
+			
+			modulesEngineerEntriesTributesMenu.add(getRuleEntryAction());
+			
+		}
+		
+		return modulesEngineerEntriesTributesMenu;
+		
+		
+	}
+
+	
 	private Menu getModulesSubjectMenu(){
 
 		
@@ -679,6 +722,40 @@ public class WorldClientView extends ClientView{
 		}	
 		
 		return unitMeasureEntryAction;
+		
+		
+	}
+
+	
+	protected ApplicationAction getIcmsEntryAction() {
+
+		
+		if (icmsEntryAction==null){
+			
+			icmsEntryAction = new IcmsEntryAction(getDesktop());
+			
+			getController().addView(icmsEntryAction);
+			
+		}	
+		
+		return icmsEntryAction;
+		
+		
+	}
+
+	
+	protected ApplicationAction getRuleEntryAction() {
+
+		
+		if (ruleEntryAction==null){
+			
+			ruleEntryAction = new RuleEntryAction(getDesktop());
+			
+			getController().addView(ruleEntryAction);
+			
+		}	
+		
+		return ruleEntryAction;
 		
 		
 	}

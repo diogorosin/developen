@@ -4,10 +4,13 @@ import java.awt.Dimension;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableCellRenderer;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.MacroTag;
+import developen.common.engineer.i18n.FinanceTag;
+import developen.common.engineer.i18n.StockTag;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -25,6 +28,10 @@ public class MacroSearchView extends TableSearchView {
 
 	public static final int DENOMINATION_COLUMN_INDEX = 1;
 	
+	public static final int STOCK_COLUMN_INDEX = 2;
+	
+	public static final int FINANCE_COLUMN_INDEX = 3;
+	
 	protected UneditableTableModel tableModel;
 
 	protected Table recordTable;
@@ -32,6 +39,10 @@ public class MacroSearchView extends TableSearchView {
 	protected Column identifierColumn;
 
 	protected Column denominationColumn;
+	
+	protected Column stockColumn;
+	
+	protected Column financeColumn;
 	
 
 	public MacroSearchView(SearchController controller) {
@@ -50,7 +61,23 @@ public class MacroSearchView extends TableSearchView {
 
 		if (recordTable == null){
 
-			recordTable = new Table(getTableModel());
+			recordTable = new Table(getTableModel()){
+
+				private static final long serialVersionUID = 7686042099071902242L;
+
+				public TableCellRenderer getCellRenderer(int row, int column)   {  
+
+					if(column==STOCK_COLUMN_INDEX || column==FINANCE_COLUMN_INDEX)
+
+						return getDefaultRenderer(Boolean.class);
+
+					else
+
+						return super.getCellRenderer(row, column);
+
+				}  
+
+			};
 
 			recordTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -61,6 +88,22 @@ public class MacroSearchView extends TableSearchView {
 			recordTable.getColumnModel().getColumn(IDENTIFIER_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
+			
+			recordTable.getColumnModel().getColumn(STOCK_COLUMN_INDEX).setPreferredWidth(750);
+
+			recordTable.getColumnModel().getColumn(STOCK_COLUMN_INDEX).setMaxWidth(75);
+
+			recordTable.getColumnModel().getColumn(STOCK_COLUMN_INDEX).setCellRenderer(
+
+					TableFactory.createTableCellRenderer(SwingConstants.CENTER));
+			
+			recordTable.getColumnModel().getColumn(FINANCE_COLUMN_INDEX).setPreferredWidth(75);
+
+			recordTable.getColumnModel().getColumn(FINANCE_COLUMN_INDEX).setMaxWidth(75);
+
+			recordTable.getColumnModel().getColumn(FINANCE_COLUMN_INDEX).setCellRenderer(
+
+					TableFactory.createTableCellRenderer(SwingConstants.CENTER));
 			
 		}
 
@@ -80,6 +123,10 @@ public class MacroSearchView extends TableSearchView {
 			tableModel.addColumn(getIdentifierColumn());
 
 			tableModel.addColumn(getDenominationColumn());
+			
+			tableModel.addColumn(getStockColumn());
+			
+			tableModel.addColumn(getFinanceColumn());
 			
 		}
 
@@ -110,6 +157,32 @@ public class MacroSearchView extends TableSearchView {
 			denominationColumn = new Column(new DenominationTag(), DENOMINATION_COLUMN_INDEX);
 
 		return denominationColumn;
+
+
+	}
+
+
+	public Column getStockColumn(){
+
+
+		if (stockColumn == null)
+
+			stockColumn = new Column(new StockTag(), STOCK_COLUMN_INDEX);
+
+		return stockColumn;
+
+
+	}
+
+
+	public Column getFinanceColumn(){
+
+
+		if (financeColumn == null)
+
+			financeColumn = new Column(new FinanceTag(), FINANCE_COLUMN_INDEX);
+
+		return financeColumn;
 
 
 	}

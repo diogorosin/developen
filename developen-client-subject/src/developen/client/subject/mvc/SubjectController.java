@@ -3,9 +3,14 @@ package developen.client.subject.mvc;
 import developen.client.framework.mvc.EntryController;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.exception.OutOfRangeException;
+import developen.common.framework.messenger.Messenger;
+import developen.common.persistence.dpa.DPA;
+import developen.common.persistence.session.Session;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
+import developen.common.subject.i18n.RuleTag;
 import developen.common.subject.mvc.Address;
+import developen.common.subject.mvc.Rule;
 import developen.common.subject.mvc.Subject;
 
 public class SubjectController extends EntryController {
@@ -18,6 +23,8 @@ public class SubjectController extends EntryController {
 	public static final String ACTIVE_PROPERTY = "Active";
 	
 	public static final String ADDRESS_PROPERTY = "Address";
+	
+	public static final String RULE_PROPERTY = "Rule";
 
 
 	public Subject getModel(){
@@ -75,6 +82,19 @@ public class SubjectController extends EntryController {
 	}
 
 	
+	public void changeRuleProperty(Rule newValue) throws Exception {
+
+		
+		if (newValue==null)
+
+			throw new NotNullException(new RuleTag());
+
+		setModelProperty(SubjectController.RULE_PROPERTY, newValue);
+
+		
+	}
+
+	
 	public void onClear() throws Exception{
 
 
@@ -85,6 +105,8 @@ public class SubjectController extends EntryController {
 		setModelProperty(SubjectController.DENOMINATION_PROPERTY, null);
 
 		setModelProperty(SubjectController.ACTIVE_PROPERTY, new Boolean(false));
+		
+		setModelProperty(SubjectController.RULE_PROPERTY, null);
 		
 		getModel().getAddress().setIdentifier(null);
 		
@@ -115,7 +137,25 @@ public class SubjectController extends EntryController {
 
 		super.onInclude();
 
+		setModelProperty(SubjectController.DENOMINATION_PROPERTY, null);
+		
 		setModelProperty(SubjectController.ACTIVE_PROPERTY, new Boolean(true));
+		
+		try {
+
+			Session session = DPA.getSessionFactory().createSession();
+
+			Rule r = (Rule) session.read(Rule.class, 1);
+
+			session.close();
+			
+			setModelProperty(SubjectController.RULE_PROPERTY, r);
+
+		} catch (Exception e) {
+
+			Messenger.show(e);
+
+		}
 
 		getModel().getAddress().setIdentifier(null);
 		

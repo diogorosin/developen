@@ -51,10 +51,10 @@ public class UnitMeasureConversionView extends ListEditorView implements CheckLi
 	}
 
 	
-	public ExtendedPanel getNorthLayout(){
+	public ExtendedPanel getNorthPanel(){
 
 		
-		ExtendedPanel l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthPanel();
 
 		l.add(getIdentifierField());
 		
@@ -64,10 +64,10 @@ public class UnitMeasureConversionView extends ListEditorView implements CheckLi
 	}
 	
 
-	public ExtendedPanel getCenterLayout(){
+	public ExtendedPanel getCenterPanel(){
 
 		
-		ExtendedPanel l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.setBorder(BorderFactory.createTitledBorder(""));
 		

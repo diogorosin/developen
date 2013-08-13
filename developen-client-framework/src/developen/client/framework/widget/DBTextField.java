@@ -129,11 +129,15 @@ public class DBTextField extends TextField implements DBField{
 
 		setEnabled(getCondition().analyse(event, this));
 
-		if (event.getPropertyName().equals(getPropertyName()))
+		if (event.getPropertyName().equals(getPropertyName())){
 
 			setText(event.getNewValue()==null ? "" : 
 
 				event.getNewValue().toString());
+		
+			setCaretPosition(0);
+			
+		}
 
 
 	}

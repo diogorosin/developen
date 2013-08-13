@@ -4,6 +4,7 @@ package developen.client.engineer.mvc;
 import developen.client.framework.mvc.EntryController;
 import developen.common.engineer.i18n.DenominationTag;
 import developen.common.engineer.i18n.IdentifierTag;
+import developen.common.engineer.mvc.Icms;
 import developen.common.engineer.mvc.Progeny;
 import developen.common.engineer.mvc.UnitMeasure;
 import developen.common.framework.exception.NotNullException;
@@ -22,6 +23,8 @@ public class ProgenyController extends EntryController {
 	
 	public static final String UNIT_MEASURE_PROPERTY = "UnitMeasure";
 		
+	public static final String ICMS_PROPERTY = "Icms";
+
 	
 	public Progeny getModel(){
 		
@@ -85,6 +88,13 @@ public class ProgenyController extends EntryController {
 	}
 		
 
+	public void changeIcmsProperty(Icms newValue){
+		
+		setModelProperty(ProgenyController.ICMS_PROPERTY, newValue);
+		
+	}
+		
+
 	public void onClear() throws Exception{
 
 	
@@ -97,6 +107,8 @@ public class ProgenyController extends EntryController {
 		setModelProperty(ProgenyController.ACTIVE_PROPERTY, new Boolean(false));
 
 		setModelProperty(ProgenyController.PRICE_PROPERTY, new Double(0));
+		
+		setModelProperty(ProgenyController.ICMS_PROPERTY, null);
 		
 		
 	}

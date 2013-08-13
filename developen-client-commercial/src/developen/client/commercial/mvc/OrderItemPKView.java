@@ -1,6 +1,7 @@
 package developen.client.commercial.mvc;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.JDesktopPane;
@@ -181,7 +182,7 @@ public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 			
 			progenyField.setPrimaryKey(true);
 			
-			progenyField.setColumns(30);
+			progenyField.setPreferredSize(new Dimension(400, 24));
 			
 			progenyField.setSearch(search);
 			

@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
-import developen.client.fiscal.mvc.OutputCfopController;
-import developen.client.fiscal.mvc.OutputCfopView;
+import developen.client.commercial.mvc.OutputCfopController;
+import developen.client.commercial.mvc.OutputCfopView;
 import developen.client.osm.Client;
-import developen.common.fiscal.i18n.OutputCfopTag;
-import developen.common.fiscal.mvc.OutputCfop;
+import developen.common.commercial.i18n.OutputCfopTag;
+import developen.common.commercial.mvc.OutputCfop;
 import developen.common.framework.widget.InternalFramePosition;
 
 public class OutputCfopEntryAction extends ApplicationAction {

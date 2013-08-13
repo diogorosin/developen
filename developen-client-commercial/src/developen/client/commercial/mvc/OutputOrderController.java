@@ -1,6 +1,6 @@
 package developen.client.commercial.mvc;
 
-import developen.common.commercial.i18n.OutputMacroTag;
+import developen.common.commercial.i18n.MacroTag;
 import developen.common.commercial.mvc.OutputMacro;
 import developen.common.commercial.mvc.OutputOrder;
 import developen.common.framework.exception.NotNullException;
@@ -26,7 +26,7 @@ public abstract class OutputOrderController extends OrderController {
 		
 		if (newValue==null)
 
-			throw new NotNullException(new OutputMacroTag());
+			throw new NotNullException(new MacroTag());
 
 		setModelProperty(OutputOrderController.OUTPUT_MACRO_PROPERTY, newValue);
 		

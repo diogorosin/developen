@@ -4,17 +4,19 @@ import java.awt.Dimension;
 
 import developen.client.commercial.search.OutputMacroSearch;
 import developen.client.commercial.search.OutputOrderSearch;
+import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
-import developen.common.commercial.i18n.OutputMacroTag;
+import developen.common.commercial.i18n.MacroTag;
 import developen.common.commercial.i18n.OutputOrderTag;
 import developen.common.commercial.mvc.OutputMacro;
 import developen.common.commercial.mvc.OutputOrder;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.widget.CheckEvent;
 
 public class OutputOrderView extends OrderView {
 
@@ -37,19 +39,19 @@ public class OutputOrderView extends OrderView {
 
 	}
 
-	
+
 	public DBRowPanel getHeaderPanel(){
 
-		
+
 		DBRowPanel s = super.getHeaderPanel();
-		
+
 		s.add(getOutputMacroField());
-		
+
 		return s;
 
-		
+
 	}
-	
+
 
 	public Tag getInternalFrameTitle() {
 
@@ -57,20 +59,20 @@ public class OutputOrderView extends OrderView {
 
 	}
 
-	
+
 	public DBTextField getFromField() {
 
 
 		DBTextField fromField = super.getFromField();
-		
+
 		fromField.setCondition(new NeverEnabledCondition());
 
 		return fromField;
 
-		
+
 	}
-	
-	
+
+
 	public DBTextField getOutputMacroField() {
 
 
@@ -88,7 +90,7 @@ public class OutputOrderView extends OrderView {
 
 			});
 
-			outputMacroField = new DBTextField(new OutputMacroTag(), OutputOrderController.OUTPUT_MACRO_PROPERTY);
+			outputMacroField = new DBTextField(new MacroTag(), OutputOrderController.OUTPUT_MACRO_PROPERTY);
 
 			outputMacroField.setSearch(toSearch);
 
@@ -105,7 +107,7 @@ public class OutputOrderView extends OrderView {
 
 	}
 
-	
+
 	public Search getIdentifierSearch(){
 
 
@@ -126,7 +128,30 @@ public class OutputOrderView extends OrderView {
 		}
 
 		return identifierSearch;
-		
+
+
+	}
+
+
+	public void onCheck(CheckEvent event) throws Exception {
+
+
+		super.onCheck(event);
+
+		if (event.getCheckable() == getOutputMacroField()){
+
+			try{
+
+				getController().changeOutputMacroProperty((OutputMacro) getOutputMacroField().getSearch().findBy());
+
+			} catch (ManyRecordsFoundException e) {
+
+				getOutputMacroField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+			}
+
+		}
+
 
 	}
 

@@ -2,8 +2,8 @@ package developen.client.commercial.mvc;
 
 import java.awt.Dimension;
 
+import developen.client.commercial.search.InputCfopSearch;
 import developen.client.commercial.search.InputMacroSearch;
-import developen.client.fiscal.search.InputCfopSearch;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
@@ -14,17 +14,16 @@ import developen.common.commercial.i18n.Cfop1Tag;
 import developen.common.commercial.i18n.Cfop2Tag;
 import developen.common.commercial.i18n.Cfop3Tag;
 import developen.common.commercial.i18n.Cfop4Tag;
+import developen.common.commercial.i18n.CfopsTag;
 import developen.common.commercial.i18n.ExteriorTag;
 import developen.common.commercial.i18n.InputMacroTag;
 import developen.common.commercial.i18n.InterstateTag;
 import developen.common.commercial.i18n.StateTag;
+import developen.common.commercial.mvc.InputCfop;
 import developen.common.commercial.mvc.InputMacro;
-import developen.common.fiscal.mvc.InputCfop;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
-import developen.common.subject.i18n.FiscalTag;
 
 public class InputMacroView extends MacroView {
 
@@ -55,8 +54,6 @@ public class InputMacroView extends MacroView {
 
 	private DBTextField cfopExterior4Field;
 
-	private TabbedPane tabbedPane;
-	
 	private DBRowPanel fiscalTab;
 
 
@@ -106,33 +103,14 @@ public class InputMacroView extends MacroView {
 	}
 
 	
-	public ExtendedPanel getCenterPanel(){
-
-		
-		ExtendedPanel l = super.getCenterPanel();
-
-		l.add(getTabbedPane());
-
-		return l;
-		
-
-	}
-
-	
 	public TabbedPane getTabbedPane(){
 
 		
-		if (tabbedPane == null){
-
-			tabbedPane = new TabbedPane();
-			
-			tabbedPane.add(getFiscalTab());
-			
-			tabbedPane.setFocusable(false);
-
-		}
+		TabbedPane p = super.getTabbedPane();
 		
-		return tabbedPane;
+		p.add(getFiscalTab());
+		
+		return p;
 		
 
 	}
@@ -177,7 +155,7 @@ public class InputMacroView extends MacroView {
 			
 			fiscalTab.add(getCfopExterior4Field());
 
-			fiscalTab.setName(new FiscalTag().toString());
+			fiscalTab.setName(new CfopsTag().toString());
 
 		}
 

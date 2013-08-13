@@ -5,6 +5,7 @@ import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.Model;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Identifier;
+import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.OneToOne;
 import developen.common.persistence.annotation.Table;
 
@@ -27,6 +28,9 @@ public class Subject extends Model implements Entry{
 	
 	@OneToOne
 	private Address address;
+	
+	@ManyToOne
+	private Rule rule;
 	
 	
 	public Long getIdentifier() {
@@ -115,6 +119,32 @@ public class Subject extends Model implements Entry{
 	}
 
 
+	public Rule getRule() {
+		
+		
+		if (rule==null)
+			
+			rule = new Rule();
+		
+		return rule;
+
+		
+	}
+
+
+	public void setRule(Rule newValue) {
+		
+		
+		Rule oldValue = this.rule;
+		
+		this.rule = newValue;
+		
+		firePropertyChange("Rule", oldValue, newValue);
+		
+		
+	}
+
+	
 	public void setModelState(EntryState state) {
 	
 		

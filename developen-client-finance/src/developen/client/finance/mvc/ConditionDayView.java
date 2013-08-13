@@ -58,10 +58,10 @@ public class ConditionDayView extends ListEditorView implements CheckListener {
 	}
 
 	
-	public ExtendedPanel getNorthLayout(){
+	public ExtendedPanel getNorthPanel(){
 
 		
-		ExtendedPanel l = super.getNorthLayout();
+		ExtendedPanel l = super.getNorthPanel();
 		
 		l.add(getIdentifierField());
 		
@@ -71,10 +71,10 @@ public class ConditionDayView extends ListEditorView implements CheckListener {
 	}
 	
 
-	public ExtendedPanel getCenterLayout(){
+	public ExtendedPanel getCenterPanel(){
 
 		
-		ExtendedPanel l = super.getCenterLayout();
+		ExtendedPanel l = super.getCenterPanel();
 
 		l.setBorder(BorderFactory.createTitledBorder(""));
 		

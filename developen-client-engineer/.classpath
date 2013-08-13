@@ -8,5 +8,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-persistence"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-engineer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-subject"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-subject"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

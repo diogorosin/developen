@@ -65,7 +65,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 		controller.setModel(model);
 
-		setPreferredSize(new Dimension(350,24));
+//		setPreferredSize(new Dimension(350,24));
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
@@ -200,7 +200,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 			}
 
-			stateComboBox.setPreferredSize(new Dimension(75,24));
+			stateComboBox.setPreferredSize(new Dimension(175,24));
 
 			stateComboBox.setCondition(new EditingOrIncludingCondition());
 

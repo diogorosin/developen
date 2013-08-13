@@ -13,9 +13,19 @@ import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.MacroTag;
+import developen.common.engineer.i18n.FinanceTag;
+import developen.common.engineer.i18n.IcmsTag;
+import developen.common.engineer.i18n.IntegrationsTag;
+import developen.common.engineer.i18n.IpiTag;
+import developen.common.engineer.i18n.IssTag;
+import developen.common.engineer.i18n.PisCofinsTag;
+import developen.common.engineer.i18n.StockTag;
+import developen.common.engineer.i18n.TributesIntegrationsTag;
+import developen.common.engineer.i18n.TributesTag;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
+import developen.common.framework.widget.TabbedPane;
 import developen.common.subject.i18n.ActiveTag;
 import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
@@ -33,12 +43,28 @@ public abstract class MacroView extends EntryView {
 
 	private DBTextField denominationField;
 
-	private DBCheckBox fieldActive;
-
+	private DBCheckBox activeField;
+	
+	private DBCheckBox icmsField;
+	
+	private DBCheckBox ipiField;
+	
+	private DBCheckBox pisCofinsField;
+	
+	private DBCheckBox issField;
+	
+	private DBCheckBox stockField;
+	
+	private DBCheckBox financeField;
+	
 	protected DBRowPanel headerPanel;
 
 	protected Search identifierSearch;
+	
+	private TabbedPane tabbedPane;
 
+	private DBRowPanel tributesIntegrationsTab;
+	
 
 	public MacroView(MacroController controller) {
 
@@ -78,7 +104,7 @@ public abstract class MacroView extends EntryView {
 
 			headerPanel.add(getDenominationField());
 
-			headerPanel.add(getFieldActive());
+			headerPanel.add(getActiveField());
 			
 		}
 	
@@ -87,6 +113,71 @@ public abstract class MacroView extends EntryView {
 		
 	}
 	
+	
+	public ExtendedPanel getCenterPanel(){
+
+		
+		ExtendedPanel l = super.getCenterPanel();
+
+		l.add(getTabbedPane());
+
+		return l;
+		
+
+	}
+
+	
+	public TabbedPane getTabbedPane(){
+
+		
+		if (tabbedPane == null){
+
+			tabbedPane = new TabbedPane();
+			
+			tabbedPane.add(getTributesIntegrationsTab());
+			
+			tabbedPane.setFocusable(false);
+
+		}
+		
+		return tabbedPane;
+		
+
+	}
+	
+	
+	public DBRowPanel getTributesIntegrationsTab(){
+
+
+		if (tributesIntegrationsTab==null){
+
+			tributesIntegrationsTab = new DBRowPanel(0);
+
+			tributesIntegrationsTab.addSeparator(new TributesTag());
+			
+			tributesIntegrationsTab.add(getIcmsField());
+			
+			tributesIntegrationsTab.add(getIpiField());
+			
+			tributesIntegrationsTab.add(getPisCofinsField());
+			
+			tributesIntegrationsTab.add(getIssField());
+
+			tributesIntegrationsTab.addSeparator(new IntegrationsTag());
+			
+			tributesIntegrationsTab.add(getStockField());
+			
+			tributesIntegrationsTab.add(getFinanceField());
+			
+			tributesIntegrationsTab.setName(new TributesIntegrationsTag().toString());
+			
+		}
+
+		return tributesIntegrationsTab;
+
+
+	}
+
 	
 	public void onCheck(CheckEvent event) throws Exception {
 
@@ -164,35 +255,209 @@ public abstract class MacroView extends EntryView {
 	}
 
 
-	public DBCheckBox getFieldActive() {
+	public DBCheckBox getActiveField() {
 
 
-		if (fieldActive == null){
+		if (activeField == null){
 
-			fieldActive = new DBCheckBox(new ActiveTag(), MacroController.ACTIVE_PROPERTY);
+			activeField = new DBCheckBox(new ActiveTag(), MacroController.ACTIVE_PROPERTY);
 
-			fieldActive.setSelected(false);
+			activeField.setSelected(false);
 
-			fieldActive.addActionListener(new ActionListener() {
+			activeField.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent arg0) {
 
-					getController().changeActiveProperty(fieldActive.isSelected());
+					getController().changeActiveProperty(activeField.isSelected());
 
 				}
 
 			});
 
-			getController().addView(fieldActive);
+			getController().addView(activeField);
 
 		}
 
-		return fieldActive;
+		return activeField;
 
 
 	}
 
 	
+	public DBCheckBox getIcmsField() {
+
+
+		if (icmsField == null){
+
+			icmsField = new DBCheckBox(new IcmsTag(), MacroController.ICMS_PROPERTY);
+
+			icmsField.setSelected(false);
+
+			icmsField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					getController().changeIcmsProperty(icmsField.isSelected());
+
+				}
+
+			});
+
+			getController().addView(icmsField);
+
+		}
+
+		return icmsField;
+
+
+	}
+
+	
+	public DBCheckBox getIpiField() {
+
+
+		if (ipiField == null){
+
+			ipiField = new DBCheckBox(new IpiTag(), MacroController.IPI_PROPERTY);
+
+			ipiField.setSelected(false);
+
+			ipiField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					getController().changeIpiProperty(ipiField.isSelected());
+
+				}
+
+			});
+
+			getController().addView(ipiField);
+
+		}
+
+		return ipiField;
+
+
+	}
+	
+	
+	public DBCheckBox getPisCofinsField() {
+
+
+		if (pisCofinsField == null){
+
+			pisCofinsField = new DBCheckBox(new PisCofinsTag(), MacroController.PIS_COFINS_PROPERTY);
+
+			pisCofinsField.setSelected(false);
+
+			pisCofinsField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					getController().changePisCofinsProperty(pisCofinsField.isSelected());
+
+				}
+
+			});
+
+			getController().addView(pisCofinsField);
+
+		}
+
+		return pisCofinsField;
+
+
+	}
+	
+	
+	public DBCheckBox getIssField() {
+
+
+		if (issField == null){
+
+			issField = new DBCheckBox(new IssTag(), MacroController.ISS_PROPERTY);
+
+			issField.setSelected(false);
+
+			issField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					getController().changeIssProperty(issField.isSelected());
+
+				}
+
+			});
+
+			getController().addView(issField);
+
+		}
+
+		return issField;
+
+
+	}
+	
+	
+	public DBCheckBox getStockField() {
+
+
+		if (stockField == null){
+
+			stockField = new DBCheckBox(new StockTag(), MacroController.STOCK_PROPERTY);
+
+			stockField.setSelected(false);
+
+			stockField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					getController().changeStockProperty(stockField.isSelected());
+
+				}
+
+			});
+
+			getController().addView(stockField);
+
+		}
+
+		return stockField;
+
+
+	}
+	
+	
+	public DBCheckBox getFinanceField() {
+
+
+		if (financeField == null){
+
+			financeField = new DBCheckBox(new FinanceTag(), MacroController.FINANCE_PROPERTY);
+
+			financeField.setSelected(false);
+
+			financeField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					getController().changeFinanceProperty(financeField.isSelected());
+
+				}
+
+			});
+
+			getController().addView(financeField);
+
+		}
+
+		return financeField;
+
+
+	}
+	
+
 	public Tag getInternalFrameTitle() {
 
 		return new MacroTag();

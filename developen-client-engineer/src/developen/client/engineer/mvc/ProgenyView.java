@@ -8,7 +8,9 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
+import developen.client.engineer.search.IcmsSearch;
 import developen.client.engineer.search.ProgenySearch;
+import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.mvc.EntryView;
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
@@ -23,10 +25,12 @@ import developen.client.framework.widget.EditingOrIncludingCondition;
 import developen.common.engineer.i18n.ActiveTag;
 import developen.common.engineer.i18n.BasicTag;
 import developen.common.engineer.i18n.DenominationTag;
+import developen.common.engineer.i18n.IcmsIcmsSTTag;
 import developen.common.engineer.i18n.IdentifierTag;
 import developen.common.engineer.i18n.PriceTag;
 import developen.common.engineer.i18n.ProgenyTag;
 import developen.common.engineer.i18n.UnitMeasureForUseOrSaleTag;
+import developen.common.engineer.mvc.Icms;
 import developen.common.engineer.mvc.Progeny;
 import developen.common.engineer.mvc.UnitMeasure;
 import developen.common.framework.messenger.Messenger;
@@ -37,6 +41,7 @@ import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
+import developen.common.subject.i18n.TributationTag;
 
 public class ProgenyView extends EntryView {
 
@@ -47,22 +52,26 @@ public class ProgenyView extends EntryView {
 
 	public static int HEIGHT = 550;
 
+	protected Search identifierSearch;
+
 	private DBIdentifierField identifierField;
 
 	private DBTextField denominationField;
 
 	private DBCheckBox activeField;
 
-	protected Search identifierSearch;
+	private DBTextField icmsField;
 
 	private TabbedPane tabbedPane;
 
 	private DBRowPanel basicTab;
 
+	private DBRowPanel tributationTab;
+
 	private DBNumberField priceField;
-	
+
 	private DBComboBox unitMeasureComboBox;
-	
+
 
 	public ProgenyView(ProgenyController controller) {
 
@@ -120,6 +129,8 @@ public class ProgenyView extends EntryView {
 			tabbedPane = new TabbedPane();
 
 			tabbedPane.add(getBasicTab());
+			
+			tabbedPane.add(getTributationTab());
 
 			tabbedPane.setFocusable(false);
 
@@ -139,14 +150,33 @@ public class ProgenyView extends EntryView {
 			basicTab = new DBRowPanel(180);
 
 			basicTab.setName(new BasicTag().toString());
-			
+
 			basicTab.add(getPriceField());
-			
+
 			basicTab.add(getUnitMeasureComboBox());
 
 		}
 
 		return basicTab;
+
+
+	}
+
+
+	public DBRowPanel getTributationTab(){
+
+
+		if (tributationTab==null){
+
+			tributationTab = new DBRowPanel(100);
+
+			tributationTab.add(getIcmsField());
+
+			tributationTab.setName(new TributationTag().toString());
+
+		}
+
+		return tributationTab;
 
 
 	}
@@ -174,6 +204,20 @@ public class ProgenyView extends EntryView {
 				if (event.getCheckable() == getPriceField())
 
 					getController().changePriceProperty(Double.valueOf(getPriceField().getValue().toString()));
+
+				else
+
+					if (event.getCheckable() == getIcmsField())
+
+						try{
+
+							getController().changeIcmsProperty((Icms) getIcmsField().getSearch().findBy());
+
+						} catch (ManyRecordsFoundException e) {
+
+							getIcmsField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+						}
 
 
 	}
@@ -210,6 +254,7 @@ public class ProgenyView extends EntryView {
 
 	}
 
+	
 	public DBTextField getDenominationField() {
 
 
@@ -219,7 +264,7 @@ public class ProgenyView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setColumns(30);
+			denominationField.setPreferredSize(new Dimension(300,24));
 
 			getController().addView(denominationField);
 
@@ -288,7 +333,7 @@ public class ProgenyView extends EntryView {
 
 	}
 
-	
+
 	public DBComboBox getUnitMeasureComboBox() {
 
 
@@ -335,6 +380,42 @@ public class ProgenyView extends EntryView {
 		}
 
 		return unitMeasureComboBox;
+
+
+	}
+
+
+	public DBTextField getIcmsField() {
+
+
+		if (icmsField == null){
+
+			IcmsSearch icmsSearch = new IcmsSearch();
+
+			icmsSearch.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeIcmsProperty((Icms) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+
+			icmsField = new DBTextField(new IcmsIcmsSTTag(), ProgenyController.ICMS_PROPERTY);
+
+			icmsField.addCheckListener(this);
+
+			icmsField.setSearch(icmsSearch);
+
+			icmsField.setPreferredSize(new Dimension(400,24));
+
+			getController().addView(icmsField);
+
+		}
+
+		return icmsField;
 
 
 	}

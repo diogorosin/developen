@@ -15,8 +15,8 @@ import developen.common.framework.widget.Column;
 import developen.common.framework.widget.Table;
 import developen.common.framework.widget.UneditableTableModel;
 import developen.common.subject.i18n.CnpjTag;
+import developen.common.subject.i18n.CompanyNameTag;
 import developen.common.subject.i18n.CompanyTag;
-import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
 import developen.common.subject.mvc.Cnpj;
 
@@ -29,7 +29,7 @@ public class CompanySearchView extends TableSearchView {
 
 	public static final int CNPJ_COLUMN_INDEX = 1;
 	
-	public static final int DENOMINATION_COLUMN_INDEX = 2;
+	public static final int COMPANY_NAME_COLUMN_INDEX = 2;
 
 	protected UneditableTableModel tableModel;
 
@@ -39,7 +39,7 @@ public class CompanySearchView extends TableSearchView {
 
 	protected Column cnpjColumn;
 
-	protected Column denominationColumn;
+	protected Column companyNameColumn;
 
 
 	public CompanySearchView(SearchController controller) {
@@ -115,7 +115,7 @@ public class CompanySearchView extends TableSearchView {
 
 			tableModel.addColumn(getCnpjColumn());
 
-			tableModel.addColumn(getDenominationColumn());
+			tableModel.addColumn(getCompanyNameColumn());
 
 		}
 
@@ -151,14 +151,14 @@ public class CompanySearchView extends TableSearchView {
 	}
 
 	
-	public Column getDenominationColumn(){
+	public Column getCompanyNameColumn(){
 
 
-		if (denominationColumn == null)
+		if (companyNameColumn == null)
 
-			denominationColumn = new Column(new DenominationTag(), DENOMINATION_COLUMN_INDEX);
+			companyNameColumn = new Column(new CompanyNameTag(), COMPANY_NAME_COLUMN_INDEX);
 
-		return denominationColumn;
+		return companyNameColumn;
 
 
 	}

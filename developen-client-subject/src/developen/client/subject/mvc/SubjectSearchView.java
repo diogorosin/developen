@@ -17,8 +17,8 @@ import developen.common.framework.widget.UneditableTableModel;
 import developen.common.subject.i18n.CityTag;
 import developen.common.subject.i18n.CountryTag;
 import developen.common.subject.i18n.CpfOrCnpjTag;
-import developen.common.subject.i18n.DenominationTag;
 import developen.common.subject.i18n.IdentifierTag;
+import developen.common.subject.i18n.NameCompanyNameTag;
 import developen.common.subject.i18n.StateTag;
 import developen.common.subject.i18n.SubjectTag;
 import developen.common.subject.i18n.TypeTag;
@@ -220,7 +220,7 @@ public class SubjectSearchView extends TableSearchView {
 
 		if (denominationColumn == null)
 
-			denominationColumn = new Column(new DenominationTag(), DENOMINATION_COLUMN_INDEX);
+			denominationColumn = new Column(new NameCompanyNameTag(), DENOMINATION_COLUMN_INDEX);
 
 		return denominationColumn;
 
