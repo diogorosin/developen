@@ -17,9 +17,9 @@ import javax.swing.JSplitPane;
 
 import developen.client.application.action.NewPasswordAction;
 import developen.client.application.i18n.AccessControlTag;
-import developen.client.application.i18n.SystemPersonTag;
-import developen.client.application.search.SystemPersonSearch;
 import developen.client.application.widget.SystemPersonDBTree;
+import developen.client.commercial.mvc.PersonView;
+import developen.client.commercial.search.SystemPersonSearch;
 import developen.client.framework.action.AddAction;
 import developen.client.framework.action.ColapseAction;
 import developen.client.framework.action.ExpandAction;
@@ -29,7 +29,12 @@ import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBListView;
-import developen.client.subject.mvc.PersonView;
+import developen.common.commercial.i18n.SystemPersonTag;
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPersonSystemAction;
+import developen.common.commercial.mvc.SystemPersonSystemCompany;
+import developen.common.commercial.mvc.SystemPersonSystemCompanyPK;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
@@ -40,11 +45,6 @@ import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
-import developen.common.subject.mvc.SystemPersonSystemAction;
-import developen.common.subject.mvc.SystemPersonSystemCompany;
-import developen.common.subject.mvc.SystemPersonSystemCompanyPK;
-import developen.common.subject.mvc.SystemCompany;
-import developen.common.subject.mvc.SystemPerson;
 
 public abstract class SystemPersonView extends PersonView {
 

@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
-import developen.client.engineer.mvc.ProductController;
-import developen.client.engineer.mvc.ProductView;
+import developen.client.commercial.mvc.ProductController;
+import developen.client.commercial.mvc.ProductView;
 import developen.client.osm.Client;
-import developen.common.engineer.i18n.ProductTag;
-import developen.common.engineer.mvc.Product;
+import developen.common.commercial.i18n.ProductTag;
+import developen.common.commercial.mvc.Product;
 import developen.common.framework.widget.InternalFramePosition;
 
 public class ProductEntryAction extends ApplicationAction {

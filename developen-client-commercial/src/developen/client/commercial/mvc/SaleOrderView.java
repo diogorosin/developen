@@ -2,7 +2,6 @@ package developen.client.commercial.mvc;
 
 import java.awt.Dimension;
 
-import developen.client.application.search.SystemPersonSearch;
 import developen.client.commercial.search.SaleOrderSearch;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.Search;
@@ -14,9 +13,9 @@ import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.SaleOrderTag;
 import developen.common.commercial.i18n.SellerTag;
 import developen.common.commercial.mvc.SaleOrder;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
-import developen.common.subject.mvc.SystemPerson;
 
 public class SaleOrderView extends OutputOrderView {
 
@@ -90,21 +89,21 @@ public class SaleOrderView extends OutputOrderView {
 
 		if (seller == null){
 
-			SystemPersonSearch sellerSearch = new SystemPersonSearch(true);
-
-			sellerSearch.addSearchListener(new SearchAdapter(){
-
-				public void onSearchConfirmed(SearchEvent event) throws Exception {
-
-					getController().changeSellerProperty((SystemPerson) event.getSelectedRows().get(0));
-
-				}
-
-			});
+//			SystemPersonSearch sellerSearch = new SystemPersonSearch(true);
+//
+//			sellerSearch.addSearchListener(new SearchAdapter(){
+//
+//				public void onSearchConfirmed(SearchEvent event) throws Exception {
+//
+//					getController().changeSellerProperty((SystemPerson) event.getSelectedRows().get(0));
+//
+//				}
+//
+//			});
 
 			seller = new DBTextField(new SellerTag(), SaleOrderController.SELLER_PROPERTY);
 
-			seller.setSearch(sellerSearch);
+//			seller.setSearch(sellerSearch);
 
 			seller.setCondition(new NeverEnabledCondition());
 

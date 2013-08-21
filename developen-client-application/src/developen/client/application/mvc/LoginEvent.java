@@ -1,6 +1,6 @@
 package developen.client.application.mvc;
 
-import developen.common.subject.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPerson;
 
 
 public class LoginEvent {

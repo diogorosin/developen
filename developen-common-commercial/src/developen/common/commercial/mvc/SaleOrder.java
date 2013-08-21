@@ -2,7 +2,6 @@ package developen.common.commercial.mvc;
 
 import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.Table;
-import developen.common.subject.mvc.SystemPerson;
 
 @Table
 public class SaleOrder extends OutputOrder {

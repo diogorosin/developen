@@ -1,10 +1,8 @@
 package developen.common.commercial.mvc;
 
-import developen.common.engineer.mvc.Product;
 import developen.common.framework.mvc.Model;
 import developen.common.persistence.annotation.Embeddable;
 import developen.common.persistence.annotation.ManyToOne;
-import developen.common.subject.mvc.SystemCompany;
 
 @Embeddable
 public class StockPK extends Model {

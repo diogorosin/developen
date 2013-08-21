@@ -2,10 +2,10 @@ package developen.client.commercial.mvc;
 
 
 import developen.common.commercial.i18n.OrderTag;
+import developen.common.commercial.i18n.ProgenyTag;
 import developen.common.commercial.mvc.Order;
 import developen.common.commercial.mvc.OrderItemPK;
-import developen.common.engineer.i18n.ProgenyTag;
-import developen.common.engineer.mvc.Progeny;
+import developen.common.commercial.mvc.Progeny;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 

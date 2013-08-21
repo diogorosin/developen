@@ -4,5 +4,5 @@ import developen.common.framework.utils.Tag;
 
 public class StateTag extends Tag {
 
-	
+
 }

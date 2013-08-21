@@ -10,9 +10,9 @@ import developen.client.commercial.mvc.SaleOrderView;
 import developen.client.osm.Client;
 import developen.common.commercial.i18n.SaleOrderTag;
 import developen.common.commercial.mvc.SaleOrder;
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.widget.InternalFramePosition;
-import developen.common.subject.mvc.SystemCompany;
-import developen.common.subject.mvc.SystemPerson;
 
 public class SaleOrderEntryAction extends ApplicationAction {
 

@@ -1,6 +1,5 @@
 package developen.common.commercial.mvc;
 
-import developen.common.engineer.mvc.Progeny;
 import developen.common.framework.mvc.Model;
 import developen.common.persistence.annotation.Embeddable;
 import developen.common.persistence.annotation.ManyToOne;

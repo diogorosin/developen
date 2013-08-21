@@ -10,8 +10,8 @@ import developen.client.commercial.mvc.OutputOrderView;
 import developen.client.osm.Client;
 import developen.common.commercial.i18n.OutputOrderTag;
 import developen.common.commercial.mvc.OutputOrder;
+import developen.common.commercial.mvc.SystemCompany;
 import developen.common.framework.widget.InternalFramePosition;
-import developen.common.subject.mvc.SystemCompany;
 
 public class OutputOrderEntryAction extends ApplicationAction {
 

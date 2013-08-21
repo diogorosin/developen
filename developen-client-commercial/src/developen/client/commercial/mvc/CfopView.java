@@ -17,14 +17,14 @@ import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextArea;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.CfopTag;
+import developen.common.commercial.i18n.DenominationTag;
+import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.NoteTag;
 import developen.common.commercial.mvc.Cfop;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
-import developen.common.subject.i18n.DenominationTag;
-import developen.common.subject.i18n.IdentifierTag;
 
 public class CfopView extends EntryView {
 

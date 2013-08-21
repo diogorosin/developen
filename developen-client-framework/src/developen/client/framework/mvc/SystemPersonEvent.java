@@ -1,6 +1,6 @@
 package developen.client.framework.mvc;
 
-import developen.common.subject.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPerson;
 
 public class SystemPersonEvent {
 

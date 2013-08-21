@@ -1,10 +1,10 @@
 package developen.client.commercial.mvc;
 
 import developen.client.framework.exception.RecordNotFoundException;
+import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.mvc.OutputCfop;
 import developen.common.framework.exception.OutOfRangeException;
 import developen.common.framework.messenger.Messenger;
-import developen.common.subject.i18n.IdentifierTag;
 
 public class OutputCfopController extends CfopController {
 

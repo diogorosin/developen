@@ -12,6 +12,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import developen.client.commercial.search.OrderSearch;
+import developen.client.commercial.search.SystemPersonSearch;
 import developen.client.commercial.widget.DBOrderItemTable;
 import developen.client.framework.action.AddAction;
 import developen.client.framework.action.EditAction;
@@ -27,14 +28,15 @@ import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
-import developen.client.subject.search.SystemPersonSearch;
+import developen.common.commercial.i18n.FromTag;
 import developen.common.commercial.i18n.ItemsTag;
+import developen.common.commercial.i18n.NumberTag;
 import developen.common.commercial.i18n.OrderTag;
+import developen.common.commercial.i18n.ToTag;
 import developen.common.commercial.mvc.Order;
 import developen.common.commercial.mvc.OrderItem;
 import developen.common.commercial.mvc.OrderItemPK;
-import developen.common.engineer.i18n.FromTag;
-import developen.common.engineer.i18n.ToTag;
+import developen.common.commercial.mvc.Subject;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.messenger.Question;
 import developen.common.framework.messenger.SimplifiedQuestion;
@@ -47,8 +49,6 @@ import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.type.AllwaysDiferentList;
-import developen.common.subject.i18n.NumberTag;
-import developen.common.subject.mvc.Subject;
 
 public class OrderView extends EntryView {
 

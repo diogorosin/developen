@@ -10,8 +10,6 @@
                 	. 
                     ../configuration/
                     ../source/developen-common-framework.jar
-                	../source/developen-common-subject.jar 
-                	../source/developen-common-engineer.jar 
                 	../source/developen-common-commercial.jar 
                 	../source/developen-common-persistence.jar
                 	../source/developen-common-finance.jar

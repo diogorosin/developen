@@ -2,12 +2,12 @@ package developen.client.commercial.mvc;
 
 import developen.client.framework.exception.RecordNotFoundException;
 import developen.client.framework.mvc.EntryController;
+import developen.common.commercial.i18n.DenominationTag;
+import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.mvc.Cfop;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.exception.OutOfRangeException;
 import developen.common.framework.messenger.Messenger;
-import developen.common.subject.i18n.DenominationTag;
-import developen.common.subject.i18n.IdentifierTag;
 
 public class CfopController extends EntryController {
 

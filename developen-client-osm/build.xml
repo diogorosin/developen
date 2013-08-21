@@ -11,17 +11,13 @@
             		.
                 	../source/developen-client-application.jar
                 	../source/developen-client-commercial.jar
-                	../source/developen-client-engineer.jar
                 	../source/developen-client-framework.jar
                 	../source/developen-client-persistence.jar
-                	../source/developen-client-subject.jar
                 	../source/developen-client-finance.jar
                 	../source/developen-client-fiscal.jar
                 	../source/developen-common-commercial.jar 
-                	../source/developen-common-engineer.jar 
                 	../source/developen-common-framework.jar 
                 	../source/developen-common-persistence.jar
-                	../source/developen-common-subject.jar
                 	../source/developen-common-finance.jar
                 	../source/developen-common-fiscal.jar  
             	"/>

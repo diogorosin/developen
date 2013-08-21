@@ -22,6 +22,7 @@ public class ExitAction extends Action {
 		super(new ExitTag());
 		
 		setController(controller);
+
 		
 	}
 

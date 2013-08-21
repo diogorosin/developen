@@ -10,7 +10,6 @@ import developen.common.persistence.annotation.Identifier;
 import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.OneToMany;
 import developen.common.persistence.annotation.Table;
-import developen.common.subject.mvc.Subject;
 
 
 @Table

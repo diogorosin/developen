@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
-import developen.client.application.i18n.SystemCompaniesTag;
 import developen.client.application.mvc.SystemCompanyController;
 import developen.client.application.mvc.SystemCompanyView;
+import developen.common.commercial.i18n.SystemCompaniesTag;
+import developen.common.commercial.mvc.SystemCompany;
 import developen.common.framework.widget.InternalFramePosition;
-import developen.common.subject.mvc.SystemCompany;
 
 public class SystemCompanyEntryAction extends ApplicationAction {
 

@@ -12,23 +12,23 @@ import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
+import developen.common.commercial.i18n.ActiveTag;
+import developen.common.commercial.i18n.DenominationTag;
+import developen.common.commercial.i18n.FinanceTag;
+import developen.common.commercial.i18n.IcmsIcmsSTTag;
+import developen.common.commercial.i18n.IdentifierTag;
+import developen.common.commercial.i18n.IntegrationsTag;
+import developen.common.commercial.i18n.IpiTag;
+import developen.common.commercial.i18n.IssqnTag;
 import developen.common.commercial.i18n.MacroTag;
-import developen.common.engineer.i18n.FinanceTag;
-import developen.common.engineer.i18n.IcmsTag;
-import developen.common.engineer.i18n.IntegrationsTag;
-import developen.common.engineer.i18n.IpiTag;
-import developen.common.engineer.i18n.IssTag;
-import developen.common.engineer.i18n.PisCofinsTag;
-import developen.common.engineer.i18n.StockTag;
-import developen.common.engineer.i18n.TributesIntegrationsTag;
-import developen.common.engineer.i18n.TributesTag;
+import developen.common.commercial.i18n.PisCofinsTag;
+import developen.common.commercial.i18n.StockTag;
+import developen.common.commercial.i18n.TributesIntegrationsTag;
+import developen.common.commercial.i18n.TributesTag;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
-import developen.common.subject.i18n.ActiveTag;
-import developen.common.subject.i18n.DenominationTag;
-import developen.common.subject.i18n.IdentifierTag;
 
 public abstract class MacroView extends EntryView {
 
@@ -289,7 +289,7 @@ public abstract class MacroView extends EntryView {
 
 		if (icmsField == null){
 
-			icmsField = new DBCheckBox(new IcmsTag(), MacroController.ICMS_PROPERTY);
+			icmsField = new DBCheckBox(new IcmsIcmsSTTag(), MacroController.ICMS_PROPERTY);
 
 			icmsField.setSelected(false);
 
@@ -376,7 +376,7 @@ public abstract class MacroView extends EntryView {
 
 		if (issField == null){
 
-			issField = new DBCheckBox(new IssTag(), MacroController.ISS_PROPERTY);
+			issField = new DBCheckBox(new IssqnTag(), MacroController.ISS_PROPERTY);
 
 			issField.setSelected(false);
 

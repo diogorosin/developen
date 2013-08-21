@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-framework"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-subject"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-persistence"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-subject"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-commercial"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-commercial"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

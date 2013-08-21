@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import sun.misc.BASE64Encoder;
 import developen.client.application.exception.InvalidPasswordException;
 import developen.client.application.exception.ShortPasswordException;
-import developen.client.application.i18n.SystemPersonTag;
+import developen.common.commercial.i18n.SystemPersonTag;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
 import developen.common.framework.widget.Checkable;
-import developen.common.subject.mvc.SystemPerson;
 
 public class LoginController extends Controller {
 

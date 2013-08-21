@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
-import developen.client.engineer.mvc.UnitMeasureController;
-import developen.client.engineer.mvc.UnitMeasureView;
+import developen.client.commercial.mvc.UnitMeasureController;
+import developen.client.commercial.mvc.UnitMeasureView;
 import developen.client.osm.Client;
-import developen.common.engineer.i18n.UnitMeasureTag;
-import developen.common.engineer.mvc.UnitMeasure;
+import developen.common.commercial.i18n.UnitMeasureTag;
+import developen.common.commercial.mvc.UnitMeasure;
 import developen.common.framework.widget.InternalFramePosition;
 
 public class UnitMeasureEntryAction extends ApplicationAction {

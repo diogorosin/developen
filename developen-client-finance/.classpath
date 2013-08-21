@@ -8,8 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-persistence"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-finance"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-commercial"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-subject"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-commercial"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-subject"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

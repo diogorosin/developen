@@ -1,13 +1,13 @@
 package developen.client.application.mvc;
 
-import developen.client.application.i18n.SystemCompanyTag;
-import developen.client.application.search.SystemCompanySearch;
+import developen.client.commercial.mvc.CompanyView;
+import developen.client.commercial.search.SystemCompanySearch;
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
-import developen.client.subject.mvc.CompanyView;
+import developen.common.commercial.i18n.SystemCompanyTag;
+import developen.common.commercial.mvc.SystemCompany;
 import developen.common.framework.utils.Tag;
-import developen.common.subject.mvc.SystemCompany;
 
 public class SystemCompanyView extends CompanyView {
 

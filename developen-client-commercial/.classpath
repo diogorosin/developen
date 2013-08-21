@@ -5,12 +5,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-framework"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-persistence"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-persistence"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-application"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-subject"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-engineer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-commercial"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-engineer"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-subject"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-framework"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

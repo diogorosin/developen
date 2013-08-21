@@ -10,13 +10,13 @@ import developen.client.commercial.factory.FiscalFormatFactory;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.CfopTag;
+import developen.common.commercial.i18n.DenominationTag;
+import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
 import developen.common.framework.widget.Table;
 import developen.common.framework.widget.UneditableTableModel;
-import developen.common.subject.i18n.DenominationTag;
-import developen.common.subject.i18n.IdentifierTag;
 
 public class CfopSearchView extends TableSearchView {
 

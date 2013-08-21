@@ -1,11 +1,11 @@
 package developen.client.commercial.mvc;
 
 import developen.client.framework.mvc.EntryController;
+import developen.common.commercial.i18n.DenominationTag;
+import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.mvc.Macro;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.exception.OutOfRangeException;
-import developen.common.subject.i18n.DenominationTag;
-import developen.common.subject.i18n.IdentifierTag;
 
 public class MacroController extends EntryController {
 

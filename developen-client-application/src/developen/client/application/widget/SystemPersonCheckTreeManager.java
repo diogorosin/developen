@@ -9,11 +9,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import developen.client.application.mvc.SystemPersonController;
+import developen.common.commercial.mvc.SystemAction;
+import developen.common.commercial.mvc.SystemPersonSystemAction;
+import developen.common.commercial.mvc.SystemPersonSystemActionPK;
 import developen.common.framework.widget.Action;
 import developen.common.framework.widget.CheckTreeManager;
-import developen.common.subject.mvc.SystemPersonSystemAction;
-import developen.common.subject.mvc.SystemPersonSystemActionPK;
-import developen.common.subject.mvc.SystemAction;
 
 public class SystemPersonCheckTreeManager extends CheckTreeManager {
 

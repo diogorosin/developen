@@ -3,8 +3,8 @@ package developen.client.commercial.mvc;
 import developen.common.commercial.i18n.MacroTag;
 import developen.common.commercial.mvc.OutputMacro;
 import developen.common.commercial.mvc.OutputOrder;
+import developen.common.commercial.mvc.SystemCompany;
 import developen.common.framework.exception.NotNullException;
-import developen.common.subject.mvc.SystemCompany;
 
 
 

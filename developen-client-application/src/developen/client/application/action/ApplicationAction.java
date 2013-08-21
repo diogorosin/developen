@@ -6,10 +6,10 @@ import java.util.List;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.mvc.ClientController;
+import developen.common.commercial.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPersonSystemAction;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.PrivilegedAction;
-import developen.common.subject.mvc.SystemPersonSystemAction;
-import developen.common.subject.mvc.SystemPerson;
 
 public abstract class ApplicationAction extends PrivilegedAction {
 

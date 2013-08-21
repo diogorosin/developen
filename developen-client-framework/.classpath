@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-client-persistence"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-persistence"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-subject"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/developen-common-commercial"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

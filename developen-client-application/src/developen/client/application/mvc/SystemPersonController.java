@@ -11,8 +11,14 @@ import developen.client.application.exception.ShortPasswordException;
 import developen.client.application.i18n.MessageOnAfterNewPasswordTag;
 import developen.client.application.i18n.QuestionOnBeforeNewPasswordTag;
 import developen.client.application.i18n.QuestionOnBeforeSaveSystemPersonTag;
-import developen.client.application.i18n.SystemCompaniesTag;
-import developen.client.subject.mvc.PersonController;
+import developen.client.commercial.mvc.PersonController;
+import developen.common.commercial.i18n.SystemCompaniesTag;
+import developen.common.commercial.mvc.Idiom;
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPersonSystemAction;
+import developen.common.commercial.mvc.SystemPersonSystemCompany;
+import developen.common.commercial.mvc.SystemPersonSystemCompanyPK;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.exception.OperationCanceledByUserException;
 import developen.common.framework.messenger.InformationMessage;
@@ -22,12 +28,6 @@ import developen.common.framework.messenger.SimplifiedQuestion;
 import developen.common.framework.utils.TagParam;
 import developen.common.persistence.dpa.DPA;
 import developen.common.persistence.session.Session;
-import developen.common.subject.mvc.Idiom;
-import developen.common.subject.mvc.SystemPersonSystemAction;
-import developen.common.subject.mvc.SystemPersonSystemCompany;
-import developen.common.subject.mvc.SystemPersonSystemCompanyPK;
-import developen.common.subject.mvc.SystemCompany;
-import developen.common.subject.mvc.SystemPerson;
 
 
 public class SystemPersonController extends PersonController {

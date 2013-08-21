@@ -1,7 +1,7 @@
 package developen.client.application.mvc;
 
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.mvc.Model;
-import developen.common.subject.mvc.SystemPerson;
 
 public class LoginModel extends Model implements Login{
 	

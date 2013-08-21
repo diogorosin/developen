@@ -18,8 +18,7 @@ import developen.client.application.i18n.ChangePasswordTag;
 import developen.client.application.i18n.ConfirmNewPasswordTag;
 import developen.client.application.i18n.NewPasswordTag;
 import developen.client.application.i18n.SecurityTag;
-import developen.client.application.i18n.SystemPersonTag;
-import developen.client.application.search.SystemPersonSearch;
+import developen.client.commercial.search.SystemPersonSearch;
 import developen.client.framework.action.CancelAction;
 import developen.client.framework.action.ConfirmAction;
 import developen.client.framework.exception.ManyRecordsFoundException;
@@ -29,6 +28,8 @@ import developen.client.framework.widget.AllwaysEnabledCondition;
 import developen.client.framework.widget.DBPasswordField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
+import developen.common.commercial.i18n.SystemPersonTag;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.utils.Tag;
@@ -39,7 +40,6 @@ import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
-import developen.common.subject.mvc.SystemPerson;
 
 public class ChangePasswordView extends InternalFrame implements CheckListener{
 

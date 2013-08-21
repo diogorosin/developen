@@ -23,9 +23,13 @@ import developen.client.application.i18n.ModulesTag;
 import developen.client.application.i18n.ParameterizationTag;
 import developen.client.application.i18n.PreferencesTag;
 import developen.client.application.i18n.SecurityTag;
-import developen.client.application.i18n.SystemCompanyTag;
 import developen.client.application.widget.LoggedInCondition;
 import developen.client.framework.widget.DBComboBox;
+import developen.common.commercial.i18n.SystemCompanyTag;
+import developen.common.commercial.mvc.Idiom;
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPersonSystemCompany;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.Tag;
@@ -37,10 +41,6 @@ import developen.common.framework.widget.Menu;
 import developen.common.framework.widget.MenuBar;
 import developen.common.framework.widget.PortugueseBrazilRadioButtonMenuItem;
 import developen.common.framework.widget.ToolBar;
-import developen.common.subject.mvc.Idiom;
-import developen.common.subject.mvc.SystemPersonSystemCompany;
-import developen.common.subject.mvc.SystemCompany;
-import developen.common.subject.mvc.SystemPerson;
 
 
 public abstract class ClientView extends Frame {

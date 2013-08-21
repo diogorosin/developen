@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import developen.client.framework.mvc.SystemPersonEvent;
 import developen.client.framework.mvc.SystemPersonListener;
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
+import developen.common.commercial.mvc.SystemPersonSystemCompany;
 import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
-import developen.common.subject.mvc.SystemPersonSystemCompany;
-import developen.common.subject.mvc.SystemCompany;
-import developen.common.subject.mvc.SystemPerson;
 
 public class ClientController extends Controller {
 

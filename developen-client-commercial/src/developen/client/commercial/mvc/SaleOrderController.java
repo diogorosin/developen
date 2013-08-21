@@ -2,8 +2,8 @@ package developen.client.commercial.mvc;
 
 import developen.common.commercial.i18n.SellerTag;
 import developen.common.commercial.mvc.SaleOrder;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.exception.NotNullException;
-import developen.common.subject.mvc.SystemPerson;
 
 
 

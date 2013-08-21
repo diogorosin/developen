@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
-import developen.client.subject.mvc.RuleController;
-import developen.client.subject.mvc.RuleView;
+import developen.client.commercial.mvc.RuleController;
+import developen.client.commercial.mvc.RuleView;
+import developen.common.commercial.i18n.FiscalRuleTag;
+import developen.common.commercial.mvc.Rule;
 import developen.common.framework.widget.InternalFramePosition;
-import developen.common.subject.i18n.TributaryRuleTag;
-import developen.common.subject.mvc.Rule;
 
 public class RuleEntryAction extends ApplicationAction {
 
@@ -19,7 +19,7 @@ public class RuleEntryAction extends ApplicationAction {
 
 	public RuleEntryAction(JDesktopPane desktop) {
 
-		super(new TributaryRuleTag(), desktop);
+		super(new FiscalRuleTag(), desktop);
 
 	}
 

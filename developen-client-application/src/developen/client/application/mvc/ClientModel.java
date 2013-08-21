@@ -1,8 +1,8 @@
 package developen.client.application.mvc;
 
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.mvc.Model;
-import developen.common.subject.mvc.SystemCompany;
-import developen.common.subject.mvc.SystemPerson;
 
 public class ClientModel extends Model implements Client {
 

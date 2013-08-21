@@ -5,12 +5,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.action.ApplicationAction;
+import developen.client.commercial.mvc.PersonController;
+import developen.client.commercial.mvc.PersonView;
 import developen.client.osm.Client;
-import developen.client.subject.mvc.PersonController;
-import developen.client.subject.mvc.PersonView;
+import developen.common.commercial.i18n.PersonTag;
+import developen.common.commercial.mvc.Person;
 import developen.common.framework.widget.InternalFramePosition;
-import developen.common.subject.i18n.PersonTag;
-import developen.common.subject.mvc.Person;
 
 public class PersonEntryAction extends ApplicationAction {
 

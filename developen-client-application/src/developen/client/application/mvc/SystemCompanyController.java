@@ -1,7 +1,7 @@
 package developen.client.application.mvc;
 
-import developen.client.subject.mvc.CompanyController;
-import developen.common.subject.mvc.SystemCompany;
+import developen.client.commercial.mvc.CompanyController;
+import developen.common.commercial.mvc.SystemCompany;
 
 public class SystemCompanyController extends CompanyController {
 	
