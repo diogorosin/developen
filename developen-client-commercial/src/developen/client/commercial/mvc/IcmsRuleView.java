@@ -217,6 +217,8 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 			getController().addView(identifierField.getFromField());
 
 			getController().addView(identifierField.getToField());
+			
+			getController().addView(identifierField.getRuleField());
 
 		}
 

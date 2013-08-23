@@ -1,26 +1,26 @@
 package developen.client.commercial.mvc;
 
 import developen.client.framework.mvc.SearchController;
-import developen.common.commercial.mvc.IpiCst;
+import developen.common.commercial.mvc.Ipi;
 import developen.common.persistence.query.Column;
 import developen.common.persistence.query.ColumnQuery;
 import developen.common.persistence.query.Equal;
 import developen.common.persistence.query.Like;
 
-public class IpiCstSearchController extends SearchController {
+public class IpiSearchController extends SearchController {
+	
+	
+	public IpiSearchModel getModel(){
 
-
-	public IpiCstSearchModel getModel(){
-
-		return (IpiCstSearchModel) super.getModel();
+		return (IpiSearchModel) super.getModel();
 
 	}
 
-
+	
 	public ColumnQuery buildQuery(){
 
 
-		ColumnQuery query = new ColumnQuery(IpiCst.class);
+		ColumnQuery query = new ColumnQuery(Ipi.class);
 
 		if (getModel().getSearch() != null && !getModel().getSearch().isEmpty()) {
 
@@ -38,13 +38,15 @@ public class IpiCstSearchController extends SearchController {
 
 			if (isNumber){
 
+				Long number = Long.valueOf(getModel().getSearch());
+
 				query.add(new Equal(
 
 						new Column("identifier", 
 
-								IpiCst.class), 
+								Ipi.class), 
 
-								getModel().getSearch()));
+								number));
 
 			} else 
 
@@ -52,7 +54,7 @@ public class IpiCstSearchController extends SearchController {
 
 						"denomination", 
 
-						IpiCst.class),
+						Ipi.class),
 
 						"%" + getModel().getSearch() + "%"));
 
@@ -63,5 +65,5 @@ public class IpiCstSearchController extends SearchController {
 
 	}
 
-
+	
 }
