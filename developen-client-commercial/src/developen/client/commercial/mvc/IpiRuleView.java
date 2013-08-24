@@ -18,7 +18,7 @@ import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingListEditorCondition;
 import developen.common.commercial.i18n.AliquotTag;
 import developen.common.commercial.i18n.BasicTag;
-import developen.common.commercial.i18n.CstTag;
+import developen.common.commercial.i18n.IpiCstTag;
 import developen.common.commercial.i18n.IpiTag;
 import developen.common.commercial.i18n.RulesTag;
 import developen.common.commercial.i18n.StaffTag;
@@ -194,7 +194,7 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			cstField = new DBTextField(new CstTag(), IpiRuleController.CST_PROPERTY);
+			cstField = new DBTextField(new IpiCstTag(), IpiRuleController.CST_PROPERTY);
 
 			cstField.setCondition(new EditingOrIncludingListEditorCondition());
 

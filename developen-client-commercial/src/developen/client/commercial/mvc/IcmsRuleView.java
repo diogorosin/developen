@@ -28,8 +28,8 @@ import developen.common.commercial.i18n.AliquotReducedTag;
 import developen.common.commercial.i18n.AliquotTag;
 import developen.common.commercial.i18n.BasicTag;
 import developen.common.commercial.i18n.CfopTag;
-import developen.common.commercial.i18n.CsosnTag;
-import developen.common.commercial.i18n.CstTag;
+import developen.common.commercial.i18n.IcmsCsosnTag;
+import developen.common.commercial.i18n.IcmsCstTag;
 import developen.common.commercial.i18n.IcmsSTTag;
 import developen.common.commercial.i18n.IcmsTag;
 import developen.common.commercial.i18n.MacroTag;
@@ -245,7 +245,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			cstField = new DBTextField(new CstTag(), IcmsRuleController.CST_PROPERTY);
+			cstField = new DBTextField(new IcmsCstTag(), IcmsRuleController.CST_PROPERTY);
 
 			cstField.setCondition(new EditingOrIncludingListEditorCondition());
 
@@ -282,7 +282,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			csosnField = new DBTextField(new CsosnTag(), IcmsRuleController.CSOSN_PROPERTY);
+			csosnField = new DBTextField(new IcmsCsosnTag(), IcmsRuleController.CSOSN_PROPERTY);
 
 			csosnField.setCondition(new EditingOrIncludingListEditorCondition());
 
