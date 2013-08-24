@@ -212,15 +212,7 @@ public class PisCofinsRule extends Model implements Search, ListEditor{
 
 				getIdentifier().getCfop(),
 
-				getIdentifier().getRule(),
-
-				getPisCumulative(),
-				
-				getPisNonCumulative(),
-				
-				getCofinsCumulative(),
-				
-				getCofinsNonCumulative(),
+				getIdentifier().getRule()
 
 		};
 

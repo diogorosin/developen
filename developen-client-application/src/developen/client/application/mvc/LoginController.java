@@ -27,7 +27,7 @@ public class LoginController extends Controller {
 
 	public boolean isEditing(){
 
-		return getModel().getModelState().equals(LoginState.EDITING); 
+		return getModel().getModelState().equals(LoginState.CLEAN); 
 
 	}
 
@@ -118,14 +118,14 @@ public class LoginController extends Controller {
 	}
 
 
-	public void edit() throws Exception{
+	public void clear() throws Exception{
 
 
-		onBeforeEdit();
+		onBeforeClear();
 
-		onEdit();
+		onClear();
 
-		onAfterEdit();
+		onAfterClear();
 
 
 	}
@@ -179,7 +179,7 @@ public class LoginController extends Controller {
 	
 	protected void onAfterLogin() throws Exception{
 
-		setModelProperty(MODEL_STATE, LoginState.LOGGEDIN);
+		setModelProperty(MODEL_STATE, LoginState.LOGGED_IN);
 
 	}
 
@@ -207,15 +207,15 @@ public class LoginController extends Controller {
 	}
 	
 
-	protected void onBeforeEdit() throws Exception{}
+	protected void onBeforeClear() throws Exception{}
 
 	
-	protected void onEdit() throws Exception{}
+	protected void onClear() throws Exception{}
 
 	
-	protected void onAfterEdit() throws Exception{
+	protected void onAfterClear() throws Exception{
 
-		setModelProperty(MODEL_STATE, LoginState.EDITING);
+		setModelProperty(MODEL_STATE, LoginState.CLEAN);
 
 	}
 

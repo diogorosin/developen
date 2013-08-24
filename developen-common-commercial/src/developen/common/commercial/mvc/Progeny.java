@@ -19,21 +19,24 @@ public class Progeny extends Model implements Entry, Search{
 
 	private EntryState modelState;
 
-	@Identifier(sequence=true)
+	@Identifier
 	private Long identifier;
 
 	@Column
 	private String denomination;
 
 	@Column
+	private String shortDenomination;
+
+	@Column
 	private Boolean active;
 
+	@ManyToOne
+	private ProgenyType progenyType;
+	
 	@Column 
 	private Double price;
 
-	@ManyToOne
-	private UnitMeasure unitMeasure;
-	
 	@ManyToOne
 	private Icms icms;
 
@@ -78,6 +81,26 @@ public class Progeny extends Model implements Entry, Search{
 	}
 
 
+	public String getShortDenomination() {
+
+		return shortDenomination;
+
+	}
+
+
+	public void setShortDenomination(String newValue) {
+
+
+		String oldValue = this.shortDenomination;
+
+		this.shortDenomination = newValue;
+
+		firePropertyChange("ShortDenomination", oldValue, newValue);
+
+
+	}
+
+
 	public Boolean getActive() {
 
 		return active;
@@ -97,20 +120,27 @@ public class Progeny extends Model implements Entry, Search{
 
 	}
 
+	
+	public ProgenyType getProgenyType() {
 
-	public void setModelState(EntryState state) {
-
-
-		EntryState oldValue = this.modelState;
-
-		this.modelState = state;
-
-		firePropertyChange("ModelState", oldValue, state);
-
+		return progenyType;
 
 	}
 
 
+	public void setProgenyType(ProgenyType newValue) {
+
+
+		ProgenyType oldValue = this.progenyType;
+
+		this.progenyType = newValue;
+
+		firePropertyChange("ProgenyType", oldValue, newValue);
+
+
+	}
+
+	
 	public Double getPrice() {
 
 		return price;
@@ -126,26 +156,6 @@ public class Progeny extends Model implements Entry, Search{
 		this.price = newValue;
 
 		firePropertyChange("Price", oldValue, newValue);
-
-
-	}
-
-
-	public UnitMeasure getUnitMeasure() {
-
-		return unitMeasure;
-
-	}
-
-
-	public void setUnitMeasure(UnitMeasure newValue) {
-
-
-		UnitMeasure oldValue = this.unitMeasure;
-
-		this.unitMeasure = newValue;
-
-		firePropertyChange("UnitMeasure", oldValue, newValue);
 
 
 	}
@@ -178,9 +188,22 @@ public class Progeny extends Model implements Entry, Search{
 	}
 
 
+	public void setModelState(EntryState state) {
+
+
+		EntryState oldValue = this.modelState;
+
+		this.modelState = state;
+
+		firePropertyChange("ModelState", oldValue, state);
+
+
+	}
+
+
 	public String toString(){
 
-		return getDenomination() + " (" + getUnitMeasure().getAcronym() + ")";
+		return getDenomination();
 
 	}
 
@@ -192,9 +215,7 @@ public class Progeny extends Model implements Entry, Search{
 
 				getIdentifier(),
 
-				getDenomination(),
-
-				getUnitMeasure().getAcronym()				
+				getDenomination()
 
 		};
 

@@ -1,9 +1,9 @@
 package developen.client.osm;
 
 
-import developen.client.application.mvc.ClientController;
-import developen.client.application.mvc.ClientModel;
 import developen.client.application.mvc.ClientView;
+import developen.client.osm.mvc.WorldClientController;
+import developen.client.osm.mvc.WorldClientModel;
 import developen.client.osm.mvc.WorldClientView;
 import developen.common.persistence.dpa.DPA;
 import developen.persistence.client.ClientSessionFactory;
@@ -11,9 +11,9 @@ import developen.persistence.client.ClientSessionFactory;
 public class Client {
 
 
-	private static ClientModel clientModel;
+	private static WorldClientModel clientModel;
 
-	private static ClientController clientController;
+	private static WorldClientController clientController;
 
 	private static WorldClientView clientView;
 
@@ -23,9 +23,9 @@ public class Client {
 
 		DPA.setSessionFactory(new ClientSessionFactory());
 		
-		clientModel = new ClientModel();
+		clientModel = new WorldClientModel();
 
-		clientController = new ClientController();
+		clientController = new WorldClientController();
 
 		clientView = new WorldClientView(clientController);
 
@@ -51,14 +51,14 @@ public class Client {
 	}
 	
 
-	public static ClientModel getClientModel() {
+	public static WorldClientModel getClientModel() {
 
 		return clientModel;
 
 	}
 
 	
-	public static ClientController getClientController() {
+	public static WorldClientController getClientController() {
 
 		return clientController;
 

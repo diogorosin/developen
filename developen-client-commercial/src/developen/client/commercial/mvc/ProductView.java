@@ -10,38 +10,75 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import developen.client.commercial.search.ProductDetailSearch;
+import developen.client.commercial.search.ProductFinishSearch;
+import developen.client.commercial.search.ProductGroupSearch;
+import developen.client.commercial.search.ProductLineSearch;
+import developen.client.commercial.search.ProductMarkSearch;
+import developen.client.commercial.search.ProductModelSearch;
 import developen.client.commercial.search.ProductSearch;
+import developen.client.commercial.widget.DBMeasureUnitComboBox;
+import developen.client.commercial.widget.DBMeasureUnitComboBoxType;
 import developen.client.commercial.widget.DBProductPartTable;
 import developen.client.framework.action.AddAction;
 import developen.client.framework.action.EditAction;
 import developen.client.framework.action.RemoveAction;
+import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.i18n.QuestionOnBeforeDeleteTag;
 import developen.client.framework.mvc.ListEditorAdapter;
 import developen.client.framework.mvc.ListEditorEvent;
 import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
-import developen.client.framework.widget.DBComboBox;
+import developen.client.framework.widget.DBGrouper;
+import developen.client.framework.widget.DBNumberField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
+import developen.client.framework.widget.NeverEnabledCondition;
+import developen.common.commercial.i18n.ClassificationTag;
 import developen.common.commercial.i18n.CompositionTag;
+import developen.common.commercial.i18n.ContentTag;
+import developen.common.commercial.i18n.DetailTag;
+import developen.common.commercial.i18n.DimensionTag;
+import developen.common.commercial.i18n.FinishTag;
+import developen.common.commercial.i18n.GrossWeightTag;
+import developen.common.commercial.i18n.GroupTag;
+import developen.common.commercial.i18n.HeightTag;
+import developen.common.commercial.i18n.LengthTag;
+import developen.common.commercial.i18n.LineTag;
+import developen.common.commercial.i18n.MarkTag;
+import developen.common.commercial.i18n.ModelTag;
+import developen.common.commercial.i18n.NetWeightTag;
 import developen.common.commercial.i18n.ProductTag;
-import developen.common.commercial.i18n.TypeTag;
+import developen.common.commercial.i18n.SpecificationTag;
+import developen.common.commercial.i18n.TechnicalTag;
+import developen.common.commercial.i18n.TributationTag;
+import developen.common.commercial.i18n.VolumeTag;
+import developen.common.commercial.i18n.WeightTag;
+import developen.common.commercial.i18n.WidthTag;
+import developen.common.commercial.mvc.MeasureUnit;
+import developen.common.commercial.mvc.ProductDetail;
+import developen.common.commercial.mvc.ProductFinish;
+import developen.common.commercial.mvc.ProductGroup;
+import developen.common.commercial.mvc.ProductLine;
+import developen.common.commercial.mvc.ProductMark;
+import developen.common.commercial.mvc.ProductModel;
 import developen.common.commercial.mvc.ProductPart;
 import developen.common.commercial.mvc.ProductPartPK;
-import developen.common.commercial.mvc.ProductType;
 import developen.common.commercial.mvc.Progeny;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.messenger.Question;
 import developen.common.framework.messenger.SimplifiedQuestion;
 import developen.common.framework.mvc.EntryState;
+import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
-import developen.common.persistence.dpa.DPA;
-import developen.common.persistence.session.Session;
 import developen.common.persistence.type.AllwaysDiferentList;
 
 public class ProductView extends ProgenyView {
@@ -49,9 +86,65 @@ public class ProductView extends ProgenyView {
 
 	private static final long serialVersionUID = 783041782578234966L;
 
-	private JPanel compositionTab;
+	private TabbedPane technicalTabbedPane;
 
-	private ToolBar toolBar;
+	private DBRowPanel tributationTab;
+
+	private DBRowPanel specificationTab;
+
+	private ExtendedPanel technicalTab;
+
+	private JPanel compositionTab;
+	
+	private DBTextField productGroupField;
+
+	private DBTextField productMarkField;
+
+	private DBTextField productLineField;
+
+	private DBTextField productModelField;
+
+	private DBTextField productDetailField;
+
+	private DBTextField productFinishField;
+
+	private DBNumberField widthValueField;
+
+	private DBMeasureUnitComboBox widthUnitField;
+
+	private DBGrouper widthGrouper;
+
+	private DBNumberField heightValueField;
+
+	private DBMeasureUnitComboBox heightUnitField;
+
+	private DBGrouper heightGrouper;
+
+	private DBNumberField lengthValueField;
+
+	private DBMeasureUnitComboBox lengthUnitField;
+
+	private DBGrouper lengthGrouper;
+
+	private DBNumberField contentValueField;
+
+	private DBMeasureUnitComboBox contentUnitField;
+
+	private DBGrouper contentGrouper;
+
+	private DBNumberField grossWeightValueField;
+
+	private DBMeasureUnitComboBox grossWeightUnitField;
+
+	private DBGrouper grossWeightGrouper;
+
+	private DBNumberField netWeightValueField;
+
+	private DBMeasureUnitComboBox netWeightUnitField;
+
+	private DBGrouper netWeightGrouper;
+
+	private ToolBar productPartToolBar;
 
 	private AddAction addProductPartAction;
 
@@ -61,8 +154,6 @@ public class ProductView extends ProgenyView {
 
 	private DBProductPartTable productPartTable;
 
-	private DBComboBox productTypeComboBox;
-
 
 	public ProductView(ProductController controller) {
 
@@ -71,40 +162,207 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public ExtendedPanel getCenterPanel(){
+	public ProductController getController() {
 
-
-		ExtendedPanel l = super.getCenterPanel();
-
-		l.add(getTabbedPane());
-
-		return l;
-
+		return (ProductController) super.getController();
 
 	}
 
 
-	public TabbedPane getTabbedPane(){
+	public TabbedPane getMainTabbedPane(){
 
-		
-		TabbedPane t = super.getTabbedPane();
-		
-		t.add(getCompositionTab());
-		
+
+		TabbedPane t = super.getMainTabbedPane();
+
+		t.add(getTechnicalTab());
+
+		t.add(getTributationTab());
+
 		return t;
 
 
 	}
 
 
-	public DBRowPanel getBasicTab(){
+	public ExtendedPanel getTechnicalTab(){
 
 
-		DBRowPanel t = super.getBasicTab();
-		
-		t.add(getProductTypeComboBox());
+		if (technicalTab == null){
 
-		return t;
+			technicalTab = new ExtendedPanel();
+
+			technicalTab.setName(new TechnicalTag().toString());
+
+			technicalTab.add(getTechnicalTabbedPane());
+
+		}
+
+		return technicalTab;
+
+
+	}
+
+
+	public TabbedPane getTechnicalTabbedPane(){
+
+
+		if (technicalTabbedPane == null){
+
+			technicalTabbedPane = new TabbedPane();
+
+			technicalTabbedPane.add(getSpecificationTab());
+
+			technicalTabbedPane.add(getCompositionTab());
+
+			technicalTabbedPane.setFocusable(false);
+
+		}
+
+		return technicalTabbedPane;
+
+
+	}
+
+
+	public DBRowPanel getSpecificationTab(){
+
+
+		if (specificationTab==null){
+
+			specificationTab = new DBRowPanel(150);
+
+			specificationTab.setName(new SpecificationTag().toString());
+
+			specificationTab.addSeparator(new ClassificationTag());
+
+			specificationTab.add(getProductGroupField(), getProductMarkField());
+
+			specificationTab.add(getProductLineField(), getProductModelField());
+
+			specificationTab.add(getProductDetailField(), getProductFinishField());
+
+			specificationTab.addSeparator(new DimensionTag());
+
+			specificationTab.add(getWidthGrouper());
+
+			specificationTab.add(getHeightGrouper());
+
+			specificationTab.add(getLenghtGrouper());
+
+			specificationTab.addSeparator(new VolumeTag());
+
+			specificationTab.add(getContentGrouper());
+
+			specificationTab.addSeparator(new WeightTag());
+
+			specificationTab.add(getGrossWeightGrouper(), getNetWeightGrouper());
+
+
+		}
+
+		return specificationTab;
+
+
+	}
+
+
+	public DBGrouper getWidthGrouper(){
+
+
+		if (widthGrouper==null){
+
+			widthGrouper = new DBGrouper(getWidthValueField(), getWidthUnitField());
+
+			getController().addView(widthGrouper);
+
+		}
+
+		return widthGrouper;
+
+
+	}
+
+
+	public DBGrouper getHeightGrouper(){
+
+
+		if (heightGrouper==null){
+
+			heightGrouper = new DBGrouper(getHeightValueField(), getHeightUnitField());
+
+			getController().addView(heightGrouper);
+
+		}
+
+		return heightGrouper;
+
+
+	}
+
+
+	public DBGrouper getLenghtGrouper(){
+
+
+		if (lengthGrouper==null){
+
+			lengthGrouper = new DBGrouper(getLengthValueField(), getLengthUnitField());
+
+			getController().addView(lengthGrouper);
+
+		}
+
+		return lengthGrouper;
+
+
+	}
+
+
+	public DBGrouper getContentGrouper(){
+
+
+		if (contentGrouper==null){
+
+			contentGrouper = new DBGrouper(getContentValueField(), getContentUnitField());
+
+			getController().addView(contentGrouper);
+
+		}
+
+		return contentGrouper;
+
+
+	}
+
+
+	public DBGrouper getGrossWeightGrouper(){
+
+
+		if (grossWeightGrouper==null){
+
+			grossWeightGrouper = new DBGrouper(getGrossWeightValueField(), getGrossWeightUnitField());
+
+			getController().addView(grossWeightGrouper);
+
+		}
+
+		return grossWeightGrouper;
+
+
+	}
+
+
+	public DBGrouper getNetWeightGrouper(){
+
+
+		if (netWeightGrouper==null){
+
+			netWeightGrouper = new DBGrouper(getNetWeightValueField(), getNetWeightUnitField());
+
+			getController().addView(netWeightGrouper);
+
+		}
+
+		return netWeightGrouper;
 
 
 	}
@@ -119,13 +377,36 @@ public class ProductView extends ProgenyView {
 
 			compositionTab.setName(new CompositionTag().toString());
 
-			compositionTab.add(getToolBar(), BorderLayout.NORTH);
+			compositionTab.add(getProductPartToolBar(), BorderLayout.NORTH);
 
 			compositionTab.add(getProductPartTable(), BorderLayout.CENTER);
 
 		}
 
 		return compositionTab;
+
+
+	}
+
+
+	public DBRowPanel getTributationTab(){
+
+
+		if (tributationTab==null){
+
+			tributationTab = new DBRowPanel(150);
+
+			tributationTab.add(getProgenyTypeComboBox());
+
+			tributationTab.add(getIcmsField());
+			
+			tributationTab.add(getPriceField());
+
+			tributationTab.setName(new TributationTag().toString());
+
+		}
+
+		return tributationTab;
 
 
 	}
@@ -152,7 +433,7 @@ public class ProductView extends ProgenyView {
 
 		return identifierSearch;
 
-		
+
 	}
 
 
@@ -163,9 +444,130 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public ProductController getController() {
+	public void onCheck(CheckEvent event) throws Exception {
 
-		return (ProductController) super.getController();
+
+		super.onCheck(event);
+
+		if (event.getCheckable() == getProductGroupField())
+
+			try{
+
+				getController().changeProductGroupProperty((ProductGroup) getProductGroupField().getSearch().findBy());
+
+			} catch (ManyRecordsFoundException e) {
+
+				getProductGroupField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+			}
+
+		else
+
+			if (event.getCheckable() == getProductMarkField())
+
+				try{
+
+					getController().changeProductMarkProperty((ProductMark) getProductMarkField().getSearch().findBy());
+
+				} catch (ManyRecordsFoundException e) {
+
+					getProductMarkField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+				}
+
+			else
+
+				if (event.getCheckable() == getProductLineField())
+
+					try{
+
+						getController().changeProductLineProperty((ProductLine) getProductLineField().getSearch().findBy());
+
+					} catch (ManyRecordsFoundException e) {
+
+						getProductLineField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+					}
+
+				else
+
+					if (event.getCheckable() == getProductModelField())
+
+						try{
+
+							getController().changeProductModelProperty((ProductModel) getProductModelField().getSearch().findBy());
+
+						} catch (ManyRecordsFoundException e) {
+
+							getProductModelField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+						}
+
+					else
+
+						if (event.getCheckable() == getProductDetailField())
+
+							try{
+
+								getController().changeProductDetailProperty((ProductDetail) getProductDetailField().getSearch().findBy());
+
+							} catch (ManyRecordsFoundException e) {
+
+								getProductDetailField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+							}
+
+						else
+
+							if (event.getCheckable() == getProductFinishField())
+
+								try{
+
+									getController().changeProductFinishProperty((ProductFinish) getProductFinishField().getSearch().findBy());
+
+								} catch (ManyRecordsFoundException e) {
+
+									getProductFinishField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+								}
+
+							else
+
+								if (event.getCheckable()==getWidthValueField())
+
+									getController().changeWidthValueProperty(Double.valueOf(getWidthValueField().getValue().toString()));
+
+
+								else
+
+									if (event.getCheckable()==getHeightValueField())
+
+										getController().changeHeightValueProperty(Double.valueOf(getHeightValueField().getValue().toString()));
+
+									else
+
+										if (event.getCheckable()==getLengthValueField())
+
+											getController().changeLengthValueProperty(Double.valueOf(getLengthValueField().getValue().toString()));
+
+										else
+
+											if (event.getCheckable()==getContentValueField())
+
+												getController().changeContentValueProperty(Double.valueOf(getContentValueField().getValue().toString()));
+
+											else
+
+												if (event.getCheckable()==getGrossWeightValueField())
+
+													getController().changeGrossWeightValueProperty(Double.valueOf(getGrossWeightValueField().getValue().toString()));
+
+												else
+
+													if (event.getCheckable()==getNetWeightValueField())
+
+														getController().changeNetWeightValueProperty(Double.valueOf(getNetWeightValueField().getValue().toString()));
+
 
 	}
 
@@ -316,28 +718,28 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public ToolBar getToolBar(){
+	public ToolBar getProductPartToolBar(){
 
 
-		if (toolBar == null){
+		if (productPartToolBar == null){
 
-			toolBar = new ToolBar();
+			productPartToolBar = new ToolBar();
 
-			toolBar.add(getAddProductPartAction());
+			productPartToolBar.add(getAddProductPartAction());
 
-			toolBar.add(getEditProductPartAction());
+			productPartToolBar.add(getEditProductPartAction());
 
-			toolBar.add(getRemoveProductPartAction());
+			productPartToolBar.add(getRemoveProductPartAction());
 
-			toolBar.setFloatable(false);
+			productPartToolBar.setFloatable(false);
 
-			toolBar.setBorder(BorderFactory.createEmptyBorder());
+			productPartToolBar.setBorder(BorderFactory.createEmptyBorder());
 
-			toolBar.setFocusable(false);
+			productPartToolBar.setFocusable(false);
 
 		}
 
-		return toolBar;
+		return productPartToolBar;
 
 
 	}
@@ -530,52 +932,671 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBComboBox getProductTypeComboBox() {
+	public DBTextField getDenominationField() {
 
 
-		if (productTypeComboBox==null){
+		DBTextField tf = super.getDenominationField();
 
-			try {
+		tf.setCondition(new NeverEnabledCondition());
 
-				Session session = DPA.getSessionFactory().createSession();
+		return tf;
 
-				List<Object> list = session.list(ProductType.class);
 
-				productTypeComboBox = new DBComboBox(
+	}
 
-						new TypeTag()
 
-						, list.toArray()
+	public DBTextField getShortDenominationField() {
 
-						, ProductController.PRODUCTTYPE_PROPERTY);
 
-				session.close();
+		DBTextField tf = super.getShortDenominationField();
 
-			} catch (Exception e) {
+		tf.setCondition(new NeverEnabledCondition());
 
-				Messenger.show(e);
+		return tf;
 
-			}
 
-			productTypeComboBox.setPreferredSize(new Dimension(220,24));
+	}
 
-			productTypeComboBox.setCondition(new EditingOrIncludingCondition());
 
-			productTypeComboBox.addActionListener(new ActionListener() {
+	public DBTextField getProductGroupField() {
 
-				public void actionPerformed(ActionEvent e) {
 
-					getController().changeProductTypeProperty((ProductType)((DBComboBox)e.getSource()).getSelectedItem());
+		if (productGroupField==null){
+
+			ProductGroupSearch search = new ProductGroupSearch();
+
+			search.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeProductGroupProperty((ProductGroup) event.getSelectedRows().get(0));
 
 				}
 
 			});
 
-			getController().addView(productTypeComboBox);
+			productGroupField = new DBTextField(new GroupTag(), ProductController.PRODUCT_GROUP_PROPERTY);
+
+			productGroupField.setCondition(new EditingOrIncludingCondition());
+
+			productGroupField.addCheckListener(this);
+
+			productGroupField.setPreferredSize(new Dimension(200, 24));
+
+			productGroupField.setSearch(search);
+
+			getController().addView(productGroupField);
 
 		}
 
-		return productTypeComboBox;
+		return productGroupField;
+
+
+	}
+
+
+	public DBTextField getProductMarkField() {
+
+
+		if (productMarkField==null){
+
+			ProductMarkSearch search = new ProductMarkSearch();
+
+			search.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeProductMarkProperty((ProductMark) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			productMarkField = new DBTextField(new MarkTag(), ProductController.PRODUCT_MARK_PROPERTY);
+
+			productMarkField.setCondition(new EditingOrIncludingCondition());
+
+			productMarkField.addCheckListener(this);
+
+			productMarkField.setPreferredSize(new Dimension(200, 24));
+
+			productMarkField.setSearch(search);
+
+			getController().addView(productMarkField);
+
+		}
+
+		return productMarkField;
+
+
+	}
+
+
+	public DBTextField getProductLineField() {
+
+
+		if (productLineField==null){
+
+			ProductLineSearch search = new ProductLineSearch();
+
+			search.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeProductLineProperty((ProductLine) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			productLineField = new DBTextField(new LineTag(), ProductController.PRODUCT_LINE_PROPERTY);
+
+			productLineField.setCondition(new EditingOrIncludingCondition());
+
+			productLineField.addCheckListener(this);
+
+			productLineField.setPreferredSize(new Dimension(200, 24));
+
+			productLineField.setSearch(search);
+
+			getController().addView(productLineField);
+
+		}
+
+		return productLineField;
+
+
+	}
+
+
+	public DBTextField getProductModelField() {
+
+
+		if (productModelField==null){
+
+			ProductModelSearch search = new ProductModelSearch();
+
+			search.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeProductModelProperty((ProductModel) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			productModelField = new DBTextField(new ModelTag(), ProductController.PRODUCT_MODEL_PROPERTY);
+
+			productModelField.setCondition(new EditingOrIncludingCondition());
+
+			productModelField.addCheckListener(this);
+
+			productModelField.setPreferredSize(new Dimension(200, 24));
+
+			productModelField.setSearch(search);
+
+			getController().addView(productModelField);
+
+		}
+
+		return productModelField;
+
+
+	}
+
+
+	public DBTextField getProductDetailField() {
+
+
+		if (productDetailField==null){
+
+			ProductDetailSearch search = new ProductDetailSearch();
+
+			search.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeProductDetailProperty((ProductDetail) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			productDetailField = new DBTextField(new DetailTag(), ProductController.PRODUCT_DETAIL_PROPERTY);
+
+			productDetailField.setCondition(new EditingOrIncludingCondition());
+
+			productDetailField.addCheckListener(this);
+
+			productDetailField.setPreferredSize(new Dimension(200, 24));
+
+			productDetailField.setSearch(search);
+
+			getController().addView(productDetailField);
+
+		}
+
+		return productDetailField;
+
+
+	}
+
+
+	public DBTextField getProductFinishField() {
+
+
+		if (productFinishField==null){
+
+			ProductFinishSearch search = new ProductFinishSearch();
+
+			search.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeProductFinishProperty((ProductFinish) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			productFinishField = new DBTextField(new FinishTag(), ProductController.PRODUCT_FINISH_PROPERTY);
+
+			productFinishField.setCondition(new EditingOrIncludingCondition());
+
+			productFinishField.addCheckListener(this);
+
+			productFinishField.setPreferredSize(new Dimension(200, 24));
+
+			productFinishField.setSearch(search);
+
+			getController().addView(productFinishField);
+
+		}
+
+		return productFinishField;
+
+
+	}
+
+
+	public DBNumberField getWidthValueField() {
+
+
+		if (widthValueField==null){
+
+			widthValueField = new DBNumberField(new WidthTag(), 
+
+					FormatFactory.createNumberFormat(10, 4),
+
+					ProductController.WIDTH_VALUE_PROPERTY);
+
+			widthValueField.setValue(new Double(0));
+
+			widthValueField.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			widthValueField.setPreferredSize(new Dimension(125,24));
+
+			widthValueField.addCheckListener(this);
+
+			widthValueField.setCondition(new EditingOrIncludingCondition());
+
+			getController().addView(widthValueField);
+
+		}
+
+		return widthValueField;
+
+
+	}
+
+
+	public DBMeasureUnitComboBox getWidthUnitField() {
+
+
+		if (widthUnitField==null){
+
+			widthUnitField = new DBMeasureUnitComboBox(ProductController.WIDTH_UNIT_PROPERTY, 
+
+					new DBMeasureUnitComboBoxType[] {DBMeasureUnitComboBoxType.SIZE});
+
+			widthUnitField.setCondition(new EditingOrIncludingCondition());
+
+			widthUnitField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+
+						getController().changeWidthUnitProperty((MeasureUnit)((DBMeasureUnitComboBox)e.getSource()).getSelectedItem());
+
+					} catch (Exception e1) {
+
+						Messenger.show(e1);
+
+					}
+
+				}
+
+			});
+
+			getController().addView(widthUnitField);
+
+		}
+
+		return widthUnitField;
+
+
+	}
+
+
+	public DBNumberField getHeightValueField() {
+
+
+		if (heightValueField==null){
+
+			heightValueField = new DBNumberField(new HeightTag(), 
+
+					FormatFactory.createNumberFormat(10, 4),
+
+					ProductController.HEIGHT_VALUE_PROPERTY);
+
+			heightValueField.setValue(new Double(0));
+
+			heightValueField.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			heightValueField.setPreferredSize(new Dimension(125,24));
+
+			heightValueField.addCheckListener(this);
+
+			heightValueField.setCondition(new EditingOrIncludingCondition());
+
+			getController().addView(heightValueField);
+
+		}
+
+		return heightValueField;
+
+
+	}
+
+
+	public DBMeasureUnitComboBox getHeightUnitField() {
+
+
+		if (heightUnitField==null){
+
+			heightUnitField = new DBMeasureUnitComboBox(ProductController.HEIGHT_UNIT_PROPERTY, 
+
+					new DBMeasureUnitComboBoxType[] {DBMeasureUnitComboBoxType.SIZE});
+
+			heightUnitField.setCondition(new EditingOrIncludingCondition());
+
+			heightUnitField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+
+						getController().changeHeightUnitProperty((MeasureUnit)((DBMeasureUnitComboBox)e.getSource()).getSelectedItem());
+
+					} catch (Exception e1) {
+
+						Messenger.show(e1);
+
+					}
+
+				}
+
+			});
+
+			getController().addView(heightUnitField);
+
+		}
+
+		return heightUnitField;
+
+
+	}
+
+
+	public DBNumberField getLengthValueField() {
+
+
+		if (lengthValueField==null){
+
+			lengthValueField = new DBNumberField(new LengthTag(), 
+
+					FormatFactory.createNumberFormat(10, 4),
+
+					ProductController.LENGTH_VALUE_PROPERTY);
+
+			lengthValueField.setValue(new Double(0));
+
+			lengthValueField.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			lengthValueField.setPreferredSize(new Dimension(125,24));
+
+			lengthValueField.addCheckListener(this);
+
+			lengthValueField.setCondition(new EditingOrIncludingCondition());
+
+			getController().addView(lengthValueField);
+
+		}
+
+		return lengthValueField;
+
+
+	}
+
+
+	public DBMeasureUnitComboBox getLengthUnitField() {
+
+
+		if (lengthUnitField==null){
+
+			lengthUnitField = new DBMeasureUnitComboBox(ProductController.LENGTH_UNIT_PROPERTY, 
+
+					new DBMeasureUnitComboBoxType[] {DBMeasureUnitComboBoxType.SIZE});
+
+			lengthUnitField.setCondition(new EditingOrIncludingCondition());
+
+			lengthUnitField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+
+						getController().changeLengthUnitProperty((MeasureUnit)((DBMeasureUnitComboBox)e.getSource()).getSelectedItem());
+
+					} catch (Exception e1) {
+
+						Messenger.show(e1);
+
+					}
+
+				}
+
+			});
+
+			getController().addView(lengthUnitField);
+
+		}
+
+		return lengthUnitField;
+
+
+	}
+
+
+	public DBNumberField getContentValueField() {
+
+
+		if (contentValueField==null){
+
+			contentValueField = new DBNumberField(new ContentTag(), 
+
+					FormatFactory.createNumberFormat(10, 4),
+
+					ProductController.CONTENT_VALUE_PROPERTY);
+
+			contentValueField.setValue(new Double(0));
+
+			contentValueField.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			contentValueField.setPreferredSize(new Dimension(125,24));
+
+			contentValueField.addCheckListener(this);
+
+			contentValueField.setCondition(new EditingOrIncludingCondition());
+
+			getController().addView(contentValueField);
+
+		}
+
+		return contentValueField;
+
+
+	}
+
+
+	public DBMeasureUnitComboBox getContentUnitField() {
+
+
+		if (contentUnitField==null){
+
+			contentUnitField = new DBMeasureUnitComboBox(ProductController.CONTENT_UNIT_PROPERTY, 
+
+					new DBMeasureUnitComboBoxType[] {DBMeasureUnitComboBoxType.VOLUME, 
+
+					DBMeasureUnitComboBoxType.UNIT});
+
+			contentUnitField.setCondition(new EditingOrIncludingCondition());
+
+			contentUnitField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+
+						getController().changeContentUnitProperty((MeasureUnit)((DBMeasureUnitComboBox)e.getSource()).getSelectedItem());
+
+					} catch (Exception e1) {
+
+						Messenger.show(e1);
+
+					}
+
+				}
+
+			});
+
+			getController().addView(contentUnitField);
+
+		}
+
+		return contentUnitField;
+
+
+	}
+
+
+	public DBNumberField getGrossWeightValueField() {
+
+
+		if (grossWeightValueField==null){
+
+			grossWeightValueField = new DBNumberField(new GrossWeightTag(), 
+
+					FormatFactory.createNumberFormat(10, 4),
+
+					ProductController.GROSS_WEIGHT_VALUE_PROPERTY);
+
+			grossWeightValueField.setValue(new Double(0));
+
+			grossWeightValueField.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			grossWeightValueField.setPreferredSize(new Dimension(125,24));
+
+			grossWeightValueField.addCheckListener(this);
+
+			grossWeightValueField.setCondition(new EditingOrIncludingCondition());
+
+			getController().addView(grossWeightValueField);
+
+		}
+
+		return grossWeightValueField;
+
+
+	}
+
+
+	public DBMeasureUnitComboBox getGrossWeightUnitField() {
+
+
+		if (grossWeightUnitField==null){
+
+			grossWeightUnitField = new DBMeasureUnitComboBox(ProductController.GROSS_WEIGHT_UNIT_PROPERTY, 
+
+					new DBMeasureUnitComboBoxType[] {DBMeasureUnitComboBoxType.MASS});
+
+			grossWeightUnitField.setCondition(new EditingOrIncludingCondition());
+
+			grossWeightUnitField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+
+						getController().changeGrossWeightUnitProperty((MeasureUnit)((DBMeasureUnitComboBox)e.getSource()).getSelectedItem());
+
+					} catch (Exception e1) {
+
+						Messenger.show(e1);
+
+					}
+
+				}
+
+			});
+
+			getController().addView(grossWeightUnitField);
+
+		}
+
+		return grossWeightUnitField;
+
+
+	}
+
+
+	public DBNumberField getNetWeightValueField() {
+
+
+		if (netWeightValueField==null){
+
+			netWeightValueField = new DBNumberField(new NetWeightTag(), 
+
+					FormatFactory.createNumberFormat(10, 4),
+
+					ProductController.NET_WEIGHT_VALUE_PROPERTY);
+
+			netWeightValueField.setValue(new Double(0));
+
+			netWeightValueField.setHorizontalAlignment(SwingConstants.RIGHT);
+
+			netWeightValueField.setPreferredSize(new Dimension(125,24));
+
+			netWeightValueField.addCheckListener(this);
+
+			netWeightValueField.setCondition(new EditingOrIncludingCondition());
+
+			getController().addView(netWeightValueField);
+
+		}
+
+		return netWeightValueField;
+
+
+	}
+
+
+	public DBMeasureUnitComboBox getNetWeightUnitField() {
+
+
+		if (netWeightUnitField==null){
+
+			netWeightUnitField = new DBMeasureUnitComboBox(ProductController.NET_WEIGHT_UNIT_PROPERTY, 
+
+					new DBMeasureUnitComboBoxType[] {DBMeasureUnitComboBoxType.MASS});
+
+			netWeightUnitField.setCondition(new EditingOrIncludingCondition());
+
+			netWeightUnitField.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+
+						getController().changeNetWeightUnitProperty((MeasureUnit)((DBMeasureUnitComboBox)e.getSource()).getSelectedItem());
+
+					} catch (Exception e1) {
+
+						Messenger.show(e1);
+
+					}
+
+				}
+
+			});
+
+			getController().addView(netWeightUnitField);
+
+		}
+
+		return netWeightUnitField;
 
 
 	}

@@ -2,6 +2,8 @@ package developen.client.commercial.mvc;
 
 import developen.client.framework.mvc.SearchController;
 import developen.common.commercial.i18n.InputCfopTag;
+import developen.common.commercial.mvc.InputCfop;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.Tag;
 
 public class InputCfopSearchView extends CfopSearchView {
@@ -21,6 +23,13 @@ public class InputCfopSearchView extends CfopSearchView {
 
 		return new InputCfopTag(); 
 
+	}
+	
+
+	public Class<? extends Model> getMimeType() {
+
+		return InputCfop.class;
+		
 	}
 
 	

@@ -2,22 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
+import developen.client.application.action.EntryAction;
+import developen.client.osm.Client;
 import developen.common.commercial.i18n.ServiceTag;
-import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
 
-public class ServiceEntryAction extends ApplicationAction {
+public class ServiceEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public ServiceEntryAction(JDesktopPane desktop) {
+	public ServiceEntryAction() {
 
-		super(new ServiceTag(), desktop);
+		super(new ServiceTag());
 
 	}
 
@@ -27,11 +25,11 @@ public class ServiceEntryAction extends ApplicationAction {
 		
 		try {
 			
-			throw new NotYetImplementedException();
+			Client.getClientView().executeServiceEntry();
 			
-		} catch (NotYetImplementedException e) {
-
-			Messenger.show(e);
+		} catch (Exception exception) {
+			
+			Messenger.show(exception);
 			
 		}
 		

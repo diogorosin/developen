@@ -4,24 +4,38 @@ import java.beans.PropertyChangeEvent;
 
 import developen.client.application.mvc.ClientState;
 import developen.client.framework.widget.Condition;
-import developen.client.framework.widget.DBComponent;
+import developen.common.framework.mvc.View;
 
 public class LoggedInCondition extends Condition {
 
 	
-	boolean latestState = true;
+	private boolean loggedIn = true;
 
 	
-	public boolean analyse(PropertyChangeEvent event, DBComponent component) {
+	public boolean analyse(PropertyChangeEvent event, View component) {
 
 		
 		if (event.getPropertyName().equals("ModelState"))
 
-			latestState = !event.getNewValue().equals(ClientState.LOGOUT);
+			setLoggedIn(!event.getNewValue().equals(ClientState.LOGGED_OUT));
 
-		return latestState;
+		return isLoggedIn();
 		
 
+	}
+
+
+	public boolean isLoggedIn() {
+		
+		return loggedIn;
+		
+	}
+
+
+	public void setLoggedIn(boolean loggedIn) {
+		
+		this.loggedIn = loggedIn;
+		
 	}
 	
 

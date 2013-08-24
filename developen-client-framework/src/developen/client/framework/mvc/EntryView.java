@@ -28,7 +28,7 @@ import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
 
 
-public abstract class EntryView extends InternalFrame implements CheckListener, SystemPersonListener {
+public abstract class EntryView extends InternalFrame implements CheckListener {
 
 
 	private static final long serialVersionUID = -4370820176822925904L;
@@ -505,20 +505,6 @@ public abstract class EntryView extends InternalFrame implements CheckListener, 
 
 
 	public abstract JComponent getComponentAtTop(); 
-
-
-	public void onLogout(SystemPersonEvent event) throws Exception{
-		
-		getController().cancel();
-
-	}
-	
-	
-	public void onLogin(SystemPersonEvent event){
-		
-		
-
-	}
 
 	
 }

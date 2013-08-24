@@ -1,14 +1,11 @@
 package developen.client.application.mvc;
 
-import java.util.ArrayList;
 
-import developen.client.framework.mvc.SystemPersonEvent;
-import developen.client.framework.mvc.SystemPersonListener;
+import javax.swing.JInternalFrame;
+
 import developen.common.commercial.mvc.SystemCompany;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.commercial.mvc.SystemPersonSystemCompany;
-import developen.common.framework.exception.NotYetImplementedException;
-import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
 
 public class ClientController extends Controller {
@@ -19,35 +16,8 @@ public class ClientController extends Controller {
 	public static final String SYSTEM_PERSON_PROPERTY = "SystemPerson";
 	
 	public static final String SYSTEM_COMPANY_PROPERTY = "SystemCompany";
-
-	private ArrayList<SystemPersonListener> registeredSystemPersonListeners;
-
-
-	private ArrayList<SystemPersonListener> getRegisteredSystemPersonListeners(){
-
-
-		if (registeredSystemPersonListeners == null)
-
-			registeredSystemPersonListeners = new ArrayList<SystemPersonListener>();
-
-		return registeredSystemPersonListeners;
-
-
-	}
-
-
-	public void addSystemPersonListener(SystemPersonListener listener) {
-
-		getRegisteredSystemPersonListeners().add(listener);
-
-	}
-
-
-	public void removeSystemPersonListener(SystemPersonListener listener) {
-
-		getRegisteredSystemPersonListeners().remove(listener);
-
-	}
+	
+	public static final String ACTIVE_FRAME_PROPERTY = "ActiveFrame";
 
 
 	public void changeSystemPersonProperty(SystemPerson newValue) {
@@ -64,6 +34,13 @@ public class ClientController extends Controller {
 	}
 	
 
+	public void changeActiveFrameProperty(JInternalFrame newValue) {
+
+		setModelProperty(ClientController.ACTIVE_FRAME_PROPERTY, newValue);
+
+	}
+
+	
 	public ClientModel getModel() {
 
 		return (ClientModel) model;
@@ -110,19 +87,6 @@ public class ClientController extends Controller {
 	}
 	
 
-	public void help() throws Exception{
-
-		
-		onBeforeHelp();
-		
-		onHelp();
-		
-		onAfterHelp();
-		
-
-	}
-
-
 	private void onBeforeExit() throws Exception{}
 
 	
@@ -136,18 +100,7 @@ public class ClientController extends Controller {
 	}
 
 
-	private void onBeforeLogout() throws Exception{
-		
-		
-		SystemPersonEvent event = new SystemPersonEvent(getModel().getSystemPerson());
-
-		for (SystemPersonListener l : getRegisteredSystemPersonListeners())
-
-			l.onLogout(event);
-
-
-	}
-
+	private void onBeforeLogout() throws Exception{}
 	
 	private void onLogout() throws Exception{
 
@@ -158,7 +111,7 @@ public class ClientController extends Controller {
 	
 	private void onAfterLogout() throws Exception{
 
-		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.LOGOUT);
+		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.LOGGED_OUT);
 
 	}
 
@@ -185,36 +138,9 @@ public class ClientController extends Controller {
 	
 	private void onAfterLogin(SystemPerson systemPerson) throws Exception{
 
-		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.LOGIN);
+		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.LOGGED_IN);
 
 	}
-
-
-	private void onBeforeHelp() throws Exception{
-
-		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.HELPING);
-
-	}
-
-
-	private void onHelp() throws Exception{
-
-		
-		try {
-			
-			throw new NotYetImplementedException();
-			
-		} catch (NotYetImplementedException e) {
-
-			Messenger.show(e);
-			
-		}
-
-		
-	}
-
-	
-	private void onAfterHelp() throws Exception{}
 
 	
 }

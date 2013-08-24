@@ -86,7 +86,7 @@ public class LoginView extends InternalFrame implements CheckListener {
 
 			LoginState newValue = (LoginState) evt.getNewValue();
 
-			if (newValue.equals(LoginState.LOGGEDIN)){
+			if (newValue.equals(LoginState.LOGGED_IN)){
 
 				setVisible(false);
 				
@@ -96,7 +96,7 @@ public class LoginView extends InternalFrame implements CheckListener {
 
 			} else 
 
-				if (newValue.equals(LoginState.EDITING))
+				if (newValue.equals(LoginState.CLEAN))
 
 					if (getComponentAtTop() != null){
 

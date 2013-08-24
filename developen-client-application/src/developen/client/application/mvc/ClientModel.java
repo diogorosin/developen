@@ -1,5 +1,7 @@
 package developen.client.application.mvc;
 
+import javax.swing.JInternalFrame;
+
 import developen.common.commercial.mvc.SystemCompany;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.mvc.Model;
@@ -9,6 +11,8 @@ public class ClientModel extends Model implements Client {
 
 	private static final long serialVersionUID = 1831593178580066468L;
 	
+	private JInternalFrame activeFrame;
+	
 	private SystemPerson systemPerson;
 	
 	private SystemCompany systemCompany;
@@ -16,6 +20,26 @@ public class ClientModel extends Model implements Client {
 	private ClientState modelState;
 	
 
+	public JInternalFrame getActiveFrame() {
+
+		return activeFrame;
+
+	}
+
+	
+	public void setActiveFrame(JInternalFrame newValue) {
+
+		
+		JInternalFrame oldValue = this.activeFrame;
+		
+		this.activeFrame = newValue;
+		
+		firePropertyChange("ActiveFrame", oldValue, newValue);
+		
+
+	}
+
+	
 	public SystemPerson getSystemPerson() {
 
 		return systemPerson;

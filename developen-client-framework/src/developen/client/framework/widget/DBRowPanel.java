@@ -73,6 +73,7 @@ public class DBRowPanel extends RowPanel {
 	
 	public void add(JComponent field1, JComponent field2){
 
+		
 		//FIELD 1		
 		GridBagConstraints cons1 = new GridBagConstraints();
 		
@@ -147,7 +148,7 @@ public class DBRowPanel extends RowPanel {
 
 		add(field2, cons2);
 
-		
+
 	}
 
 	

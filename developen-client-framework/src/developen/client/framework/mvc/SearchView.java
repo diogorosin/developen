@@ -1,11 +1,10 @@
 package developen.client.framework.mvc;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
@@ -22,12 +20,15 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 import developen.client.framework.action.CancelAction;
+import developen.client.framework.action.RefreshAction;
 import developen.client.framework.action.SelectAction;
-import developen.client.framework.i18n.RefreshTag;
+import developen.client.framework.i18n.OpenEntryTag;
 import developen.client.framework.i18n.SearchTag;
 import developen.common.framework.messenger.Messenger;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.mvc.SearchState;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.widget.Action;
 import developen.common.framework.widget.Button;
 import developen.common.framework.widget.ButtonPanel;
 import developen.common.framework.widget.ButtonPanelAligment;
@@ -37,7 +38,7 @@ import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
 import developen.common.framework.widget.SearchField;
 
-public abstract class SearchView extends InternalFrame implements CheckListener, SystemPersonListener {
+public abstract class SearchView extends InternalFrame implements CheckListener {
 
 
 	private static final long serialVersionUID = -8901109365984063505L;
@@ -52,12 +53,16 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 	
 	private SearchField searchField;
 
-	private JLabel refreshLabel;
+	private Button refreshButton;
 	
+	private Button entryButton;
+
 	private Button selectButton;
 	
 	private Button cancelButton;
-
+	
+	private RefreshAction refreshAction;
+	
 	private SelectAction selectAction;
 	
 	private CancelAction cancelAction;
@@ -329,12 +334,15 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 
 	}
 
+	
 	protected ButtonPanel getButtonLayout() {
 
 		
 		if (buttonLayout == null){
 			
 			buttonLayout = new ButtonPanel();
+			
+			buttonLayout.add(getRefreshButton(), ButtonPanelAligment.LEFT);
 			
 			buttonLayout.add(getSelectButton(), ButtonPanelAligment.RIGHT);
 			
@@ -347,6 +355,7 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 
 	}
 
+	
 	protected JScrollPane getScrollPane() {
 		
 
@@ -365,6 +374,25 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 
 	}
 
+	
+	protected Button getRefreshButton() {
+
+		
+		if (refreshButton == null){
+			
+			refreshButton = new Button(getRefreshAction());
+		
+			refreshButton.setPreferredSize(new Dimension(26,26));
+			
+			refreshButton.setFocusable(false);
+			
+		}
+			
+		return refreshButton;
+
+		
+	}
+	
 	
 	protected Button getSelectButton() {
 
@@ -392,17 +420,17 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 	}
 	
 
-	protected JLabel getRefreshButton() {
+	public RefreshAction getRefreshAction() {
 
 		
-		if (refreshLabel == null){
+		if (refreshAction == null){
 			
-			refreshLabel = new JLabel(new RefreshTag().getSmallIcon());
-			
-			refreshLabel.addMouseListener(new MouseAdapter() {
+			refreshAction = new RefreshAction() {
 				
-				public void mouseClicked(MouseEvent e) {
-
+				private static final long serialVersionUID = 77810448785584808L;
+				
+				public void actionPerformed(ActionEvent e) {
+					
 					try {
 						
 						getScrollPane().getVerticalScrollBar().setValue(0);
@@ -414,53 +442,21 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 						Messenger.show(exception);
 						
 					}
-
+					
 				}
 				
-			});
-
+			};
+			
+			getController().addView(refreshAction);
+			
 		}
 		
-		return refreshLabel;
-
+		return refreshAction;
 		
+
 	}
 
 	
-	public CancelAction getCancelAction(){
-
-		
-		if (cancelAction == null){
-			
-			cancelAction = new CancelAction() {
-				
-				private static final long serialVersionUID = 6263648975218065018L;
-
-				public void actionPerformed(ActionEvent e) {
-					
-					try {
-						
-						getController().cancel();
-						
-					} catch (Exception exception) {
-						
-						Messenger.show(exception);
-						
-					}
-					
-				}
-				
-			};	
-			
-			getController().addView(cancelAction);
-			
-		}
-		
-		return cancelAction;
-
-		
-	}
-
 	public SelectAction getSelectAction() {
 
 		
@@ -505,18 +501,67 @@ public abstract class SearchView extends InternalFrame implements CheckListener,
 	}
 
 	
-	public void onLogout(SystemPersonEvent event) throws Exception{
-		
-		getController().cancel();
+	public CancelAction getCancelAction(){
 
+		
+		if (cancelAction == null){
+			
+			cancelAction = new CancelAction() {
+				
+				private static final long serialVersionUID = 6263648975218065018L;
+
+				public void actionPerformed(ActionEvent e) {
+					
+					try {
+						
+						getController().cancel();
+						
+					} catch (Exception exception) {
+						
+						Messenger.show(exception);
+						
+					}
+					
+				}
+				
+			};	
+			
+			getController().addView(cancelAction);
+			
+		}
+		
+		return cancelAction;
+
+		
+	}
+
+	
+	public void createEntryButton(Action action){
+		
+		
+		if (entryButton==null){
+			
+			entryButton = new Button(action);
+			
+			entryButton.setCaption(new OpenEntryTag());
+			
+			entryButton.setFocusable(false);
+			
+			entryButton.setPreferredSize(new Dimension(26,26));
+
+			getButtonLayout().add(entryButton, ButtonPanelAligment.LEFT);
+
+		}
+		
+		
+	}
+
+
+	public Class<? extends Model> getMimeType(){
+		
+		return null;
+		
 	}
 	
-	
-	public void onLogin(SystemPersonEvent event){
-		
-		
-
-	}
-
 	
 }

@@ -129,7 +129,64 @@ public class DBTree extends Tree implements DBComponent {
 
 													if (!level6.isLeaf()){
 
+														for (int f = 0; f < level6.getChildCount(); f++) {
 
+															DefaultMutableTreeNode level7 = (DefaultMutableTreeNode) level6.getChildAt(f);
+
+															if (!level7.isLeaf()){
+
+																for (int g = 0; g < level7.getChildCount(); g++) {
+
+																	DefaultMutableTreeNode level8 = (DefaultMutableTreeNode) level7.getChildAt(g);
+
+																	if (!level8.isLeaf()){
+
+																		for (int h = 0; h < level8.getChildCount(); h++) {
+
+																			DefaultMutableTreeNode level9 = (DefaultMutableTreeNode) level8.getChildAt(h);
+
+																			if (!level9.isLeaf()){
+
+																				for (int i = 0; i < level9.getChildCount(); i++) {
+
+																					DefaultMutableTreeNode level10 = (DefaultMutableTreeNode) level9.getChildAt(i);
+
+																					if (!level10.isLeaf()){
+
+
+																					
+																					} else {
+
+																						nodes.add(level10);		
+
+																					}
+
+																				}
+																			
+																			} else {
+
+																				nodes.add(level9);		
+
+																			}
+
+																		}
+
+																	} else {
+
+																		nodes.add(level8);
+
+																	}
+
+																}
+
+															} else {
+
+																nodes.add(level7);		
+
+															}
+
+														}
+														
 													} else {
 
 														nodes.add(level6);		

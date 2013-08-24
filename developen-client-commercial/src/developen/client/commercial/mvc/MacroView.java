@@ -6,25 +6,32 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
 
+import developen.client.commercial.search.FiscalDocumentTypeSearch;
+import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.mvc.EntryView;
 import developen.client.framework.search.Search;
+import developen.client.framework.search.SearchAdapter;
+import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.ActiveTag;
+import developen.common.commercial.i18n.BasicTag;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.FinanceTag;
+import developen.common.commercial.i18n.FiscalDocumentTag;
 import developen.common.commercial.i18n.IcmsIcmsSTTag;
 import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.IntegrationsTag;
 import developen.common.commercial.i18n.IpiTag;
 import developen.common.commercial.i18n.IssqnTag;
 import developen.common.commercial.i18n.MacroTag;
+import developen.common.commercial.i18n.ModelTag;
 import developen.common.commercial.i18n.PisCofinsTag;
 import developen.common.commercial.i18n.StockTag;
-import developen.common.commercial.i18n.TributesIntegrationsTag;
 import developen.common.commercial.i18n.TributesTag;
+import developen.common.commercial.mvc.FiscalDocumentType;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
@@ -39,32 +46,34 @@ public abstract class MacroView extends EntryView {
 
 	public static int HEIGHT = 650;
 
+	protected DBRowPanel headerPanel;
+
+	protected Search identifierSearch;
+
 	private DBIdentifierField identifierField;
 
 	private DBTextField denominationField;
 
 	private DBCheckBox activeField;
-	
-	private DBCheckBox icmsField;
-	
-	private DBCheckBox ipiField;
-	
-	private DBCheckBox pisCofinsField;
-	
-	private DBCheckBox issField;
-	
-	private DBCheckBox stockField;
-	
-	private DBCheckBox financeField;
-	
-	protected DBRowPanel headerPanel;
 
-	protected Search identifierSearch;
-	
+	private DBCheckBox icmsField;
+
+	private DBCheckBox ipiField;
+
+	private DBCheckBox pisCofinsField;
+
+	private DBCheckBox issField;
+
+	private DBCheckBox stockField;
+
+	private DBCheckBox financeField;
+
 	private TabbedPane tabbedPane;
 
-	private DBRowPanel tributesIntegrationsTab;
-	
+	private DBRowPanel basicTab;
+
+	private DBTextField fiscalDocumentTypeField;
+
 
 	public MacroView(MacroController controller) {
 
@@ -92,12 +101,12 @@ public abstract class MacroView extends EntryView {
 
 	}
 
-	
+
 	public DBRowPanel getHeaderPanel(){
-		
-		
+
+
 		if (headerPanel == null){
-			
+
 			headerPanel = new DBRowPanel();
 
 			headerPanel.add(getIdentifierField());
@@ -105,80 +114,84 @@ public abstract class MacroView extends EntryView {
 			headerPanel.add(getDenominationField());
 
 			headerPanel.add(getActiveField());
-			
+
 		}
-	
+
 		return headerPanel;
-		
-		
+
+
 	}
-	
-	
+
+
 	public ExtendedPanel getCenterPanel(){
 
-		
+
 		ExtendedPanel l = super.getCenterPanel();
 
 		l.add(getTabbedPane());
 
 		return l;
-		
+
 
 	}
 
-	
+
 	public TabbedPane getTabbedPane(){
 
-		
+
 		if (tabbedPane == null){
 
 			tabbedPane = new TabbedPane();
-			
-			tabbedPane.add(getTributesIntegrationsTab());
-			
+
+			tabbedPane.add(getBasicTab());
+
 			tabbedPane.setFocusable(false);
 
 		}
-		
+
 		return tabbedPane;
-		
+
 
 	}
-	
-	
-	public DBRowPanel getTributesIntegrationsTab(){
 
 
-		if (tributesIntegrationsTab==null){
+	public DBRowPanel getBasicTab(){
 
-			tributesIntegrationsTab = new DBRowPanel(0);
 
-			tributesIntegrationsTab.addSeparator(new TributesTag());
-			
-			tributesIntegrationsTab.add(getIcmsField());
-			
-			tributesIntegrationsTab.add(getIpiField());
-			
-			tributesIntegrationsTab.add(getPisCofinsField());
-			
-			tributesIntegrationsTab.add(getIssField());
+		if (basicTab==null){
 
-			tributesIntegrationsTab.addSeparator(new IntegrationsTag());
-			
-			tributesIntegrationsTab.add(getStockField());
-			
-			tributesIntegrationsTab.add(getFinanceField());
-			
-			tributesIntegrationsTab.setName(new TributesIntegrationsTag().toString());
-			
+			basicTab = new DBRowPanel();
+
+			basicTab.addSeparator(new FiscalDocumentTag());
+
+			basicTab.add(getFiscalDocumentTypeField());
+
+			basicTab.addSeparator(new TributesTag());
+
+			basicTab.add(getIcmsField());
+
+			basicTab.add(getIpiField());
+
+			basicTab.add(getPisCofinsField());
+
+			basicTab.add(getIssField());
+
+			basicTab.addSeparator(new IntegrationsTag());
+
+			basicTab.add(getStockField());
+
+			basicTab.add(getFinanceField());
+
+			basicTab.setName(new BasicTag().toString());
+
 		}
 
-		return tributesIntegrationsTab;
+		return basicTab;
 
 
 	}
 
-	
+
 	public void onCheck(CheckEvent event) throws Exception {
 
 
@@ -197,6 +210,20 @@ public abstract class MacroView extends EntryView {
 			if (event.getCheckable() == getDenominationField())
 
 				getController().changeDenominationProperty(getDenominationField().getText());
+
+			else
+
+				if (event.getCheckable() == getFiscalDocumentTypeField())
+
+					try{
+
+						getController().changeFiscalDocumentTypeProperty((FiscalDocumentType) getFiscalDocumentTypeField().getSearch().findBy());
+
+					} catch (ManyRecordsFoundException e) {
+
+						getFiscalDocumentTypeField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+					}
 
 
 	}
@@ -283,7 +310,7 @@ public abstract class MacroView extends EntryView {
 
 	}
 
-	
+
 	public DBCheckBox getIcmsField() {
 
 
@@ -312,7 +339,7 @@ public abstract class MacroView extends EntryView {
 
 	}
 
-	
+
 	public DBCheckBox getIpiField() {
 
 
@@ -340,8 +367,8 @@ public abstract class MacroView extends EntryView {
 
 
 	}
-	
-	
+
+
 	public DBCheckBox getPisCofinsField() {
 
 
@@ -369,8 +396,8 @@ public abstract class MacroView extends EntryView {
 
 
 	}
-	
-	
+
+
 	public DBCheckBox getIssField() {
 
 
@@ -398,8 +425,8 @@ public abstract class MacroView extends EntryView {
 
 
 	}
-	
-	
+
+
 	public DBCheckBox getStockField() {
 
 
@@ -427,8 +454,8 @@ public abstract class MacroView extends EntryView {
 
 
 	}
-	
-	
+
+
 	public DBCheckBox getFinanceField() {
 
 
@@ -456,7 +483,42 @@ public abstract class MacroView extends EntryView {
 
 
 	}
-	
+
+
+	public DBTextField getFiscalDocumentTypeField() {
+
+
+		if (fiscalDocumentTypeField == null){
+
+			FiscalDocumentTypeSearch fiscalDocumentTypeSearch = new FiscalDocumentTypeSearch();
+
+			fiscalDocumentTypeSearch.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeFiscalDocumentTypeProperty((FiscalDocumentType) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			fiscalDocumentTypeField = new DBTextField(new ModelTag(), MacroController.FISCAL_DOCUMENT_TYPE_PROPERTY);
+
+			fiscalDocumentTypeField.addCheckListener(this);
+
+			fiscalDocumentTypeField.setSearch(fiscalDocumentTypeSearch);
+
+			fiscalDocumentTypeField.setPreferredSize(new Dimension(400,24));
+
+			getController().addView(fiscalDocumentTypeField);
+
+		}
+
+		return fiscalDocumentTypeField;
+
+
+	}
+
 
 	public Tag getInternalFrameTitle() {
 
@@ -464,14 +526,14 @@ public abstract class MacroView extends EntryView {
 
 	}
 
-	
+
 	public MacroController getController() {
 
 		return (MacroController) super.getController();
 
 	}
 
-	
+
 	public abstract Search getIdentifierSearch();
 
 

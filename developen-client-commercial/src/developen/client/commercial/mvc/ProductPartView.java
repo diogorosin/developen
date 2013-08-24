@@ -46,7 +46,7 @@ public class ProductPartView extends ListEditorView implements CheckListener {
 
 	public void buildInterface() {
 
-		setSize(new Dimension(600,250));
+		setSize(new Dimension(700,250));
 
 	}
 

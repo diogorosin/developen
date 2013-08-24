@@ -2,26 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
-import developen.client.commercial.mvc.OutputOrderController;
-import developen.client.commercial.mvc.OutputOrderView;
+import developen.client.application.action.EntryAction;
 import developen.client.osm.Client;
 import developen.common.commercial.i18n.OutputOrderTag;
-import developen.common.commercial.mvc.OutputOrder;
-import developen.common.commercial.mvc.SystemCompany;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class OutputOrderEntryAction extends ApplicationAction {
+public class OutputOrderEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public OutputOrderEntryAction(JDesktopPane desktop) {
+	public OutputOrderEntryAction() {
 
-		super(new OutputOrderTag(), desktop);
+		super(new OutputOrderTag());
 
 	}
 
@@ -29,41 +23,15 @@ public class OutputOrderEntryAction extends ApplicationAction {
 	public void actionPerformed(ActionEvent arg0) {
 
 		
-		OutputOrder model = new OutputOrder();
-		
-		OutputOrderController controller = new OutputOrderController(){
-
-			public SystemCompany getSystemCompany() {
-
-				return Client.getClientModel().getSystemCompany();
-				
-			}
-
-		};
-		
-		controller.setModel(model);
-		
-		OutputOrderView view = new OutputOrderView(controller);
-		
-		controller.addView(view);
-
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeOutputOrderEntry();
 			
-		} catch (Exception e) {
+		} catch (Exception exception) {
 			
-			e.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
-		
-		view.setLocation(InternalFramePosition.CENTER);
-		
-		Client.getClientController().addSystemPersonListener(view);
 
 		
 	}

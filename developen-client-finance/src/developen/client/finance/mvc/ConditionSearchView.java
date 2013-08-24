@@ -10,6 +10,8 @@ import developen.client.framework.mvc.TableSearchView;
 import developen.common.finance.i18n.ConditionTag;
 import developen.common.finance.i18n.DenominationTag;
 import developen.common.finance.i18n.IdentifierTag;
+import developen.common.finance.mvc.Condition;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -39,7 +41,7 @@ public class ConditionSearchView extends TableSearchView {
 
 		super(controller);
 
-		setSize(new Dimension(400, 600));
+		setSize(new Dimension(600, 600));
 
 
 	}
@@ -119,6 +121,13 @@ public class ConditionSearchView extends TableSearchView {
 
 		return new ConditionTag(); 
 
+	}
+
+
+	public Class<? extends Model> getMimeType() {
+
+		return Condition.class;
+		
 	}
 
 

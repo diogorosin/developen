@@ -6,7 +6,7 @@ import java.util.Vector;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import developen.client.commercial.factory.SubjectFormatFactory;
+import developen.client.commercial.factory.CommercialFormatFactory;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.CpfTag;
@@ -14,6 +14,8 @@ import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.PersonTag;
 import developen.common.commercial.mvc.Cpf;
+import developen.common.commercial.mvc.Person;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -101,7 +103,7 @@ public class PersonSearchView extends TableSearchView {
 
 					if (y==CPF_COLUMN_INDEX) {
 
-						return	SubjectFormatFactory.formatCPF(((Cpf)row.elementAt(y)).getNumber());
+						return	CommercialFormatFactory.formatCPF(((Cpf)row.elementAt(y)).getNumber());
 
 					} else
 
@@ -168,6 +170,13 @@ public class PersonSearchView extends TableSearchView {
 
 		return new PersonTag(); 
 
+	}
+
+
+	public Class<? extends Model> getMimeType(){
+		
+		return Person.class;
+		
 	}
 
 

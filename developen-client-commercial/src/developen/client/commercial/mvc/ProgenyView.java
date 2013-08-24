@@ -23,17 +23,16 @@ import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
 import developen.common.commercial.i18n.ActiveTag;
-import developen.common.commercial.i18n.BasicTag;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IcmsIcmsSTTag;
 import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.PriceTag;
 import developen.common.commercial.i18n.ProgenyTag;
-import developen.common.commercial.i18n.TributationTag;
-import developen.common.commercial.i18n.UnitMeasureForUseOrSaleTag;
+import developen.common.commercial.i18n.ShortDenominationTag;
+import developen.common.commercial.i18n.TypeTag;
 import developen.common.commercial.mvc.Icms;
 import developen.common.commercial.mvc.Progeny;
-import developen.common.commercial.mvc.UnitMeasure;
+import developen.common.commercial.mvc.ProgenyType;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
@@ -48,29 +47,29 @@ public class ProgenyView extends EntryView {
 
 	private static final long serialVersionUID = 6129699206038480588L;
 
-	public static int WIDTH = 700;
+	public static int WIDTH = 800;
 
-	public static int HEIGHT = 550;
+	public static int HEIGHT = 600;
 
-	protected Search identifierSearch;
+	protected Search identifierSearch;	
 
+	
 	private DBIdentifierField identifierField;
 
 	private DBTextField denominationField;
 
+	private DBTextField shortDenominationField;
+
 	private DBCheckBox activeField;
-
-	private DBTextField icmsField;
-
-	private TabbedPane tabbedPane;
-
-	private DBRowPanel basicTab;
-
-	private DBRowPanel tributationTab;
+	
+	private DBComboBox progenyTypeComboBox;
 
 	private DBNumberField priceField;
-
-	private DBComboBox unitMeasureComboBox;
+	
+	private DBTextField icmsField;
+	
+	
+	private TabbedPane mainTabbedPane;
 
 
 	public ProgenyView(ProgenyController controller) {
@@ -87,16 +86,25 @@ public class ProgenyView extends EntryView {
 	}
 
 
+	public ProgenyController getController() {
+
+		return (ProgenyController) super.getController();
+
+	}
+
+
 	public ExtendedPanel getNorthPanel(){
 
 
 		ExtendedPanel l = super.getNorthPanel();
 
-		DBRowPanel northPanel = new DBRowPanel();
+		DBRowPanel northPanel = new DBRowPanel(150);
 
 		northPanel.add(getIdentifierField());
 
 		northPanel.add(getDenominationField());
+
+		northPanel.add(getShortDenominationField());
 
 		northPanel.add(getActiveField());
 
@@ -113,70 +121,26 @@ public class ProgenyView extends EntryView {
 
 		ExtendedPanel l = super.getCenterPanel();
 
-		l.add(getTabbedPane());
+		l.add(getMainTabbedPane());
 
 		return l;
 
 
 	}
 
+	
+	public TabbedPane getMainTabbedPane(){
 
-	public TabbedPane getTabbedPane(){
 
+		if (mainTabbedPane == null){
 
-		if (tabbedPane == null){
+			mainTabbedPane = new TabbedPane();
 
-			tabbedPane = new TabbedPane();
-
-			tabbedPane.add(getBasicTab());
-			
-			tabbedPane.add(getTributationTab());
-
-			tabbedPane.setFocusable(false);
+			mainTabbedPane.setFocusable(false);
 
 		}
 
-		return tabbedPane;
-
-
-	}
-
-
-	public DBRowPanel getBasicTab(){
-
-
-		if (basicTab == null){
-
-			basicTab = new DBRowPanel(180);
-
-			basicTab.setName(new BasicTag().toString());
-
-			basicTab.add(getPriceField());
-
-			basicTab.add(getUnitMeasureComboBox());
-
-		}
-
-		return basicTab;
-
-
-	}
-
-
-	public DBRowPanel getTributationTab(){
-
-
-		if (tributationTab==null){
-
-			tributationTab = new DBRowPanel(100);
-
-			tributationTab.add(getIcmsField());
-
-			tributationTab.setName(new TributationTag().toString());
-
-		}
-
-		return tributationTab;
+		return mainTabbedPane;
 
 
 	}
@@ -201,23 +165,29 @@ public class ProgenyView extends EntryView {
 
 			else
 
-				if (event.getCheckable() == getPriceField())
+				if (event.getCheckable() == getShortDenominationField())
 
-					getController().changePriceProperty(Double.valueOf(getPriceField().getValue().toString()));
+					getController().changeShortDenominationProperty(getShortDenominationField().getText());
 
 				else
 
-					if (event.getCheckable() == getIcmsField())
+					if (event.getCheckable() == getPriceField())
 
-						try{
+						getController().changePriceProperty(Double.valueOf(getPriceField().getValue().toString()));
 
-							getController().changeIcmsProperty((Icms) getIcmsField().getSearch().findBy());
+					else
 
-						} catch (ManyRecordsFoundException e) {
+						if (event.getCheckable() == getIcmsField())
 
-							getIcmsField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+							try{
 
-						}
+								getController().changeIcmsProperty((Icms) getIcmsField().getSearch().findBy());
+
+							} catch (ManyRecordsFoundException e) {
+
+								getIcmsField().getSearch().openSearchViewWithoutReset(getDesktopPane());
+
+							}
 
 
 	}
@@ -243,7 +213,7 @@ public class ProgenyView extends EntryView {
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setColumns(6);
+			identifierField.setPreferredSize(new Dimension(100,24));
 
 			getController().addView(identifierField);
 
@@ -254,7 +224,32 @@ public class ProgenyView extends EntryView {
 
 	}
 
-	
+
+	public Search getIdentifierSearch(){
+
+
+		if (identifierSearch==null){
+
+			identifierSearch = new ProgenySearch(true);
+
+			identifierSearch.addSearchListener(new SearchAdapter(){
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeIdentifierProperty(((Progeny)event.getSelectedRows().get(0)).getIdentifier());   
+
+				}
+
+			});
+
+		}
+
+		return identifierSearch;
+
+
+	}
+
+
 	public DBTextField getDenominationField() {
 
 
@@ -264,13 +259,34 @@ public class ProgenyView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(300,24));
+			denominationField.setPreferredSize(new Dimension(400,24));
 
 			getController().addView(denominationField);
 
 		}
 
 		return denominationField;
+
+
+	}
+
+
+	public DBTextField getShortDenominationField() {
+
+
+		if (shortDenominationField == null){
+
+			shortDenominationField = new DBTextField(new ShortDenominationTag(), ProgenyController.SHORT_DENOMINATION_PROPERTY);
+
+			shortDenominationField.addCheckListener(this);
+
+			shortDenominationField.setPreferredSize(new Dimension(300,24));
+
+			getController().addView(shortDenominationField);
+
+		}
+
+		return shortDenominationField;
 
 
 	}
@@ -334,24 +350,24 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public DBComboBox getUnitMeasureComboBox() {
+	public DBComboBox getProgenyTypeComboBox() {
 
 
-		if (unitMeasureComboBox==null){
+		if (progenyTypeComboBox==null){
 
 			try {
 
 				Session session = DPA.getSessionFactory().createSession();
 
-				List<Object> list = session.list(UnitMeasure.class);
+				List<Object> list = session.list(ProgenyType.class);
 
-				unitMeasureComboBox = new DBComboBox(
+				progenyTypeComboBox = new DBComboBox(
 
-						new UnitMeasureForUseOrSaleTag()
+						new TypeTag()
 
 						, list.toArray()
 
-						, ProgenyController.UNIT_MEASURE_PROPERTY);
+						, ProgenyController.PROGENY_TYPE_PROPERTY);
 
 				session.close();
 
@@ -361,25 +377,25 @@ public class ProgenyView extends EntryView {
 
 			}
 
-			unitMeasureComboBox.setPreferredSize(new Dimension(190,24));
+			progenyTypeComboBox.setPreferredSize(new Dimension(220,24));
 
-			unitMeasureComboBox.setCondition(new EditingOrIncludingCondition());
+			progenyTypeComboBox.setCondition(new EditingOrIncludingCondition());
 
-			unitMeasureComboBox.addActionListener(new ActionListener() {
+			progenyTypeComboBox.addActionListener(new ActionListener() {
 
 				public void actionPerformed(ActionEvent e) {
 
-					getController().changeUnitMeasureProperty((UnitMeasure)((DBComboBox)e.getSource()).getSelectedItem());
+					getController().changeProgenyTypeProperty((ProgenyType)((DBComboBox)e.getSource()).getSelectedItem());
 
 				}
 
 			});
 
-			getController().addView(unitMeasureComboBox);
+			getController().addView(progenyTypeComboBox);
 
 		}
 
-		return unitMeasureComboBox;
+		return progenyTypeComboBox;
 
 
 	}
@@ -421,41 +437,9 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public Search getIdentifierSearch(){
-
-
-		if (identifierSearch==null){
-
-			identifierSearch = new ProgenySearch(true);
-
-			identifierSearch.addSearchListener(new SearchAdapter(){
-
-				public void onSearchConfirmed(SearchEvent event) throws Exception {
-
-					getController().changeIdentifierProperty(((Progeny)event.getSelectedRows().get(0)).getIdentifier());   
-
-				}
-
-			});
-
-		}
-
-		return identifierSearch;
-
-
-	}
-
-
 	public Tag getInternalFrameTitle() {
 
 		return new ProgenyTag();
-
-	}
-
-
-	public ProgenyController getController() {
-
-		return (ProgenyController) super.getController();
 
 	}
 

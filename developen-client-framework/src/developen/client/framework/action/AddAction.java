@@ -1,9 +1,9 @@
 package developen.client.framework.action;
 
 import developen.client.framework.i18n.AddTag;
-import developen.common.framework.widget.PrivilegedAction;
+import developen.client.framework.widget.DBAction;
 
-public abstract class AddAction extends PrivilegedAction {
+public abstract class AddAction extends DBAction {
 
 
 	private static final long serialVersionUID = -4435786856722658211L;

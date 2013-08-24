@@ -1,6 +1,7 @@
 package developen.client.commercial.mvc;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.JDesktopPane;
@@ -142,7 +143,7 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 			
 			productField.setFixedValue(true);
 			
-			productField.setColumns(30);
+			productField.setPreferredSize(new Dimension(400,24));
 			
 			productField.setSearch(search);
 			
@@ -179,7 +180,7 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 			
 			partField.setPrimaryKey(true);
 			
-			partField.setColumns(30);
+			partField.setPreferredSize(new Dimension(400,24));
 			
 			partField.setSearch(search);
 			

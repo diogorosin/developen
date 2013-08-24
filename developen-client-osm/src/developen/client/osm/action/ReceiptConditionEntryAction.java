@@ -2,25 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
-import developen.client.finance.mvc.ReceiptConditionController;
-import developen.client.finance.mvc.ReceiptConditionView;
+import developen.client.application.action.EntryAction;
 import developen.client.osm.Client;
 import developen.common.finance.i18n.ReceiptConditionTag;
-import developen.common.finance.mvc.ReceiptCondition;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class ReceiptConditionEntryAction extends ApplicationAction {
+public class ReceiptConditionEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public ReceiptConditionEntryAction(JDesktopPane desktop) {
+	public ReceiptConditionEntryAction() {
 
-		super(new ReceiptConditionTag(), desktop);
+		super(new ReceiptConditionTag());
 
 	}
 
@@ -28,33 +23,15 @@ public class ReceiptConditionEntryAction extends ApplicationAction {
 	public void actionPerformed(ActionEvent arg0) {
 
 		
-		ReceiptCondition model = new ReceiptCondition();
-		
-		ReceiptConditionController controller = new ReceiptConditionController();
-		
-		controller.setModel(model);
-		
-		ReceiptConditionView view = new ReceiptConditionView(controller);
-		
-		controller.addView(view);
-
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeReceiptConditionEntry();
 			
-		} catch (Exception e) {
+		} catch (Exception exception) {
 			
-			e.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
-		
-		view.setLocation(InternalFramePosition.CENTER);
-		
-		Client.getClientController().addSystemPersonListener(view);
 
 		
 	}

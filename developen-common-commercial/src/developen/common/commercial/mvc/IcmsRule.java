@@ -306,9 +306,7 @@ public class IcmsRule extends Model implements Search, ListEditor{
 
 				getIdentifier().getTo(),
 				
-				getIdentifier().getRule(),
-
-				getIcmsAliquot() 
+				getIdentifier().getRule()
 
 		};
 

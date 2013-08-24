@@ -12,7 +12,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import developen.client.finance.search.ConditionSearch;
 import developen.client.finance.widget.DBConditionDayTable;
 import developen.client.framework.action.AddAction;
 import developen.client.framework.action.EditAction;
@@ -22,8 +21,6 @@ import developen.client.framework.mvc.EntryView;
 import developen.client.framework.mvc.ListEditorAdapter;
 import developen.client.framework.mvc.ListEditorEvent;
 import developen.client.framework.search.Search;
-import developen.client.framework.search.SearchAdapter;
-import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
@@ -34,7 +31,6 @@ import developen.common.finance.i18n.ConditionDayTag;
 import developen.common.finance.i18n.ConditionTag;
 import developen.common.finance.i18n.DenominationTag;
 import developen.common.finance.i18n.IdentifierTag;
-import developen.common.finance.mvc.Condition;
 import developen.common.finance.mvc.ConditionDay;
 import developen.common.finance.mvc.ConditionDayPK;
 import developen.common.framework.messenger.Messenger;
@@ -48,7 +44,7 @@ import developen.common.framework.widget.TabbedPane;
 import developen.common.framework.widget.ToolBar;
 import developen.common.persistence.type.AllwaysDiferentList;
 
-public class ConditionView extends EntryView {
+public abstract class ConditionView extends EntryView {
 
 
 	private static final long serialVersionUID = -5394176398244939089L;
@@ -280,30 +276,7 @@ public class ConditionView extends EntryView {
 	}
 
 	
-	public Search getIdentifierSearch(){
-
-
-		if (identifierSearch==null){
-
-			identifierSearch = new ConditionSearch(new Boolean(true));
-
-			identifierSearch.addSearchListener(new SearchAdapter(){
-
-				public void onSearchConfirmed(SearchEvent event) throws Exception {
-
-					getController().changeIdentifierProperty(((Condition)event.getSelectedRows().get(0)).getIdentifier());
-
-				}
-
-			});
-
-		}
-
-		return identifierSearch;
-
-		
-	}
-
+	public abstract Search getIdentifierSearch();
 
 	public Tag getInternalFrameTitle() {
 

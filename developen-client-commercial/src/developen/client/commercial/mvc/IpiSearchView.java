@@ -10,6 +10,8 @@ import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.IpiTag;
+import developen.common.commercial.mvc.Ipi;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -119,6 +121,13 @@ public class IpiSearchView extends TableSearchView {
 
 		return new IpiTag(); 
 
+	}
+
+
+	public Class<? extends Model> getMimeType(){
+		
+		return Ipi.class;
+		
 	}
 
 

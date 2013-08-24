@@ -27,19 +27,16 @@ import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBComponent;
 import developen.client.framework.widget.DBTable;
 import developen.client.framework.widget.EditingOrIncludingCondition;
-import developen.common.commercial.i18n.AliquotTag;
+import developen.common.commercial.i18n.FiscalRuleTag;
 import developen.common.commercial.i18n.FromTag;
 import developen.common.commercial.i18n.ToTag;
-import developen.common.commercial.i18n.FiscalRuleTag;
 import developen.common.commercial.mvc.Icms;
 import developen.common.commercial.mvc.IcmsRule;
-import developen.common.commercial.mvc.Rule;
 import developen.common.commercial.mvc.State;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.ListEditorState;
 import developen.common.framework.mvc.View;
-import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.widget.Column;
 import developen.common.framework.widget.InternalFrame;
@@ -47,7 +44,7 @@ import developen.common.framework.widget.InternalFramePosition;
 import developen.common.framework.widget.UneditableTableModel;
 
 
-public class DBIcmsRuleTable extends JComponent implements DBComponent{
+public abstract class DBIcmsRuleTable extends JComponent implements DBComponent{
 
 
 	private static final long serialVersionUID = -7634636505875826803L;
@@ -58,8 +55,6 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 
 	public static final int RULE_COLUMN_INDEX = 2;
 
-	public static final int ICMS_ALIQUOT_COLUMN_INDEX = 3;
-
 	private UneditableTableModel tableModel;
 
 	private DBTable<IcmsRule> table;
@@ -69,8 +64,6 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 	private Column toColumn;
 
 	private Column ruleColumn;
-
-	private Column icmsAliquotColumn;
 
 	private boolean fixedValue;
 
@@ -167,40 +160,26 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-			
-			
 			table.getColumnModel().getColumn(FROM_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
-			
-//			table.getColumnModel().getColumn(FROM_COLUMN_INDEX).setMaxWidth(250);
 
+			table.getColumnModel().getColumn(FROM_COLUMN_INDEX).setMaxWidth(50);
 			
-			
-			
+			table.getColumnModel().getColumn(FROM_COLUMN_INDEX).setMinWidth(50);
+
 			table.getColumnModel().getColumn(TO_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
 
-//			table.getColumnModel().getColumn(TO_COLUMN_INDEX).setMaxWidth(250);
+			table.getColumnModel().getColumn(TO_COLUMN_INDEX).setMaxWidth(50);
+			
+			table.getColumnModel().getColumn(TO_COLUMN_INDEX).setMinWidth(50);
 
-			
-			
 			table.getColumnModel().getColumn(RULE_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
 
-			
-			
-			table.getColumnModel().getColumn(ICMS_ALIQUOT_COLUMN_INDEX).setCellRenderer(
-
-					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
-
-			table.getColumnModel().getColumn(ICMS_ALIQUOT_COLUMN_INDEX).setMaxWidth(100);
-
-			
-			
-			
 			table.getActionMap().put(ListEditorAction.DELETE, getRemoveAction());
 
 			table.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
@@ -267,25 +246,19 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 
 					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
 
-//					if (y==FROM_COLUMN_INDEX)
-//
-//						return ((State)row.elementAt(y)).getAcronym();
-//
-//					else					
-//
-//						if (y==TO_COLUMN_INDEX)
-//
-//							return ((State)row.elementAt(y)).getAcronym();
-//
-//						else					
-//
-							if (y==ICMS_ALIQUOT_COLUMN_INDEX)
+					if (y==FROM_COLUMN_INDEX)
 
-								return FormatFactory.formatNumber((Double)row.elementAt(y), 3, 2);
+						return ((State)row.elementAt(y)).getAcronym();
 
-							else
+					else					
 
-								return row.elementAt(y);
+						if (y==TO_COLUMN_INDEX)
+
+							return ((State)row.elementAt(y)).getAcronym();
+
+						else
+
+							return row.elementAt(y);
 
 				}
 
@@ -296,8 +269,6 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 			tableModel.addColumn(getToColumn());
 
 			tableModel.addColumn(getRuleColumn());
-
-			tableModel.addColumn(getIcmsAliquotColumn());
 
 		}
 
@@ -341,19 +312,6 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 			ruleColumn = new Column(new FiscalRuleTag(), RULE_COLUMN_INDEX);
 
 		return ruleColumn;
-
-
-	}
-
-
-	public Column getIcmsAliquotColumn(){
-
-
-		if (icmsAliquotColumn == null)
-
-			icmsAliquotColumn = new Column(new AliquotTag(), ICMS_ALIQUOT_COLUMN_INDEX);
-
-		return icmsAliquotColumn;
 
 
 	}
@@ -519,11 +477,11 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 
 		controller.changeIcmsProperty(getIcms());
 
-		controller.changeFromProperty((State)getTableModel().getValueAt(getTable().getSelectedRow(), FROM_COLUMN_INDEX));
+		controller.changeFromProperty(getRowAt(getTable().getSelectedRow()).getIdentifier().getFrom());
 
-		controller.changeToProperty((State)getTableModel().getValueAt(getTable().getSelectedRow(), TO_COLUMN_INDEX));
+		controller.changeToProperty(getRowAt(getTable().getSelectedRow()).getIdentifier().getTo());
 
-		controller.changeRuleProperty((Rule)getTableModel().getValueAt(getTable().getSelectedRow(), RULE_COLUMN_INDEX));
+		controller.changeRuleProperty(getRowAt(getTable().getSelectedRow()).getIdentifier().getRule());
 
 		view.setVisible(true);
 
@@ -592,6 +550,9 @@ public class DBIcmsRuleTable extends JComponent implements DBComponent{
 		this.fixedValue = fixedValue;
 
 	}
+
+
+	public abstract IcmsRule getRowAt(int index);
 
 
 }

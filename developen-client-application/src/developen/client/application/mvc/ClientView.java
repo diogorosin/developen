@@ -7,14 +7,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
-import developen.client.application.action.ApplicationAction;
+import developen.client.application.action.EntryAction;
 import developen.client.application.i18n.AdministratorTag;
 import developen.client.application.i18n.DevelOpenCloudTag;
 import developen.client.application.i18n.HelpTag;
@@ -25,12 +25,15 @@ import developen.client.application.i18n.PreferencesTag;
 import developen.client.application.i18n.SecurityTag;
 import developen.client.application.widget.LoggedInCondition;
 import developen.client.framework.widget.DBComboBox;
+import developen.client.framework.widget.DesktopPane;
+import developen.client.framework.widget.MimeTypeProvider;
 import developen.common.commercial.i18n.SystemCompanyTag;
 import developen.common.commercial.mvc.Idiom;
 import developen.common.commercial.mvc.SystemCompany;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.commercial.mvc.SystemPersonSystemCompany;
 import developen.common.framework.messenger.Messenger;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Action;
@@ -43,14 +46,16 @@ import developen.common.framework.widget.PortugueseBrazilRadioButtonMenuItem;
 import developen.common.framework.widget.ToolBar;
 
 
-public abstract class ClientView extends Frame {
+public abstract class ClientView extends Frame implements MimeTypeProvider {
 
 
 	private static final long serialVersionUID = 4721868847647105877L;
 
 	protected Object[] menuHierarchy;
+	
+	private HashMap<Class<? extends Model>, Action> mimeType;
 
-	protected JDesktopPane desktop;
+	protected DesktopPane desktop;
 	
 	protected MenuBar menu;
 	
@@ -85,6 +90,39 @@ public abstract class ClientView extends Frame {
 
 		super(controller);
 
+	}
+
+	
+	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
+
+		
+		if (mimeType==null)
+			
+			mimeType = new HashMap<Class<? extends Model>, Action>();
+			
+		return mimeType;
+		
+		
+	}
+
+	
+	public Action getEntryActionOfMimeType(Class<? extends Model> model){
+		
+		
+		if (model==null)
+			
+			return null;
+		
+		return getMimeTypes().get(model);
+		
+		
+	}
+	
+
+	public void setEntryActionOfMimeType(Class<? extends Model> model, Action action){
+		
+		getMimeTypes().put(model, action);
+		
 	}
 
 	
@@ -189,9 +227,9 @@ public abstract class ClientView extends Frame {
 
 			else
 
-				if (newValue.equals(ClientState.LOGOUT))
+				if (newValue.equals(ClientState.LOGGED_OUT))
 
-					showLoginDialog();
+					executeLoginDialog();
 
 		} else 
 
@@ -227,7 +265,7 @@ public abstract class ClientView extends Frame {
 	}
 
 	
-	public void showLoginDialog(){
+	public void executeLoginDialog(){
 
 		
 		loginModel = new LoginModel();
@@ -264,7 +302,7 @@ public abstract class ClientView extends Frame {
 
 		try {
 
-			loginController.edit();
+			loginController.clear();
 
 		} catch (Exception e) {
 
@@ -292,7 +330,7 @@ public abstract class ClientView extends Frame {
 
 				companyComboBox = new DBComboBox(new SystemCompanyTag(), new SystemCompany[]{}, ClientController.SYSTEM_COMPANY_PROPERTY);
 				
-				companyComboBox.setPreferredSize(new Dimension(250,24));
+				companyComboBox.setPreferredSize(new Dimension(300,24));
 				
 				companyComboBox.setCondition(new LoggedInCondition());
 				
@@ -322,12 +360,12 @@ public abstract class ClientView extends Frame {
 	}
 
 	
-	protected JDesktopPane getDesktop() {
+	protected DesktopPane getDesktop() {
 
 		
 		if (desktop == null)
 			
-			desktop = new JDesktopPane();
+			desktop = new DesktopPane();
 		
 		return desktop;
 		
@@ -557,13 +595,13 @@ public abstract class ClientView extends Frame {
 	protected abstract Action getHelpAction();
 
 	
-	protected abstract ApplicationAction getChangePasswordAction();
+	protected abstract EntryAction getChangePasswordAction();
 	
 	
-	protected abstract ApplicationAction getSystemCompanyEntryAction();
+	protected abstract EntryAction getSystemCompanyEntryAction();
 
 	
-	protected abstract ApplicationAction getSystemPersonEntryAction();
+	protected abstract EntryAction getSystemPersonEntryAction();
 
 
 }

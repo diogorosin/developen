@@ -5,12 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 
 import developen.client.application.i18n.HelpAboutTag;
-import developen.client.application.mvc.HelpAboutController;
-import developen.client.application.mvc.HelpAboutModel;
-import developen.client.application.mvc.HelpAboutView;
+import developen.client.osm.Client;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.widget.Action;
-import developen.common.framework.widget.InternalFramePosition;
 
 public class HelpAboutAction extends Action {
 
@@ -20,7 +17,7 @@ public class HelpAboutAction extends Action {
 	
 	public HelpAboutAction(JDesktopPane desktop) {
 
-		super(new HelpAboutTag(), desktop);
+		super(new HelpAboutTag());
 
 	}
 
@@ -28,31 +25,15 @@ public class HelpAboutAction extends Action {
 	public void actionPerformed(ActionEvent e) {
 
 		
-		HelpAboutModel model = new HelpAboutModel();
-		
-		HelpAboutController controller = new HelpAboutController();
-		
-		HelpAboutView view = new HelpAboutView(controller);
-		
-		controller.addView(view);
-		
-		controller.setModel(model);
-
 		try {
 			
-			controller.standBy();
+			Client.getClientView().executeHelpAbout();
 			
 		} catch (Exception exception) {
 			
 			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
-		
-		view.setLocation(InternalFramePosition.CENTER);
 
 		
 	}

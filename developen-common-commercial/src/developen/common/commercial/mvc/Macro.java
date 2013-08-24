@@ -6,6 +6,7 @@ import developen.common.framework.mvc.Model;
 import developen.common.framework.mvc.Search;
 import developen.common.persistence.annotation.Column;
 import developen.common.persistence.annotation.Identifier;
+import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.Table;
 
 @Table
@@ -42,6 +43,9 @@ public class Macro extends Model implements Entry, Search{
 
 	@Column
 	private Boolean finance;
+	
+	@ManyToOne
+	private FiscalDocumentType fiscalDocumentType;
 
 	
 	public Long getIdentifier() {
@@ -219,6 +223,26 @@ public class Macro extends Model implements Entry, Search{
 		this.finance = newValue;
 		
 		firePropertyChange("Finance", oldValue, newValue);
+		
+		
+	}
+
+	
+	public FiscalDocumentType getFiscalDocumentType() {
+		
+		return fiscalDocumentType;
+		
+	}
+
+	
+	public void setFiscalDocumentType(FiscalDocumentType newValue) {
+		
+		
+		FiscalDocumentType oldValue = this.fiscalDocumentType;
+		
+		this.fiscalDocumentType = newValue;
+		
+		firePropertyChange("FiscalDocumentType", oldValue, newValue);
 		
 		
 	}

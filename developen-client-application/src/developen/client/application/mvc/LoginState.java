@@ -2,10 +2,12 @@ package developen.client.application.mvc;
 
 public enum LoginState {
 	
+	
 	CANCELED,
 	
-	LOGGEDIN,
+	LOGGED_IN,
 	
-	EDITING
+	CLEAN
+	
 	
 }

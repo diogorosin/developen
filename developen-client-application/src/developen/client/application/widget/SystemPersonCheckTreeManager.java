@@ -142,8 +142,99 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 
 												DefaultMutableTreeNode node6 = (DefaultMutableTreeNode) node5.getChildAt(e);		
 
-												if (node6.isLeaf()){
+												if (!node6.isLeaf()){
 
+													for (int f = 0; f < node6.getChildCount(); f++){		
+
+														DefaultMutableTreeNode node7 = (DefaultMutableTreeNode) node6.getChildAt(f);		
+
+														if (!node7.isLeaf()){
+
+															for (int g = 0; g < node7.getChildCount(); g++){		
+
+																DefaultMutableTreeNode node8 = (DefaultMutableTreeNode) node7.getChildAt(g);		
+
+																if (!node8.isLeaf()){
+
+																	for (int h = 0; h < node8.getChildCount(); h++){		
+
+																		DefaultMutableTreeNode node9 = (DefaultMutableTreeNode) node8.getChildAt(h);		
+
+																		if (!node9.isLeaf()){
+
+																			for (int i = 0; i < node9.getChildCount(); i++){		
+
+																				DefaultMutableTreeNode node10 = (DefaultMutableTreeNode) node9.getChildAt(i);		
+
+																				if (!node10.isLeaf()){
+
+
+																				} else {
+																					
+																					if (node10.getUserObject() instanceof Action)
+																						
+																						newList.add(
+																								
+																								new SystemPersonSystemAction(
+																										
+																										new SystemPersonSystemActionPK(getController().getModel(),
+																												
+																												new SystemAction(node10.getUserObject().getClass().getName()))));
+																					
+																				}
+
+																			}
+																			
+																		} else {
+																			
+																			if (node9.getUserObject() instanceof Action)
+																				
+																				newList.add(
+																						
+																						new SystemPersonSystemAction(
+																								
+																								new SystemPersonSystemActionPK(getController().getModel(),
+																										
+																										new SystemAction(node9.getUserObject().getClass().getName()))));
+																			
+																		}
+
+																	}
+																	
+																} else {
+																	
+																	if (node8.getUserObject() instanceof Action)
+																		
+																		newList.add(
+																				
+																				new SystemPersonSystemAction(
+																						
+																						new SystemPersonSystemActionPK(getController().getModel(),
+																								
+																								new SystemAction(node8.getUserObject().getClass().getName()))));
+																	
+																}
+
+															}
+															
+														} else {
+															
+															if (node7.getUserObject() instanceof Action)
+																
+																newList.add(
+																		
+																		new SystemPersonSystemAction(
+																				
+																				new SystemPersonSystemActionPK(getController().getModel(),
+																						
+																						new SystemAction(node7.getUserObject().getClass().getName()))));
+															
+														}
+
+													}
+
+												} else {
+													
 													if (node6.getUserObject() instanceof Action)
 														
 														newList.add(
@@ -153,7 +244,7 @@ public class SystemPersonCheckTreeManager extends CheckTreeManager {
 																		new SystemPersonSystemActionPK(getController().getModel(),
 																				
 																				new SystemAction(node6.getUserObject().getClass().getName()))));
-
+													
 												}
 
 											}

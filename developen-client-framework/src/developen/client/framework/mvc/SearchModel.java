@@ -18,6 +18,8 @@ public class SearchModel extends Model {
 	
 	private SearchState modelState;
 
+	private Class<? extends Model> mimeType;
+	
 	
 	public List<Object> getResultedRows(){
 		
@@ -81,6 +83,25 @@ public class SearchModel extends Model {
 		
 		firePropertyChange("ModelState", oldValue, newValue);
 		
+		
+	}
+
+
+	public Class<? extends Model> getMimeType() {
+		
+		return mimeType;
+		
+	}
+
+
+	public void setMimeType(Class<? extends Model> newValue) {
+		
+
+		Class<? extends Model> oldValue = this.mimeType;
+		
+		this.mimeType = newValue;
+		
+		firePropertyChange("MimeType", oldValue, newValue);
 		
 	}
 

@@ -4,14 +4,12 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JDesktopPane;
 
-import developen.client.application.action.ApplicationAction;
-import developen.client.application.mvc.SystemCompanyController;
-import developen.client.application.mvc.SystemCompanyView;
+import developen.client.application.action.EntryAction;
+import developen.client.osm.Client;
 import developen.common.commercial.i18n.SystemCompaniesTag;
-import developen.common.commercial.mvc.SystemCompany;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class SystemCompanyEntryAction extends ApplicationAction {
+public class SystemCompanyEntryAction extends EntryAction {
 
 
 	private static final long serialVersionUID = -1381822675217039440L;
@@ -19,40 +17,24 @@ public class SystemCompanyEntryAction extends ApplicationAction {
 	
 	public SystemCompanyEntryAction(JDesktopPane desktop) {
 
-		super(new SystemCompaniesTag(), desktop);
+		super(new SystemCompaniesTag());
 
 	}
 
 	
 	public void actionPerformed(ActionEvent e) {
 
-		
-		SystemCompany model = new SystemCompany();
-		
-		SystemCompanyController controller = new SystemCompanyController();
-		
-		controller.setModel(model);
-		
-		SystemCompanyView view = new SystemCompanyView(controller);
-		
-		controller.addView(view);
 
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeSystemCompanyEntry();
 			
 		} catch (Exception exception) {
 			
-			exception.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
 		
-		view.setLocation(InternalFramePosition.CENTER);
-
 		
 	}
 	

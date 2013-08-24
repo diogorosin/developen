@@ -3,6 +3,7 @@ package developen.client.framework.widget;
 import java.beans.PropertyChangeEvent;
 
 import developen.common.framework.mvc.EntryState;
+import developen.common.framework.mvc.View;
 
 public class EditingOrIncludingCondition extends Condition {
 
@@ -10,7 +11,7 @@ public class EditingOrIncludingCondition extends Condition {
 	boolean latestState = true;
 
 
-	public boolean analyse(PropertyChangeEvent event, DBComponent component) {
+	public boolean analyse(PropertyChangeEvent event, View component) {
 
 
 		if (event.getPropertyName().equals("ModelState"))

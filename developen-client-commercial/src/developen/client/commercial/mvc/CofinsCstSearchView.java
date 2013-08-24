@@ -7,9 +7,11 @@ import javax.swing.SwingConstants;
 
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
+import developen.common.commercial.i18n.CofinsCstTag;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IdentifierTag;
-import developen.common.commercial.i18n.PisCstTag;
+import developen.common.commercial.mvc.CofinsCst;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -117,9 +119,16 @@ public class CofinsCstSearchView extends TableSearchView {
 	
 	public Tag getInternalFrameTitle() {
 
-		return new PisCstTag(); 
+		return new CofinsCstTag(); 
 
 	}
 
-
+	
+	public Class<? extends Model> getMimeType(){
+		
+		return CofinsCst.class;
+		
+	}
+	
+	
 }

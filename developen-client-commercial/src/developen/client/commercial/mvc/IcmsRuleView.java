@@ -599,7 +599,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			cfopGroupField.setCondition(new EditingOrIncludingListEditorCondition());
 
-			cfopGroupField.setPreferredSize(new Dimension(100,30));
+			cfopGroupField.setPreferredSize(new Dimension(100,32));
 			
 			Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 			

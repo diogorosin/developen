@@ -2,14 +2,12 @@ package developen.client.application.mvc;
 
 public enum ClientState {
 
+
+	LOGGED_OUT,
 	
-	LOGOUT,
+	LOGGED_IN,	
 	
-	EXITED,
-	
-	LOGIN,
-	
-	HELPING
+	EXITED
 	
 
 }

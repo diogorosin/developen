@@ -2,22 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
+import developen.client.application.action.EntryAction;
+import developen.client.osm.Client;
 import developen.common.commercial.i18n.InputOrderTag;
-import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
 
-public class InputOrderEntryAction extends ApplicationAction {
+public class InputOrderEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public InputOrderEntryAction(JDesktopPane desktop) {
+	public InputOrderEntryAction() {
 
-		super(new InputOrderTag(), desktop);
+		super(new InputOrderTag());
 
 	}
 
@@ -27,11 +25,11 @@ public class InputOrderEntryAction extends ApplicationAction {
 		
 		try {
 			
-			throw new NotYetImplementedException();
+			Client.getClientView().executeInputOrderEntry();
 			
-		} catch (NotYetImplementedException e) {
-
-			Messenger.show(e);
+		} catch (Exception exception) {
+			
+			Messenger.show(exception);
 			
 		}
 		

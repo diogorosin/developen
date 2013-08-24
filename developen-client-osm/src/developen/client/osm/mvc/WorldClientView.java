@@ -2,18 +2,63 @@ package developen.client.osm.mvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import developen.client.application.action.ApplicationAction;
+import developen.client.application.action.EntryAction;
 import developen.client.application.i18n.AdministratorTag;
 import developen.client.application.i18n.DevelOpenCloudTag;
 import developen.client.application.i18n.ModulesTag;
 import developen.client.application.i18n.ParameterizationTag;
 import developen.client.application.i18n.SecurityTag;
+import developen.client.application.mvc.ChangePasswordController;
+import developen.client.application.mvc.ChangePasswordModel;
+import developen.client.application.mvc.ChangePasswordView;
 import developen.client.application.mvc.ClientController;
 import developen.client.application.mvc.ClientView;
+import developen.client.application.mvc.HelpAboutController;
+import developen.client.application.mvc.HelpAboutModel;
+import developen.client.application.mvc.HelpAboutView;
+import developen.client.application.mvc.SystemCompanyController;
+import developen.client.application.mvc.SystemCompanyView;
+import developen.client.commercial.mvc.CompanyController;
+import developen.client.commercial.mvc.CompanyView;
+import developen.client.commercial.mvc.IcmsController;
+import developen.client.commercial.mvc.IcmsView;
+import developen.client.commercial.mvc.InputMacroController;
+import developen.client.commercial.mvc.InputMacroView;
+import developen.client.commercial.mvc.IpiController;
+import developen.client.commercial.mvc.IpiView;
+import developen.client.commercial.mvc.MeasureUnitController;
+import developen.client.commercial.mvc.MeasureUnitView;
+import developen.client.commercial.mvc.OutputMacroController;
+import developen.client.commercial.mvc.OutputMacroView;
+import developen.client.commercial.mvc.PersonController;
+import developen.client.commercial.mvc.PersonView;
+import developen.client.commercial.mvc.PisCofinsController;
+import developen.client.commercial.mvc.PisCofinsView;
+import developen.client.commercial.mvc.ProductController;
+import developen.client.commercial.mvc.ProductDetailController;
+import developen.client.commercial.mvc.ProductDetailView;
+import developen.client.commercial.mvc.ProductFinishController;
+import developen.client.commercial.mvc.ProductFinishView;
+import developen.client.commercial.mvc.ProductGroupController;
+import developen.client.commercial.mvc.ProductGroupView;
+import developen.client.commercial.mvc.ProductLineController;
+import developen.client.commercial.mvc.ProductLineView;
+import developen.client.commercial.mvc.ProductMarkController;
+import developen.client.commercial.mvc.ProductMarkView;
+import developen.client.commercial.mvc.ProductModelController;
+import developen.client.commercial.mvc.ProductModelView;
+import developen.client.commercial.mvc.ProductView;
+import developen.client.commercial.mvc.RuleController;
+import developen.client.commercial.mvc.RuleView;
+import developen.client.finance.mvc.PaymentConditionController;
+import developen.client.finance.mvc.PaymentConditionView;
+import developen.client.finance.mvc.ReceiptConditionController;
+import developen.client.finance.mvc.ReceiptConditionView;
 import developen.client.osm.action.ChangePasswordAction;
 import developen.client.osm.action.CompanyEntryAction;
 import developen.client.osm.action.ExitAction;
@@ -25,12 +70,19 @@ import developen.client.osm.action.InputOrderEntryAction;
 import developen.client.osm.action.IpiEntryAction;
 import developen.client.osm.action.IssqnEntryAction;
 import developen.client.osm.action.LogoutAction;
+import developen.client.osm.action.MeasureUnitEntryAction;
 import developen.client.osm.action.OutputMacroEntryAction;
 import developen.client.osm.action.OutputOrderEntryAction;
 import developen.client.osm.action.PaymentConditionEntryAction;
 import developen.client.osm.action.PersonEntryAction;
 import developen.client.osm.action.PisCofinsEntryAction;
+import developen.client.osm.action.ProductDetailEntryAction;
 import developen.client.osm.action.ProductEntryAction;
+import developen.client.osm.action.ProductFinishEntryAction;
+import developen.client.osm.action.ProductGroupEntryAction;
+import developen.client.osm.action.ProductLineEntryAction;
+import developen.client.osm.action.ProductMarkEntryAction;
+import developen.client.osm.action.ProductModelEntryAction;
 import developen.client.osm.action.PurchaseOrderEntryAction;
 import developen.client.osm.action.ReceiptConditionEntryAction;
 import developen.client.osm.action.RuleEntryAction;
@@ -38,20 +90,49 @@ import developen.client.osm.action.SaleOrderEntryAction;
 import developen.client.osm.action.ServiceEntryAction;
 import developen.client.osm.action.SystemCompanyEntryAction;
 import developen.client.osm.action.SystemPersonEntryAction;
-import developen.client.osm.action.UnitMeasureEntryAction;
+import developen.client.osm.factory.MVCBeanFactory;
 import developen.client.osm.i18n.CommercialModuleTag;
 import developen.client.osm.i18n.EntriesTag;
 import developen.client.osm.i18n.FinanceModuleTag;
 import developen.client.osm.i18n.MovementsTag;
 import developen.client.osm.i18n.ProgeniesTag;
 import developen.client.osm.i18n.SubjectsTag;
+import developen.client.osm.widget.MVCBean;
 import developen.common.commercial.i18n.MacrosTag;
 import developen.common.commercial.i18n.OrdersTag;
 import developen.common.commercial.i18n.ProductTag;
 import developen.common.commercial.i18n.TributesTag;
+import developen.common.commercial.mvc.Company;
+import developen.common.commercial.mvc.Icms;
+import developen.common.commercial.mvc.InputMacro;
+import developen.common.commercial.mvc.Ipi;
+import developen.common.commercial.mvc.MeasureUnit;
+import developen.common.commercial.mvc.OutputMacro;
+import developen.common.commercial.mvc.OutputOrder;
+import developen.common.commercial.mvc.Person;
+import developen.common.commercial.mvc.PisCofins;
+import developen.common.commercial.mvc.Product;
+import developen.common.commercial.mvc.ProductDetail;
+import developen.common.commercial.mvc.ProductFinish;
+import developen.common.commercial.mvc.ProductGroup;
+import developen.common.commercial.mvc.ProductLine;
+import developen.common.commercial.mvc.ProductMark;
+import developen.common.commercial.mvc.ProductModel;
+import developen.common.commercial.mvc.Rule;
+import developen.common.commercial.mvc.SaleOrder;
+import developen.common.commercial.mvc.SystemCompany;
+import developen.common.commercial.mvc.SystemPerson;
 import developen.common.finance.i18n.ConditionsTag;
+import developen.common.finance.mvc.PaymentCondition;
+import developen.common.finance.mvc.ReceiptCondition;
+import developen.common.framework.exception.NotYetImplementedException;
+import developen.common.framework.messenger.Messenger;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.widget.Action;
 import developen.common.framework.widget.EnglishUSARadioButtonMenuItem;
+import developen.common.framework.widget.InternalFrame;
+import developen.common.framework.widget.InternalFramePosition;
 import developen.common.framework.widget.Menu;
 import developen.common.framework.widget.PortugueseBrazilRadioButtonMenuItem;
 
@@ -77,7 +158,7 @@ public class WorldClientView extends ClientView{
 
 	private Menu modulesCommercialMovementsMenu;
 
-	private Menu modulesCommercialMovementsOrdersMenu;	
+	private Menu modulesCommercialMovementsOrdersMenu;
 
 	private Menu modulesFinanceMenu;
 
@@ -99,7 +180,7 @@ public class WorldClientView extends ClientView{
 
 	protected EnglishUSARadioButtonMenuItem englishUSARadioButtonMenuItem;
 
-	protected ApplicationAction changePasswordAction;
+	protected EntryAction changePasswordAction;
 
 	protected SystemPersonEntryAction systemPersonEntryAction;
 
@@ -108,17 +189,29 @@ public class WorldClientView extends ClientView{
 	protected PersonEntryAction personEntryAction;
 
 	protected ProductEntryAction productEntryAction;
-	
+
+	protected ProductGroupEntryAction productGroupEntryAction;
+
+	protected ProductMarkEntryAction productMarkEntryAction;
+
+	protected ProductLineEntryAction productLineEntryAction;
+
+	protected ProductModelEntryAction productModelEntryAction;
+
+	protected ProductDetailEntryAction productDetailEntryAction;
+
+	protected ProductFinishEntryAction productFinishEntryAction;
+
 	protected ServiceEntryAction serviceEntryAction;
 
-	protected UnitMeasureEntryAction unitMeasureEntryAction;
+	protected MeasureUnitEntryAction measureUnitEntryAction;
 
 	protected IcmsEntryAction icmsEntryAction;
-	
+
 	protected PisCofinsEntryAction pisCofinsEntryAction;
-	
+
 	protected IpiEntryAction ipiEntryAction;
-	
+
 	protected IssqnEntryAction issqnEntryAction;
 
 	protected RuleEntryAction ruleEntryAction;
@@ -143,6 +236,57 @@ public class WorldClientView extends ClientView{
 	public WorldClientView(ClientController controller) {
 
 		super(controller);
+
+	}
+
+
+	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
+
+
+		HashMap<Class<? extends Model>, Action> mimes = super.getMimeTypes();
+
+		mimes.put(OutputMacro.class, getOutputMacroEntryAction());
+
+		mimes.put(InputMacro.class, getInputMacroEntryAction());
+
+		mimes.put(Product.class, getProductEntryAction());
+
+		mimes.put(ProductGroup.class, getProductGroupEntryAction());
+
+		mimes.put(ProductMark.class, getProductMarkEntryAction());
+
+		mimes.put(ProductLine.class, getProductLineEntryAction());
+
+		mimes.put(ProductModel.class, getProductModelEntryAction());
+
+		mimes.put(ProductDetail.class, getProductDetailEntryAction());
+
+		mimes.put(ProductFinish.class, getProductFinishEntryAction());
+
+		mimes.put(MeasureUnit.class, getMeasureUnitEntryAction());
+
+		mimes.put(Icms.class, getIcmsEntryAction());
+
+		mimes.put(PisCofins.class, getPisCofinsEntryAction());
+
+		mimes.put(Ipi.class, getIpiEntryAction());
+
+		mimes.put(Rule.class, getRuleEntryAction());
+
+		mimes.put(Person.class, getPersonEntryAction());
+
+		mimes.put(Company.class, getCompanyEntryAction());
+
+		mimes.put(SystemPerson.class, getSystemPersonEntryAction());
+
+		mimes.put(SystemCompany.class, getSystemCompanyEntryAction());
+
+		mimes.put(PaymentCondition.class, getPaymentConditionEntryAction());
+
+		mimes.put(ReceiptCondition.class, getReceiptConditionEntryAction());
+
+		return mimes;
+
 
 	}
 
@@ -188,23 +332,35 @@ public class WorldClientView extends ClientView{
 									new Object[]{
 										new ProductTag(),
 
-										getProductEntryAction()
+										getProductEntryAction(),
+
+										getProductGroupEntryAction(),
+
+										getProductMarkEntryAction(),
+
+										getProductLineEntryAction(),
+
+										getProductModelEntryAction(),
+
+										getProductDetailEntryAction(),
+
+										getProductFinishEntryAction()
 
 									},
 
 									getServiceEntryAction(),
-									
-									getUnitMeasureEntryAction(),
-									
+
+									getMeasureUnitEntryAction(),
+
 									new Object[]{
 										new TributesTag(),
 
 										getIcmsEntryAction(),
-										
+
 										getIpiEntryAction(),
-										
+
 										getPisCofinsEntryAction(),
-										
+
 										getIssqnEntryAction(),
 
 										getRuleEntryAction()
@@ -245,7 +401,7 @@ public class WorldClientView extends ClientView{
 									getPaymentConditionEntryAction()
 
 								}
-								
+
 							}
 
 						}
@@ -288,12 +444,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getSystemPersonEntryAction() {
+	protected EntryAction getSystemPersonEntryAction() {
 
 
 		if (systemPersonEntryAction == null){
 
-			systemPersonEntryAction = new SystemPersonEntryAction(getDesktop());
+			systemPersonEntryAction = new SystemPersonEntryAction();
 
 			getController().addView(systemPersonEntryAction);
 
@@ -395,24 +551,24 @@ public class WorldClientView extends ClientView{
 		if (modulesCommercialEntriesSubjectsMenu==null){
 
 			modulesCommercialEntriesSubjectsMenu = new Menu(new SubjectsTag());
-			
+
 			JMenuItem m1 = new JMenuItem(getCompanyEntryAction());
-			
+
 			m1.setAccelerator(KeyStroke.getKeyStroke(
-					
-			        KeyEvent.VK_J, ActionEvent.CTRL_MASK));
+
+					KeyEvent.VK_J, ActionEvent.CTRL_MASK));
 
 			modulesCommercialEntriesSubjectsMenu.add(m1);
 
 			JMenuItem m2 = new JMenuItem(getPersonEntryAction());
-			
+
 			m2.setAccelerator(KeyStroke.getKeyStroke(
-					
-			        KeyEvent.VK_F, ActionEvent.CTRL_MASK));
+
+					KeyEvent.VK_F, ActionEvent.CTRL_MASK));
 
 			modulesCommercialEntriesSubjectsMenu.add(m2);
 
-			
+
 		}
 
 		return modulesCommercialEntriesSubjectsMenu;
@@ -431,19 +587,19 @@ public class WorldClientView extends ClientView{
 			modulesCommercialEntriesProgeniesMenu.add(getModulesCommercialEntriesProgeniesProductMenu());
 
 			JMenuItem m1 = new JMenuItem(getServiceEntryAction());
-			
+
 			m1.setAccelerator(KeyStroke.getKeyStroke(
-					
-			        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+
+					KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 
 			modulesCommercialEntriesProgeniesMenu.add(m1);
-			
+
 			modulesCommercialEntriesProgeniesMenu.addSeparator();
 
-			modulesCommercialEntriesProgeniesMenu.add(getUnitMeasureEntryAction());
-			
+			modulesCommercialEntriesProgeniesMenu.add(getMeasureUnitEntryAction());
+
 			modulesCommercialEntriesProgeniesMenu.addSeparator();
-			
+
 			modulesCommercialEntriesProgeniesMenu.add(getModulesCommercialEntriesProgeniesTributesMenu());
 
 		}
@@ -462,12 +618,27 @@ public class WorldClientView extends ClientView{
 			modulesCommercialEntriesProgeniesProductMenu = new Menu(new ProductTag());
 
 			JMenuItem m1 = new JMenuItem(getProductEntryAction());
-			
+
 			m1.setAccelerator(KeyStroke.getKeyStroke(
-					
-			        KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-			
+
+					KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+
 			modulesCommercialEntriesProgeniesProductMenu.add(m1);
+
+			modulesCommercialEntriesProgeniesProductMenu.addSeparator();
+
+			modulesCommercialEntriesProgeniesProductMenu.add(getProductGroupEntryAction());
+
+			modulesCommercialEntriesProgeniesProductMenu.add(getProductMarkEntryAction());
+
+			modulesCommercialEntriesProgeniesProductMenu.add(getProductLineEntryAction());
+
+			modulesCommercialEntriesProgeniesProductMenu.add(getProductModelEntryAction());
+
+			modulesCommercialEntriesProgeniesProductMenu.add(getProductDetailEntryAction());
+
+			modulesCommercialEntriesProgeniesProductMenu.add(getProductFinishEntryAction());
+
 
 		}
 
@@ -485,11 +656,11 @@ public class WorldClientView extends ClientView{
 			modulesCommercialEntriesProgeniesTributesMenu = new Menu(new TributesTag());
 
 			modulesCommercialEntriesProgeniesTributesMenu.add(getIcmsEntryAction());
-			
+
 			modulesCommercialEntriesProgeniesTributesMenu.add(getIpiEntryAction());
-			
+
 			modulesCommercialEntriesProgeniesTributesMenu.add(getPisCofinsEntryAction());
-			
+
 			modulesCommercialEntriesProgeniesTributesMenu.add(getIssqnEntryAction());
 
 			modulesCommercialEntriesProgeniesTributesMenu.addSeparator();
@@ -611,7 +782,7 @@ public class WorldClientView extends ClientView{
 
 		if (logoutAction == null){
 
-			logoutAction = new LogoutAction(getController());
+			logoutAction = new LogoutAction();
 
 			getController().addView(logoutAction);
 
@@ -623,12 +794,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getChangePasswordAction() {
+	protected EntryAction getChangePasswordAction() {
 
 
 		if (changePasswordAction == null){
 
-			changePasswordAction = new ChangePasswordAction(getDesktop(), getController());
+			changePasswordAction = new ChangePasswordAction();
 
 			getController().addView(changePasswordAction);
 
@@ -684,7 +855,7 @@ public class WorldClientView extends ClientView{
 
 		if (helpAction == null)
 
-			helpAction = new HelpAction(getController());
+			helpAction = new HelpAction();
 
 		return helpAction;
 
@@ -692,7 +863,7 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getSystemCompanyEntryAction() {
+	protected EntryAction getSystemCompanyEntryAction() {
 
 
 		if (systemCompanyEntryAction == null){
@@ -709,12 +880,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getPersonEntryAction() {
+	protected EntryAction getPersonEntryAction() {
 
 
 		if (personEntryAction == null){
 
-			personEntryAction = new PersonEntryAction(getDesktop());
+			personEntryAction = new PersonEntryAction();
 
 			getController().addView(personEntryAction);
 
@@ -726,12 +897,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getCompanyEntryAction() {
+	protected EntryAction getCompanyEntryAction() {
 
 
 		if (companyEntryAction == null){
 
-			companyEntryAction = new CompanyEntryAction(getDesktop());
+			companyEntryAction = new CompanyEntryAction();
 
 			getController().addView(companyEntryAction);
 
@@ -743,12 +914,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getProductEntryAction() {
+	protected EntryAction getProductEntryAction() {
 
 
 		if (productEntryAction==null){
 
-			productEntryAction = new ProductEntryAction(getDesktop());
+			productEntryAction = new ProductEntryAction();
 
 			getController().addView(productEntryAction);
 
@@ -760,12 +931,114 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getServiceEntryAction() {
+	protected EntryAction getProductGroupEntryAction() {
+
+
+		if (productGroupEntryAction==null){
+
+			productGroupEntryAction = new ProductGroupEntryAction();
+
+			getController().addView(productGroupEntryAction);
+
+		}	
+
+		return productGroupEntryAction;
+
+
+	}
+
+
+	protected EntryAction getProductModelEntryAction() {
+
+
+		if (productModelEntryAction==null){
+
+			productModelEntryAction = new ProductModelEntryAction();
+
+			getController().addView(productModelEntryAction);
+
+		}	
+
+		return productModelEntryAction;
+
+
+	}
+
+
+	protected EntryAction getProductMarkEntryAction() {
+
+
+		if (productMarkEntryAction==null){
+
+			productMarkEntryAction = new ProductMarkEntryAction();
+
+			getController().addView(productMarkEntryAction);
+
+		}	
+
+		return productMarkEntryAction;
+
+
+	}
+
+
+	protected EntryAction getProductLineEntryAction() {
+
+
+		if (productLineEntryAction==null){
+
+			productLineEntryAction = new ProductLineEntryAction();
+
+			getController().addView(productLineEntryAction);
+
+		}	
+
+		return productLineEntryAction;
+
+
+	}
+
+
+	protected EntryAction getProductDetailEntryAction() {
+
+
+		if (productDetailEntryAction==null){
+
+			productDetailEntryAction = new ProductDetailEntryAction();
+
+			getController().addView(productDetailEntryAction);
+
+		}	
+
+		return productDetailEntryAction;
+
+
+	}
+
+
+	protected EntryAction getProductFinishEntryAction() {
+
+
+		if (productFinishEntryAction==null){
+
+			productFinishEntryAction = new ProductFinishEntryAction();
+
+			getController().addView(productFinishEntryAction);
+
+		}	
+
+		return productFinishEntryAction;
+
+
+	}
+
+
+	protected EntryAction getServiceEntryAction() {
 
 
 		if (serviceEntryAction==null){
 
-			serviceEntryAction = new ServiceEntryAction(getDesktop());
+			serviceEntryAction = new ServiceEntryAction();
 
 			getController().addView(serviceEntryAction);
 
@@ -777,29 +1050,29 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getUnitMeasureEntryAction() {
+	protected EntryAction getMeasureUnitEntryAction() {
 
 
-		if (unitMeasureEntryAction==null){
+		if (measureUnitEntryAction==null){
 
-			unitMeasureEntryAction = new UnitMeasureEntryAction(getDesktop());
+			measureUnitEntryAction = new MeasureUnitEntryAction();
 
-			getController().addView(unitMeasureEntryAction);
+			getController().addView(measureUnitEntryAction);
 
 		}	
 
-		return unitMeasureEntryAction;
+		return measureUnitEntryAction;
 
 
 	}
 
 
-	protected ApplicationAction getIcmsEntryAction() {
+	protected EntryAction getIcmsEntryAction() {
 
 
 		if (icmsEntryAction==null){
 
-			icmsEntryAction = new IcmsEntryAction(getDesktop());
+			icmsEntryAction = new IcmsEntryAction();
 
 			getController().addView(icmsEntryAction);
 
@@ -811,12 +1084,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getPisCofinsEntryAction() {
+	protected EntryAction getPisCofinsEntryAction() {
 
 
 		if (pisCofinsEntryAction==null){
 
-			pisCofinsEntryAction = new PisCofinsEntryAction(getDesktop());
+			pisCofinsEntryAction = new PisCofinsEntryAction();
 
 			getController().addView(pisCofinsEntryAction);
 
@@ -828,12 +1101,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getIpiEntryAction() {
+	protected EntryAction getIpiEntryAction() {
 
 
 		if (ipiEntryAction==null){
 
-			ipiEntryAction = new IpiEntryAction(getDesktop());
+			ipiEntryAction = new IpiEntryAction();
 
 			getController().addView(ipiEntryAction);
 
@@ -845,12 +1118,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getIssqnEntryAction() {
+	protected EntryAction getIssqnEntryAction() {
 
 
 		if (issqnEntryAction==null){
 
-			issqnEntryAction = new IssqnEntryAction(getDesktop());
+			issqnEntryAction = new IssqnEntryAction();
 
 			getController().addView(issqnEntryAction);
 
@@ -862,12 +1135,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getRuleEntryAction() {
+	protected EntryAction getRuleEntryAction() {
 
 
 		if (ruleEntryAction==null){
 
-			ruleEntryAction = new RuleEntryAction(getDesktop());
+			ruleEntryAction = new RuleEntryAction();
 
 			getController().addView(ruleEntryAction);
 
@@ -879,12 +1152,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getOutputMacroEntryAction() {
+	protected EntryAction getOutputMacroEntryAction() {
 
 
 		if (outputMacroEntryAction==null){
 
-			outputMacroEntryAction = new OutputMacroEntryAction(getDesktop());
+			outputMacroEntryAction = new OutputMacroEntryAction();
 
 			getController().addView(outputMacroEntryAction);
 
@@ -896,12 +1169,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getInputMacroEntryAction() {
+	protected EntryAction getInputMacroEntryAction() {
 
 
 		if (inputMacroEntryAction==null){
 
-			inputMacroEntryAction = new InputMacroEntryAction(getDesktop());
+			inputMacroEntryAction = new InputMacroEntryAction();
 
 			getController().addView(inputMacroEntryAction);
 
@@ -913,12 +1186,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getSaleOrderEntryAction() {
+	protected EntryAction getSaleOrderEntryAction() {
 
 
 		if (saleOrderEntryAction==null){
 
-			saleOrderEntryAction = new SaleOrderEntryAction(getDesktop());
+			saleOrderEntryAction = new SaleOrderEntryAction();
 
 			getController().addView(saleOrderEntryAction);
 
@@ -930,12 +1203,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getPurchaseOrderEntryAction() {
+	protected EntryAction getPurchaseOrderEntryAction() {
 
 
 		if (purchaseOrderEntryAction==null){
 
-			purchaseOrderEntryAction = new PurchaseOrderEntryAction(getDesktop());
+			purchaseOrderEntryAction = new PurchaseOrderEntryAction();
 
 			getController().addView(purchaseOrderEntryAction);
 
@@ -947,12 +1220,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getOutputOrderEntryAction() {
+	protected EntryAction getOutputOrderEntryAction() {
 
 
 		if (outputOrderEntryAction==null){
 
-			outputOrderEntryAction = new OutputOrderEntryAction(getDesktop());
+			outputOrderEntryAction = new OutputOrderEntryAction();
 
 			getController().addView(outputOrderEntryAction);
 
@@ -964,12 +1237,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getInputOrderEntryAction() {
+	protected EntryAction getInputOrderEntryAction() {
 
 
 		if (inputOrderEntryAction==null){
 
-			inputOrderEntryAction = new InputOrderEntryAction(getDesktop());
+			inputOrderEntryAction = new InputOrderEntryAction();
 
 			getController().addView(inputOrderEntryAction);
 
@@ -981,12 +1254,12 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getReceiptConditionEntryAction() {
+	protected EntryAction getReceiptConditionEntryAction() {
 
 
 		if (receiptConditionEntryAction==null){
 
-			receiptConditionEntryAction = new ReceiptConditionEntryAction(getDesktop());
+			receiptConditionEntryAction = new ReceiptConditionEntryAction();
 
 			getController().addView(receiptConditionEntryAction);
 
@@ -998,18 +1271,594 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ApplicationAction getPaymentConditionEntryAction() {
+	protected EntryAction getPaymentConditionEntryAction() {
 
 
 		if (paymentConditionEntryAction==null){
 
-			paymentConditionEntryAction = new PaymentConditionEntryAction(getDesktop());
+			paymentConditionEntryAction = new PaymentConditionEntryAction();
 
 			getController().addView(paymentConditionEntryAction);
 
 		}	
 
 		return paymentConditionEntryAction;
+
+
+	}
+
+
+	public void executeSystemPersonEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				SystemPerson.class, 
+
+				WorldSystemPersonView.class, 
+
+				WorldSystemPersonController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeSystemCompanyEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				SystemCompany.class, 
+
+				SystemCompanyView.class, 
+
+				SystemCompanyController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeServiceEntry() throws Exception{
+
+
+		try {
+
+			throw new NotYetImplementedException();
+
+		} catch (NotYetImplementedException e) {
+
+			Messenger.show(e);
+
+		}
+
+
+	}
+
+
+	public void executeSaleOrderEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				SaleOrder.class, 
+
+				WorldSaleOrderView.class, 
+
+				WorldSaleOrderController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeRuleEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				Rule.class, 
+
+				RuleView.class, 
+
+				RuleController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeReceiptConditionEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ReceiptCondition.class, 
+
+				ReceiptConditionView.class, 
+
+				ReceiptConditionController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executePaymentConditionEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				PaymentCondition.class, 
+
+				PaymentConditionView.class, 
+
+				PaymentConditionController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executePurchaseOrderEntry() throws Exception{
+
+
+		try {
+
+			throw new NotYetImplementedException();
+
+		} catch (NotYetImplementedException e) {
+
+			Messenger.show(e);
+
+		}
+
+
+	}
+
+
+	public void executeProductModelEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ProductModel.class, 
+
+				ProductModelView.class, 
+
+				ProductModelController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeProductMarkEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ProductMark.class, 
+
+				ProductMarkView.class, 
+
+				ProductMarkController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeProductLineEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ProductLine.class, 
+
+				ProductLineView.class, 
+
+				ProductLineController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeProductGroupEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ProductGroup.class, 
+
+				ProductGroupView.class, 
+
+				ProductGroupController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeProductFinishEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ProductFinish.class, 
+
+				ProductFinishView.class, 
+
+				ProductFinishController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeProductEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				Product.class, 
+
+				ProductView.class, 
+
+				ProductController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeProductDetailEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ProductDetail.class, 
+
+				ProductDetailView.class, 
+
+				ProductDetailController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executePisCofinsEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				PisCofins.class, 
+
+				PisCofinsView.class, 
+
+				PisCofinsController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executePersonEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				Person.class, 
+
+				PersonView.class, 
+
+				PersonController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeOutputOrderEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				OutputOrder.class, 
+
+				WorldOutputOrderView.class, 
+
+				WorldOutputOrderController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeOutputMacroEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				OutputMacro.class, 
+
+				OutputMacroView.class, 
+
+				OutputMacroController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeMeasureUnitEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				MeasureUnit.class, 
+
+				MeasureUnitView.class, 
+
+				MeasureUnitController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeIssqnEntry() throws Exception{
+
+
+		try {
+
+			throw new NotYetImplementedException();
+
+		} catch (NotYetImplementedException e) {
+
+			Messenger.show(e);
+
+		}
+
+
+	}
+
+
+	public void executeIpiEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				Ipi.class, 
+
+				IpiView.class, 
+
+				IpiController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeInputOrderEntry() throws Exception{
+
+
+		try {
+
+			throw new NotYetImplementedException();
+
+		} catch (NotYetImplementedException e) {
+
+			Messenger.show(e);
+
+		}
+
+
+	}
+
+
+	public void executeInputMacroEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				InputMacro.class, 
+
+				InputMacroView.class, 
+
+				InputMacroController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeIcmsEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				Icms.class, 
+
+				IcmsView.class, 
+
+				IcmsController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeCompanyEntry() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				Company.class, 
+
+				CompanyView.class, 
+
+				CompanyController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeHelpAbout() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				HelpAboutModel.class, 
+
+				HelpAboutView.class, 
+
+				HelpAboutController.class);
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
+
+
+	}
+
+
+	public void executeChangePassword() throws Exception{
+
+
+		MVCBean bean = MVCBeanFactory.create(
+
+				ChangePasswordModel.class, 
+
+				ChangePasswordView.class, 
+
+				ChangePasswordController.class);
+
+		((ChangePasswordController)bean.getController()).
+
+		changeSystemPersonProperty(getController().getModel().getSystemPerson());
+
+		getDesktop().add((InternalFrame)bean.getView());
+
+		((InternalFrame)bean.getView()).setVisible(true);
+
+		((InternalFrame)bean.getView()).setLocation(InternalFramePosition.CENTER);
 
 
 	}

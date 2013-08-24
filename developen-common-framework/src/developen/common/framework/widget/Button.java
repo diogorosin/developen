@@ -35,7 +35,7 @@ public class Button extends JButton implements LanguageChangeListener {
 	public Button(Tag caption){
 
 		
-		getCaption(caption);
+		setCaption(caption);
 		
 		init();
 		
@@ -57,7 +57,7 @@ public class Button extends JButton implements LanguageChangeListener {
 	public Button(Tag caption, Icon icon){
 
 		
-		getCaption(caption);
+		setCaption(caption);
 		
 		setIcon(icon);
 		
@@ -72,7 +72,7 @@ public class Button extends JButton implements LanguageChangeListener {
 		
 		I18N.addLanguageChangeListener(this);
 		
-		setPreferredSize(new Dimension(100,26));
+		setPreferredSize(new Dimension(110,26));
 		
 		registerKeyboardAction(getActionForKeyStroke(
 				
@@ -108,7 +108,11 @@ public class Button extends JButton implements LanguageChangeListener {
 			if (getCaption().hasToolTip())
 				
 				setToolTipText(getCaption().getToolTip());
-			
+
+			if (getCaption().hasSmallIcon())
+				
+				setIcon(getCaption().getSmallIcon());
+
 		}
 		
 
@@ -122,7 +126,7 @@ public class Button extends JButton implements LanguageChangeListener {
 	}
 
 	
-	public void getCaption(Tag caption) {
+	public void setCaption(Tag caption) {
 
 		
 		this.caption = caption;

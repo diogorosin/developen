@@ -2,7 +2,9 @@ package developen.client.commercial.mvc;
 
 import developen.client.framework.mvc.EntryController;
 import developen.common.commercial.i18n.DenominationTag;
+import developen.common.commercial.i18n.FiscalDocumentTypeTag;
 import developen.common.commercial.i18n.IdentifierTag;
+import developen.common.commercial.mvc.FiscalDocumentType;
 import developen.common.commercial.mvc.Macro;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.exception.OutOfRangeException;
@@ -27,6 +29,8 @@ public class MacroController extends EntryController {
 	public static final String STOCK_PROPERTY = "Stock";
 	
 	public static final String FINANCE_PROPERTY = "Finance";
+	
+	public static final String FISCAL_DOCUMENT_TYPE_PROPERTY = "FiscalDocumentType";
 	
 
 	public Macro getModel(){
@@ -119,6 +123,19 @@ public class MacroController extends EntryController {
 	}
 	
 
+	public void changeFiscalDocumentTypeProperty(FiscalDocumentType newValue) throws Exception{
+
+
+		if (newValue==null)
+
+			throw new NotNullException(new FiscalDocumentTypeTag());
+
+		setModelProperty(MacroController.FISCAL_DOCUMENT_TYPE_PROPERTY, newValue);
+
+
+	}
+
+
 	public void onClear() throws Exception{
 
 
@@ -142,6 +159,8 @@ public class MacroController extends EntryController {
 		
 		setModelProperty(MacroController.FINANCE_PROPERTY, new Boolean(false));
 		
+		setModelProperty(MacroController.FISCAL_DOCUMENT_TYPE_PROPERTY, null);
+		
 
 	}
 
@@ -164,6 +183,8 @@ public class MacroController extends EntryController {
 		setModelProperty(MacroController.STOCK_PROPERTY, new Boolean(true));
 		
 		setModelProperty(MacroController.FINANCE_PROPERTY, new Boolean(true));
+
+		setModelProperty(MacroController.FISCAL_DOCUMENT_TYPE_PROPERTY, null);
 
 
 	}

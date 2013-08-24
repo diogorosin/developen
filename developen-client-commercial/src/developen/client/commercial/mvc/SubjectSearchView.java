@@ -6,7 +6,7 @@ import java.util.Vector;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import developen.client.commercial.factory.SubjectFormatFactory;
+import developen.client.commercial.factory.CommercialFormatFactory;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.CityTag;
@@ -142,9 +142,9 @@ public class SubjectSearchView extends TableSearchView {
 
 						return row.elementAt(TYPE_COLUMN_INDEX).equals("J") ? 
 
-								SubjectFormatFactory.formatCNPJ((Long)row.elementAt(y)) :
+								CommercialFormatFactory.formatCNPJ((Long)row.elementAt(y)) :
 
-									SubjectFormatFactory.formatCPF((Long)row.elementAt(y));
+									CommercialFormatFactory.formatCPF((Long)row.elementAt(y));
 
 					} else
 

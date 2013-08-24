@@ -10,7 +10,6 @@ import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.ProgenyTag;
-import developen.common.commercial.i18n.UnitMeasureShortTag;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -26,8 +25,6 @@ public class ProgenySearchView extends TableSearchView {
 
 	public static final int DENOMINATION_COLUMN_INDEX = 1;
 
-	public static final int UNIT_MEASURE_COLUMN_INDEX = 2;
-
 	protected UneditableTableModel tableModel;
 
 	protected Table recordTable;
@@ -35,8 +32,6 @@ public class ProgenySearchView extends TableSearchView {
 	protected Column identifierColumn;
 
 	protected Column denominationColumn;
-
-	protected Column unitMeasureColumn;
 
 
 	public ProgenySearchView(SearchController controller) {
@@ -67,12 +62,6 @@ public class ProgenySearchView extends TableSearchView {
 
 					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
 
-			recordTable.getColumnModel().getColumn(UNIT_MEASURE_COLUMN_INDEX).setMaxWidth(50);
-
-			recordTable.getColumnModel().getColumn(UNIT_MEASURE_COLUMN_INDEX).setCellRenderer(
-
-					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
-
 		}
 
 		return recordTable;
@@ -92,8 +81,6 @@ public class ProgenySearchView extends TableSearchView {
 
 			tableModel.addColumn(getDenominationColumn());
 			
-			tableModel.addColumn(getUnitMeasureColumn());
-
 		}
 
 		return tableModel;
@@ -123,19 +110,6 @@ public class ProgenySearchView extends TableSearchView {
 			denominationColumn = new Column(new DenominationTag(), DENOMINATION_COLUMN_INDEX);
 
 		return denominationColumn;
-
-
-	}
-
-
-	public Column getUnitMeasureColumn(){
-
-
-		if (unitMeasureColumn == null)
-
-			unitMeasureColumn = new Column(new UnitMeasureShortTag(), UNIT_MEASURE_COLUMN_INDEX);
-
-		return unitMeasureColumn;
 
 
 	}

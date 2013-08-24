@@ -2,24 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
-import developen.client.commercial.mvc.IcmsController;
-import developen.client.commercial.mvc.IcmsView;
+import developen.client.application.action.EntryAction;
+import developen.client.osm.Client;
 import developen.common.commercial.i18n.IcmsIcmsSTTag;
-import developen.common.commercial.mvc.Icms;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class IcmsEntryAction extends ApplicationAction {
+public class IcmsEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public IcmsEntryAction(JDesktopPane desktop) {
+	public IcmsEntryAction() {
 
-		super(new IcmsIcmsSTTag(), desktop);
+		super(new IcmsIcmsSTTag());
 
 	}
 
@@ -27,33 +23,15 @@ public class IcmsEntryAction extends ApplicationAction {
 	public void actionPerformed(ActionEvent arg0) {
 
 		
-		Icms model = new Icms();
-		
-		IcmsController controller = new IcmsController();
-		
-		controller.setModel(model);
-		
-		IcmsView view = new IcmsView(controller);
-		
-		controller.addView(view);
-
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeIcmsEntry();
 			
-		} catch (Exception e) {
+		} catch (Exception exception) {
 			
-			e.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
-		
-		view.setLocation(InternalFramePosition.CENTER);
-		
-//		Client.getClientController().addSystemPersonListener(view);
 
 		
 	}

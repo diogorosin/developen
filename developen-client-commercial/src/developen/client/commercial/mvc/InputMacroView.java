@@ -240,15 +240,15 @@ public class InputMacroView extends MacroView {
 
 						} else {
 
-							if (event.getCheckable() == getCfopExterior2Field()){
+							if (event.getCheckable() == getFiscalDocumentTypeField()){
 
 								try{
 
-									getController().changeCfopExterior2Property((InputCfop) getCfopExterior2Field().getSearch().findBy());
+									getController().changeCfopExterior2Property((InputCfop) getFiscalDocumentTypeField().getSearch().findBy());
 
 								} catch (ManyRecordsFoundException e) {
 
-									getCfopExterior2Field().getSearch().openSearchViewWithoutReset(getDesktopPane());
+									getFiscalDocumentTypeField().getSearch().openSearchViewWithoutReset(getDesktopPane());
 
 								}
 

@@ -2,25 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
-import developen.client.commercial.mvc.CompanyController;
-import developen.client.commercial.mvc.CompanyView;
+import developen.client.application.action.EntryAction;
 import developen.client.osm.Client;
 import developen.common.commercial.i18n.CompanyTag;
-import developen.common.commercial.mvc.Company;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class CompanyEntryAction extends ApplicationAction {
+public class CompanyEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public CompanyEntryAction(JDesktopPane desktop) {
+	public CompanyEntryAction() {
 
-		super(new CompanyTag(), desktop);
+		super(new CompanyTag());
 		
 	}
 
@@ -28,33 +23,15 @@ public class CompanyEntryAction extends ApplicationAction {
 	public void actionPerformed(ActionEvent arg0) {
 
 		
-		Company model = new Company();
-		
-		CompanyController controller = new CompanyController();
-		
-		controller.setModel(model);
-		
-		CompanyView view = new CompanyView(controller);
-		
-		controller.addView(view);
-
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeCompanyEntry();
 			
-		} catch (Exception e) {
+		} catch (Exception exception) {
 			
-			e.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
-		
-		view.setLocation(InternalFramePosition.CENTER);
-		
-		Client.getClientController().addSystemPersonListener(view);
 		
 
 	}

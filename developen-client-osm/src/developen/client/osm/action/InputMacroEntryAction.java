@@ -2,25 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
-import developen.client.commercial.mvc.InputMacroController;
-import developen.client.commercial.mvc.InputMacroView;
+import developen.client.application.action.EntryAction;
 import developen.client.osm.Client;
 import developen.common.commercial.i18n.InputMacroTag;
-import developen.common.commercial.mvc.InputMacro;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class InputMacroEntryAction extends ApplicationAction {
+public class InputMacroEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -2670947297365137490L;
 
 
-	public InputMacroEntryAction(JDesktopPane desktop) {
+	public InputMacroEntryAction() {
 
-		super(new InputMacroTag(), desktop);
+		super(new InputMacroTag());
 
 	}
 
@@ -28,33 +23,15 @@ public class InputMacroEntryAction extends ApplicationAction {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		
-		InputMacro model = new InputMacro();
-		
-		InputMacroController controller = new InputMacroController();
-		
-		controller.setModel(model);
-		
-		InputMacroView view = new InputMacroView(controller);
-		
-		controller.addView(view);
-
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeInputMacroEntry();
 			
-		} catch (Exception e) {
+		} catch (Exception exception) {
 			
-			e.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
-		
-		view.setLocation(InternalFramePosition.CENTER);
-		
-		Client.getClientController().addSystemPersonListener(view);
 		
 		
 	}

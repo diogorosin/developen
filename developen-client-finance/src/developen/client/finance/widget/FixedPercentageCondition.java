@@ -3,9 +3,9 @@ package developen.client.finance.widget;
 import java.beans.PropertyChangeEvent;
 
 import developen.client.framework.widget.Condition;
-import developen.client.framework.widget.DBComponent;
 import developen.client.framework.widget.DBField;
 import developen.common.framework.mvc.ListEditorState;
+import developen.common.framework.mvc.View;
 
 public class FixedPercentageCondition extends Condition {
 
@@ -15,7 +15,7 @@ public class FixedPercentageCondition extends Condition {
 	private boolean fixedPercentage = false;
 
 
-	public boolean analyse(PropertyChangeEvent event, DBComponent component) {
+	public boolean analyse(PropertyChangeEvent event, View component) {
 
 
 		if (event.getPropertyName().equals("ModelState"))

@@ -143,9 +143,7 @@ public class IpiRule extends Model implements Search, ListEditor{
 
 				getIdentifier().getCfop(),
 
-				getIdentifier().getRule(),
-
-				getIpiAliquot() 
+				getIdentifier().getRule()
 
 		};
 

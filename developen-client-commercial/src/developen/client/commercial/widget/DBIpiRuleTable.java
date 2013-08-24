@@ -16,6 +16,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
+import developen.client.commercial.factory.CommercialFormatFactory;
 import developen.client.commercial.mvc.IpiRuleController;
 import developen.client.commercial.mvc.IpiRuleView;
 import developen.client.framework.action.AddAction;
@@ -27,18 +28,15 @@ import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBComponent;
 import developen.client.framework.widget.DBTable;
 import developen.client.framework.widget.EditingOrIncludingCondition;
-import developen.common.commercial.i18n.AliquotTag;
 import developen.common.commercial.i18n.CfopTag;
 import developen.common.commercial.i18n.FiscalRuleTag;
 import developen.common.commercial.mvc.Cfop;
 import developen.common.commercial.mvc.Ipi;
 import developen.common.commercial.mvc.IpiRule;
-import developen.common.commercial.mvc.Rule;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.ListEditorState;
 import developen.common.framework.mvc.View;
-import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.widget.Column;
 import developen.common.framework.widget.InternalFrame;
@@ -46,7 +44,7 @@ import developen.common.framework.widget.InternalFramePosition;
 import developen.common.framework.widget.UneditableTableModel;
 
 
-public class DBIpiRuleTable extends JComponent implements DBComponent{
+public abstract class DBIpiRuleTable extends JComponent implements DBComponent{
 
 
 	private static final long serialVersionUID = 877593865267407181L;
@@ -55,8 +53,6 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 
 	public static final int RULE_COLUMN_INDEX = 1;
 
-	public static final int IPI_ALIQUOT_COLUMN_INDEX = 2;
-
 	private UneditableTableModel tableModel;
 
 	private DBTable<IpiRule> table;
@@ -64,8 +60,6 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 	private Column cfopColumn;
 
 	private Column ruleColumn;
-
-	private Column ipiAliquotColumn;
 
 	private boolean fixedValue;
 
@@ -165,16 +159,14 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 			table.getColumnModel().getColumn(CFOP_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
+
+			table.getColumnModel().getColumn(CFOP_COLUMN_INDEX).setMinWidth(100);
 			
+			table.getColumnModel().getColumn(CFOP_COLUMN_INDEX).setMaxWidth(100);
+
 			table.getColumnModel().getColumn(RULE_COLUMN_INDEX).setCellRenderer(
 
 					TableFactory.createTableCellRenderer(SwingConstants.LEFT));
-			
-			table.getColumnModel().getColumn(IPI_ALIQUOT_COLUMN_INDEX).setCellRenderer(
-
-					TableFactory.createTableCellRenderer(SwingConstants.RIGHT));
-
-			table.getColumnModel().getColumn(IPI_ALIQUOT_COLUMN_INDEX).setMaxWidth(100);
 
 			table.getActionMap().put(ListEditorAction.DELETE, getRemoveAction());
 
@@ -242,25 +234,13 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 
 					Vector<?> row = (Vector<?>) this.dataVector.elementAt(x);
 
-//					if (y==FROM_COLUMN_INDEX)
-//
-//						return ((State)row.elementAt(y)).getAcronym();
-//
-//					else					
-//
-//						if (y==TO_COLUMN_INDEX)
-//
-//							return ((State)row.elementAt(y)).getAcronym();
-//
-//						else					
-//
-							if (y==IPI_ALIQUOT_COLUMN_INDEX)
+					if (y==CFOP_COLUMN_INDEX)
 
-								return FormatFactory.formatNumber((Double)row.elementAt(y), 3, 2);
+						return CommercialFormatFactory.formatCFOP(((Cfop)row.elementAt(CFOP_COLUMN_INDEX)).getIdentifier());
 
-							else
+					else
 
-								return row.elementAt(y);
+						return row.elementAt(y);
 
 				}
 
@@ -269,8 +249,6 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 			tableModel.addColumn(getCfopColumn());
 
 			tableModel.addColumn(getRuleColumn());
-
-			tableModel.addColumn(getIpiAliquotColumn());
 
 		}
 
@@ -301,19 +279,6 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 			ruleColumn = new Column(new FiscalRuleTag(), RULE_COLUMN_INDEX);
 
 		return ruleColumn;
-
-
-	}
-
-
-	public Column getIpiAliquotColumn(){
-
-
-		if (ipiAliquotColumn == null)
-
-			ipiAliquotColumn = new Column(new AliquotTag(), IPI_ALIQUOT_COLUMN_INDEX);
-
-		return ipiAliquotColumn;
 
 
 	}
@@ -479,9 +444,9 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 
 		controller.changeIpiProperty(getIpi());
 
-		controller.changeCfopProperty((Cfop)getTableModel().getValueAt(getTable().getSelectedRow(), CFOP_COLUMN_INDEX));
+		controller.changeCfopProperty(getRowAt(getTable().getSelectedRow()).getIdentifier().getCfop());
 
-		controller.changeRuleProperty((Rule)getTableModel().getValueAt(getTable().getSelectedRow(), RULE_COLUMN_INDEX));
+		controller.changeRuleProperty(getRowAt(getTable().getSelectedRow()).getIdentifier().getRule());
 
 		view.setVisible(true);
 
@@ -550,6 +515,9 @@ public class DBIpiRuleTable extends JComponent implements DBComponent{
 		this.fixedValue = fixedValue;
 
 	}
+
+
+	public abstract IpiRule getRowAt(int index);
 
 
 }

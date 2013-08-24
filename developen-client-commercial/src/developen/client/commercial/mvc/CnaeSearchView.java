@@ -6,7 +6,7 @@ import java.util.Vector;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import developen.client.commercial.factory.SubjectFormatFactory;
+import developen.client.commercial.factory.CommercialFormatFactory;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.CnaeTag;
@@ -87,7 +87,7 @@ public class CnaeSearchView extends TableSearchView {
 
 					if (y==IDENTIFIER_COLUMN_INDEX) {
 
-						return SubjectFormatFactory.formatCNAE((String)row.elementAt(y));
+						return CommercialFormatFactory.formatCNAE((String)row.elementAt(y));
 
 					} else
 

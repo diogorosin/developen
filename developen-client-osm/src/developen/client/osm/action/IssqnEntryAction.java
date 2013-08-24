@@ -2,22 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
+import developen.client.application.action.EntryAction;
+import developen.client.osm.Client;
 import developen.common.commercial.i18n.IssqnTag;
-import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
 
-public class IssqnEntryAction extends ApplicationAction {
+public class IssqnEntryAction extends EntryAction {
 
 	
 	private static final long serialVersionUID = -3219011617531614831L;
 
 
-	public IssqnEntryAction(JDesktopPane desktop) {
+	public IssqnEntryAction() {
 
-		super(new IssqnTag(), desktop);
+		super(new IssqnTag());
 
 	}
 
@@ -27,11 +25,11 @@ public class IssqnEntryAction extends ApplicationAction {
 		
 		try {
 			
-			throw new NotYetImplementedException();
+			Client.getClientView().executeIssqnEntry();
 			
-		} catch (NotYetImplementedException e) {
-
-			Messenger.show(e);
+		} catch (Exception exception) {
+			
+			Messenger.show(exception);
 			
 		}
 		

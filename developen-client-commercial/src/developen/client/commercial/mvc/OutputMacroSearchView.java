@@ -2,6 +2,8 @@ package developen.client.commercial.mvc;
 
 import developen.client.framework.mvc.SearchController;
 import developen.common.commercial.i18n.OutputMacroTag;
+import developen.common.commercial.mvc.OutputMacro;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.Tag;
 
 public class OutputMacroSearchView extends MacroSearchView {
@@ -21,6 +23,13 @@ public class OutputMacroSearchView extends MacroSearchView {
 
 		return new OutputMacroTag(); 
 
+	}
+
+
+	public Class<? extends Model> getMimeType(){
+		
+		return OutputMacro.class;
+		
 	}
 
 

@@ -2,6 +2,8 @@ package developen.client.finance.mvc;
 
 import developen.client.framework.mvc.SearchController;
 import developen.common.finance.i18n.PaymentConditionTag;
+import developen.common.finance.mvc.PaymentCondition;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.Tag;
 
 public class PaymentConditionSearchView extends ConditionSearchView {
@@ -23,5 +25,11 @@ public class PaymentConditionSearchView extends ConditionSearchView {
 
 	}
 
+
+	public Class<? extends Model> getMimeType() {
+
+		return PaymentCondition.class;
+		
+	}
 	
 }

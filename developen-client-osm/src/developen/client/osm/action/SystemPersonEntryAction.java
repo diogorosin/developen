@@ -2,24 +2,20 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JDesktopPane;
-
-import developen.client.application.action.ApplicationAction;
-import developen.client.application.mvc.SystemPersonController;
-import developen.client.osm.mvc.WorldSystemPersonView;
+import developen.client.application.action.EntryAction;
+import developen.client.osm.Client;
 import developen.common.commercial.i18n.SystemPersonsTag;
-import developen.common.commercial.mvc.SystemPerson;
-import developen.common.framework.widget.InternalFramePosition;
+import developen.common.framework.messenger.Messenger;
 
-public class SystemPersonEntryAction extends ApplicationAction {
+public class SystemPersonEntryAction extends EntryAction {
 
 
 	private static final long serialVersionUID = 5895567472741003747L;
 
 	
-	public SystemPersonEntryAction(JDesktopPane desktop) {
+	public SystemPersonEntryAction() {
 
-		super(new SystemPersonsTag(), desktop);
+		super(new SystemPersonsTag());
 
 	}
 
@@ -27,32 +23,16 @@ public class SystemPersonEntryAction extends ApplicationAction {
 	public void actionPerformed(ActionEvent arg0) {
 
 		
-		SystemPerson model = new SystemPerson();
-		
-		SystemPersonController controller = new SystemPersonController();
-		
-		controller.setModel(model);
-		
-		WorldSystemPersonView view = new WorldSystemPersonView(controller);
-		
-		controller.addView(view);
-
 		try {
 			
-			controller.clear();
+			Client.getClientView().executeSystemPersonEntry();
 			
 		} catch (Exception exception) {
 			
-			exception.printStackTrace();
+			Messenger.show(exception);
 			
 		}
-
-		getDesktop().add(view);
-
-		view.setVisible(true);
 		
-		view.setLocation(InternalFramePosition.CENTER);
-
 		
 	}
 

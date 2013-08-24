@@ -188,7 +188,7 @@ public class IcmsView extends EntryView {
 
 				getController().changeDenominationProperty(getDenominationField().getText());
 
-		
+
 	}
 
 
@@ -289,7 +289,17 @@ public class IcmsView extends EntryView {
 
 					, getEditRuleAction()
 
-					, getAddRuleAction());
+					, getAddRuleAction()){
+
+				private static final long serialVersionUID = 3052110809137289237L;
+
+				public IcmsRule getRowAt(int index) {
+
+					return getController().getModel().getRules().get(index);
+
+				}
+
+			};
 
 			rulesTable.addListEditorChangeListener(new ListEditorAdapter() {
 
@@ -310,11 +320,11 @@ public class IcmsView extends EntryView {
 					IcmsRulePK newValuePK = new IcmsRulePK();
 
 					newValuePK.setIcms(newValue.getIdentifier().getIcms());
-					
+
 					newValuePK.setFrom(newValue.getIdentifier().getFrom());
 
 					newValuePK.setTo(newValue.getIdentifier().getTo());
-					
+
 					newValuePK.setRule(newValue.getIdentifier().getRule());
 
 					IcmsRule child = new IcmsRule();
@@ -322,25 +332,25 @@ public class IcmsView extends EntryView {
 					child.setIdentifier(newValuePK);
 
 					child.setCst(newValue.getCst());
-					
+
 					child.setCsosn(newValue.getCsosn());
-					
+
 					child.setIcmsAliquot(newValue.getIcmsAliquot());
-					
+
 					child.setIcmsReduction(newValue.getIcmsReduction());
-					
+
 					child.setIcmsAliquotReduced(newValue.getIcmsAliquotReduced());
-					
+
 					child.setIcmsAliquotCreditReusable(newValue.getIcmsAliquotCreditReusable());
-					
+
 					child.setIcmsSTMarckup(newValue.getIcmsSTMarckup());
-					
+
 					child.setIcmsSTReduction(newValue.getIcmsSTReduction());
-					
+
 					child.setIcmsSTStaff(newValue.getIcmsSTSTaff());
-					
+
 					child.setCfopGroup(newValue.getCfopGroup());
-					
+
 					childsToSender.add(child);
 
 					getController().changeRulesProperty(childsToSender);
@@ -369,23 +379,23 @@ public class IcmsView extends EntryView {
 					child.setIdentifier(newValuePK);
 
 					child.setCst(newValue.getCst());
-					
+
 					child.setCsosn(newValue.getCsosn());
-					
+
 					child.setIcmsAliquot(newValue.getIcmsAliquot());
 
 					child.setIcmsReduction(newValue.getIcmsReduction());
-					
+
 					child.setIcmsAliquotReduced(newValue.getIcmsAliquotReduced());
-					
+
 					child.setIcmsAliquotCreditReusable(newValue.getIcmsAliquotCreditReusable());
-					
+
 					child.setIcmsSTMarckup(newValue.getIcmsSTMarckup());
-					
+
 					child.setIcmsSTReduction(newValue.getIcmsSTReduction());
-					
+
 					child.setIcmsSTStaff(newValue.getIcmsSTSTaff());
-					
+
 					child.setCfopGroup(newValue.getCfopGroup());
 
 					List<IcmsRule> childs = getController().getModel().getRules();
@@ -416,7 +426,7 @@ public class IcmsView extends EntryView {
 					IcmsRulePK newValuePK = new IcmsRulePK();
 
 					newValuePK.setIcms(newValue.getIdentifier().getIcms());
-					
+
 					newValuePK.setFrom(newValue.getIdentifier().getFrom());
 
 					newValuePK.setTo(newValue.getIdentifier().getTo());
@@ -428,23 +438,23 @@ public class IcmsView extends EntryView {
 					child.setIdentifier(newValuePK);
 
 					child.setCst(newValue.getCst());
-					
+
 					child.setCsosn(newValue.getCsosn());
-					
+
 					child.setIcmsAliquot(newValue.getIcmsAliquot());
-					
+
 					child.setIcmsReduction(newValue.getIcmsReduction());
-					
+
 					child.setIcmsAliquotReduced(newValue.getIcmsAliquotReduced());
-					
+
 					child.setIcmsAliquotCreditReusable(newValue.getIcmsAliquotCreditReusable());
-					
+
 					child.setIcmsSTMarckup(newValue.getIcmsSTMarckup());
-					
+
 					child.setIcmsSTReduction(newValue.getIcmsSTReduction());
-					
+
 					child.setIcmsSTStaff(newValue.getIcmsSTSTaff());
-					
+
 					child.setCfopGroup(newValue.getCfopGroup());
 
 					List<IcmsRule> childs = getController().getModel().getRules();

@@ -10,6 +10,8 @@ import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IcmsIcmsSTTag;
 import developen.common.commercial.i18n.IdentifierTag;
+import developen.common.commercial.mvc.Icms;
+import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.TableFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Column;
@@ -122,4 +124,11 @@ public class IcmsSearchView extends TableSearchView {
 	}
 
 
+	public Class<? extends Model> getMimeType(){
+		
+		return Icms.class;
+		
+	}
+
+	
 }

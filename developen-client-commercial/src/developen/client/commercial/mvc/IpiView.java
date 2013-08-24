@@ -53,10 +53,6 @@ public class IpiView extends EntryView {
 
 	public static int HEIGHT = 500;
 
-	public static int C_WIDTH = 400;
-
-	public static int C_HEIGHT = 24;
-
 	private DBIdentifierField identifierField;
 
 	private DBTextField denominationField;
@@ -188,7 +184,7 @@ public class IpiView extends EntryView {
 
 				getController().changeDenominationProperty(getDenominationField().getText());
 
-		
+
 	}
 
 
@@ -233,7 +229,7 @@ public class IpiView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(C_WIDTH, C_HEIGHT));
+			denominationField.setPreferredSize(new Dimension(400, 24));
 
 			getController().addView(denominationField);
 
@@ -289,7 +285,17 @@ public class IpiView extends EntryView {
 
 					, getEditRuleAction()
 
-					, getAddRuleAction());
+					, getAddRuleAction()){
+
+				private static final long serialVersionUID = 3200850609986680128L;
+
+				public IpiRule getRowAt(int index) {
+					
+					return getController().getModel().getRules().get(index);
+					
+				}
+
+			};
 
 			rulesTable.addListEditorChangeListener(new ListEditorAdapter() {
 
@@ -310,9 +316,9 @@ public class IpiView extends EntryView {
 					IpiRulePK newValuePK = new IpiRulePK();
 
 					newValuePK.setIpi(newValue.getIdentifier().getIpi());
-					
+
 					newValuePK.setCfop(newValue.getIdentifier().getCfop());
-					
+
 					newValuePK.setRule(newValue.getIdentifier().getRule());
 
 					IpiRule child = new IpiRule();
@@ -320,11 +326,11 @@ public class IpiView extends EntryView {
 					child.setIdentifier(newValuePK);
 
 					child.setCst(newValue.getCst());
-					
+
 					child.setIpiAliquot(newValue.getIpiAliquot());
-					
+
 					child.setIpiStaff(newValue.getIpiStaff());
-					
+
 					childsToSender.add(child);
 
 					getController().changeRulesProperty(childsToSender);
@@ -351,11 +357,11 @@ public class IpiView extends EntryView {
 					child.setIdentifier(newValuePK);
 
 					child.setCst(newValue.getCst());
-					
+
 					child.setIpiAliquot(newValue.getIpiAliquot());
 
 					child.setIpiStaff(newValue.getIpiStaff());
-					
+
 					List<IpiRule> childs = getController().getModel().getRules();
 
 					List<IpiRule> childsToSender = new AllwaysDiferentList<IpiRule>();
@@ -384,7 +390,7 @@ public class IpiView extends EntryView {
 					IpiRulePK newValuePK = new IpiRulePK();
 
 					newValuePK.setIpi(newValue.getIdentifier().getIpi());
-					
+
 					newValuePK.setCfop(newValue.getIdentifier().getCfop());
 
 					newValuePK.setRule(newValue.getIdentifier().getRule());
@@ -394,11 +400,11 @@ public class IpiView extends EntryView {
 					child.setIdentifier(newValuePK);
 
 					child.setCst(newValue.getCst());
-					
+
 					child.setIpiAliquot(newValue.getIpiAliquot());
-					
+
 					child.setIpiStaff(newValue.getIpiStaff());
-					
+
 					List<IpiRule> childs = getController().getModel().getRules();
 
 					List<IpiRule> childsToRemove = new ArrayList<IpiRule>();

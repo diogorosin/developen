@@ -5,7 +5,6 @@ package developen.common.framework.widget;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.JDesktopPane;
 
 import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.LanguageChangeListener;
@@ -20,8 +19,6 @@ public abstract class Action extends AbstractAction implements LanguageChangeLis
 
 	private Tag caption;
 
-	private JDesktopPane desktop;
-
 
 	public Action(Tag caption){
 
@@ -34,19 +31,6 @@ public abstract class Action extends AbstractAction implements LanguageChangeLis
 	}
 
 	
-	public Action(Tag caption, JDesktopPane desktop){
-
-
-		setCaption(caption);
-
-		setDesktop(desktop);
-
-		init();
-
-
-	}
-
-
 	protected void init(){
 
 		I18N.addLanguageChangeListener(this);
@@ -183,20 +167,6 @@ public abstract class Action extends AbstractAction implements LanguageChangeLis
 	public Tag getCaption() {
 
 		return caption;
-
-	}
-
-	
-	public JDesktopPane getDesktop() {
-
-		return desktop;
-
-	}
-
-	
-	public void setDesktop(JDesktopPane desktop) {
-
-		this.desktop = desktop;
 
 	}
 

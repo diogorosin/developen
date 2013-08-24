@@ -6,7 +6,7 @@ import java.util.Vector;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-import developen.client.commercial.factory.FiscalFormatFactory;
+import developen.client.commercial.factory.CommercialFormatFactory;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.CfopTag;
@@ -87,7 +87,7 @@ public class CfopSearchView extends TableSearchView {
 
 					if (y==IDENTIFIER_COLUMN_INDEX) {
 
-						return FiscalFormatFactory.formatCFOP((Long)row.elementAt(y));
+						return CommercialFormatFactory.formatCFOP((Long)row.elementAt(y));
 
 					} else
 
