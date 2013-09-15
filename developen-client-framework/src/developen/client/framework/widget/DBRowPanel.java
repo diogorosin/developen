@@ -45,7 +45,7 @@ public class DBRowPanel extends RowPanel {
 		
 		cons.weightx = 0;
 		
-		Label label = ((field instanceof DBField) && (((DBField)field).getSearch() != null)) ? new DBLink() : new Label();
+		Label label = ((field instanceof DBSearchableField) && (((DBSearchableField)field).getSearch() != null)) ? new DBLink() : new Label();
 		
 		if (field instanceof Nameable && !(field instanceof JCheckBox))
 			
@@ -87,7 +87,7 @@ public class DBRowPanel extends RowPanel {
 		
 		cons1.gridwidth = 1;
 		
-		Label label1 = ((field1 instanceof DBField) && (((DBField)field1).getSearch() != null)) ? new DBLink() : new Label();
+		Label label1 = ((field1 instanceof DBSearchableField) && (((DBSearchableField)field1).getSearch() != null)) ? new DBLink() : new Label();
 		
 		if (field1 instanceof Nameable && !(field1 instanceof JCheckBox))
 			
@@ -124,7 +124,7 @@ public class DBRowPanel extends RowPanel {
 		
 		cons2.gridwidth = 1;
 		
-		Label label2 = ((field2 instanceof DBField) && (((DBField)field2).getSearch() != null)) ? new DBLink() : new Label();
+		Label label2 = ((field2 instanceof DBSearchableField) && (((DBSearchableField)field2).getSearch() != null)) ? new DBLink() : new Label();
 		
 		if (field2 instanceof Nameable && !(field2 instanceof JCheckBox))
 			

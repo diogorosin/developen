@@ -247,7 +247,7 @@ public class CompanyView extends SubjectView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch == null){

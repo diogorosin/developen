@@ -180,7 +180,7 @@ public class CfopView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), CfopController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -242,7 +242,7 @@ public class CfopView extends EntryView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){

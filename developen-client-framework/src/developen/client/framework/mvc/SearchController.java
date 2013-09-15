@@ -204,7 +204,7 @@ public abstract class SearchController extends Controller {
 
 	}
 
-
+	
 	public void cancel() throws Exception {
 
 

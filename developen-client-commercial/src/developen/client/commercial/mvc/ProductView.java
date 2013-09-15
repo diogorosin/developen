@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import developen.client.commercial.search.IpiSearch;
 import developen.client.commercial.search.ProductDetailSearch;
 import developen.client.commercial.search.ProductFinishSearch;
 import developen.client.commercial.search.ProductGroupSearch;
@@ -47,6 +48,7 @@ import developen.common.commercial.i18n.FinishTag;
 import developen.common.commercial.i18n.GrossWeightTag;
 import developen.common.commercial.i18n.GroupTag;
 import developen.common.commercial.i18n.HeightTag;
+import developen.common.commercial.i18n.IpiTag;
 import developen.common.commercial.i18n.LengthTag;
 import developen.common.commercial.i18n.LineTag;
 import developen.common.commercial.i18n.MarkTag;
@@ -56,9 +58,11 @@ import developen.common.commercial.i18n.ProductTag;
 import developen.common.commercial.i18n.SpecificationTag;
 import developen.common.commercial.i18n.TechnicalTag;
 import developen.common.commercial.i18n.TributationTag;
+import developen.common.commercial.i18n.TributesTag;
 import developen.common.commercial.i18n.VolumeTag;
 import developen.common.commercial.i18n.WeightTag;
 import developen.common.commercial.i18n.WidthTag;
+import developen.common.commercial.mvc.Ipi;
 import developen.common.commercial.mvc.MeasureUnit;
 import developen.common.commercial.mvc.ProductDetail;
 import developen.common.commercial.mvc.ProductFinish;
@@ -153,6 +157,8 @@ public class ProductView extends ProgenyView {
 	private RemoveAction removeProductPartAction;
 
 	private DBProductPartTable productPartTable;
+	
+	private DBTextField ipiField;
 
 
 	public ProductView(ProductController controller) {
@@ -396,10 +402,16 @@ public class ProductView extends ProgenyView {
 
 			tributationTab = new DBRowPanel(150);
 
-			tributationTab.add(getProgenyTypeComboBox());
-
+			tributationTab.addSeparator(new TributesTag());
+			
 			tributationTab.add(getIcmsField());
 			
+			tributationTab.add(getPisCofinsField());
+			
+			tributationTab.add(getIpiField());
+			
+			tributationTab.add(getProgenyTypeComboBox());
+
 			tributationTab.add(getPriceField());
 
 			tributationTab.setName(new TributationTag().toString());
@@ -1597,6 +1609,41 @@ public class ProductView extends ProgenyView {
 		}
 
 		return netWeightUnitField;
+
+
+	}
+	
+	
+	public DBTextField getIpiField() {
+
+
+		if (ipiField == null){
+
+			IpiSearch ipiSearch = new IpiSearch();
+
+			ipiSearch.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeIpiProperty((Ipi) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+			ipiField = new DBTextField(new IpiTag(), ProductController.IPI_PROPERTY);
+
+			ipiField.addCheckListener(this);
+
+			ipiField.setSearch(ipiSearch);
+
+			ipiField.setPreferredSize(new Dimension(400,24));
+
+			getController().addView(ipiField);
+
+		}
+
+		return ipiField;
 
 
 	}

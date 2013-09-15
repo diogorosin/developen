@@ -1,8 +1,6 @@
 package developen.client.framework.widget;
 
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.JComponent;
@@ -13,7 +11,7 @@ import developen.client.framework.search.Search;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.TextField;
 
-public class DBTextField extends TextField implements DBField{
+public class DBTextField extends TextField implements DBSearchableField{
 
 
 	private static final long serialVersionUID = 5254764103720680641L;
@@ -49,31 +47,25 @@ public class DBTextField extends TextField implements DBField{
 	}
 
 
-	public void init(){
+	public void modelPropertyChanged(PropertyChangeEvent event) {
 
 
-		super.init();
+		setEnabled(getCondition().analyse(event, this));
 
-		addKeyListener(new KeyAdapter() {
+		if (event.getPropertyName().equals(getPropertyName())){
 
-			public void keyPressed(KeyEvent event) {
+			setText(event.getNewValue()==null ? "" : 
 
-				if (event.getKeyCode() == KeyEvent.VK_F4){
-
-					if (getSearch() != null)
-
-						getSearch().openSearchView(getDesktopPane());
-
-				}
-
-			}
-
-		});
+				event.getNewValue().toString());
+		
+			setCaretPosition(0);
+			
+		}
 
 
 	}
 
-
+	
 	public void setPropertyName(String propertyName) {
 
 		this.propertyName = propertyName;
@@ -124,25 +116,6 @@ public class DBTextField extends TextField implements DBField{
 	}
 
 
-	public void modelPropertyChanged(PropertyChangeEvent event) {
-
-
-		setEnabled(getCondition().analyse(event, this));
-
-		if (event.getPropertyName().equals(getPropertyName())){
-
-			setText(event.getNewValue()==null ? "" : 
-
-				event.getNewValue().toString());
-		
-			setCaretPosition(0);
-			
-		}
-
-
-	}
-
-	
 	public Search getSearch() {
 
 		return search;

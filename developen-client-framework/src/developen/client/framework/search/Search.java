@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.SearchModel;
 import developen.client.framework.mvc.SearchView;
-import developen.client.framework.widget.DBField;
+import developen.client.framework.widget.DBSearchableField;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.SearchState;
 import developen.common.framework.mvc.View;
@@ -27,7 +27,7 @@ public abstract class Search implements View {
 	
 	protected SearchModel model;
 
-	private DBField component;
+	private DBSearchableField component;
 	
 
 	public Object findBy() throws Exception{
@@ -214,14 +214,14 @@ public abstract class Search implements View {
 	}
 
 	
-	public DBField getComponent() {
+	public DBSearchableField getComponent() {
 
 		return component;
 
 	}
 
 	
-	public void setComponent(DBField component) {
+	public void setComponent(DBSearchableField component) {
 
 		this.component = component;
 		

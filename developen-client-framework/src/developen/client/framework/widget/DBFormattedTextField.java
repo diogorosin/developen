@@ -3,11 +3,6 @@ package developen.client.framework.widget;
 import java.beans.PropertyChangeEvent;
 import java.text.Format;
 
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-
-import developen.client.framework.search.Search;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.FormattedTextField;
 
@@ -23,8 +18,6 @@ public class DBFormattedTextField extends FormattedTextField implements DBField{
 	private boolean foreignKey;
 	
 	private boolean fixedValue;
-	
-	private Search search;
 	
 	private Condition condition;
 	
@@ -68,7 +61,20 @@ public class DBFormattedTextField extends FormattedTextField implements DBField{
 
 	}
 	
+	
+	public void modelPropertyChanged(PropertyChangeEvent event) {
 
+		
+		setEnabled(getCondition().analyse(event, this));
+
+		if (event.getPropertyName().equals(getPropertyName()))
+
+			setValue(event.getNewValue());
+		
+
+	}
+
+	
 	public void setPropertyName(String propertyName) {
 
 		this.propertyName = propertyName;
@@ -115,69 +121,6 @@ public class DBFormattedTextField extends FormattedTextField implements DBField{
 	public boolean isForeignKey() {
 
 		return foreignKey;
-
-	}
-
-	
-	public void modelPropertyChanged(PropertyChangeEvent event) {
-
-		
-		setEnabled(getCondition().analyse(event, this));
-
-		if (event.getPropertyName().equals(getPropertyName()))
-
-			setValue(event.getNewValue());
-		
-
-	}
-
-	
-	public Search getSearch() {
-
-		return search;
-
-	}
-
-	
-	public void setSearch(Search search) {
-
-		
-		this.search = search;
-		
-		this.search.setComponent(this);
-		
-
-	}
-
-	
-	public JDesktopPane getDesktopPane() {
-
-		
-		JDesktopPane desktop = null;
-
-		JComponent frame = (JComponent) this.getParent();
-		
-		while (frame.getParent() != null){
-
-			frame = (JComponent) frame.getParent();
-			
-			if (frame instanceof JInternalFrame) break;
-
-		}
-
-		if (frame instanceof JInternalFrame)
-			
-			desktop = ((JInternalFrame) frame).getDesktopPane();
-
-		return desktop;
-		
-
-	}
-
-	
-	public String getFindByString() {
-
-		return getText();
 
 	}
 

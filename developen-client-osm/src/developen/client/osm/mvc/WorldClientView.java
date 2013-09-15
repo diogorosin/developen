@@ -1,9 +1,11 @@
 package developen.client.osm.mvc;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
+import java.beans.PropertyVetoException;
 
+import javax.swing.JInternalFrame;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
@@ -59,9 +61,10 @@ import developen.client.finance.mvc.PaymentConditionController;
 import developen.client.finance.mvc.PaymentConditionView;
 import developen.client.finance.mvc.ReceiptConditionController;
 import developen.client.finance.mvc.ReceiptConditionView;
+import developen.client.framework.util.DesktopPaneChangedEvent;
 import developen.client.osm.action.ChangePasswordAction;
+import developen.client.osm.action.CloseAction;
 import developen.client.osm.action.CompanyEntryAction;
-import developen.client.osm.action.ExitAction;
 import developen.client.osm.action.HelpAboutAction;
 import developen.client.osm.action.HelpAction;
 import developen.client.osm.action.IcmsEntryAction;
@@ -71,6 +74,8 @@ import developen.client.osm.action.IpiEntryAction;
 import developen.client.osm.action.IssqnEntryAction;
 import developen.client.osm.action.LogoutAction;
 import developen.client.osm.action.MeasureUnitEntryAction;
+import developen.client.osm.action.OpenEntryAction;
+import developen.client.osm.action.OpenSearchAction;
 import developen.client.osm.action.OutputMacroEntryAction;
 import developen.client.osm.action.OutputOrderEntryAction;
 import developen.client.osm.action.PaymentConditionEntryAction;
@@ -127,9 +132,7 @@ import developen.common.finance.mvc.PaymentCondition;
 import developen.common.finance.mvc.ReceiptCondition;
 import developen.common.framework.exception.NotYetImplementedException;
 import developen.common.framework.messenger.Messenger;
-import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.Tag;
-import developen.common.framework.widget.Action;
 import developen.common.framework.widget.EnglishUSARadioButtonMenuItem;
 import developen.common.framework.widget.InternalFrame;
 import developen.common.framework.widget.InternalFramePosition;
@@ -166,7 +169,11 @@ public class WorldClientView extends ClientView{
 
 	private Menu modulesFinanceEntriesConditionsMenu;
 
-	protected ExitAction exitAction;
+	protected CloseAction closeAction;
+
+	protected OpenEntryAction openEntryAction;
+
+	protected OpenSearchAction openSearchAction;
 
 	protected LogoutAction logoutAction;
 
@@ -240,55 +247,55 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
-
-
-		HashMap<Class<? extends Model>, Action> mimes = super.getMimeTypes();
-
-		mimes.put(OutputMacro.class, getOutputMacroEntryAction());
-
-		mimes.put(InputMacro.class, getInputMacroEntryAction());
-
-		mimes.put(Product.class, getProductEntryAction());
-
-		mimes.put(ProductGroup.class, getProductGroupEntryAction());
-
-		mimes.put(ProductMark.class, getProductMarkEntryAction());
-
-		mimes.put(ProductLine.class, getProductLineEntryAction());
-
-		mimes.put(ProductModel.class, getProductModelEntryAction());
-
-		mimes.put(ProductDetail.class, getProductDetailEntryAction());
-
-		mimes.put(ProductFinish.class, getProductFinishEntryAction());
-
-		mimes.put(MeasureUnit.class, getMeasureUnitEntryAction());
-
-		mimes.put(Icms.class, getIcmsEntryAction());
-
-		mimes.put(PisCofins.class, getPisCofinsEntryAction());
-
-		mimes.put(Ipi.class, getIpiEntryAction());
-
-		mimes.put(Rule.class, getRuleEntryAction());
-
-		mimes.put(Person.class, getPersonEntryAction());
-
-		mimes.put(Company.class, getCompanyEntryAction());
-
-		mimes.put(SystemPerson.class, getSystemPersonEntryAction());
-
-		mimes.put(SystemCompany.class, getSystemCompanyEntryAction());
-
-		mimes.put(PaymentCondition.class, getPaymentConditionEntryAction());
-
-		mimes.put(ReceiptCondition.class, getReceiptConditionEntryAction());
-
-		return mimes;
-
-
-	}
+//	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
+//
+//
+//		HashMap<Class<? extends Model>, Action> mimes = super.getMimeTypes();
+//
+//		mimes.put(OutputMacro.class, getOutputMacroEntryAction());
+//
+//		mimes.put(InputMacro.class, getInputMacroEntryAction());
+//
+//		mimes.put(Product.class, getProductEntryAction());
+//
+//		mimes.put(ProductGroup.class, getProductGroupEntryAction());
+//
+//		mimes.put(ProductMark.class, getProductMarkEntryAction());
+//
+//		mimes.put(ProductLine.class, getProductLineEntryAction());
+//
+//		mimes.put(ProductModel.class, getProductModelEntryAction());
+//
+//		mimes.put(ProductDetail.class, getProductDetailEntryAction());
+//
+//		mimes.put(ProductFinish.class, getProductFinishEntryAction());
+//
+//		mimes.put(MeasureUnit.class, getMeasureUnitEntryAction());
+//
+//		mimes.put(Icms.class, getIcmsEntryAction());
+//
+//		mimes.put(PisCofins.class, getPisCofinsEntryAction());
+//
+//		mimes.put(Ipi.class, getIpiEntryAction());
+//
+//		mimes.put(Rule.class, getRuleEntryAction());
+//
+//		mimes.put(Person.class, getPersonEntryAction());
+//
+//		mimes.put(Company.class, getCompanyEntryAction());
+//
+//		mimes.put(SystemPerson.class, getSystemPersonEntryAction());
+//
+//		mimes.put(SystemCompany.class, getSystemCompanyEntryAction());
+//
+//		mimes.put(PaymentCondition.class, getPaymentConditionEntryAction());
+//
+//		mimes.put(ReceiptCondition.class, getReceiptConditionEntryAction());
+//
+//		return mimes;
+//
+//
+//	}
 
 
 	public Object[] getMenuHierarchy() {
@@ -357,9 +364,9 @@ public class WorldClientView extends ClientView{
 
 										getIcmsEntryAction(),
 
-										getIpiEntryAction(),
-
 										getPisCofinsEntryAction(),
+
+										getIpiEntryAction(),
 
 										getIssqnEntryAction(),
 
@@ -476,7 +483,7 @@ public class WorldClientView extends ClientView{
 
 			modulesMenu.add(getLogoutAction());
 
-			modulesMenu.add(getExitAction());
+			modulesMenu.add(getCloseAction());
 
 		}
 
@@ -657,9 +664,9 @@ public class WorldClientView extends ClientView{
 
 			modulesCommercialEntriesProgeniesTributesMenu.add(getIcmsEntryAction());
 
-			modulesCommercialEntriesProgeniesTributesMenu.add(getIpiEntryAction());
-
 			modulesCommercialEntriesProgeniesTributesMenu.add(getPisCofinsEntryAction());
+
+			modulesCommercialEntriesProgeniesTributesMenu.add(getIpiEntryAction());
 
 			modulesCommercialEntriesProgeniesTributesMenu.add(getIssqnEntryAction());
 
@@ -764,14 +771,48 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected ExitAction getExitAction() {
+	protected CloseAction getCloseAction() {
 
 
-		if (exitAction == null)
+		if (closeAction == null)
 
-			exitAction = new ExitAction(getController());
+			closeAction = new CloseAction(getController());
 
-		return exitAction;
+		return closeAction;
+
+
+	}
+
+
+	protected OpenEntryAction getOpenEntryAction() {
+
+
+		if (openEntryAction == null){
+
+			openEntryAction = new OpenEntryAction();
+
+			getController().addView(openEntryAction);
+
+		}
+
+		return openEntryAction;
+
+
+	}
+
+
+	protected OpenSearchAction getOpenSearchAction() {
+
+
+		if (openSearchAction == null){
+
+			openSearchAction = new OpenSearchAction();
+
+			getController().addView(openSearchAction);
+
+		}
+
+		return openSearchAction;
 
 
 	}
@@ -1863,5 +1904,54 @@ public class WorldClientView extends ClientView{
 
 	}
 
+
+	public void internalFrameDeactived(DesktopPaneChangedEvent event) {
+
+
+		boolean finded = getDesktop().getComponentCount() > 0;
+
+		if (finded)
+
+			for (Component comp : getDesktop().getComponents()) {
+
+				if (comp instanceof JInternalFrame){
+
+					getDesktop().setSelectedFrame((JInternalFrame)comp);
+
+					try {
+
+						((JInternalFrame)comp).setSelected(true);
+
+					} catch (PropertyVetoException e) {
+
+						e.printStackTrace();
+
+					}
+
+					break;
+
+				}
+
+			}
+
+		else
+
+			getController().changeActiveFrameProperty(null);
+
+
+	}
+
+
+	public void internalFrameActived(DesktopPaneChangedEvent event) {
+
+
+		JInternalFrame f = (JInternalFrame) event.getSource();
+
+		if (f!=null)
+
+			getController().changeActiveFrameProperty(f);
+
+
+	}
 
 }

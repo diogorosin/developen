@@ -16,7 +16,9 @@ import javax.swing.event.InternalFrameEvent;
 import developen.client.framework.action.CancelAction;
 import developen.client.framework.action.DeleteAction;
 import developen.client.framework.action.SaveAction;
+import developen.client.framework.action.SearchAction;
 import developen.client.framework.i18n.EntryTag;
+import developen.client.framework.search.Search;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
@@ -39,14 +41,16 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 	private ButtonPanel buttonPanel;
 
-	private Button cancelButton;
+	private Button saveButton;
 
 	private Button deleteButton;
 
-	private Button saveButton;
+	private Button cancelButton;
 
 	private SaveAction saveAction;
 
+	private SearchAction searchAction;
+	
 	private DeleteAction deleteAction;
 
 	private CancelAction cancelAction;
@@ -114,25 +118,15 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 				EntryAction.CLEAR_OR_CANCEL);
 
-		getActionMap().put(EntryAction.SAVE, new AbstractAction() {
+		getActionMap().put(EntryAction.SEARCH, getSearchAction());
 
-			private static final long serialVersionUID = -1862018329518595289L;
+		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
 
-			public void actionPerformed(ActionEvent arg0) {
+				KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), 
 
-				try {
-
-					getController().save();
-
-				} catch (Exception exception) {
-
-					Messenger.show(exception);
-
-				}	
-
-			}
-
-		});
+				EntryAction.SEARCH);
+		
+		getActionMap().put(EntryAction.SAVE, getSaveAction());
 
 		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
 
@@ -140,25 +134,7 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 				EntryAction.SAVE);
 
-		getActionMap().put(EntryAction.DELETE, new AbstractAction() {
-
-			private static final long serialVersionUID = -1862018329518595289L;
-
-			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-
-					getController().delete();
-
-				} catch (Exception exception) {
-
-					Messenger.show(exception);
-
-				}	
-
-			}
-
-		});
+		getActionMap().put(EntryAction.DELETE, getDeleteAction());
 
 		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
 
@@ -208,62 +184,6 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 						EntryView.this.getComponentAtTop().requestFocus();
 
-				} else {
-
-					if (newValue.equals(EntryState.INCLUDING)){
-
-//						if (getController().getModel() instanceof Auditable){
-//
-//							Component component = this;
-//
-//							while (component != null){
-//
-//								if (component instanceof AuditProvider){
-//
-//									((Auditable)getController().getModel()).setCreatedBy(
-//
-//											((AuditProvider)component).getUser());
-//									
-//									break;
-//
-//								}
-//
-//								component = component.getParent();
-//
-//							}
-//
-//						}
-
-					} else {
-
-						if (newValue.equals(EntryState.EDITING)){
-
-//							if (getController().getModel() instanceof Auditable){
-//
-//								Component component = this;
-//
-//								while (component != null){
-//
-//									if (component instanceof AuditProvider){
-//
-//										((Auditable)getController().getModel()).setModifiedBy(
-//
-//												((AuditProvider)component).getUser());
-//
-//										break;
-//
-//									}
-//
-//									component = component.getParent();
-//
-//								}
-//
-//							}
-
-						}
-
-					}
-
 				}
 
 			}
@@ -280,11 +200,11 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 	}
 
-	
+
 	public Tag getInternalFrameTitle(){
-		
+
 		return new EntryTag();
-		
+
 	}
 
 
@@ -381,6 +301,33 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 	}
 
 
+	public SearchAction getSearchAction(){
+
+
+		if (searchAction == null){
+
+			searchAction = new SearchAction() {
+
+				private static final long serialVersionUID = 1L;
+
+				public void actionPerformed(ActionEvent e) {
+
+					getSearch().openSearchView(getDesktopPane());
+					
+				}
+
+			};
+
+			getController().addView(searchAction);
+
+		}
+
+		return searchAction;
+
+
+	}
+
+	
 	public CancelAction getCancelAction(){
 
 
@@ -425,14 +372,6 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 				private static final long serialVersionUID = 2658419979483024893L;
 
-				public void modelPropertyChanged(PropertyChangeEvent e) {
-
-					if (e.getPropertyName().equals("ModelState"))
-
-						setEnabled(e.getNewValue().equals(EntryState.EDITING));
-
-				}
-
 				public void actionPerformed(ActionEvent e) {
 
 					try {
@@ -468,16 +407,6 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 				private static final long serialVersionUID = -4856209104015211823L;
 
-				public void modelPropertyChanged(PropertyChangeEvent e) {
-
-					if (e.getPropertyName().equals("ModelState"))
-
-						setEnabled(e.getNewValue().equals(EntryState.EDITING) ||
-
-								e.getNewValue().equals(EntryState.INCLUDING));
-
-				}
-
 				public void actionPerformed(ActionEvent e) {
 
 					try {
@@ -504,7 +433,9 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 	}
 
 
-	public abstract JComponent getComponentAtTop(); 
+	public abstract JComponent getComponentAtTop();
 
-	
+	public abstract Search getSearch();
+
+
 }

@@ -27,7 +27,7 @@ public class PaymentConditionView extends ConditionView {
 
 	}
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){

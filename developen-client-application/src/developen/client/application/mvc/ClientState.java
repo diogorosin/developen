@@ -7,7 +7,7 @@ public enum ClientState {
 	
 	LOGGED_IN,	
 	
-	EXITED
+	CLOSED
 	
 
 }

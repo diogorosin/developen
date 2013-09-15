@@ -78,7 +78,7 @@ public class InputMacroView extends MacroView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch == null){

@@ -36,27 +36,6 @@ public class DBTextArea extends TextArea implements DBComponent{
 	}
 
 
-	public void init(){
-
-		super.init();
-
-	}
-
-
-	public void setPropertyName(String propertyName) {
-
-		this.propertyName = propertyName;
-
-	}
-
-
-	public String getPropertyName() {
-
-		return propertyName;
-
-	}
-
-
 	public void modelPropertyChanged(PropertyChangeEvent event) {
 
 
@@ -72,6 +51,20 @@ public class DBTextArea extends TextArea implements DBComponent{
 	}
 
 	
+	public void setPropertyName(String propertyName) {
+
+		this.propertyName = propertyName;
+
+	}
+
+
+	public String getPropertyName() {
+
+		return propertyName;
+
+	}
+
+
 	public Condition getCondition(){
 
 		

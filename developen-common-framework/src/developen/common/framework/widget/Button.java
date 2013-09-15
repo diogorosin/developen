@@ -72,7 +72,7 @@ public class Button extends JButton implements LanguageChangeListener {
 		
 		I18N.addLanguageChangeListener(this);
 		
-		setPreferredSize(new Dimension(110,26));
+		setPreferredSize(new Dimension(100,26));
 		
 		registerKeyboardAction(getActionForKeyStroke(
 				

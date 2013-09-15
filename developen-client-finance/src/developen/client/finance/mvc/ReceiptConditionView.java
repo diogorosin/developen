@@ -28,7 +28,7 @@ public class ReceiptConditionView extends ConditionView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){

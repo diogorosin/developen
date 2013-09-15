@@ -74,28 +74,28 @@ public class ClientController extends Controller {
 	}
 
 	
-	public void exit() throws Exception{
+	public void close() throws Exception{
 
 		
-		onBeforeExit();
+		onBeforeClose();
 		
-		onExit();
+		onClose();
 		
-		onAfterExit();
+		onAfterClose();
 		
 
 	}
 	
 
-	private void onBeforeExit() throws Exception{}
+	private void onBeforeClose() throws Exception{}
 
 	
-	private void onExit() throws Exception{}
+	private void onClose() throws Exception{}
 
 	
-	private void onAfterExit() throws Exception{
+	private void onAfterClose() throws Exception{
 
-		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.EXITED);
+		setModelProperty(ClientController.MODEL_STATE_PROPERTY, ClientState.CLOSED);
 
 	}
 

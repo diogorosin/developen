@@ -116,7 +116,7 @@ public class PersonView extends SubjectView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch == null){

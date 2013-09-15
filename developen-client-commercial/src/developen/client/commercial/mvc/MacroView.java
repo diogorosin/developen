@@ -247,7 +247,7 @@ public abstract class MacroView extends EntryView {
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.setPreferredSize(new Dimension(75,24));
 
@@ -532,9 +532,5 @@ public abstract class MacroView extends EntryView {
 		return (MacroController) super.getController();
 
 	}
-
-
-	public abstract Search getIdentifierSearch();
-
 
 }

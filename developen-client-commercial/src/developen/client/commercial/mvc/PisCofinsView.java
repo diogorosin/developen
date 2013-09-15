@@ -202,7 +202,7 @@ public class PisCofinsView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), PisCofinsController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -241,7 +241,7 @@ public class PisCofinsView extends EntryView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){

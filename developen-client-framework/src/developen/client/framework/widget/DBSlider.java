@@ -44,20 +44,6 @@ public class DBSlider extends Slider implements DBComponent {
 	}
 
 
-	public void setPropertyName(String propertyName) {
-
-		this.propertyName = propertyName;
-
-	}
-
-
-	public String getPropertyName() {
-
-		return propertyName;
-
-	}
-
-
 	public void modelPropertyChanged(PropertyChangeEvent event) {
 
 
@@ -77,6 +63,20 @@ public class DBSlider extends Slider implements DBComponent {
 
 			}
 
+
+	}
+
+
+	public void setPropertyName(String propertyName) {
+
+		this.propertyName = propertyName;
+
+	}
+
+
+	public String getPropertyName() {
+
+		return propertyName;
 
 	}
 

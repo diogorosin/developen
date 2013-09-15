@@ -40,7 +40,10 @@ public class Progeny extends Model implements Entry, Search{
 	@ManyToOne
 	private Icms icms;
 
+	@ManyToOne
+	private PisCofins pisCofins;
 
+	
 	public Long getIdentifier() {
 
 		return identifier;
@@ -176,6 +179,26 @@ public class Progeny extends Model implements Entry, Search{
 		this.icms = newValue;
 
 		firePropertyChange("Icms", oldValue, newValue);
+
+
+	}
+
+
+	public PisCofins getPisCofins() {
+
+		return pisCofins;
+
+	}
+
+
+	public void setPisCofins(PisCofins newValue) {
+
+
+		PisCofins oldValue = this.pisCofins;
+
+		this.pisCofins = newValue;
+
+		firePropertyChange("PisCofins", oldValue, newValue);
 
 
 	}

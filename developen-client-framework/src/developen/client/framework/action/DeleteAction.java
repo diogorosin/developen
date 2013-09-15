@@ -1,7 +1,9 @@
 package developen.client.framework.action;
 
 import developen.client.framework.i18n.DeleteTag;
+import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBAction;
+import developen.client.framework.widget.EditingCondition;
 
 public abstract class DeleteAction extends DBAction {
 
@@ -14,6 +16,19 @@ public abstract class DeleteAction extends DBAction {
 		super(new DeleteTag());
 		
 	}
+
 	
+	public Condition getCondition(){
+
+		
+		if (condition==null)
+			
+			condition = new EditingCondition();
+		
+		return condition;
+
+		
+	}
 	
+
 }

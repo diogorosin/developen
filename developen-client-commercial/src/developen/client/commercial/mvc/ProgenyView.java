@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
 import developen.client.commercial.search.IcmsSearch;
+import developen.client.commercial.search.PisCofinsSearch;
 import developen.client.commercial.search.ProgenySearch;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.mvc.EntryView;
@@ -26,11 +27,13 @@ import developen.common.commercial.i18n.ActiveTag;
 import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IcmsIcmsSTTag;
 import developen.common.commercial.i18n.IdentifierTag;
+import developen.common.commercial.i18n.PisCofinsTag;
 import developen.common.commercial.i18n.PriceTag;
 import developen.common.commercial.i18n.ProgenyTag;
 import developen.common.commercial.i18n.ShortDenominationTag;
 import developen.common.commercial.i18n.TypeTag;
 import developen.common.commercial.mvc.Icms;
+import developen.common.commercial.mvc.PisCofins;
 import developen.common.commercial.mvc.Progeny;
 import developen.common.commercial.mvc.ProgenyType;
 import developen.common.framework.messenger.Messenger;
@@ -67,6 +70,8 @@ public class ProgenyView extends EntryView {
 	private DBNumberField priceField;
 	
 	private DBTextField icmsField;
+	
+	private DBTextField pisCofinsField;
 	
 	
 	private TabbedPane mainTabbedPane;
@@ -207,7 +212,7 @@ public class ProgenyView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ProgenyController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -225,7 +230,7 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){
@@ -437,6 +442,42 @@ public class ProgenyView extends EntryView {
 	}
 
 
+	public DBTextField getPisCofinsField() {
+
+
+		if (pisCofinsField == null){
+
+			PisCofinsSearch pisCofinsSearch = new PisCofinsSearch();
+
+			pisCofinsSearch.addSearchListener(new SearchAdapter() {
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changePisCofinsProperty((PisCofins) event.getSelectedRows().get(0));
+
+				}
+
+			});
+
+
+			pisCofinsField = new DBTextField(new PisCofinsTag(), ProgenyController.PIS_COFINS_PROPERTY);
+
+			pisCofinsField.addCheckListener(this);
+
+			pisCofinsField.setSearch(pisCofinsSearch);
+
+			pisCofinsField.setPreferredSize(new Dimension(400,24));
+
+			getController().addView(pisCofinsField);
+
+		}
+
+		return pisCofinsField;
+
+
+	}
+
+	
 	public Tag getInternalFrameTitle() {
 
 		return new ProgenyTag();

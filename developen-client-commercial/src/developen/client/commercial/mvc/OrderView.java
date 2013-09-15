@@ -281,7 +281,7 @@ public class OrderView extends EntryView {
 
 			identifierField = new DBIdentifierField(new NumberTag(), OrderController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -299,7 +299,7 @@ public class OrderView extends EntryView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch == null){

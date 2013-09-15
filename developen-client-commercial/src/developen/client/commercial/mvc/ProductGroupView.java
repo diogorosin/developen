@@ -245,7 +245,7 @@ public class ProductGroupView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ProductGroupController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -624,7 +624,7 @@ public class ProductGroupView extends EntryView {
 	}
 	
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){

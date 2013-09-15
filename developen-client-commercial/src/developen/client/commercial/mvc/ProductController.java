@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import developen.client.commercial.factory.CommercialFormatFactory;
+import developen.common.commercial.mvc.Ipi;
 import developen.common.commercial.mvc.MeasureUnit;
 import developen.common.commercial.mvc.Product;
 import developen.common.commercial.mvc.ProductDetail;
@@ -54,6 +55,8 @@ public class ProductController extends ProgenyController {
 	public static final String NET_WEIGHT_VALUE_PROPERTY = "NetWeightValue";
 
 	public static final String NET_WEIGHT_UNIT_PROPERTY = "NetWeightUnit";
+	
+	public static final String IPI_PROPERTY = "Ipi";
 
 
 	public static final String PARTS_PROPERTY = "Parts";
@@ -264,6 +267,13 @@ public class ProductController extends ProgenyController {
 	}
 
 
+	public void changeIpiProperty(Ipi newValue){
+
+		setModelProperty(ProductController.IPI_PROPERTY, newValue);
+
+	}
+
+
 	public void changePartsProperty(List<ProductPart> newValue) {
 
 		setModelProperty(ProductController.PARTS_PROPERTY, newValue);
@@ -314,7 +324,9 @@ public class ProductController extends ProgenyController {
 
 		setModelProperty(ProductController.PARTS_PROPERTY, null);
 
+		setModelProperty(ProductController.IPI_PROPERTY, null);
 
+		
 	}
 
 
@@ -358,6 +370,8 @@ public class ProductController extends ProgenyController {
 		setModelProperty(ProductController.NET_WEIGHT_VALUE_PROPERTY, new Double(0));
 
 		setModelProperty(ProductController.NET_WEIGHT_UNIT_PROPERTY, null);
+		
+		setModelProperty(ProductController.IPI_PROPERTY, null);
 
 		setModelProperty(ProductController.PARTS_PROPERTY, new ArrayList<ProductPart>());
 

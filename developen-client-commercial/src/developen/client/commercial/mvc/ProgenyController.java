@@ -7,6 +7,7 @@ import developen.common.commercial.i18n.DenominationTag;
 import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.ShortDenominationTag;
 import developen.common.commercial.mvc.Icms;
+import developen.common.commercial.mvc.PisCofins;
 import developen.common.commercial.mvc.Progeny;
 import developen.common.commercial.mvc.ProgenyType;
 import developen.common.framework.exception.NotNullException;
@@ -29,6 +30,8 @@ public class ProgenyController extends EntryController {
 	public static final String PRICE_PROPERTY = "Price";
 	
 	public static final String ICMS_PROPERTY = "Icms";
+	
+	public static final String PIS_COFINS_PROPERTY = "PisCofins";
 
 	
 	public Progeny getModel(){
@@ -127,6 +130,13 @@ public class ProgenyController extends EntryController {
 	}
 		
 
+	public void changePisCofinsProperty(PisCofins newValue){
+		
+		setModelProperty(ProgenyController.PIS_COFINS_PROPERTY, newValue);
+		
+	}
+		
+
 	public void onClear() throws Exception{
 
 	
@@ -145,6 +155,8 @@ public class ProgenyController extends EntryController {
 		setModelProperty(ProgenyController.PRICE_PROPERTY, new Double(0));
 		
 		setModelProperty(ProgenyController.ICMS_PROPERTY, null);
+		
+		setModelProperty(ProgenyController.PIS_COFINS_PROPERTY, null);
 		
 		
 	}
@@ -166,6 +178,8 @@ public class ProgenyController extends EntryController {
 		setModelProperty(ProgenyController.PRICE_PROPERTY, new Double(0));
 		
 		setModelProperty(ProgenyController.ICMS_PROPERTY, null);
+		
+		setModelProperty(ProgenyController.PIS_COFINS_PROPERTY, null);
 		
 
 	}

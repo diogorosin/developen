@@ -122,7 +122,7 @@ public class ProductLineView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ProductLineController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -182,7 +182,7 @@ public class ProductLineView extends EntryView {
 	}
 
 
-	public Search getIdentifierSearch(){
+	public Search getSearch(){
 
 
 		if (identifierSearch==null){

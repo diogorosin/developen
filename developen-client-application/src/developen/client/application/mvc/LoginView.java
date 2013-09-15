@@ -16,7 +16,7 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 
 import developen.client.application.action.LoginAction;
-import developen.client.application.i18n.LoginTag;
+import developen.client.application.i18n.AccessControlTag;
 import developen.client.application.i18n.PasswordTag;
 import developen.client.application.i18n.SecurityTag;
 import developen.client.commercial.search.SystemPersonSearch;
@@ -225,7 +225,7 @@ public class LoginView extends InternalFrame implements CheckListener {
 	
 	public Tag getInternalFrameTitle() {
 
-		return new LoginTag();
+		return new AccessControlTag();
 
 	}
 

@@ -7,7 +7,9 @@ public enum SearchAction {
 	
 	SELECT,
 	
-	CANCEL
+	CANCEL,
+	
+	ENTRY
 	
 	
 }

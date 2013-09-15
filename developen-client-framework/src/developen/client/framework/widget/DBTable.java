@@ -53,20 +53,6 @@ public class DBTable<E extends Search> extends Table implements DBComponent {
 	}
 
 
-	public void setPropertyName(String propertyName) {
-
-		this.propertyName = propertyName;
-
-	}
-
-
-	public String getPropertyName() {
-
-		return propertyName;
-
-	}
-
-
 	@SuppressWarnings("unchecked")
 	public void modelPropertyChanged(PropertyChangeEvent event) {
 
@@ -96,6 +82,20 @@ public class DBTable<E extends Search> extends Table implements DBComponent {
 		}
 
 		
+	}
+
+
+	public void setPropertyName(String propertyName) {
+
+		this.propertyName = propertyName;
+
+	}
+
+
+	public String getPropertyName() {
+
+		return propertyName;
+
 	}
 
 

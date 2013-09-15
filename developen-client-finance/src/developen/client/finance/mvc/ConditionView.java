@@ -206,7 +206,7 @@ public abstract class ConditionView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ConditionController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getIdentifierSearch());
+			identifierField.setSearch(getSearch());
 
 			identifierField.addCheckListener(this);
 
@@ -276,8 +276,6 @@ public abstract class ConditionView extends EntryView {
 	}
 
 	
-	public abstract Search getIdentifierSearch();
-
 	public Tag getInternalFrameTitle() {
 
 		return new ConditionTag();

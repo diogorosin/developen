@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 
-import developen.common.framework.i18n.ExitTag;
+import developen.common.framework.i18n.CloseTag;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.widget.SystemTrayIcon;
 import developen.server.application.i18n.DevelOpenServerTag;
@@ -36,7 +36,7 @@ public class ServerView extends SystemTrayIcon {
 
 		PopupMenu menu = new PopupMenu();
 
-		MenuItem exit = new MenuItem(new ExitTag().toString());
+		MenuItem exit = new MenuItem(new CloseTag().toString());
 
 		exit.addActionListener(new ActionListener() {
 

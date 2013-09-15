@@ -74,6 +74,9 @@ public class Product extends Progeny {
 	@ManyToOne
 	private MeasureUnit netWeightUnit;
 
+	@ManyToOne
+	private Ipi ipi;
+
 	
 	@OneToMany(mappedBy="product")
 	private List<ProductPart> parts;
@@ -434,6 +437,26 @@ public class Product extends Progeny {
 		this.netWeightUnit = newValue;
 
 		firePropertyChange("NetWeightUnit", oldValue, newValue);
+
+
+	}
+
+	
+	public Ipi getIpi() {
+
+		return ipi;
+
+	}
+
+
+	public void setIpi(Ipi newValue) {
+
+
+		Ipi oldValue = this.ipi;
+
+		this.ipi = newValue;
+
+		firePropertyChange("Ipi", oldValue, newValue);
 
 
 	}

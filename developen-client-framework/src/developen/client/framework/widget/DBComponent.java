@@ -9,13 +9,13 @@ public interface DBComponent extends View {
 
 	public String getPropertyName();
 	
-	public Condition getCondition();
-	
 	public void setCondition(Condition condition);
 
-	public boolean isFixedValue();
-	
+	public Condition getCondition();
+
 	public void setFixedValue(boolean fixedValue);
+
+	public boolean isFixedValue();
 
 	
 }

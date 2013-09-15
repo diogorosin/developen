@@ -78,31 +78,6 @@ public class OutputMacroView extends MacroView {
 
 	}
 
-
-	public Search getIdentifierSearch(){
-
-
-		if (identifierSearch == null){
-
-			identifierSearch = new OutputMacroSearch(true);
-
-			identifierSearch.addSearchListener(new SearchAdapter(){
-
-				public void onSearchConfirmed(SearchEvent event) throws Exception {
-
-					getController().changeIdentifierProperty(((OutputMacro)event.getSelectedRows().get(0)).getIdentifier());
-
-				}
-
-			});
-
-		}
-
-		return identifierSearch;
-
-
-	}
-
 	
 	public ExtendedPanel getCenterPanel(){
 
@@ -373,6 +348,31 @@ public class OutputMacroView extends MacroView {
 			}			
 
 		}
+
+
+	}
+	
+
+	public Search getSearch(){
+
+
+		if (identifierSearch == null){
+
+			identifierSearch = new OutputMacroSearch(true);
+
+			identifierSearch.addSearchListener(new SearchAdapter(){
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+					getController().changeIdentifierProperty(((OutputMacro)event.getSelectedRows().get(0)).getIdentifier());
+
+				}
+
+			});
+
+		}
+
+		return identifierSearch;
 
 
 	}

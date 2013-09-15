@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
-import java.util.HashMap;
 import java.util.Locale;
 
 import javax.swing.ButtonGroup;
@@ -24,16 +23,15 @@ import developen.client.application.i18n.ParameterizationTag;
 import developen.client.application.i18n.PreferencesTag;
 import developen.client.application.i18n.SecurityTag;
 import developen.client.application.widget.LoggedInCondition;
+import developen.client.framework.util.DesktopPaneChangeListener;
 import developen.client.framework.widget.DBComboBox;
 import developen.client.framework.widget.DesktopPane;
-import developen.client.framework.widget.MimeTypeProvider;
 import developen.common.commercial.i18n.SystemCompanyTag;
 import developen.common.commercial.mvc.Idiom;
 import developen.common.commercial.mvc.SystemCompany;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.commercial.mvc.SystemPersonSystemCompany;
 import developen.common.framework.messenger.Messenger;
-import developen.common.framework.mvc.Model;
 import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Action;
@@ -46,14 +44,14 @@ import developen.common.framework.widget.PortugueseBrazilRadioButtonMenuItem;
 import developen.common.framework.widget.ToolBar;
 
 
-public abstract class ClientView extends Frame implements MimeTypeProvider {
+public abstract class ClientView extends Frame implements DesktopPaneChangeListener {
 
 
 	private static final long serialVersionUID = 4721868847647105877L;
 
 	protected Object[] menuHierarchy;
 	
-	private HashMap<Class<? extends Model>, Action> mimeType;
+//	private HashMap<Class<? extends Model>, Action> mimeType;
 
 	protected DesktopPane desktop;
 	
@@ -92,38 +90,38 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 
 	}
 
-	
-	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
-
-		
-		if (mimeType==null)
-			
-			mimeType = new HashMap<Class<? extends Model>, Action>();
-			
-		return mimeType;
-		
-		
-	}
-
-	
-	public Action getEntryActionOfMimeType(Class<? extends Model> model){
-		
-		
-		if (model==null)
-			
-			return null;
-		
-		return getMimeTypes().get(model);
-		
-		
-	}
-	
-
-	public void setEntryActionOfMimeType(Class<? extends Model> model, Action action){
-		
-		getMimeTypes().put(model, action);
-		
-	}
+//	
+//	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
+//
+//		
+//		if (mimeType==null)
+//			
+//			mimeType = new HashMap<Class<? extends Model>, Action>();
+//			
+//		return mimeType;
+//		
+//		
+//	}
+//
+//	
+//	public Action getEntryActionOfMimeType(Class<? extends Model> model){
+//		
+//		
+//		if (model==null)
+//			
+//			return null;
+//		
+//		return getMimeTypes().get(model);
+//		
+//		
+//	}
+//	
+//
+//	public void setEntryActionOfMimeType(Class<? extends Model> model, Action action){
+//		
+//		getMimeTypes().put(model, action);
+//		
+//	}
 
 	
 	public Object[] getMenuHierarchy() {
@@ -182,7 +180,7 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 				
 				try {
 					
-					getController().exit();
+					getController().close();
 					
 				} catch (Exception exception) {
 					
@@ -221,7 +219,7 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 
 			ClientState newValue = (ClientState) evt.getNewValue();
 
-			if (newValue.equals(ClientState.EXITED))
+			if (newValue.equals(ClientState.CLOSED))
 
 				System.exit(0);
 
@@ -288,7 +286,7 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 
 			public void onFailure(LoginEvent event) throws Exception {
 
-				getController().exit();
+				getController().close();
 
 			}
 
@@ -363,9 +361,13 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 	protected DesktopPane getDesktop() {
 
 		
-		if (desktop == null)
+		if (desktop == null){
 			
 			desktop = new DesktopPane();
+			
+			desktop.addDesktopPaneChangeListener(this);
+			
+		}
 		
 		return desktop;
 		
@@ -385,12 +387,16 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 			toolBar.addSeparator();
 			
 			toolBar.add(getHelpAction());
+
+			toolBar.add(getOpenEntryAction());
+			
+			toolBar.add(getOpenSearchAction());
 			
 			toolBar.addSeparator();
 			
 			toolBar.add(getLogoutAction());
 			
-			toolBar.add(getExitAction());
+			toolBar.add(getCloseAction());
 
 		}
 		
@@ -432,7 +438,7 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 			
 			modulesMenu.add(getLogoutAction());
 			
-			modulesMenu.add(getExitAction());
+			modulesMenu.add(getCloseAction());
 
 		}
 		
@@ -577,9 +583,15 @@ public abstract class ClientView extends Frame implements MimeTypeProvider {
 	}
 
 	
-	protected abstract Action getExitAction();
+	protected abstract Action getCloseAction();
 	
+	
+	protected abstract Action getOpenEntryAction();
 
+	
+	protected abstract Action getOpenSearchAction();
+	
+	
 	protected abstract Action getLogoutAction();
 	
 	
