@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-client-framework" name="Create Runnable Jar for Project developen-client-framework with libraries in sub-folder">
+    <target name="developen-client-framework">
+    	<mkdir dir="c:\client\source"/>
+        <jar destfile="c:\client\source\developen-client-framework.jar">
+            <fileset dir="c:\Users\Diogo\git\developen\developen-client-framework\bin"/>
+        </jar>
+    </target>
+</project>

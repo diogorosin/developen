@@ -3,10 +3,15 @@ package developen.client.osm.action;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+
 import developen.client.application.widget.LoggedInAndEntryActiveCondition;
-import developen.client.framework.i18n.SearchTag;
+import developen.client.framework.i18n.OpenSearchTag;
+import developen.client.framework.mvc.EntryView;
 import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBAction;
+import developen.client.osm.Client;
 
 public class OpenSearchAction extends DBAction {
 
@@ -16,7 +21,7 @@ public class OpenSearchAction extends DBAction {
 
 	public OpenSearchAction() {
 
-		super(new SearchTag());
+		super(new OpenSearchTag());
 
 	}
 
@@ -24,15 +29,13 @@ public class OpenSearchAction extends DBAction {
 	public void actionPerformed(ActionEvent e) {
 
 		
-//		try {
-//
-//			Client.getClientController().logout();
-//
-//		} catch (Exception exception) {
-//
-//			Messenger.show(exception);
-//
-//		}
+		JDesktopPane d = Client.getClientView().getDesktop();
+		
+		JInternalFrame f = d.getSelectedFrame();
+		
+		if (f instanceof EntryView)
+			
+			((EntryView) f).getSearch().openSearchView(d);
 		
 
 	}	

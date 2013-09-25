@@ -1,7 +1,6 @@
 package developen.common.framework.i18n;
 
 import developen.common.framework.utils.Tag;
-import developen.common.framework.utils.TagParam;
 
 public class NotNullTag extends Tag {
 
@@ -11,7 +10,7 @@ public class NotNullTag extends Tag {
 		
 		super();
 		
-		getParams().add(new TagParam(TagParam.FIELD, field));
+		put(Tag.FIELD, field);
 		
 		
 	}

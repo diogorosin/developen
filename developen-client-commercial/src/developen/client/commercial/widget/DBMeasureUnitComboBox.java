@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import developen.client.commercial.factory.CommercialDataFactory;
 import developen.client.framework.widget.DBComboBox;
 import developen.common.commercial.i18n.MeasureUnitTag;
+import developen.common.framework.utils.UIConstants;
 
 public class DBMeasureUnitComboBox extends DBComboBox {
 
@@ -23,7 +24,7 @@ public class DBMeasureUnitComboBox extends DBComboBox {
 
 				propertyName);
 
-		setPreferredSize(new Dimension(75,24));
+		setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 
 	}
@@ -38,7 +39,7 @@ public class DBMeasureUnitComboBox extends DBComboBox {
 				
 				propertyName);
 
-		setPreferredSize(new Dimension(75,24));
+		setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 
 	}

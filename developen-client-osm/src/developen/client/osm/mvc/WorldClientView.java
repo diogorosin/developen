@@ -11,6 +11,7 @@ import javax.swing.KeyStroke;
 
 import developen.client.application.action.EntryAction;
 import developen.client.application.i18n.AdministratorTag;
+import developen.client.application.i18n.ApplicationTag;
 import developen.client.application.i18n.DevelOpenCloudTag;
 import developen.client.application.i18n.ModulesTag;
 import developen.client.application.i18n.ParameterizationTag;
@@ -168,6 +169,8 @@ public class WorldClientView extends ClientView{
 	private Menu modulesFinanceEntriesMenu;
 
 	private Menu modulesFinanceEntriesConditionsMenu;
+	
+	private ApplicationTag caption;
 
 	protected CloseAction closeAction;
 
@@ -446,8 +449,14 @@ public class WorldClientView extends ClientView{
 
 	public Tag getCaption(){
 
-		return new DevelOpenCloudTag();
+		
+		if (caption==null)
+			
+			caption = new ApplicationTag();
+		
+		return caption;
 
+		
 	}
 
 

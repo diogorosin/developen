@@ -12,12 +12,13 @@ import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.PartTag;
 import developen.common.commercial.i18n.ProductTag;
 import developen.common.commercial.mvc.Product;
 import developen.common.framework.mvc.View;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 
@@ -28,9 +29,9 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 
 	private ProductPartPKController controller;
 
-	private DBTextField productField;
+	private DBSearchField productField;
 	
-	private DBTextField partField;
+	private DBSearchField partField;
 	
 	
 	public ProductPartPKView(ProductPartPKController controller){
@@ -116,7 +117,7 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 	}
 
 	
-	public DBTextField getProductField() {
+	public DBSearchField getProductField() {
 
 		
 		if (productField==null){
@@ -133,7 +134,7 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 				
 			});
 
-			productField = new DBTextField(new ProductTag(), ProductPartPKController.PRODUCT_PROPERTY);
+			productField = new DBSearchField(new ProductTag(), ProductPartPKController.PRODUCT_PROPERTY);
 			
 			productField.setCondition(new NeverEnabledCondition());
 			
@@ -143,7 +144,7 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 			
 			productField.setFixedValue(true);
 			
-			productField.setPreferredSize(new Dimension(400,24));
+			productField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 			
 			productField.setSearch(search);
 			
@@ -157,7 +158,7 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 	}
 	
 
-	public DBTextField getPartField() {
+	public DBSearchField getPartField() {
 
 		
 		if (partField==null){
@@ -174,13 +175,13 @@ public class ProductPartPKView extends DBRowPanel implements View, CheckListener
 				
 			});
 
-			partField = new DBTextField(new PartTag(), ProductPartPKController.PART_PROPERTY);
+			partField = new DBSearchField(new PartTag(), ProductPartPKController.PART_PROPERTY);
 			
 			partField.addCheckListener(this);
 			
 			partField.setPrimaryKey(true);
 			
-			partField.setPreferredSize(new Dimension(400,24));
+			partField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 			
 			partField.setSearch(search);
 			

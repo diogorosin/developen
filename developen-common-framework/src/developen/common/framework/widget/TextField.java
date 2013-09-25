@@ -18,6 +18,7 @@ import javax.swing.text.PlainDocument;
 
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 
 
 public class TextField extends JTextField implements Nameable, Checkable {
@@ -63,7 +64,7 @@ public class TextField extends JTextField implements Nameable, Checkable {
 	
 		setDocument(new MyDocument());
 
-		setPreferredSize(new Dimension(115,24));
+		setPreferredSize(new Dimension(115,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 		addKeyListener(new KeyAdapter() {
 			

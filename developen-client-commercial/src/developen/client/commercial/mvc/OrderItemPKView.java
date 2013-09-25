@@ -13,7 +13,7 @@ import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.OrderTag;
 import developen.common.commercial.i18n.ProgenyTag;
@@ -30,9 +30,9 @@ public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 
 	private OrderItemPKController controller;
 
-	private DBTextField orderField;
+	private DBSearchField orderField;
 	
-	private DBTextField progenyField;
+	private DBSearchField progenyField;
 	
 	
 	public OrderItemPKView(OrderItemPKController controller){
@@ -118,7 +118,7 @@ public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 	}
 
 	
-	public DBTextField getOrderField() {
+	public DBSearchField getOrderField() {
 
 		
 		if (orderField==null){
@@ -135,7 +135,7 @@ public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 				
 			});
 
-			orderField = new DBTextField(new OrderTag(), OrderItemPKController.ORDER_PROPERTY);
+			orderField = new DBSearchField(new OrderTag(), OrderItemPKController.ORDER_PROPERTY);
 			
 			orderField.setCondition(new NeverEnabledCondition());
 			
@@ -159,7 +159,7 @@ public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 	}
 	
 
-	public DBTextField getProgenyField() {
+	public DBSearchField getProgenyField() {
 
 		
 		if (progenyField==null){
@@ -176,7 +176,7 @@ public class OrderItemPKView extends DBRowPanel implements View, CheckListener{
 				
 			});
 
-			progenyField = new DBTextField(new ProgenyTag(), OrderItemPKController.PROGENY_PROPERTY);
+			progenyField = new DBSearchField(new ProgenyTag(), OrderItemPKController.PROGENY_PROPERTY);
 			
 			progenyField.addCheckListener(this);
 			

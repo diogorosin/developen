@@ -16,6 +16,7 @@ import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.CfopTag;
@@ -28,6 +29,7 @@ import developen.common.commercial.mvc.Rule;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 
@@ -179,11 +181,11 @@ public class DBIpiRulePKField extends JComponent{
 
 		private IpiRulePKController controller;
 
-		private DBTextField ipiField;
+		private DBSearchField ipiField;
 
-		private DBTextField cfopField;
+		private DBSearchField cfopField;
 
-		private DBTextField ruleField;
+		private DBSearchField ruleField;
 
 
 		public IpiRulePKView(IpiRulePKController controller){
@@ -285,7 +287,7 @@ public class DBIpiRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getIpiField() {
+		public DBSearchField getIpiField() {
 
 
 			if (ipiField==null){
@@ -302,7 +304,7 @@ public class DBIpiRulePKField extends JComponent{
 
 				});
 
-				ipiField = new DBTextField(new IpiTag(), IpiRulePKController.IPI_PROPERTY);
+				ipiField = new DBSearchField(new IpiTag(), IpiRulePKController.IPI_PROPERTY);
 
 				ipiField.setCondition(new NeverEnabledCondition());
 
@@ -312,7 +314,7 @@ public class DBIpiRulePKField extends JComponent{
 
 				ipiField.setPrimaryKey(true);
 
-				ipiField.setPreferredSize(new Dimension(400, 24));
+				ipiField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				ipiField.setSearch(search);
 
@@ -326,7 +328,7 @@ public class DBIpiRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getCfopField() {
+		public DBSearchField getCfopField() {
 
 
 			if (cfopField==null){
@@ -343,13 +345,13 @@ public class DBIpiRulePKField extends JComponent{
 
 				});
 
-				cfopField = new DBTextField(new CfopTag(), IpiRulePKController.CFOP_PROPERTY);
+				cfopField = new DBSearchField(new CfopTag(), IpiRulePKController.CFOP_PROPERTY);
 
 				cfopField.addCheckListener(this);
 
 				cfopField.setPrimaryKey(true);
 
-				cfopField.setPreferredSize(new Dimension(400, 24));
+				cfopField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				cfopField.setSearch(search);
 
@@ -363,7 +365,7 @@ public class DBIpiRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getRuleField() {
+		public DBSearchField getRuleField() {
 
 
 			if (ruleField==null){
@@ -380,13 +382,13 @@ public class DBIpiRulePKField extends JComponent{
 
 				});
 
-				ruleField = new DBTextField(new FiscalRuleTag(), IpiRulePKController.RULE_PROPERTY);
+				ruleField = new DBSearchField(new FiscalRuleTag(), IpiRulePKController.RULE_PROPERTY);
 
 				ruleField.addCheckListener(this);
 
 				ruleField.setPrimaryKey(true);
 
-				ruleField.setPreferredSize(new Dimension(400, 24));
+				ruleField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				ruleField.setSearch(search);
 

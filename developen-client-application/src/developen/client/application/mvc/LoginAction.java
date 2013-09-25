@@ -5,7 +5,9 @@ public enum LoginAction {
 
 	LOGIN,
 	
-	CANCEL
+	CANCEL,
+	
+	SEARCH
 
 
 }

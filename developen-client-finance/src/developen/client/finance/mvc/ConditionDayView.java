@@ -21,6 +21,7 @@ import developen.common.finance.i18n.FixedPercentageTag;
 import developen.common.finance.i18n.ValuePercentageTag;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
@@ -76,13 +77,13 @@ public class ConditionDayView extends ListEditorView implements CheckListener {
 		
 		ExtendedPanel l = super.getCenterPanel();
 
-		l.setBorder(BorderFactory.createTitledBorder(""));
-		
 		DBRowPanel r = new DBRowPanel(125);
 		
 		r.add(getFixedPercentageField());
 		
 		r.add(getValuePercentageField());
+		
+		r.setBorder(BorderFactory.createTitledBorder(""));
 		
 		l.add(r);
 
@@ -169,7 +170,7 @@ public class ConditionDayView extends ListEditorView implements CheckListener {
 
 			valuePercentageField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			valuePercentageField.setPreferredSize(new Dimension(75,24));
+			valuePercentageField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			valuePercentageField.addCheckListener(this);
 			

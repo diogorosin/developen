@@ -27,7 +27,7 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.common.commercial.i18n.FromTag;
 import developen.common.commercial.i18n.ItemsTag;
 import developen.common.commercial.i18n.NumberTag;
@@ -44,6 +44,7 @@ import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -61,9 +62,9 @@ public class OrderView extends EntryView {
 
 	private DBIdentifierField identifierField;
 
-	private DBTextField fromField;
+	private DBSearchField fromField;
 
-	private DBTextField toField;
+	private DBSearchField toField;
 
 	private TabbedPane tabbedPane;
 
@@ -281,13 +282,11 @@ public class OrderView extends EntryView {
 
 			identifierField = new DBIdentifierField(new NumberTag(), OrderController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setPreferredSize(new Dimension(75,24));
+			identifierField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -324,7 +323,7 @@ public class OrderView extends EntryView {
 	}
 
 
-	public DBTextField getFromField() {
+	public DBSearchField getFromField() {
 
 
 		if (fromField == null){
@@ -341,13 +340,13 @@ public class OrderView extends EntryView {
 
 			});
 
-			fromField = new DBTextField(new FromTag(), OrderController.FROM_PROPERTY);
+			fromField = new DBSearchField(new FromTag(), OrderController.FROM_PROPERTY);
 
 			fromField.setSearch(fromSearch);
 
 			fromField.addCheckListener(this);
 
-			fromField.setPreferredSize(new Dimension(400,24));
+			fromField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(fromField);
 
@@ -359,7 +358,7 @@ public class OrderView extends EntryView {
 	}
 
 
-	public DBTextField getToField() {
+	public DBSearchField getToField() {
 
 
 		if (toField == null){
@@ -376,13 +375,13 @@ public class OrderView extends EntryView {
 
 			});
 
-			toField = new DBTextField(new ToTag(), OrderController.TO_PROPERTY);
+			toField = new DBSearchField(new ToTag(), OrderController.TO_PROPERTY);
 
 			toField.setSearch(toSearch);
 
 			toField.addCheckListener(this);
 
-			toField.setPreferredSize(new Dimension(400,24));
+			toField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(toField);
 
@@ -573,9 +572,9 @@ public class OrderView extends EntryView {
 
 			toolBar = new ToolBar();
 
-			toolBar.add(getAddOrderItemAction());
-
 			toolBar.add(getEditOrderItemAction());
+
+			toolBar.add(getAddOrderItemAction());
 
 			toolBar.add(getRemoveOrderItemAction());
 

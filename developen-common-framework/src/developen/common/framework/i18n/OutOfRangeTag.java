@@ -1,7 +1,6 @@
 package developen.common.framework.i18n;
 
 import developen.common.framework.utils.Tag;
-import developen.common.framework.utils.TagParam;
 
 public class OutOfRangeTag extends Tag {
 
@@ -11,11 +10,11 @@ public class OutOfRangeTag extends Tag {
 		
 		super();
 		
-		getParams().add(new TagParam(TagParam.FIELD, field));
+		put(Tag.FIELD, field);
 		
-		getParams().add(new TagParam(TagParam.FIRST_VALUE, firstValue));
+		put(Tag.FIRST_VALUE, firstValue);
 		
-		getParams().add(new TagParam(TagParam.SECOND_VALUE, secondValue));
+		put(Tag.SECOND_VALUE, secondValue);
 		
 		
 	}

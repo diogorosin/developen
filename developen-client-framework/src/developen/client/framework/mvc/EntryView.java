@@ -1,7 +1,9 @@
 package developen.client.framework.mvc;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 
@@ -19,6 +21,7 @@ import developen.client.framework.action.SaveAction;
 import developen.client.framework.action.SearchAction;
 import developen.client.framework.i18n.EntryTag;
 import developen.client.framework.search.Search;
+import developen.client.framework.widget.DBSearchableField;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
@@ -50,7 +53,7 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 	private SaveAction saveAction;
 
 	private SearchAction searchAction;
-	
+
 	private DeleteAction deleteAction;
 
 	private CancelAction cancelAction;
@@ -118,14 +121,6 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 				EntryAction.CLEAR_OR_CANCEL);
 
-		getActionMap().put(EntryAction.SEARCH, getSearchAction());
-
-		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
-
-				KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), 
-
-				EntryAction.SEARCH);
-		
 		getActionMap().put(EntryAction.SAVE, getSaveAction());
 
 		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
@@ -141,6 +136,20 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 				KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0), 
 
 				EntryAction.DELETE);
+
+		getActionMap().put(EntryAction.SEARCH, getSearchAction());
+
+		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+
+				KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.SHIFT_DOWN_MASK), 
+
+				EntryAction.SEARCH);
+
+		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+
+				KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), 
+
+				EntryAction.SEARCH);
 
 		getContentPane().setLayout(new BorderLayout());
 
@@ -312,8 +321,32 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 				public void actionPerformed(ActionEvent e) {
 
-					getSearch().openSearchView(getDesktopPane());
+					JInternalFrame f = (JInternalFrame) e.getSource();
 					
+					if (e.getModifiers()==ActionEvent.SHIFT_MASK){
+
+						getSearch().openSearchView(getDesktopPane());
+
+					} else {
+
+						Component c = f.getFocusOwner();
+
+						if (c!=null){
+
+							if (c instanceof DBSearchableField)
+
+								((DBSearchableField) c).getSearch().openSearchView(getDesktopPane());
+
+							else
+
+								getSearch().openSearchView(getDesktopPane());
+
+						} else 
+
+							getSearch().openSearchView(getDesktopPane());
+
+					}
+
 				}
 
 			};
@@ -327,7 +360,7 @@ public abstract class EntryView extends InternalFrame implements CheckListener {
 
 	}
 
-	
+
 	public CancelAction getCancelAction(){
 
 

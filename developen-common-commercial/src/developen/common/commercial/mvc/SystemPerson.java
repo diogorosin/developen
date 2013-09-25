@@ -3,8 +3,8 @@ package developen.common.commercial.mvc;
 import java.util.List;
 
 import developen.common.persistence.annotation.Column;
-import developen.common.persistence.annotation.ManyToOne;
 import developen.common.persistence.annotation.OneToMany;
+import developen.common.persistence.annotation.OneToOne;
 import developen.common.persistence.annotation.Table;
 
 
@@ -23,11 +23,8 @@ public class SystemPerson extends Person {
 	@OneToMany(mappedBy="systemPerson")
 	private List<SystemPersonSystemCompany> systemCompanies;
 
-	@ManyToOne
-	private SystemCompany lastLoggedSystemCompany;
-	
-	@ManyToOne
-	private Idiom idiom;
+	@OneToOne
+	private SystemPersonPreference preference;
 
 	
 	public String getPassword() {
@@ -89,44 +86,30 @@ public class SystemPerson extends Person {
 		
 	}
 	
+	
+	public SystemPersonPreference getPreference() {
 
-	public Idiom getIdiom() {
 		
-		return idiom;
+		if (preference==null)
+			
+			preference = new SystemPersonPreference();
+		
+		return preference;
+
 		
 	}
-	
 
-	public void setIdiom(Idiom newValue) {
-	
-		
-		Idiom oldValue = this.idiom;
-		
-		this.idiom = newValue;
-		
-		firePropertyChange("Idiom", oldValue, newValue);
-		
-		
-	}
-	
 
-	public SystemCompany getLastLoggedSystemCompany() {
-		
-		return lastLoggedSystemCompany;
-		
-	}
-	
+	public void setPreference(SystemPersonPreference newValue) {
 
-	public void setLastLoggedSystemCompany(SystemCompany newValue) {
-	
-		
-		SystemCompany oldValue = this.lastLoggedSystemCompany;
-		
-		this.lastLoggedSystemCompany = newValue;
-		
-		firePropertyChange("LastLoggedSystemCompany", oldValue, newValue);
-		
-		
+
+		SystemPersonPreference oldValue = this.preference;
+
+		this.preference = newValue;
+
+		firePropertyChange("Preference", oldValue, newValue);
+
+
 	}
 
 	

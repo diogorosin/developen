@@ -18,6 +18,7 @@ import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.ActiveTag;
 import developen.common.commercial.i18n.AdressContactTag;
@@ -29,6 +30,7 @@ import developen.common.commercial.i18n.SubjectTag;
 import developen.common.commercial.i18n.TributationTag;
 import developen.common.commercial.mvc.Rule;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -40,7 +42,7 @@ public abstract class SubjectView extends EntryView {
 
 	public static int WIDTH = 700;
 
-	public static int HEIGHT = 550;
+	public static int HEIGHT = 600;
 
 	private DBIdentifierField identifierField;
 
@@ -48,7 +50,7 @@ public abstract class SubjectView extends EntryView {
 
 	private DBCheckBox fieldActive;
 
-	private DBTextField ruleField;
+	private DBSearchField ruleField;
 
 	protected DBRowPanel headerPanel;
 
@@ -179,9 +181,7 @@ public abstract class SubjectView extends EntryView {
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setSearch(getSearch());
-
-			identifierField.setPreferredSize(new Dimension(75,24));
+			identifierField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -202,7 +202,7 @@ public abstract class SubjectView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(400,24));
+			denominationField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 
@@ -243,7 +243,7 @@ public abstract class SubjectView extends EntryView {
 	}
 
 
-	public DBTextField getRuleField() {
+	public DBSearchField getRuleField() {
 
 
 		if (ruleField == null){
@@ -260,13 +260,13 @@ public abstract class SubjectView extends EntryView {
 
 			});
 
-			ruleField = new DBTextField(new FiscalRuleTag(), SubjectController.RULE_PROPERTY);
+			ruleField = new DBSearchField(new FiscalRuleTag(), SubjectController.RULE_PROPERTY);
 
 			ruleField.addCheckListener(this);
 
 			ruleField.setSearch(ruleSearch);
 
-			ruleField.setPreferredSize(new Dimension(400,24));
+			ruleField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(ruleField);
 

@@ -26,6 +26,7 @@ import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
@@ -100,7 +101,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 			numberField = new DBTextField(new RgTag(), RgController.NUMBER_PROPERTY);
 
-			numberField.setPreferredSize(new Dimension(150,24));
+			numberField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			numberField.addCheckListener(this);
 
@@ -141,7 +142,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 			}
 
-			organizationComboBox.setPreferredSize(new Dimension(75,24));
+			organizationComboBox.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			organizationComboBox.setCondition(new EditingOrIncludingCondition());
 
@@ -200,7 +201,7 @@ public class DBRgField extends JComponent implements View, CheckListener, Nameab
 
 			}
 
-			stateComboBox.setPreferredSize(new Dimension(175,24));
+			stateComboBox.setPreferredSize(new Dimension(175,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			stateComboBox.setCondition(new EditingOrIncludingCondition());
 

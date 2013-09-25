@@ -22,6 +22,7 @@ import developen.common.commercial.i18n.IdentifierTag;
 import developen.common.commercial.i18n.NoteTag;
 import developen.common.commercial.mvc.Cfop;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -180,13 +181,11 @@ public class CfopView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), CfopController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setPreferredSize(new Dimension(75,24));
+			identifierField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -207,7 +206,7 @@ public class CfopView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(500, 24));
+			denominationField.setPreferredSize(new Dimension(500, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 

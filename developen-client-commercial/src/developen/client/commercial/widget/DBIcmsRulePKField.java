@@ -16,6 +16,7 @@ import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.FiscalRuleTag;
@@ -30,6 +31,7 @@ import developen.common.commercial.mvc.State;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 
@@ -203,13 +205,13 @@ public class DBIcmsRulePKField extends JComponent{
 
 		private IcmsRulePKController controller;
 
-		private DBTextField icmsField;
+		private DBSearchField icmsField;
 
-		private DBTextField fromField;
+		private DBSearchField fromField;
 
-		private DBTextField toField;
+		private DBSearchField toField;
 
-		private DBTextField ruleField;
+		private DBSearchField ruleField;
 
 
 		public IcmsRulePKView(IcmsRulePKController controller){
@@ -327,7 +329,7 @@ public class DBIcmsRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getIcmsField() {
+		public DBSearchField getIcmsField() {
 
 
 			if (icmsField==null){
@@ -344,7 +346,7 @@ public class DBIcmsRulePKField extends JComponent{
 
 				});
 
-				icmsField = new DBTextField(new IcmsIcmsSTTag(), IcmsRulePKController.ICMS_PROPERTY);
+				icmsField = new DBSearchField(new IcmsIcmsSTTag(), IcmsRulePKController.ICMS_PROPERTY);
 
 				icmsField.setCondition(new NeverEnabledCondition());
 
@@ -354,7 +356,7 @@ public class DBIcmsRulePKField extends JComponent{
 
 				icmsField.setPrimaryKey(true);
 
-				icmsField.setPreferredSize(new Dimension(400, 24));
+				icmsField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				icmsField.setSearch(search);
 
@@ -368,7 +370,7 @@ public class DBIcmsRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getFromField() {
+		public DBSearchField getFromField() {
 
 
 			if (fromField==null){
@@ -385,13 +387,13 @@ public class DBIcmsRulePKField extends JComponent{
 
 				});
 
-				fromField = new DBTextField(new FromTag(), IcmsRulePKController.FROM_PROPERTY);
+				fromField = new DBSearchField(new FromTag(), IcmsRulePKController.FROM_PROPERTY);
 
 				fromField.addCheckListener(this);
 
 				fromField.setPrimaryKey(true);
 
-				fromField.setPreferredSize(new Dimension(400, 24));
+				fromField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				fromField.setSearch(search);
 
@@ -405,7 +407,7 @@ public class DBIcmsRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getToField() {
+		public DBSearchField getToField() {
 
 
 			if (toField==null){
@@ -422,13 +424,13 @@ public class DBIcmsRulePKField extends JComponent{
 
 				});
 
-				toField = new DBTextField(new ToTag(), IcmsRulePKController.TO_PROPERTY);
+				toField = new DBSearchField(new ToTag(), IcmsRulePKController.TO_PROPERTY);
 
 				toField.addCheckListener(this);
 
 				toField.setPrimaryKey(true);
 
-				toField.setPreferredSize(new Dimension(400, 24));
+				toField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				toField.setSearch(search);
 
@@ -442,7 +444,7 @@ public class DBIcmsRulePKField extends JComponent{
 		}
 
 
-		public DBTextField getRuleField() {
+		public DBSearchField getRuleField() {
 
 
 			if (ruleField==null){
@@ -459,13 +461,13 @@ public class DBIcmsRulePKField extends JComponent{
 
 				});
 
-				ruleField = new DBTextField(new FiscalRuleTag(), IcmsRulePKController.RULE_PROPERTY);
+				ruleField = new DBSearchField(new FiscalRuleTag(), IcmsRulePKController.RULE_PROPERTY);
 
 				ruleField.addCheckListener(this);
 
 				ruleField.setPrimaryKey(true);
 
-				ruleField.setPreferredSize(new Dimension(400, 24));
+				ruleField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				ruleField.setSearch(search);
 

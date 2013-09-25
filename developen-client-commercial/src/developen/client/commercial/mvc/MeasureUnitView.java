@@ -44,6 +44,7 @@ import developen.common.framework.messenger.Question;
 import developen.common.framework.messenger.SimplifiedQuestion;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -228,13 +229,11 @@ public class MeasureUnitView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), MeasureUnitController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setColumns(6);
+			identifierField.setPreferredSize(new Dimension(115, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -255,7 +254,7 @@ public class MeasureUnitView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(C_WIDTH, C_HEIGHT));
+			denominationField.setPreferredSize(new Dimension(C_WIDTH, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 
@@ -315,7 +314,7 @@ public class MeasureUnitView extends EntryView {
 
 			}
 
-			groupComboBox.setPreferredSize(new Dimension(C_WIDTH/2, C_HEIGHT));
+			groupComboBox.setPreferredSize(new Dimension(C_WIDTH/2, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			groupComboBox.setCondition(new EditingOrIncludingCondition());
 
@@ -524,9 +523,9 @@ public class MeasureUnitView extends EntryView {
 
 			toolBar = new ToolBar();
 
-			toolBar.add(getAddMeasureUnitConversionAction());
-
 			toolBar.add(getEditMeasureUnitConversionAction());
+
+			toolBar.add(getAddMeasureUnitConversionAction());
 
 			toolBar.add(getRemoveMeasureUnitConversionAction());
 

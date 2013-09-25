@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 
 public class DisplayBox extends JButton implements Nameable {
 
@@ -29,7 +30,7 @@ public class DisplayBox extends JButton implements Nameable {
 	protected void init(){
 	
 		
-		setPreferredSize(new Dimension(100,26));
+		setPreferredSize(new Dimension(100,UIConstants.DEFAULT_FIELD_HEIGHT));
 		
 		setHorizontalAlignment(SwingConstants.LEFT);	
 		

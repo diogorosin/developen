@@ -17,6 +17,7 @@ import developen.common.framework.exception.InvalidDateException;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 
 public class DateField extends FormattedTextField {
 
@@ -34,7 +35,7 @@ public class DateField extends FormattedTextField {
 	protected void init(){
 
 
-		setPreferredSize(new Dimension(115,24));
+		setPreferredSize(new Dimension(115,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 		addKeyListener(new KeyAdapter() {
 

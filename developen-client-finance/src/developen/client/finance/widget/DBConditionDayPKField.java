@@ -15,6 +15,7 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.finance.i18n.ConditionTag;
@@ -24,6 +25,7 @@ import developen.common.finance.mvc.ConditionDayPK;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 
@@ -146,7 +148,7 @@ public class DBConditionDayPKField extends JComponent{
 
 		private ConditionDayPKController controller;
 
-		private DBTextField conditionField;
+		private DBSearchField conditionField;
 
 		private DBIdentifierField dayField;
 
@@ -234,7 +236,7 @@ public class DBConditionDayPKField extends JComponent{
 		}
 
 
-		public DBTextField getConditionField() {
+		public DBSearchField getConditionField() {
 
 
 			if (conditionField==null){
@@ -251,7 +253,7 @@ public class DBConditionDayPKField extends JComponent{
 	
 				});
 
-				conditionField = new DBTextField(new ConditionTag(), ConditionDayPKController.CONDITION_PROPERTY);
+				conditionField = new DBSearchField(new ConditionTag(), ConditionDayPKController.CONDITION_PROPERTY);
 
 				conditionField.setCondition(new NeverEnabledCondition());
 
@@ -261,7 +263,7 @@ public class DBConditionDayPKField extends JComponent{
 
 				conditionField.setPrimaryKey(true);
 
-				conditionField.setPreferredSize(new Dimension(300,24));
+				conditionField.setPreferredSize(new Dimension(300,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				conditionField.setSearch(search);
 
@@ -286,7 +288,7 @@ public class DBConditionDayPKField extends JComponent{
 
 				dayField.setPrimaryKey(true);
 
-				dayField.setPreferredSize(new Dimension(75,24));
+				dayField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				getController().addView(dayField);
 

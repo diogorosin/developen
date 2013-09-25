@@ -38,10 +38,10 @@ public class Label extends JLabel implements LanguageChangeListener {
 	}
 
 
-	public Label(Tag fieldName){
+	public Label(Tag caption){
 
 
-		setCaption(fieldName);
+		setCaption(caption);
 
 		init();
 
@@ -49,12 +49,12 @@ public class Label extends JLabel implements LanguageChangeListener {
 	}
 
 
-	public Label(Tag fieldName, Icon icon){
+	public Label(Tag caption, Icon icon){
 
 
 		super(icon);
 
-		setCaption(fieldName);
+		setCaption(caption);
 
 		init();
 
@@ -79,6 +79,14 @@ public class Label extends JLabel implements LanguageChangeListener {
 			if (getCaption().hasHotKey())
 
 				setDisplayedMnemonic(getCaption().getHotKey());
+
+			if (getCaption().hasToolTip())
+				
+				setToolTipText(getCaption().getToolTip());
+
+			if (getCaption().hasSmallIcon())
+				
+				setIcon(getCaption().getSmallIcon());
 
 		}
 

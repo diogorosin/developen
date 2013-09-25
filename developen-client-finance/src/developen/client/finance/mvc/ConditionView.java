@@ -206,8 +206,6 @@ public abstract class ConditionView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ConditionController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
@@ -442,9 +440,9 @@ public abstract class ConditionView extends EntryView {
 
 			toolBar = new ToolBar();
 
-			toolBar.add(getAddConditionDayAction());
-
 			toolBar.add(getEditConditionDayAction());
+
+			toolBar.add(getAddConditionDayAction());
 
 			toolBar.add(getRemoveConditionDayAction());
 

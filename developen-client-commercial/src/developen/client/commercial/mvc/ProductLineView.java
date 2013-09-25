@@ -18,6 +18,7 @@ import developen.common.commercial.i18n.LineTag;
 import developen.common.commercial.i18n.ShortDenominationTag;
 import developen.common.commercial.mvc.ProductLine;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 
@@ -122,13 +123,11 @@ public class ProductLineView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ProductLineController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setPreferredSize(new Dimension(75,24));
+			identifierField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -149,7 +148,7 @@ public class ProductLineView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(400, 24));
+			denominationField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 
@@ -170,7 +169,7 @@ public class ProductLineView extends EntryView {
 
 			shortDenominationField.addCheckListener(this);
 
-			shortDenominationField.setPreferredSize(new Dimension(200, 24));
+			shortDenominationField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(shortDenominationField);
 

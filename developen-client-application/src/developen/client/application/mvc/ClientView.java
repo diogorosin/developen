@@ -2,15 +2,11 @@ package developen.client.application.mvc;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
-import java.util.Locale;
 
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JInternalFrame;
 
 import developen.client.application.action.EntryAction;
@@ -22,17 +18,9 @@ import developen.client.application.i18n.ModulesTag;
 import developen.client.application.i18n.ParameterizationTag;
 import developen.client.application.i18n.PreferencesTag;
 import developen.client.application.i18n.SecurityTag;
-import developen.client.application.widget.LoggedInCondition;
 import developen.client.framework.util.DesktopPaneChangeListener;
-import developen.client.framework.widget.DBComboBox;
 import developen.client.framework.widget.DesktopPane;
-import developen.common.commercial.i18n.SystemCompanyTag;
-import developen.common.commercial.mvc.Idiom;
-import developen.common.commercial.mvc.SystemCompany;
-import developen.common.commercial.mvc.SystemPerson;
-import developen.common.commercial.mvc.SystemPersonSystemCompany;
 import developen.common.framework.messenger.Messenger;
-import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Action;
 import developen.common.framework.widget.EnglishUSARadioButtonMenuItem;
@@ -50,39 +38,37 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 	private static final long serialVersionUID = 4721868847647105877L;
 
 	protected Object[] menuHierarchy;
-	
-//	private HashMap<Class<? extends Model>, Action> mimeType;
+
+	//	private HashMap<Class<? extends Model>, Action> mimeType;
 
 	protected DesktopPane desktop;
-	
+
 	protected MenuBar menu;
-	
+
 	protected ToolBar toolBar;
 
 	protected Menu modulesMenu;
-	
+
 	protected Menu administratorMenu;
-	
+
 	protected Menu administratorSecurityMenu;
-	
+
 	protected Menu administratorParameterizationMenu;
-	
+
 	protected Menu preferencesMenu;
-	
+
 	protected Menu preferencesSecurityMenu;
-	
+
 	protected Menu preferencesIdiomMenu;
-	
+
 	protected Menu helpMenu;
-	
-	protected DBComboBox companyComboBox;
 
 	protected LoginModel loginModel;
-	
+
 	protected LoginController loginController;
-	
+
 	protected LoginView loginView;
-	
+
 
 	public ClientView(ClientController controller){
 
@@ -90,43 +76,43 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 
 	}
 
-//	
-//	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
-//
-//		
-//		if (mimeType==null)
-//			
-//			mimeType = new HashMap<Class<? extends Model>, Action>();
-//			
-//		return mimeType;
-//		
-//		
-//	}
-//
-//	
-//	public Action getEntryActionOfMimeType(Class<? extends Model> model){
-//		
-//		
-//		if (model==null)
-//			
-//			return null;
-//		
-//		return getMimeTypes().get(model);
-//		
-//		
-//	}
-//	
-//
-//	public void setEntryActionOfMimeType(Class<? extends Model> model, Action action){
-//		
-//		getMimeTypes().put(model, action);
-//		
-//	}
+	//	
+	//	protected HashMap<Class<? extends Model>, Action> getMimeTypes() {
+	//
+	//		
+	//		if (mimeType==null)
+	//			
+	//			mimeType = new HashMap<Class<? extends Model>, Action>();
+	//			
+	//		return mimeType;
+	//		
+	//		
+	//	}
+	//
+	//	
+	//	public Action getEntryActionOfMimeType(Class<? extends Model> model){
+	//		
+	//		
+	//		if (model==null)
+	//			
+	//			return null;
+	//		
+	//		return getMimeTypes().get(model);
+	//		
+	//		
+	//	}
+	//	
+	//
+	//	public void setEntryActionOfMimeType(Class<? extends Model> model, Action action){
+	//		
+	//		getMimeTypes().put(model, action);
+	//		
+	//	}
 
-	
+
 	public Object[] getMenuHierarchy() {
 
-		
+
 		if (menuHierarchy == null){
 
 			menuHierarchy = new Object[]{
@@ -160,61 +146,60 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 			};
 
 		}
-		
+
 		return menuHierarchy;
 
-		
+
 	}
-	
+
 
 	public void init() {
 
-		
+
 		setTitle(getCaption().toString());
-		
+
 		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		
+
 		addWindowListener(new WindowAdapter() {
-			
+
 			public void windowClosing(WindowEvent e) {
-				
+
 				try {
-					
+
 					getController().close();
-					
+
 				} catch (Exception exception) {
-					
+
 					Messenger.show(exception);
-					
+
 				}
-				
+
 			}
-			
+
 		});
-		
+
 		setIconImage(new DevelOpenCloudTag().getLargeIcon().getImage());
-		
+
 		setLayout(new BorderLayout());
-		
+
 		setJMenuBar(getMenu());
-		
+
 		add(getToolBar(), BorderLayout.PAGE_START);
-		
+
 		add(getDesktop(), BorderLayout.CENTER);
-		
+
 		setMinimumSize(new Dimension(1024, 600));
-		
+
 
 	}
 
-	
+
 	public abstract Tag getCaption();
 
-	
-	@SuppressWarnings("unchecked")
+
 	public void modelPropertyChanged(PropertyChangeEvent evt) {
 
-		
+
 		if (evt.getPropertyName().equals("ModelState")){
 
 			ClientState newValue = (ClientState) evt.getNewValue();
@@ -229,58 +214,56 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 
 					executeLoginDialog();
 
-		} else 
+		} else {
 
 			if (evt.getPropertyName().equals(ClientController.SYSTEM_PERSON_PROPERTY)){
 
-				if (evt.getNewValue() != null){
+				Tag t = getCaption();
 
-					SystemPerson systemPerson = (SystemPerson) evt.getNewValue();
+				t.put(Tag.FIRST_VALUE, evt.getNewValue());
 
-					Idiom idiom = systemPerson.getIdiom();
-					
-					I18N.setLanguage(new Locale(idiom.getIdentifier().substring(0, 2), idiom.getIdentifier().substring(3, 5).toUpperCase()));
+				setTitle(t.toString());
 
-					DefaultComboBoxModel<SystemCompany> model = (DefaultComboBoxModel<SystemCompany>) getCompanyComboBox().getModel();
-					
-					model.removeAllElements();
+			} else {
 
-					for (SystemPersonSystemCompany company : systemPerson.getSystemCompanies())
-						
-						model.addElement(company.getIdentifier().getSystemCompany());
+				if (evt.getPropertyName().equals(ClientController.SYSTEM_COMPANY_PROPERTY)){
 
-				} else {
+					Tag t = getCaption();
 
-					DefaultComboBoxModel<SystemCompany> model = (DefaultComboBoxModel<SystemCompany>) getCompanyComboBox().getModel();
-					
-					model.removeAllElements();
+					t.put(Tag.SECOND_VALUE, evt.getNewValue());
+
+					setTitle(t.toString());
 
 				}
 
+
 			}
 
-		
+
+		}
+
+
 	}
 
-	
+
 	public void executeLoginDialog(){
 
-		
+
 		loginModel = new LoginModel();
-		
+
 		loginController = new LoginController();
-		
+
 		loginView = new LoginView(loginController);
-		
+
 		loginController.setModel(loginModel);
-		
+
 		loginController.addView(loginView);
-		
+
 		loginController.addLoginListener(new LoginListener() {
 
 			public void onSuccess(LoginEvent event) throws Exception {
 
-				getController().login(event.getSystemPerson());
+				getController().login(event.getSystemPerson(), event.getSystemCompany());
 
 			}
 
@@ -295,7 +278,7 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 		getDesktop().add(loginView);
 
 		loginView.setLocation(InternalFramePosition.CENTER);
-		
+
 		loginView.setVisible(true);
 
 		try {
@@ -308,311 +291,268 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 
 		}
 
-		
+
 	}
 
-	
+
 	public ClientController getController(){
 
 		return (ClientController) super.getController();
 
 	}
 
-	
-	protected DBComboBox getCompanyComboBox(){
 
-		
-		if (companyComboBox == null){
+	public DesktopPane getDesktop() {
 
-			try {
 
-				companyComboBox = new DBComboBox(new SystemCompanyTag(), new SystemCompany[]{}, ClientController.SYSTEM_COMPANY_PROPERTY);
-				
-				companyComboBox.setPreferredSize(new Dimension(300,24));
-				
-				companyComboBox.setCondition(new LoggedInCondition());
-				
-				companyComboBox.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent e) {
-
-						getController().changeSystemCompanyProperty((SystemCompany)((DBComboBox)e.getSource()).getSelectedItem());
-
-					}
-					
-				});
-				
-				getController().addView(companyComboBox);
-				
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-				
-			}
-
-		}
-		
-		return companyComboBox;
-		
-
-	}
-
-	
-	protected DesktopPane getDesktop() {
-
-		
 		if (desktop == null){
-			
+
 			desktop = new DesktopPane();
-			
+
 			desktop.addDesktopPaneChangeListener(this);
-			
+
 		}
-		
+
 		return desktop;
-		
+
 
 	}
 
-	
-	protected ToolBar getToolBar(){
 
-	
+	public ToolBar getToolBar(){
+
+
 		if (toolBar == null) {
 
 			toolBar = new ToolBar();
-			
-			toolBar.add(getCompanyComboBox());
-			
-			toolBar.addSeparator();
-			
+
 			toolBar.add(getHelpAction());
 
 			toolBar.add(getOpenEntryAction());
-			
+
 			toolBar.add(getOpenSearchAction());
-			
+
 			toolBar.addSeparator();
-			
+
 			toolBar.add(getLogoutAction());
-			
+
 			toolBar.add(getCloseAction());
 
 		}
-		
+
 		return toolBar;
-		
+
 
 	}
 
-	
-	protected MenuBar getMenu(){
 
-	
+	public MenuBar getMenu(){
+
+
 		if (menu == null){
 
 			menu = new MenuBar();
-			
+
 			menu.add(getModulesMenu());
-			
+
 			menu.add(getAdministratorMenu());
-			
+
 			menu.add(getPreferencesMenu());
-			
+
 			menu.add(getHelpMenu());
 
 		}
-		
+
 		return menu;
-		
+
 
 	}
 
-	
+
 	protected Menu getModulesMenu(){
 
-		
+
 		if (modulesMenu==null){
 
 			modulesMenu = new Menu(new ModulesTag());
-			
+
 			modulesMenu.add(getLogoutAction());
-			
+
 			modulesMenu.add(getCloseAction());
 
 		}
-		
+
 		return modulesMenu;
-		
+
 
 	}
 
-	
+
 	protected Menu getAdministratorMenu(){
 
-	
+
 		if (administratorMenu==null){
 
 			administratorMenu = new Menu(new AdministratorTag());
-			
+
 			administratorMenu.add(getAdministratorSecurityMenu());
-			
+
 			administratorMenu.add(getAdministratorParameterizationMenu());
 
 		}
-		
+
 		return administratorMenu;
-		
+
 
 	};
 
 
 	protected Menu getAdministratorParameterizationMenu() {
 
-	
+
 		if (administratorParameterizationMenu==null){
 
 			administratorParameterizationMenu = new Menu(new ParameterizationTag());
-			
+
 			administratorParameterizationMenu.add(getSystemCompanyEntryAction());
 
 		}
-		
+
 		return administratorParameterizationMenu;
-		
+
 
 	}
 
-	
+
 	protected Menu getAdministratorSecurityMenu() {
 
-		
+
 		if (administratorSecurityMenu==null){
 
 			administratorSecurityMenu = new Menu(new SecurityTag());
-			
+
 			administratorSecurityMenu.add(getSystemPersonEntryAction());
 
 		}
-		
+
 		return administratorSecurityMenu;
-		
+
 
 	}
 
-	
+
 	protected Menu getPreferencesMenu(){
 
-		
+
 		if (preferencesMenu==null){
 
 			preferencesMenu = new Menu(new PreferencesTag());
-			
+
 			preferencesMenu.add(getPreferencesSecurityMenu());
-			
+
 			preferencesMenu.add(getPreferencesIdiomMenu());
 
 		}
-		
+
 		return preferencesMenu;
-		
+
 
 	}
 
-	
+
 	protected Menu getPreferencesSecurityMenu() {
 
-	
+
 		if (preferencesSecurityMenu==null){
 
 			preferencesSecurityMenu = new Menu(new SecurityTag());
-			
+
 			preferencesSecurityMenu.add(getChangePasswordAction());
 
 		}
-		
+
 		return preferencesSecurityMenu;
-		
+
 
 	}
-	
+
 
 	protected Menu getPreferencesIdiomMenu() {
 
-		
+
 		if (preferencesIdiomMenu==null){
 
 			preferencesIdiomMenu = new Menu(new IdiomTag());
-			
+
 			preferencesIdiomMenu.add(getPortugueseBrazilRadioButtonMenuItem());
-			
+
 			preferencesIdiomMenu.add(getEnglishUSARadioButtonMenuItem());
 
 			ButtonGroup buttonGroup = new ButtonGroup();
-			
+
 			buttonGroup.add(getPortugueseBrazilRadioButtonMenuItem());
-			
+
 			buttonGroup.add(getEnglishUSARadioButtonMenuItem());
 
 		}
-		
+
 		return preferencesIdiomMenu;
-		
+
 
 	}
 
-	
+
 	protected Menu getHelpMenu(){
 
-	
+
 		if (helpMenu==null){
 
 			helpMenu = new Menu(new HelpTag());
-			
+
 			helpMenu.add(getHelpAboutAction());
-			
+
 			helpMenu.addSeparator();
-			
+
 			helpMenu.add(getHelpAction());
 
 		}
-		
+
 		return helpMenu;
-		
+
 
 	}
 
-	
+
 	protected abstract Action getCloseAction();
-	
-	
+
+
 	protected abstract Action getOpenEntryAction();
 
-	
+
 	protected abstract Action getOpenSearchAction();
-	
-	
+
+
 	protected abstract Action getLogoutAction();
-	
-	
+
+
 	protected abstract PortugueseBrazilRadioButtonMenuItem getPortugueseBrazilRadioButtonMenuItem();
-	
-	
+
+
 	protected abstract EnglishUSARadioButtonMenuItem getEnglishUSARadioButtonMenuItem();
-	
-	
+
+
 	protected abstract Action getHelpAboutAction();
-	
-	
+
+
 	protected abstract Action getHelpAction();
 
-	
+
 	protected abstract EntryAction getChangePasswordAction();
-	
-	
+
+
 	protected abstract EntryAction getSystemCompanyEntryAction();
 
-	
+
 	protected abstract EntryAction getSystemPersonEntryAction();
 
 

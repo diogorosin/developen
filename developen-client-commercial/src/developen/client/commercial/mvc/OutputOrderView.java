@@ -9,13 +9,14 @@ import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.MacroTag;
 import developen.common.commercial.i18n.OutputOrderTag;
 import developen.common.commercial.mvc.OutputMacro;
 import developen.common.commercial.mvc.OutputOrder;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 
 public class OutputOrderView extends OrderView {
@@ -23,7 +24,7 @@ public class OutputOrderView extends OrderView {
 
 	private static final long serialVersionUID = -6224324717586281048L;
 
-	private DBTextField outputMacroField;
+	private DBSearchField outputMacroField;
 
 
 	public OutputOrderView(OutputOrderController controller) {
@@ -60,10 +61,10 @@ public class OutputOrderView extends OrderView {
 	}
 
 
-	public DBTextField getFromField() {
+	public DBSearchField getFromField() {
 
 
-		DBTextField fromField = super.getFromField();
+		DBSearchField fromField = super.getFromField();
 
 		fromField.setCondition(new NeverEnabledCondition());
 
@@ -73,7 +74,7 @@ public class OutputOrderView extends OrderView {
 	}
 
 
-	public DBTextField getOutputMacroField() {
+	public DBSearchField getOutputMacroField() {
 
 
 		if (outputMacroField == null){
@@ -90,13 +91,13 @@ public class OutputOrderView extends OrderView {
 
 			});
 
-			outputMacroField = new DBTextField(new MacroTag(), OutputOrderController.OUTPUT_MACRO_PROPERTY);
+			outputMacroField = new DBSearchField(new MacroTag(), OutputOrderController.OUTPUT_MACRO_PROPERTY);
 
 			outputMacroField.setSearch(toSearch);
 
 			outputMacroField.addCheckListener(this);
 
-			outputMacroField.setPreferredSize(new Dimension(400,24));
+			outputMacroField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(outputMacroField);
 

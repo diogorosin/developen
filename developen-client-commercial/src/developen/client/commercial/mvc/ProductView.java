@@ -36,6 +36,7 @@ import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBGrouper;
 import developen.client.framework.widget.DBNumberField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
 import developen.client.framework.widget.NeverEnabledCondition;
@@ -79,6 +80,7 @@ import developen.common.framework.messenger.SimplifiedQuestion;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -100,17 +102,17 @@ public class ProductView extends ProgenyView {
 
 	private JPanel compositionTab;
 	
-	private DBTextField productGroupField;
+	private DBSearchField productGroupField;
 
-	private DBTextField productMarkField;
+	private DBSearchField productMarkField;
 
-	private DBTextField productLineField;
+	private DBSearchField productLineField;
 
-	private DBTextField productModelField;
+	private DBSearchField productModelField;
 
-	private DBTextField productDetailField;
+	private DBSearchField productDetailField;
 
-	private DBTextField productFinishField;
+	private DBSearchField productFinishField;
 
 	private DBNumberField widthValueField;
 
@@ -158,7 +160,7 @@ public class ProductView extends ProgenyView {
 
 	private DBProductPartTable productPartTable;
 	
-	private DBTextField ipiField;
+	private DBSearchField ipiField;
 
 
 	public ProductView(ProductController controller) {
@@ -737,9 +739,9 @@ public class ProductView extends ProgenyView {
 
 			productPartToolBar = new ToolBar();
 
-			productPartToolBar.add(getAddProductPartAction());
-
 			productPartToolBar.add(getEditProductPartAction());
+
+			productPartToolBar.add(getAddProductPartAction());
 
 			productPartToolBar.add(getRemoveProductPartAction());
 
@@ -970,7 +972,7 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBTextField getProductGroupField() {
+	public DBSearchField getProductGroupField() {
 
 
 		if (productGroupField==null){
@@ -987,13 +989,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			productGroupField = new DBTextField(new GroupTag(), ProductController.PRODUCT_GROUP_PROPERTY);
+			productGroupField = new DBSearchField(new GroupTag(), ProductController.PRODUCT_GROUP_PROPERTY);
 
 			productGroupField.setCondition(new EditingOrIncludingCondition());
 
 			productGroupField.addCheckListener(this);
 
-			productGroupField.setPreferredSize(new Dimension(200, 24));
+			productGroupField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			productGroupField.setSearch(search);
 
@@ -1007,7 +1009,7 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBTextField getProductMarkField() {
+	public DBSearchField getProductMarkField() {
 
 
 		if (productMarkField==null){
@@ -1024,13 +1026,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			productMarkField = new DBTextField(new MarkTag(), ProductController.PRODUCT_MARK_PROPERTY);
+			productMarkField = new DBSearchField(new MarkTag(), ProductController.PRODUCT_MARK_PROPERTY);
 
 			productMarkField.setCondition(new EditingOrIncludingCondition());
 
 			productMarkField.addCheckListener(this);
 
-			productMarkField.setPreferredSize(new Dimension(200, 24));
+			productMarkField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			productMarkField.setSearch(search);
 
@@ -1044,7 +1046,7 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBTextField getProductLineField() {
+	public DBSearchField getProductLineField() {
 
 
 		if (productLineField==null){
@@ -1061,13 +1063,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			productLineField = new DBTextField(new LineTag(), ProductController.PRODUCT_LINE_PROPERTY);
+			productLineField = new DBSearchField(new LineTag(), ProductController.PRODUCT_LINE_PROPERTY);
 
 			productLineField.setCondition(new EditingOrIncludingCondition());
 
 			productLineField.addCheckListener(this);
 
-			productLineField.setPreferredSize(new Dimension(200, 24));
+			productLineField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			productLineField.setSearch(search);
 
@@ -1081,7 +1083,7 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBTextField getProductModelField() {
+	public DBSearchField getProductModelField() {
 
 
 		if (productModelField==null){
@@ -1098,13 +1100,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			productModelField = new DBTextField(new ModelTag(), ProductController.PRODUCT_MODEL_PROPERTY);
+			productModelField = new DBSearchField(new ModelTag(), ProductController.PRODUCT_MODEL_PROPERTY);
 
 			productModelField.setCondition(new EditingOrIncludingCondition());
 
 			productModelField.addCheckListener(this);
 
-			productModelField.setPreferredSize(new Dimension(200, 24));
+			productModelField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			productModelField.setSearch(search);
 
@@ -1118,7 +1120,7 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBTextField getProductDetailField() {
+	public DBSearchField getProductDetailField() {
 
 
 		if (productDetailField==null){
@@ -1135,13 +1137,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			productDetailField = new DBTextField(new DetailTag(), ProductController.PRODUCT_DETAIL_PROPERTY);
+			productDetailField = new DBSearchField(new DetailTag(), ProductController.PRODUCT_DETAIL_PROPERTY);
 
 			productDetailField.setCondition(new EditingOrIncludingCondition());
 
 			productDetailField.addCheckListener(this);
 
-			productDetailField.setPreferredSize(new Dimension(200, 24));
+			productDetailField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			productDetailField.setSearch(search);
 
@@ -1155,7 +1157,7 @@ public class ProductView extends ProgenyView {
 	}
 
 
-	public DBTextField getProductFinishField() {
+	public DBSearchField getProductFinishField() {
 
 
 		if (productFinishField==null){
@@ -1172,13 +1174,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			productFinishField = new DBTextField(new FinishTag(), ProductController.PRODUCT_FINISH_PROPERTY);
+			productFinishField = new DBSearchField(new FinishTag(), ProductController.PRODUCT_FINISH_PROPERTY);
 
 			productFinishField.setCondition(new EditingOrIncludingCondition());
 
 			productFinishField.addCheckListener(this);
 
-			productFinishField.setPreferredSize(new Dimension(200, 24));
+			productFinishField.setPreferredSize(new Dimension(200, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			productFinishField.setSearch(search);
 
@@ -1207,7 +1209,7 @@ public class ProductView extends ProgenyView {
 
 			widthValueField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			widthValueField.setPreferredSize(new Dimension(125,24));
+			widthValueField.setPreferredSize(new Dimension(125,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			widthValueField.addCheckListener(this);
 
@@ -1277,7 +1279,7 @@ public class ProductView extends ProgenyView {
 
 			heightValueField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			heightValueField.setPreferredSize(new Dimension(125,24));
+			heightValueField.setPreferredSize(new Dimension(125,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			heightValueField.addCheckListener(this);
 
@@ -1347,7 +1349,7 @@ public class ProductView extends ProgenyView {
 
 			lengthValueField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			lengthValueField.setPreferredSize(new Dimension(125,24));
+			lengthValueField.setPreferredSize(new Dimension(125,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			lengthValueField.addCheckListener(this);
 
@@ -1417,7 +1419,7 @@ public class ProductView extends ProgenyView {
 
 			contentValueField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			contentValueField.setPreferredSize(new Dimension(125,24));
+			contentValueField.setPreferredSize(new Dimension(125,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			contentValueField.addCheckListener(this);
 
@@ -1489,7 +1491,7 @@ public class ProductView extends ProgenyView {
 
 			grossWeightValueField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			grossWeightValueField.setPreferredSize(new Dimension(125,24));
+			grossWeightValueField.setPreferredSize(new Dimension(125,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			grossWeightValueField.addCheckListener(this);
 
@@ -1559,7 +1561,7 @@ public class ProductView extends ProgenyView {
 
 			netWeightValueField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			netWeightValueField.setPreferredSize(new Dimension(125,24));
+			netWeightValueField.setPreferredSize(new Dimension(125,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			netWeightValueField.addCheckListener(this);
 
@@ -1614,7 +1616,7 @@ public class ProductView extends ProgenyView {
 	}
 	
 	
-	public DBTextField getIpiField() {
+	public DBSearchField getIpiField() {
 
 
 		if (ipiField == null){
@@ -1631,13 +1633,13 @@ public class ProductView extends ProgenyView {
 
 			});
 
-			ipiField = new DBTextField(new IpiTag(), ProductController.IPI_PROPERTY);
+			ipiField = new DBSearchField(new IpiTag(), ProductController.IPI_PROPERTY);
 
 			ipiField.addCheckListener(this);
 
 			ipiField.setSearch(ipiSearch);
 
-			ipiField.setPreferredSize(new Dimension(400,24));
+			ipiField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(ipiField);
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-client-persistence" name="Create Runnable Jar for Project developen-persistence-server with libraries in sub-folder">
+    <target name="developen-client-persistence">
+    	<mkdir dir="c:\client\source"/>
+    	<jar destfile="c:\client\source\developen-client-persistence.jar">
+            <fileset dir="c:\Users\Diogo\git\developen\developen-client-persistence\bin"/>
+        </jar>
+    </target>
+</project>

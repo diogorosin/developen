@@ -8,13 +8,14 @@ import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.SaleOrderTag;
 import developen.common.commercial.i18n.SellerTag;
 import developen.common.commercial.mvc.SaleOrder;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 
 public class SaleOrderView extends OutputOrderView {
@@ -22,7 +23,7 @@ public class SaleOrderView extends OutputOrderView {
 
 	private static final long serialVersionUID = -6224324717586281048L;
 
-	private DBTextField seller;
+	private DBSearchField seller;
 
 
 	public SaleOrderController getController(){
@@ -84,32 +85,18 @@ public class SaleOrderView extends OutputOrderView {
 	}
 
 
-	public DBTextField getSellerField() {
+	public DBSearchField getSellerField() {
 
 
 		if (seller == null){
 
-//			SystemPersonSearch sellerSearch = new SystemPersonSearch(true);
-//
-//			sellerSearch.addSearchListener(new SearchAdapter(){
-//
-//				public void onSearchConfirmed(SearchEvent event) throws Exception {
-//
-//					getController().changeSellerProperty((SystemPerson) event.getSelectedRows().get(0));
-//
-//				}
-//
-//			});
-
-			seller = new DBTextField(new SellerTag(), SaleOrderController.SELLER_PROPERTY);
-
-//			seller.setSearch(sellerSearch);
+			seller = new DBSearchField(new SellerTag(), SaleOrderController.SELLER_PROPERTY);
 
 			seller.setCondition(new NeverEnabledCondition());
 
 			seller.addCheckListener(this);
 
-			seller.setPreferredSize(new Dimension(300,24));
+			seller.setPreferredSize(new Dimension(300,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(seller);
 

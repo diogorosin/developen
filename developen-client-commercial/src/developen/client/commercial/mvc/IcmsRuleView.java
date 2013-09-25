@@ -20,8 +20,8 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBNumberField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBSlider;
-import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingListEditorCondition;
 import developen.common.commercial.i18n.AliquotCreditReusableTag;
 import developen.common.commercial.i18n.AliquotReducedTag;
@@ -42,6 +42,7 @@ import developen.common.commercial.mvc.IcmsCsosn;
 import developen.common.commercial.mvc.IcmsCst;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
@@ -58,9 +59,9 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 	private DBRowPanel basicTab;
 
-	private DBTextField cstField;
+	private DBSearchField cstField;
 
-	private DBTextField csosnField;
+	private DBSearchField csosnField;
 
 	private DBNumberField icmsAliquotField;
 
@@ -182,7 +183,6 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			basicTab.add(getCfopGroupField());
 
-
 		}
 
 		return basicTab;
@@ -228,7 +228,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 	}
 
 
-	public DBTextField getCstField() {
+	public DBSearchField getCstField() {
 
 
 		if (cstField==null){
@@ -245,13 +245,13 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			cstField = new DBTextField(new IcmsCstTag(), IcmsRuleController.CST_PROPERTY);
+			cstField = new DBSearchField(new IcmsCstTag(), IcmsRuleController.CST_PROPERTY);
 
 			cstField.setCondition(new EditingOrIncludingListEditorCondition());
 
 			cstField.addCheckListener(this);
 
-			cstField.setPreferredSize(new Dimension(400, 24));
+			cstField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			cstField.setSearch(search);
 
@@ -265,7 +265,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 	}
 
 
-	public DBTextField getCsosnField() {
+	public DBSearchField getCsosnField() {
 
 
 		if (csosnField==null){
@@ -282,13 +282,13 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			csosnField = new DBTextField(new IcmsCsosnTag(), IcmsRuleController.CSOSN_PROPERTY);
+			csosnField = new DBSearchField(new IcmsCsosnTag(), IcmsRuleController.CSOSN_PROPERTY);
 
 			csosnField.setCondition(new EditingOrIncludingListEditorCondition());
 
 			csosnField.addCheckListener(this);
 
-			csosnField.setPreferredSize(new Dimension(400, 24));
+			csosnField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			csosnField.setSearch(search);
 
@@ -315,7 +315,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsAliquotField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsAliquotField.setPreferredSize(new Dimension(100, 24));
+			icmsAliquotField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsAliquotField.addCheckListener(this);
 
@@ -429,7 +429,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsReductionField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsReductionField.setPreferredSize(new Dimension(100, 24));
+			icmsReductionField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsReductionField.addCheckListener(this);
 
@@ -458,7 +458,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsAliquotReducedField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsAliquotReducedField.setPreferredSize(new Dimension(100, 24));
+			icmsAliquotReducedField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsAliquotReducedField.addCheckListener(this);
 
@@ -487,7 +487,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsAliquotCreditReusableField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsAliquotCreditReusableField.setPreferredSize(new Dimension(100, 24));
+			icmsAliquotCreditReusableField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsAliquotCreditReusableField.addCheckListener(this);
 
@@ -516,7 +516,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsSTMarckupField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsSTMarckupField.setPreferredSize(new Dimension(100, 24));
+			icmsSTMarckupField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsSTMarckupField.addCheckListener(this);
 
@@ -545,7 +545,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsSTReductionField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsSTReductionField.setPreferredSize(new Dimension(100, 24));
+			icmsSTReductionField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsSTReductionField.addCheckListener(this);
 
@@ -574,7 +574,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 			icmsSTStaffField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			icmsSTStaffField.setPreferredSize(new Dimension(100, 24));
+			icmsSTStaffField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			icmsSTStaffField.addCheckListener(this);
 

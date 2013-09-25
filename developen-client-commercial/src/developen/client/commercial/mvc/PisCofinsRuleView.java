@@ -15,7 +15,7 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBNumberField;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.EditingOrIncludingListEditorCondition;
 import developen.common.commercial.i18n.BasicTag;
 import developen.common.commercial.i18n.CofinsCstTag;
@@ -30,6 +30,7 @@ import developen.common.commercial.mvc.CofinsCst;
 import developen.common.commercial.mvc.PisCst;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
@@ -46,9 +47,9 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 	private DBRowPanel basicTab;
 
-	private DBTextField pisCstField;
+	private DBSearchField pisCstField;
 
-	private DBTextField cofinsCstField;
+	private DBSearchField cofinsCstField;
 
 	private DBNumberField pisCumulativeField;
 
@@ -195,7 +196,7 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 	}
 
 
-	public DBTextField getPisCstField() {
+	public DBSearchField getPisCstField() {
 
 
 		if (pisCstField==null){
@@ -212,13 +213,13 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			pisCstField = new DBTextField(new PisCstTag(), PisCofinsRuleController.PIS_CST_PROPERTY);
+			pisCstField = new DBSearchField(new PisCstTag(), PisCofinsRuleController.PIS_CST_PROPERTY);
 
 			pisCstField.setCondition(new EditingOrIncludingListEditorCondition());
 
 			pisCstField.addCheckListener(this);
 
-			pisCstField.setPreferredSize(new Dimension(400, 24));
+			pisCstField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			pisCstField.setSearch(search);
 
@@ -232,7 +233,7 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 	}
 
 
-	public DBTextField getCofinsCstField() {
+	public DBSearchField getCofinsCstField() {
 
 
 		if (cofinsCstField==null){
@@ -249,13 +250,13 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			cofinsCstField = new DBTextField(new CofinsCstTag(), PisCofinsRuleController.COFINS_CST_PROPERTY);
+			cofinsCstField = new DBSearchField(new CofinsCstTag(), PisCofinsRuleController.COFINS_CST_PROPERTY);
 
 			cofinsCstField.setCondition(new EditingOrIncludingListEditorCondition());
 
 			cofinsCstField.addCheckListener(this);
 
-			cofinsCstField.setPreferredSize(new Dimension(400, 24));
+			cofinsCstField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			cofinsCstField.setSearch(search);
 
@@ -282,7 +283,7 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 			pisCumulativeField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			pisCumulativeField.setPreferredSize(new Dimension(100, 24));
+			pisCumulativeField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			pisCumulativeField.addCheckListener(this);
 
@@ -311,7 +312,7 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 			pisNonCumulativeField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			pisNonCumulativeField.setPreferredSize(new Dimension(100, 24));
+			pisNonCumulativeField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			pisNonCumulativeField.addCheckListener(this);
 
@@ -340,7 +341,7 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 			cofinsCumulativeField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			cofinsCumulativeField.setPreferredSize(new Dimension(100, 24));
+			cofinsCumulativeField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			cofinsCumulativeField.addCheckListener(this);
 
@@ -369,7 +370,7 @@ public class PisCofinsRuleView extends ListEditorView implements CheckListener {
 
 			cofinsNonCumulativeField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			cofinsNonCumulativeField.setPreferredSize(new Dimension(100, 24));
+			cofinsNonCumulativeField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			cofinsNonCumulativeField.addCheckListener(this);
 

@@ -3,7 +3,7 @@ package developen.client.osm.action;
 import java.awt.event.ActionEvent;
 
 import developen.client.application.widget.LoggedInAndSearchActiveCondition;
-import developen.client.framework.i18n.EntryTag;
+import developen.client.framework.i18n.OpenEntryTag;
 import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBAction;
 
@@ -15,7 +15,7 @@ public class OpenEntryAction extends DBAction {
 
 	public OpenEntryAction() {
 
-		super(new EntryTag());
+		super(new OpenEntryTag());
 		
 	}
  

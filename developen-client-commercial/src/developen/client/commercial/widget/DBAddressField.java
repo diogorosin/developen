@@ -15,6 +15,7 @@ import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.AdressTag;
 import developen.common.commercial.i18n.CityTag;
@@ -33,6 +34,7 @@ import developen.common.framework.exception.InvalidValueException;
 import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 
@@ -298,7 +300,7 @@ public class DBAddressField extends JComponent {
 
 		private DBTextField complementField;
 
-		private DBTextField cityField;
+		private DBSearchField cityField;
 
 		private DBPostalCodeField postalCodeField;
 
@@ -439,7 +441,7 @@ public class DBAddressField extends JComponent {
 
 				playAreaField = new DBTextField(new PlayAreaTag(), AddressController.PLAY_AREA_PROPERTY);
 
-				playAreaField.setPreferredSize(new Dimension(400,24));
+				playAreaField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				playAreaField.addCheckListener(this);
 
@@ -460,7 +462,7 @@ public class DBAddressField extends JComponent {
 
 				numberField = new DBTextField(new NumberTag(), AddressController.NUMBER_PROPERTY);
 
-				numberField.setPreferredSize(new Dimension(75,24));
+				numberField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				numberField.addCheckListener(this);
 
@@ -481,7 +483,7 @@ public class DBAddressField extends JComponent {
 
 				districtField = new DBTextField(new DistrictTag(), AddressController.DISTRICT_PROPERTY);
 
-				districtField.setPreferredSize(new Dimension(400,24));
+				districtField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				districtField.addCheckListener(this);
 
@@ -504,7 +506,7 @@ public class DBAddressField extends JComponent {
 
 					postalCodeField = new DBPostalCodeField(AddressController.POSTAL_CODE_PROPERTY);
 
-					postalCodeField.setPreferredSize(new Dimension(150,24));
+					postalCodeField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 					postalCodeField.addCheckListener(this);
 
@@ -520,7 +522,7 @@ public class DBAddressField extends JComponent {
 		}
 
 
-		public DBTextField getCityField(){
+		public DBSearchField getCityField(){
 
 
 			if (cityField==null){			
@@ -537,9 +539,9 @@ public class DBAddressField extends JComponent {
 
 				});
 
-				cityField = new DBTextField(new CityTag(), AddressController.CITY_PROPERTY);
+				cityField = new DBSearchField(new CityTag(), AddressController.CITY_PROPERTY);
 
-				cityField.setPreferredSize(new Dimension(400,24));
+				cityField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				cityField.addCheckListener(this);
 
@@ -562,7 +564,7 @@ public class DBAddressField extends JComponent {
 
 				complementField = new DBTextField(new ComplementTag(), AddressController.COMPLEMENT_PROPERTY);
 
-				complementField.setPreferredSize(new Dimension(400,24));
+				complementField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				complementField.addCheckListener(this);
 
@@ -585,7 +587,7 @@ public class DBAddressField extends JComponent {
 
 					phoneField = new DBPhoneField(AddressController.PHONE_PROPERTY);
 
-					phoneField.setPreferredSize(new Dimension(150,24));
+					phoneField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 					phoneField.addCheckListener(this);
 
@@ -608,7 +610,7 @@ public class DBAddressField extends JComponent {
 
 				emailField = new DBTextField(new EmailTag(), AddressController.EMAIL_PROPERTY);
 
-				emailField.setPreferredSize(new Dimension(400,24));
+				emailField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				emailField.addCheckListener(this);
 
@@ -629,7 +631,7 @@ public class DBAddressField extends JComponent {
 
 				webSiteField = new DBTextField(new WebSiteTag(), AddressController.WEB_SITE_PROPERTY);
 
-				webSiteField.setPreferredSize(new Dimension(400,24));
+				webSiteField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 				webSiteField.addCheckListener(this);
 

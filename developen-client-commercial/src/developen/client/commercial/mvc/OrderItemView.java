@@ -53,7 +53,7 @@ public class OrderItemView extends ListEditorView implements CheckListener {
 
 	public void buildInterface() {
 
-		setSize(new Dimension(650,250));
+		setSize(new Dimension(650,300));
 
 	}
 
@@ -76,9 +76,9 @@ public class OrderItemView extends ListEditorView implements CheckListener {
 
 		ExtendedPanel l = super.getCenterPanel();
 
-		l.setBorder(BorderFactory.createTitledBorder(""));
-
 		DBRowPanel r = new DBRowPanel(100);
+
+		r.setBorder(BorderFactory.createTitledBorder(""));
 
 		r.add(getAmountField());
 

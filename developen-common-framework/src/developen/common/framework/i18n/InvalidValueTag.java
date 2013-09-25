@@ -1,7 +1,6 @@
 package developen.common.framework.i18n;
 
 import developen.common.framework.utils.Tag;
-import developen.common.framework.utils.TagParam;
 
 
 public class InvalidValueTag extends Tag {
@@ -12,9 +11,9 @@ public class InvalidValueTag extends Tag {
 		
 		super();
 		
-		getParams().add(new TagParam(TagParam.FIRST_VALUE, firstValue));
+		put(Tag.FIRST_VALUE, firstValue);
 
-		getParams().add(new TagParam(TagParam.FIELD, field));
+		put(Tag.FIELD, field);
 		
 		
 	}

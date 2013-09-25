@@ -27,7 +27,7 @@ import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.AllwaysEnabledCondition;
 import developen.client.framework.widget.DBPasswordField;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.common.commercial.i18n.SystemPersonTag;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.messenger.Messenger;
@@ -58,7 +58,7 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 	
 	private ConfirmAction confirmAction;
 	
-	private DBTextField systemPersonField;
+	private DBSearchField systemPersonField;
 	
 	private DBPasswordField newPasswordField;
 	
@@ -241,12 +241,12 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 	}
 
 	
-	public DBTextField getSystemPersonField() {
+	public DBSearchField getSystemPersonField() {
 
 	
 		if (systemPersonField == null){
 
-			systemPersonField = new DBTextField(new SystemPersonTag(), ChangePasswordController.SYSTEMPERSON_PROPERTY){
+			systemPersonField = new DBSearchField(new SystemPersonTag(), ChangePasswordController.SYSTEMPERSON_PROPERTY){
 
 				private static final long serialVersionUID = 1L;
 

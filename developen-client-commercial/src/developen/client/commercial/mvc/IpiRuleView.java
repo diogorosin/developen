@@ -14,7 +14,7 @@ import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBNumberField;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.EditingOrIncludingListEditorCondition;
 import developen.common.commercial.i18n.AliquotTag;
 import developen.common.commercial.i18n.BasicTag;
@@ -26,6 +26,7 @@ import developen.common.commercial.i18n.TributeSituationTag;
 import developen.common.commercial.mvc.IpiCst;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
@@ -42,7 +43,7 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 	private DBRowPanel basicTab;
 
-	private DBTextField cstField;
+	private DBSearchField cstField;
 
 	private DBNumberField ipiAliquotField;
 
@@ -177,7 +178,7 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 	}
 
 
-	public DBTextField getCstField() {
+	public DBSearchField getCstField() {
 
 
 		if (cstField==null){
@@ -194,13 +195,13 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 			});
 
-			cstField = new DBTextField(new IpiCstTag(), IpiRuleController.CST_PROPERTY);
+			cstField = new DBSearchField(new IpiCstTag(), IpiRuleController.CST_PROPERTY);
 
 			cstField.setCondition(new EditingOrIncludingListEditorCondition());
 
 			cstField.addCheckListener(this);
 
-			cstField.setPreferredSize(new Dimension(400, 24));
+			cstField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			cstField.setSearch(search);
 
@@ -227,7 +228,7 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 			ipiAliquotField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			ipiAliquotField.setPreferredSize(new Dimension(100, 24));
+			ipiAliquotField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			ipiAliquotField.addCheckListener(this);
 
@@ -256,7 +257,7 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 			ipiStaffField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			ipiStaffField.setPreferredSize(new Dimension(100, 24));
+			ipiStaffField.setPreferredSize(new Dimension(100, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			ipiStaffField.addCheckListener(this);
 

@@ -16,6 +16,7 @@ import developen.common.commercial.i18n.AmountTag;
 import developen.common.commercial.i18n.PartTag;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
@@ -69,11 +70,13 @@ public class ProductPartView extends ListEditorView implements CheckListener {
 		
 		ExtendedPanel l = super.getCenterPanel();
 
-		l.setBorder(BorderFactory.createTitledBorder(""));
+		
 		
 		DBRowPanel r = new DBRowPanel(100);
 		
 		r.add(getAmountField());
+		
+		r.setBorder(BorderFactory.createTitledBorder(""));
 		
 		l.add(r);
 
@@ -129,7 +132,7 @@ public class ProductPartView extends ListEditorView implements CheckListener {
 
 			amountField.setHorizontalAlignment(SwingConstants.RIGHT);
 
-			amountField.setColumns(10);
+			amountField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			amountField.addCheckListener(this);
 			

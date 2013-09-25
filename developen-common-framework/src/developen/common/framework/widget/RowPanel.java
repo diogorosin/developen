@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 
 public class RowPanel extends JPanel {
 
@@ -51,7 +52,7 @@ public class RowPanel extends JPanel {
 		
 		cons.anchor = field instanceof JCheckBox ? GridBagConstraints.NORTHEAST : GridBagConstraints.EAST;
 		
-		cons.insets = field instanceof JCheckBox ? new Insets(5,2,2,10) : new Insets(2,2,2,12);
+		cons.insets = field instanceof JCheckBox ? new Insets(5,2,2,10) : new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2);
 		
 		cons.weightx = 0;
 
@@ -90,7 +91,7 @@ public class RowPanel extends JPanel {
 	
 		GridBagConstraints cons = new GridBagConstraints();
 		
-		cons.insets = new Insets(2,2,2,12);
+		cons.insets = new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2);
 		
 		cons.fill = GridBagConstraints.NONE;
 		
@@ -187,21 +188,57 @@ public class RowPanel extends JPanel {
 		
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		
-		Label label = new Label(tag);
-		
-		label.setHorizontalAlignment(JLabel.LEFT);
-		
-		label.setHorizontalTextPosition(JLabel.LEFT);
-		
-		label.setVerticalTextPosition(JLabel.BOTTOM);
-		
-		label.setForeground(Color.GRAY);
-		
-		label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
-
-		label.setLayout(new BorderLayout());
+		MyLabel label = new MyLabel(tag);
 		
 		add(label, cons);
+
+		
+	}
+	
+	
+	class MyLabel extends Label{
+
+
+		private static final long serialVersionUID = 8271651846947668876L;
+
+		
+		public MyLabel(Tag caption){
+
+			super(caption);
+
+		}
+
+
+		protected void init(){
+
+			
+			super.init();
+			
+			setHorizontalAlignment(JLabel.LEFT);
+			
+			setHorizontalTextPosition(JLabel.LEFT);
+			
+			setVerticalTextPosition(JLabel.BOTTOM);
+			
+			setForeground(Color.GRAY);
+			
+			setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+
+			setLayout(new BorderLayout());
+			
+
+		}
+
+		
+		protected void onLoadLanguage() {
+
+
+			if (getCaption() != null && !getCaption().getKey().isEmpty())
+
+				setText(getCaption().toString());
+
+
+		}
 
 		
 	}

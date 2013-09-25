@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-common-framework" name="Create Runnable Jar for Project developen-common-framework with libraries in sub-folder">
+    <target name="developen-common-framework">
+    	<mkdir dir="c:\server\source"/>
+    	<mkdir dir="c:\client\source"/>
+        <jar destfile="c:\server\source\developen-common-framework.jar">
+            <fileset dir="c:\Users\Diogo\git\developen\developen-common-framework\bin"/>
+        </jar>
+        <copy overwrite="yes" file="c:\server\source\developen-common-framework.jar" todir="c:\client\source"/>
+    </target>
+</project>

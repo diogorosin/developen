@@ -3,15 +3,10 @@ package developen.client.framework.widget;
 
 import java.beans.PropertyChangeEvent;
 
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-
-import developen.client.framework.search.Search;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.TextField;
 
-public class DBTextField extends TextField implements DBSearchableField{
+public class DBTextField extends TextField implements DBField{
 
 
 	private static final long serialVersionUID = 5254764103720680641L;
@@ -23,8 +18,6 @@ public class DBTextField extends TextField implements DBSearchableField{
 	private boolean foreignKey;
 	
 	private boolean fixedValue;
-
-	private Search search;
 
 	private Condition condition;
 
@@ -116,58 +109,6 @@ public class DBTextField extends TextField implements DBSearchableField{
 	}
 
 
-	public Search getSearch() {
-
-		return search;
-
-	}
-
-	
-	public void setSearch(Search search) {
-
-		
-		this.search = search;
-		
-		this.search.setComponent(this);
-		
-
-	}
-	
-
-	public JDesktopPane getDesktopPane() {
-
-		
-		JDesktopPane desktop = null;
-
-		JComponent frame = (JComponent) this.getParent();
-		
-		while (frame.getParent() != null){
-
-			frame = (JComponent) frame.getParent();
-			
-			if (frame instanceof JInternalFrame) 
-				
-				break;
-
-		}
-
-		if (frame instanceof JInternalFrame)
-			
-			desktop = ((JInternalFrame) frame).getDesktopPane();
-
-		return desktop;
-		
-
-	}
-
-	
-	public String getFindByString() {
-
-		return getText();
-
-	}
-
-	
 	public Condition getCondition(){
 
 		

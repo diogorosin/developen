@@ -1,5 +1,6 @@
 package developen.client.application.mvc;
 
+import developen.common.commercial.mvc.SystemCompany;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.mvc.Model;
 
@@ -10,9 +11,11 @@ public class LoginModel extends Model implements Login{
 
 	private SystemPerson systemPerson;
 	
-	private LoginState modelState;
-
 	private String password;
+
+	private SystemCompany systemCompany;
+	
+	private LoginState modelState;
 	
 
 	public SystemPerson getSystemPerson() {
@@ -55,6 +58,26 @@ public class LoginModel extends Model implements Login{
 	}
 
 
+	public SystemCompany getSystemCompany() {
+		
+		return systemCompany;
+		
+	}
+	
+
+	public void setSystemCompany(SystemCompany newValue) {
+		
+		
+		SystemCompany oldValue = this.systemCompany;
+		
+		this.systemCompany = newValue;
+		
+		firePropertyChange("SystemCompany", oldValue, newValue);
+		
+		
+	}
+
+	
 	public void setModelState(LoginState state) {
 	
 		

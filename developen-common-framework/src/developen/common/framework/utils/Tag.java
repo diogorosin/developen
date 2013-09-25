@@ -1,8 +1,10 @@
 package developen.common.framework.utils;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 
@@ -11,8 +13,19 @@ import javax.swing.ImageIcon;
 public class Tag {
 
 
-	private List<TagParam> params;
+	public static final String FIELD = "{$field}";
+	
+	public static final String MAXLENGHT = "{$maxLength}";
+	
+	public static final String MINLENGHT = "{$minLength}";
+	
+	public static final String FIRST_VALUE = "{$first_value}";
+	
+	public static final String SECOND_VALUE = "{$second_value}";
 
+
+	private HashMap<String, Object> parameters;
+	
 	private String key;
 
 	
@@ -40,17 +53,6 @@ public class Tag {
 	}
 
 	
-	public Tag(String tag, List<TagParam> params){
-
-		
-		setKey(tag);
-
-		setParams(params);
-
-		
-	}
-
-
 	public void setKey(String key) {
 
 		this.key = key;
@@ -65,46 +67,32 @@ public class Tag {
 	}
 
 
-	public void setParams(List<TagParam> params){
-
-		this.params = params;
-
-	}
-
-
-	public List<TagParam> getParams(){
+	public HashMap<String, Object> getParams(){
 
 		
-		if (params==null)
+		if (parameters==null)
 
-			params = new ArrayList<TagParam>();
+			parameters = new HashMap<String, Object>();
 
-		return params;
+		return parameters;
 
 		
 	}
 
-
-	public void addParam(TagParam param){
-
-		getParams().add(param);
-
+	
+	public void put(String key, Object value){
+		
+		getParams().put(key, value);
+		
 	}
-
-
-	public void removeParam(TagParam param){
-
-		getParams().remove(param);
-
+	
+	
+	public Object get(String key){
+		
+		return getParams().get(key);
+		
 	}
-
-
-	public void clear() {
-
-		getParams().clear();
-
-	}
-
+	
 
 	public boolean hasHotKey(){
 
@@ -183,14 +171,20 @@ public class Tag {
 
 		String result = I18N.get(getKey(), getClass().getPackage().getName().replace(".", "/"));
 
-		for (TagParam param : getParams())
-
-			result = result.replace(
-					
-					param.getName(),
-					
-					String.valueOf(param.getValue()));
-
+		Iterator<Entry<String, Object>> it = getParams().entrySet().iterator();
+		
+	    while (it.hasNext()) {
+	    	
+	        Map.Entry<String, Object> pairs = it.next();
+	        
+	        result = result.replace(
+	        		
+	        		pairs.getKey(), 
+	        		
+	        		String.valueOf(pairs.getValue()));
+	        
+	    }		
+		
 		return result;
 
 

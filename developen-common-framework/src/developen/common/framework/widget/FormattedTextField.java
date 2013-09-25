@@ -15,6 +15,7 @@ import javax.swing.event.DocumentListener;
 
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 
 public class FormattedTextField extends JFormattedTextField implements Nameable, Checkable {
 
@@ -83,7 +84,7 @@ public class FormattedTextField extends JFormattedTextField implements Nameable,
 	protected void init(){
 
 
-		setPreferredSize(new Dimension(115,24));
+		setPreferredSize(new Dimension(115,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 		addKeyListener(new KeyAdapter(){
 

@@ -11,7 +11,7 @@ import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.FromTag;
 import developen.common.commercial.i18n.ToTag;
@@ -27,9 +27,9 @@ public class MeasureUnitConversionPKView extends DBRowPanel implements View, Che
 
 	private MeasureUnitConversionPKController controller;
 
-	private DBTextField fromField;
+	private DBSearchField fromField;
 	
-	private DBTextField toField;
+	private DBSearchField toField;
 	
 	
 	public MeasureUnitConversionPKView(MeasureUnitConversionPKController controller){
@@ -115,7 +115,7 @@ public class MeasureUnitConversionPKView extends DBRowPanel implements View, Che
 	}
 
 	
-	public DBTextField getFromField() {
+	public DBSearchField getFromField() {
 
 		
 		if (fromField==null){
@@ -132,7 +132,7 @@ public class MeasureUnitConversionPKView extends DBRowPanel implements View, Che
 				
 			});
 
-			fromField = new DBTextField(new FromTag(), MeasureUnitConversionPKController.FROM_PROPERTY);
+			fromField = new DBSearchField(new FromTag(), MeasureUnitConversionPKController.FROM_PROPERTY);
 			
 			fromField.setCondition(new NeverEnabledCondition());
 			
@@ -156,7 +156,7 @@ public class MeasureUnitConversionPKView extends DBRowPanel implements View, Che
 	}
 	
 
-	public DBTextField getToField() {
+	public DBSearchField getToField() {
 
 		
 		if (toField==null){
@@ -173,7 +173,7 @@ public class MeasureUnitConversionPKView extends DBRowPanel implements View, Che
 				
 			});
 
-			toField = new DBTextField(new ToTag(), MeasureUnitConversionPKController.TO_PROPERTY);
+			toField = new DBSearchField(new ToTag(), MeasureUnitConversionPKController.TO_PROPERTY);
 			
 			toField.addCheckListener(this);
 			

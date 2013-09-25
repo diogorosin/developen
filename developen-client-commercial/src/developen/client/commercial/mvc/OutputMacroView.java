@@ -9,7 +9,7 @@ import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
-import developen.client.framework.widget.DBTextField;
+import developen.client.framework.widget.DBSearchField;
 import developen.common.commercial.i18n.Cfop1Tag;
 import developen.common.commercial.i18n.Cfop2Tag;
 import developen.common.commercial.i18n.Cfop3Tag;
@@ -22,6 +22,7 @@ import developen.common.commercial.i18n.StateTag;
 import developen.common.commercial.mvc.OutputCfop;
 import developen.common.commercial.mvc.OutputMacro;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -31,29 +32,29 @@ public class OutputMacroView extends MacroView {
 
 	private static final long serialVersionUID = -6224324717586281048L;
 
-	private DBTextField cfopState1Field;
+	private DBSearchField cfopState1Field;
 
-	private DBTextField cfopInterstate1Field;
+	private DBSearchField cfopInterstate1Field;
 
-	private DBTextField cfopExterior1Field;
+	private DBSearchField cfopExterior1Field;
 
-	private DBTextField cfopState2Field;
+	private DBSearchField cfopState2Field;
 
-	private DBTextField cfopInterstate2Field;
+	private DBSearchField cfopInterstate2Field;
 
-	private DBTextField cfopExterior2Field;
+	private DBSearchField cfopExterior2Field;
 
-	private DBTextField cfopState3Field;
+	private DBSearchField cfopState3Field;
 
-	private DBTextField cfopInterstate3Field;
+	private DBSearchField cfopInterstate3Field;
 
-	private DBTextField cfopExterior3Field;
+	private DBSearchField cfopExterior3Field;
 
-	private DBTextField cfopState4Field;
+	private DBSearchField cfopState4Field;
 
-	private DBTextField cfopInterstate4Field;
+	private DBSearchField cfopInterstate4Field;
 
-	private DBTextField cfopExterior4Field;
+	private DBSearchField cfopExterior4Field;
 	
 	private DBRowPanel fiscalTab;
 
@@ -96,6 +97,18 @@ public class OutputMacroView extends MacroView {
 
 		
 		TabbedPane p = super.getTabbedPane();
+
+//		if (s == null){
+//			
+//			s = new JScrollPane(getFiscalTab());
+//			
+//			s.setName(new CfopsTag().toString());
+//			
+//			s.setAutoscrolls(true);
+//
+//			p.add(s);
+//			
+//		}
 		
 		p.add(getFiscalTab());
 		
@@ -145,7 +158,7 @@ public class OutputMacroView extends MacroView {
 			fiscalTab.add(getCfopExterior4Field());
 
 			fiscalTab.setName(new CfopsTag().toString());
-
+			
 		}
 
 		return fiscalTab;
@@ -378,7 +391,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopState1Field() {
+	public DBSearchField getCfopState1Field() {
 
 
 		if (cfopState1Field == null){
@@ -395,13 +408,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopState1Field = new DBTextField(new StateTag(), OutputMacroController.CFOP_STATE_1_PROPERTY);
+			cfopState1Field = new DBSearchField(new StateTag(), OutputMacroController.CFOP_STATE_1_PROPERTY);
 
 			cfopState1Field.addCheckListener(this);
 
 			cfopState1Field.setSearch(cfopSearch);
 
-			cfopState1Field.setPreferredSize(new Dimension(400,24));
+			cfopState1Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopState1Field);
 
@@ -413,7 +426,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopInterstate1Field() {
+	public DBSearchField getCfopInterstate1Field() {
 
 
 		if (cfopInterstate1Field == null){
@@ -430,13 +443,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopInterstate1Field = new DBTextField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_1_PROPERTY);
+			cfopInterstate1Field = new DBSearchField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_1_PROPERTY);
 
 			cfopInterstate1Field.addCheckListener(this);
 
 			cfopInterstate1Field.setSearch(cfopSearch);
 
-			cfopInterstate1Field.setPreferredSize(new Dimension(400,24));
+			cfopInterstate1Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopInterstate1Field);
 
@@ -448,7 +461,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopExterior1Field() {
+	public DBSearchField getCfopExterior1Field() {
 
 
 		if (cfopExterior1Field == null){
@@ -465,13 +478,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopExterior1Field = new DBTextField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_1_PROPERTY);
+			cfopExterior1Field = new DBSearchField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_1_PROPERTY);
 
 			cfopExterior1Field.addCheckListener(this);
 
 			cfopExterior1Field.setSearch(cfopSearch);
 
-			cfopExterior1Field.setPreferredSize(new Dimension(400,24));
+			cfopExterior1Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopExterior1Field);
 
@@ -483,7 +496,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopState2Field() {
+	public DBSearchField getCfopState2Field() {
 
 
 		if (cfopState2Field == null){
@@ -500,13 +513,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopState2Field = new DBTextField(new StateTag(), OutputMacroController.CFOP_STATE_2_PROPERTY);
+			cfopState2Field = new DBSearchField(new StateTag(), OutputMacroController.CFOP_STATE_2_PROPERTY);
 
 			cfopState2Field.addCheckListener(this);
 
 			cfopState2Field.setSearch(cfopSearch);
 
-			cfopState2Field.setPreferredSize(new Dimension(400,24));
+			cfopState2Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopState2Field);
 
@@ -518,7 +531,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopInterstate2Field() {
+	public DBSearchField getCfopInterstate2Field() {
 
 
 		if (cfopInterstate2Field == null){
@@ -535,13 +548,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopInterstate2Field = new DBTextField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_2_PROPERTY);
+			cfopInterstate2Field = new DBSearchField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_2_PROPERTY);
 
 			cfopInterstate2Field.addCheckListener(this);
 
 			cfopInterstate2Field.setSearch(cfopSearch);
 
-			cfopInterstate2Field.setPreferredSize(new Dimension(400,24));
+			cfopInterstate2Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopInterstate2Field);
 
@@ -553,7 +566,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopExterior2Field() {
+	public DBSearchField getCfopExterior2Field() {
 
 
 		if (cfopExterior2Field == null){
@@ -570,13 +583,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopExterior2Field = new DBTextField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_2_PROPERTY);
+			cfopExterior2Field = new DBSearchField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_2_PROPERTY);
 
 			cfopExterior2Field.addCheckListener(this);
 
 			cfopExterior2Field.setSearch(cfopSearch);
 
-			cfopExterior2Field.setPreferredSize(new Dimension(400,24));
+			cfopExterior2Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopExterior2Field);
 
@@ -588,7 +601,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopState3Field() {
+	public DBSearchField getCfopState3Field() {
 
 
 		if (cfopState3Field == null){
@@ -605,13 +618,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopState3Field = new DBTextField(new StateTag(), OutputMacroController.CFOP_STATE_3_PROPERTY);
+			cfopState3Field = new DBSearchField(new StateTag(), OutputMacroController.CFOP_STATE_3_PROPERTY);
 
 			cfopState3Field.addCheckListener(this);
 
 			cfopState3Field.setSearch(cfopSearch);
 
-			cfopState3Field.setPreferredSize(new Dimension(400,24));
+			cfopState3Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopState3Field);
 
@@ -623,7 +636,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopInterstate3Field() {
+	public DBSearchField getCfopInterstate3Field() {
 
 
 		if (cfopInterstate3Field == null){
@@ -640,13 +653,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopInterstate3Field = new DBTextField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_3_PROPERTY);
+			cfopInterstate3Field = new DBSearchField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_3_PROPERTY);
 
 			cfopInterstate3Field.addCheckListener(this);
 
 			cfopInterstate3Field.setSearch(cfopSearch);
 
-			cfopInterstate3Field.setPreferredSize(new Dimension(400,24));
+			cfopInterstate3Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopInterstate3Field);
 
@@ -658,7 +671,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopExterior3Field() {
+	public DBSearchField getCfopExterior3Field() {
 
 
 		if (cfopExterior3Field == null){
@@ -675,13 +688,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopExterior3Field = new DBTextField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_3_PROPERTY);
+			cfopExterior3Field = new DBSearchField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_3_PROPERTY);
 
 			cfopExterior3Field.addCheckListener(this);
 
 			cfopExterior3Field.setSearch(cfopSearch);
 
-			cfopExterior3Field.setPreferredSize(new Dimension(400,24));
+			cfopExterior3Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopExterior3Field);
 
@@ -693,7 +706,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopState4Field() {
+	public DBSearchField getCfopState4Field() {
 
 
 		if (cfopState4Field == null){
@@ -710,13 +723,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopState4Field = new DBTextField(new StateTag(), OutputMacroController.CFOP_STATE_4_PROPERTY);
+			cfopState4Field = new DBSearchField(new StateTag(), OutputMacroController.CFOP_STATE_4_PROPERTY);
 
 			cfopState4Field.addCheckListener(this);
 
 			cfopState4Field.setSearch(cfopSearch);
 
-			cfopState4Field.setPreferredSize(new Dimension(400,24));
+			cfopState4Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopState4Field);
 
@@ -728,7 +741,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopInterstate4Field() {
+	public DBSearchField getCfopInterstate4Field() {
 
 
 		if (cfopInterstate4Field == null){
@@ -745,13 +758,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopInterstate4Field = new DBTextField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_4_PROPERTY);
+			cfopInterstate4Field = new DBSearchField(new InterstateTag(), OutputMacroController.CFOP_INTERSTATE_4_PROPERTY);
 
 			cfopInterstate4Field.addCheckListener(this);
 
 			cfopInterstate4Field.setSearch(cfopSearch);
 
-			cfopInterstate4Field.setPreferredSize(new Dimension(400,24));
+			cfopInterstate4Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopInterstate4Field);
 
@@ -763,7 +776,7 @@ public class OutputMacroView extends MacroView {
 	}
 
 
-	public DBTextField getCfopExterior4Field() {
+	public DBSearchField getCfopExterior4Field() {
 
 
 		if (cfopExterior4Field == null){
@@ -780,13 +793,13 @@ public class OutputMacroView extends MacroView {
 
 			});
 
-			cfopExterior4Field = new DBTextField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_4_PROPERTY);
+			cfopExterior4Field = new DBSearchField(new ExteriorTag(), OutputMacroController.CFOP_EXTERIOR_4_PROPERTY);
 
 			cfopExterior4Field.addCheckListener(this);
 
 			cfopExterior4Field.setSearch(cfopSearch);
 
-			cfopExterior4Field.setPreferredSize(new Dimension(400,24));
+			cfopExterior4Field.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cfopExterior4Field);
 

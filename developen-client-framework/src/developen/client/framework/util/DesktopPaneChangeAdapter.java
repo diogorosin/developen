@@ -1,7 +1,5 @@
-package DesktopPaneChangeListener;
+package developen.client.framework.util;
 
-import developen.client.framework.util.DesktopPaneChangeListener;
-import developen.client.framework.util.DesktopPaneChangedEvent;
 
 public class DesktopPaneChangeAdapter implements DesktopPaneChangeListener {
 

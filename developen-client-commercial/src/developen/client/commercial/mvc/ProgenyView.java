@@ -21,6 +21,7 @@ import developen.client.framework.widget.DBComboBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBNumberField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.client.framework.widget.EditingOrIncludingCondition;
 import developen.common.commercial.i18n.ActiveTag;
@@ -39,6 +40,7 @@ import developen.common.commercial.mvc.ProgenyType;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -52,10 +54,9 @@ public class ProgenyView extends EntryView {
 
 	public static int WIDTH = 800;
 
-	public static int HEIGHT = 600;
+	public static int HEIGHT = 650;
 
 	protected Search identifierSearch;	
-
 	
 	private DBIdentifierField identifierField;
 
@@ -69,9 +70,9 @@ public class ProgenyView extends EntryView {
 
 	private DBNumberField priceField;
 	
-	private DBTextField icmsField;
+	private DBSearchField icmsField;
 	
-	private DBTextField pisCofinsField;
+	private DBSearchField pisCofinsField;
 	
 	
 	private TabbedPane mainTabbedPane;
@@ -212,13 +213,11 @@ public class ProgenyView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), ProgenyController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setPreferredSize(new Dimension(100,24));
+			identifierField.setPreferredSize(new Dimension(100,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -264,7 +263,7 @@ public class ProgenyView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(400,24));
+			denominationField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 
@@ -285,7 +284,7 @@ public class ProgenyView extends EntryView {
 
 			shortDenominationField.addCheckListener(this);
 
-			shortDenominationField.setPreferredSize(new Dimension(300,24));
+			shortDenominationField.setPreferredSize(new Dimension(300,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(shortDenominationField);
 
@@ -382,7 +381,7 @@ public class ProgenyView extends EntryView {
 
 			}
 
-			progenyTypeComboBox.setPreferredSize(new Dimension(220,24));
+			progenyTypeComboBox.setPreferredSize(new Dimension(220,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			progenyTypeComboBox.setCondition(new EditingOrIncludingCondition());
 
@@ -406,7 +405,7 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public DBTextField getIcmsField() {
+	public DBSearchField getIcmsField() {
 
 
 		if (icmsField == null){
@@ -424,13 +423,13 @@ public class ProgenyView extends EntryView {
 			});
 
 
-			icmsField = new DBTextField(new IcmsIcmsSTTag(), ProgenyController.ICMS_PROPERTY);
+			icmsField = new DBSearchField(new IcmsIcmsSTTag(), ProgenyController.ICMS_PROPERTY);
 
 			icmsField.addCheckListener(this);
 
 			icmsField.setSearch(icmsSearch);
 
-			icmsField.setPreferredSize(new Dimension(400,24));
+			icmsField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(icmsField);
 
@@ -442,7 +441,7 @@ public class ProgenyView extends EntryView {
 	}
 
 
-	public DBTextField getPisCofinsField() {
+	public DBSearchField getPisCofinsField() {
 
 
 		if (pisCofinsField == null){
@@ -460,13 +459,13 @@ public class ProgenyView extends EntryView {
 			});
 
 
-			pisCofinsField = new DBTextField(new PisCofinsTag(), ProgenyController.PIS_COFINS_PROPERTY);
+			pisCofinsField = new DBSearchField(new PisCofinsTag(), ProgenyController.PIS_COFINS_PROPERTY);
 
 			pisCofinsField.addCheckListener(this);
 
 			pisCofinsField.setSearch(pisCofinsSearch);
 
-			pisCofinsField.setPreferredSize(new Dimension(400,24));
+			pisCofinsField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(pisCofinsField);
 

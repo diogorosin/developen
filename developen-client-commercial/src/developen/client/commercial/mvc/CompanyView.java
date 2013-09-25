@@ -11,6 +11,7 @@ import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.CnaeTag;
 import developen.common.commercial.i18n.CompanyNameTag;
@@ -20,6 +21,7 @@ import developen.common.commercial.i18n.FiscalTag;
 import developen.common.commercial.mvc.Cnae;
 import developen.common.commercial.mvc.Company;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 
 public class CompanyView extends SubjectView {
@@ -33,7 +35,7 @@ public class CompanyView extends SubjectView {
 
 	private DBTextField fancyNameField;
 
-	private DBTextField cnaeField;
+	private DBSearchField cnaeField;
 
 
 	public CompanyView(CompanyController controller){
@@ -172,7 +174,7 @@ public class CompanyView extends SubjectView {
 
 			fancyNameField.addCheckListener(this);
 
-			fancyNameField.setPreferredSize(new Dimension(400,24));
+			fancyNameField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(fancyNameField);
 
@@ -184,7 +186,7 @@ public class CompanyView extends SubjectView {
 	}
 
 
-	public DBTextField getCnaeField() {
+	public DBSearchField getCnaeField() {
 
 
 		if (cnaeField == null){
@@ -202,13 +204,13 @@ public class CompanyView extends SubjectView {
 			});
 
 
-			cnaeField = new DBTextField(new CnaeTag(), CompanyController.CNAE_PROPERTY);
+			cnaeField = new DBSearchField(new CnaeTag(), CompanyController.CNAE_PROPERTY);
 
 			cnaeField.addCheckListener(this);
 
 			cnaeField.setSearch(cnaeSearch);
 
-			cnaeField.setPreferredSize(new Dimension(400,24));
+			cnaeField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(cnaeField);
 

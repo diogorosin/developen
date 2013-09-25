@@ -38,6 +38,7 @@ import developen.common.framework.messenger.Question;
 import developen.common.framework.messenger.SimplifiedQuestion;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -202,13 +203,11 @@ public class IpiView extends EntryView {
 
 			identifierField = new DBIdentifierField(new IdentifierTag(), IpiController.IDENTIFIER_PROPERTY);
 
-			identifierField.setSearch(getSearch());
-
 			identifierField.addCheckListener(this);
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setSize(new Dimension(150, 24));
+			identifierField.setSize(new Dimension(150, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -229,7 +228,7 @@ public class IpiView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(400, 24));
+			denominationField.setPreferredSize(new Dimension(400, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 
@@ -453,9 +452,9 @@ public class IpiView extends EntryView {
 
 			rulesToolBar = new ToolBar();
 
-			rulesToolBar.add(getAddRuleAction());
-
 			rulesToolBar.add(getEditRuleAction());
+
+			rulesToolBar.add(getAddRuleAction());
 
 			rulesToolBar.add(getRemoveRuleAction());
 

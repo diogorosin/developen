@@ -69,12 +69,14 @@ public class CountQuery implements Query, Serializable {
 
 	public List<InnerJoin> getInnerJoins() {
 
+		
 		if (innerJoins==null)
 
 			innerJoins = new ArrayList<InnerJoin>();
 
 		return innerJoins;
 
+		
 	}
 
 
@@ -87,12 +89,14 @@ public class CountQuery implements Query, Serializable {
 
 	public List<Condition> getWhere() {
 
+		
 		if (where==null)
 
 			where = new ArrayList<Condition>(); 
 
 		return where;
 
+		
 	}
 
 
@@ -105,12 +109,14 @@ public class CountQuery implements Query, Serializable {
 
 	public List<Sort> getOrderBy() {
 
+		
 		if (orderBy == null)
 
 			orderBy = new ArrayList<Sort>();
 
 		return orderBy;
 
+		
 	}
 
 
@@ -123,10 +129,12 @@ public class CountQuery implements Query, Serializable {
 
 	public CountQuery add(final Condition condition){
 
+		
 		getWhere().add(condition);
 
 		return this;
 
+		
 	}
 
 

@@ -18,6 +18,7 @@ import developen.common.framework.exception.NotNullException;
 import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
@@ -51,7 +52,7 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 
 		controller.setModel(model);
 
-		setPreferredSize(new Dimension(200,24));
+		setPreferredSize(new Dimension(200,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
@@ -68,7 +69,7 @@ public class DBIeField extends JComponent implements View, CheckListener, Nameab
 
 			numberField = new DBTextField(new IeTag(), RgController.NUMBER_PROPERTY);
 
-			numberField.setPreferredSize(new Dimension(150,24));
+			numberField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			numberField.addCheckListener(this);
 

@@ -69,9 +69,9 @@ public class MeasureUnitConversionView extends ListEditorView implements CheckLi
 		
 		ExtendedPanel l = super.getCenterPanel();
 
-		l.setBorder(BorderFactory.createTitledBorder(""));
-		
 		DBRowPanel r = new DBRowPanel(100);
+		
+		r.setBorder(BorderFactory.createTitledBorder(""));
 		
 		r.add(getValueField());
 		

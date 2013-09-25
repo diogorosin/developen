@@ -15,6 +15,7 @@ import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBCheckBox;
 import developen.client.framework.widget.DBIdentifierField;
 import developen.client.framework.widget.DBRowPanel;
+import developen.client.framework.widget.DBSearchField;
 import developen.client.framework.widget.DBTextField;
 import developen.common.commercial.i18n.ActiveTag;
 import developen.common.commercial.i18n.BasicTag;
@@ -33,6 +34,7 @@ import developen.common.commercial.i18n.StockTag;
 import developen.common.commercial.i18n.TributesTag;
 import developen.common.commercial.mvc.FiscalDocumentType;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.TabbedPane;
@@ -44,7 +46,7 @@ public abstract class MacroView extends EntryView {
 
 	public static int WIDTH = 700;
 
-	public static int HEIGHT = 650;
+	public static int HEIGHT = 660;
 
 	protected DBRowPanel headerPanel;
 
@@ -72,7 +74,7 @@ public abstract class MacroView extends EntryView {
 
 	private DBRowPanel basicTab;
 
-	private DBTextField fiscalDocumentTypeField;
+	private DBSearchField fiscalDocumentTypeField;
 
 
 	public MacroView(MacroController controller) {
@@ -247,9 +249,7 @@ public abstract class MacroView extends EntryView {
 
 			identifierField.setPrimaryKey(true);
 
-			identifierField.setSearch(getSearch());
-
-			identifierField.setPreferredSize(new Dimension(75,24));
+			identifierField.setPreferredSize(new Dimension(75,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(identifierField);
 
@@ -270,7 +270,7 @@ public abstract class MacroView extends EntryView {
 
 			denominationField.addCheckListener(this);
 
-			denominationField.setPreferredSize(new Dimension(400,24));
+			denominationField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(denominationField);
 
@@ -485,7 +485,7 @@ public abstract class MacroView extends EntryView {
 	}
 
 
-	public DBTextField getFiscalDocumentTypeField() {
+	public DBSearchField getFiscalDocumentTypeField() {
 
 
 		if (fiscalDocumentTypeField == null){
@@ -502,13 +502,13 @@ public abstract class MacroView extends EntryView {
 
 			});
 
-			fiscalDocumentTypeField = new DBTextField(new ModelTag(), MacroController.FISCAL_DOCUMENT_TYPE_PROPERTY);
+			fiscalDocumentTypeField = new DBSearchField(new ModelTag(), MacroController.FISCAL_DOCUMENT_TYPE_PROPERTY);
 
 			fiscalDocumentTypeField.addCheckListener(this);
 
 			fiscalDocumentTypeField.setSearch(fiscalDocumentTypeSearch);
 
-			fiscalDocumentTypeField.setPreferredSize(new Dimension(400,24));
+			fiscalDocumentTypeField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			getController().addView(fiscalDocumentTypeField);
 

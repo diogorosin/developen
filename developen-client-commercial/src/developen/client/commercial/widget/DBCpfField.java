@@ -22,6 +22,7 @@ import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
@@ -55,7 +56,7 @@ public class DBCpfField extends JComponent implements View, CheckListener, Namea
 
 		controller.setModel(model);
 
-		setPreferredSize(new Dimension(150,24));
+		setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
@@ -76,7 +77,7 @@ public class DBCpfField extends JComponent implements View, CheckListener, Namea
 
 			} catch (ParseException e) {}
 
-			numberField.setPreferredSize(new Dimension(150,24));
+			numberField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
 			numberField.addCheckListener(this);
 

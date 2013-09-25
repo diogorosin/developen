@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.Label;
 import developen.common.framework.widget.Nameable;
 import developen.common.framework.widget.RowPanel;
@@ -37,7 +38,7 @@ public class DBRowPanel extends RowPanel {
 		
 		GridBagConstraints cons = new GridBagConstraints();
 		
-		cons.insets = field instanceof JCheckBox ? new Insets(2,2,2,12) : new Insets(2,2,2,12);
+		cons.insets = field instanceof JCheckBox ? new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2) : new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2);
 		
 		cons.anchor = field instanceof JCheckBox ? GridBagConstraints.NORTHEAST : GridBagConstraints.WEST;
 		
@@ -45,7 +46,7 @@ public class DBRowPanel extends RowPanel {
 		
 		cons.weightx = 0;
 		
-		Label label = ((field instanceof DBSearchableField) && (((DBSearchableField)field).getSearch() != null)) ? new DBLink() : new Label();
+		Label label = ((field instanceof DBSearchableField) && (((DBSearchableField)field).getSearch() != null)) ? new Label() : new Label();
 		
 		if (field instanceof Nameable && !(field instanceof JCheckBox))
 			
@@ -77,7 +78,7 @@ public class DBRowPanel extends RowPanel {
 		//FIELD 1		
 		GridBagConstraints cons1 = new GridBagConstraints();
 		
-		cons1.insets = field1 instanceof JCheckBox ? new Insets(2,2,2,12) : new Insets(2,2,2,12);
+		cons1.insets = field1 instanceof JCheckBox ? new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2) : new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2);
 		
 		cons1.anchor = field1 instanceof JCheckBox ? GridBagConstraints.NORTHEAST : GridBagConstraints.WEST;
 		
@@ -87,7 +88,7 @@ public class DBRowPanel extends RowPanel {
 		
 		cons1.gridwidth = 1;
 		
-		Label label1 = ((field1 instanceof DBSearchableField) && (((DBSearchableField)field1).getSearch() != null)) ? new DBLink() : new Label();
+		Label label1 = ((field1 instanceof DBSearchableField) && (((DBSearchableField)field1).getSearch() != null)) ? new Label() : new Label();
 		
 		if (field1 instanceof Nameable && !(field1 instanceof JCheckBox))
 			
@@ -114,7 +115,7 @@ public class DBRowPanel extends RowPanel {
 		//FIELD 2
 		GridBagConstraints cons2 = new GridBagConstraints();
 		
-		cons2.insets = field2 instanceof JCheckBox ? new Insets(2,2,2,12) : new Insets(2,2,2,12);
+		cons2.insets = field2 instanceof JCheckBox ? new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2) : new Insets(2,2,2,UIConstants.DEFAULT_FIELD_HEIGHT/2);
 		
 		cons2.anchor = field2 instanceof JCheckBox ? GridBagConstraints.NORTHEAST : GridBagConstraints.WEST;
 		
@@ -124,7 +125,7 @@ public class DBRowPanel extends RowPanel {
 		
 		cons2.gridwidth = 1;
 		
-		Label label2 = ((field2 instanceof DBSearchableField) && (((DBSearchableField)field2).getSearch() != null)) ? new DBLink() : new Label();
+		Label label2 = ((field2 instanceof DBSearchableField) && (((DBSearchableField)field2).getSearch() != null)) ? new Label() : new Label();
 		
 		if (field2 instanceof Nameable && !(field2 instanceof JCheckBox))
 			

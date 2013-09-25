@@ -22,6 +22,7 @@ import developen.common.framework.mvc.Controller;
 import developen.common.framework.mvc.EntryState;
 import developen.common.framework.mvc.View;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.Nameable;
@@ -29,353 +30,353 @@ import developen.common.framework.widget.Nameable;
 public class DBCnpjField extends JComponent implements View, CheckListener, Nameable, DBComponent{
 
 
-	private static final long serialVersionUID = 121978123043061571L;
+        private static final long serialVersionUID = 121978123043061571L;
 
-	private String propertyName;
+        private String propertyName;
 
-	private CnpjView numberField;
+        private CnpjView numberField;
 
-	private CnpjController controller;
+        private CnpjController controller;
 
-	private Tag caption;
+        private Tag caption;
 
-	private boolean fixedValue;
-	
-	private Condition condition;
+        private boolean fixedValue;
+        
+        private Condition condition;
 
 
-	public DBCnpjField(Cnpj model){
+        public DBCnpjField(Cnpj model){
 
 
-		setCaption(new CnpjTag());
+                setCaption(new CnpjTag());
 
-		controller = new CnpjController();
+                controller = new CnpjController();
 
-		controller.addView(this);
+                controller.addView(this);
 
-		controller.setModel(model);
+                controller.setModel(model);
 
-		setPreferredSize(new Dimension(150,24));
+                setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
-		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+                setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-		add(getNumberField());
+                add(getNumberField());
 
 
-	}
+        }
 
 
-	public CnpjView getNumberField() {
+        public CnpjView getNumberField() {
 
 
-		if (numberField==null){
+                if (numberField==null){
 
-			try {
+                        try {
 
-				numberField = new CnpjView(CnpjController.NUMBER_PROPERTY);
+                                numberField = new CnpjView(CnpjController.NUMBER_PROPERTY);
 
-			} catch (ParseException e) {}
+                        } catch (ParseException e) {}
 
-			numberField.setPreferredSize(new Dimension(150,24));
+                        numberField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 
-			numberField.addCheckListener(this);
+                        numberField.addCheckListener(this);
 
-			controller.addView(numberField);
+                        controller.addView(numberField);
 
-		}
+                }
 
-		return numberField;
+                return numberField;
 
 
-	}
+        }
 
 
-	public JComponent getComponentAtFirst() {
+        public JComponent getComponentAtFirst() {
 
-		return getNumberField();
+                return getNumberField();
 
-	}
+        }
 
 
-	public void requestFocus(){
+        public void requestFocus(){
 
 
-		if (getComponentAtFirst().isFocusable())
+                if (getComponentAtFirst().isFocusable())
 
-			getComponentAtFirst().requestFocus();
+                        getComponentAtFirst().requestFocus();
 
 
-	}
+        }
 
 
-	public void onCheck(CheckEvent event) throws Exception {
+        public void onCheck(CheckEvent event) throws Exception {
 
 
-		if (event.getCheckable() == getNumberField())
+                if (event.getCheckable() == getNumberField())
 
-			controller.changeNumberProperty(getNumberField().getCnpj());
+                        controller.changeNumberProperty(getNumberField().getCnpj());
 
 
-	}
+        }
 
 
-	public void modelPropertyChanged(PropertyChangeEvent event) {
+        public void modelPropertyChanged(PropertyChangeEvent event) {
 
-		setEnabled(getCondition().analyse(event, this));
+                setEnabled(getCondition().analyse(event, this));
 
-	}
+        }
 
 
-	public void setCaption(Tag fieldName) {
+        public void setCaption(Tag fieldName) {
 
-		this.caption = fieldName;
+                this.caption = fieldName;
 
-	}
+        }
 
 
-	public Tag getCaption() {
+        public Tag getCaption() {
 
-		return caption;
+                return caption;
 
-	}
+        }
 
 
-	public void setPropertyName(String propertyName) {
+        public void setPropertyName(String propertyName) {
 
-		this.propertyName = propertyName;
+                this.propertyName = propertyName;
 
-	}
+        }
 
 
-	public String getPropertyName() {
+        public String getPropertyName() {
 
-		return propertyName;
+                return propertyName;
 
-	}
+        }
 
 
-	public boolean isFixedValue() {
-		
-		return fixedValue;
-		
-	}
+        public boolean isFixedValue() {
+                
+                return fixedValue;
+                
+        }
 
 
-	public void setFixedValue(boolean fixedValue) {
-		
-		this.fixedValue = fixedValue;
-		
-	}
+        public void setFixedValue(boolean fixedValue) {
+                
+                this.fixedValue = fixedValue;
+                
+        }
 
-	
-	public Condition getCondition(){
+        
+        public Condition getCondition(){
 
 
-		if (condition==null)
+                if (condition==null)
 
-			condition = new EditingOrIncludingCondition();
+                        condition = new EditingOrIncludingCondition();
 
-		return condition;
+                return condition;
 
 
-	}
+        }
 
 
-	public void setCondition(Condition condition){
+        public void setCondition(Condition condition){
 
-		this.condition = condition;
+                this.condition = condition;
 
-	}
+        }
 
 
-	class CnpjView extends DBFormattedTextField {
+        class CnpjView extends DBFormattedTextField {
 
 
-		private static final long serialVersionUID = 4281367238150392150L;
+                private static final long serialVersionUID = 4281367238150392150L;
 
 
-		public CnpjView(String propertyname) throws ParseException {
+                public CnpjView(String propertyname) throws ParseException {
 
-			super(new CnpjTag(), propertyname, new MaskFormatter("##.###.###/####-##"));
+                        super(new CnpjTag(), propertyname, new MaskFormatter("##.###.###/####-##"));
 
-		}
+                }
 
 
-		public void init(){
+                public void init(){
 
 
-			super.init();
+                        super.init();
 
-			setFocusLostBehavior(JFormattedTextField.PERSIST);
+                        setFocusLostBehavior(JFormattedTextField.PERSIST);
 
-			setPreferredSize(new Dimension(150,24));
+                        setPreferredSize(new Dimension(150,24));
 
 
-		}
+                }
 
 
-		public void modelPropertyChanged(PropertyChangeEvent evt) {
+                public void modelPropertyChanged(PropertyChangeEvent evt) {
 
 
-			if (evt.getPropertyName().equals("ModelState")) {
+                        if (evt.getPropertyName().equals("ModelState")) {
 
-				if (!isPrimaryKey())
+                                if (!isPrimaryKey())
 
-					setEnabled(evt.getNewValue().equals(EntryState.INCLUDING) 
+                                        setEnabled(evt.getNewValue().equals(EntryState.INCLUDING) 
 
-							|| evt.getNewValue().equals(EntryState.EDITING));
+                                                        || evt.getNewValue().equals(EntryState.EDITING));
 
-			} else {
+                        } else {
 
-				if (evt.getPropertyName().equals(getPropertyName())){
+                                if (evt.getPropertyName().equals(getPropertyName())){
 
-					if (evt.getNewValue()==null){
+                                        if (evt.getNewValue()==null){
 
-						setText("");
+                                                setText("");
 
-					} else {
+                                        } else {
 
-						String valueAsText = evt.getNewValue().toString();
+                                                String valueAsText = evt.getNewValue().toString();
 
-						while (valueAsText.length() < 14)
+                                                while (valueAsText.length() < 14)
 
-							valueAsText = "0" + valueAsText;
+                                                        valueAsText = "0" + valueAsText;
 
-						setText(valueAsText);
+                                                setText(valueAsText);
 
-					}
+                                        }
 
-				}
+                                }
 
-			}
+                        }
 
-		}
+                }
 
 
-		public Long getCnpj(){
+                public Long getCnpj(){
 
 
-			String cnpj = getText().replaceAll("[^0-9]*","");
+                        String cnpj = getText().replaceAll("[^0-9]*","");
 
-			Long l = null;
+                        Long l = null;
 
-			if (!cnpj.trim().isEmpty())
+                        if (!cnpj.trim().isEmpty())
 
-				l = Long.valueOf(cnpj);
+                                l = Long.valueOf(cnpj);
 
-			return l;
+                        return l;
 
 
-		}
+                }
 
 
-	}
+        }
 
 
-	class CnpjController extends Controller {
+        class CnpjController extends Controller {
 
 
-		public static final String IDENTIFIER_PROPERTY = "Identifier";
+                public static final String IDENTIFIER_PROPERTY = "Identifier";
 
-		public static final String NUMBER_PROPERTY = "Number";
+                public static final String NUMBER_PROPERTY = "Number";
 
 
-		public Cnpj getModel(){
+                public Cnpj getModel(){
 
-			return (Cnpj) super.getModel();
+                        return (Cnpj) super.getModel();
 
-		}
+                }
 
 
-		public void changeIdentifierProperty(Integer newValue) throws Exception {
+                public void changeIdentifierProperty(Integer newValue) throws Exception {
 
 
-			if (newValue==null)
+                        if (newValue==null)
 
-				throw new NotNullException(new IdentifierTag());
+                                throw new NotNullException(new IdentifierTag());
 
-			setModelProperty(IDENTIFIER_PROPERTY, newValue);
+                        setModelProperty(IDENTIFIER_PROPERTY, newValue);
 
 
-		}
+                }
 
 
-		public void changeNumberProperty(Long newValue) throws Exception {
+                public void changeNumberProperty(Long newValue) throws Exception {
 
 
-			if (newValue == null)
+                        if (newValue == null)
 
-				throw new NotNullException(new CnpjTag());
+                                throw new NotNullException(new CnpjTag());
 
-			boolean valid = false;  
+                        boolean valid = false;  
 
-			String cnpj = newValue.toString();
+                        String cnpj = newValue.toString();
 
-			String base = "00000000000000";  
+                        String base = "00000000000000";  
 
-			if (cnpj.length() <= 14) {
+                        if (cnpj.length() <= 14) {
 
-				if (cnpj.length() < 14)
+                                if (cnpj.length() < 14)
 
-					cnpj = base.substring(0, 14 - cnpj.length()) + cnpj;
+                                        cnpj = base.substring(0, 14 - cnpj.length()) + cnpj;
 
-				int sum = 0;
+                                int sum = 0;
 
-				int dig = 0;
+                                int dig = 0;
 
-				String cnpjCalculed = cnpj.substring(0, 12);
+                                String cnpjCalculed = cnpj.substring(0, 12);
 
-				char[] charCnpj = cnpj.toCharArray();  
+                                char[] charCnpj = cnpj.toCharArray();  
 
-				for (int i = 0; i < 4; i++)
+                                for (int i = 0; i < 4; i++)
 
-					if (charCnpj[i] - 48 >= 0 && charCnpj[i] - 48 <= 9)
+                                        if (charCnpj[i] - 48 >= 0 && charCnpj[i] - 48 <= 9)
 
-						sum += (charCnpj[i] - 48) * (6 - (i + 1));
+                                                sum += (charCnpj[i] - 48) * (6 - (i + 1));
 
-				for (int i = 0; i < 8; i++)
+                                for (int i = 0; i < 8; i++)
 
-					if (charCnpj[i + 4] - 48 >= 0 && charCnpj[i + 4] - 48 <= 9)
+                                        if (charCnpj[i + 4] - 48 >= 0 && charCnpj[i + 4] - 48 <= 9)
 
-						sum += (charCnpj[i + 4] - 48) * (10 - (i + 1));
+                                                sum += (charCnpj[i + 4] - 48) * (10 - (i + 1));
 
-				dig = 11 - (sum % 11);
+                                dig = 11 - (sum % 11);
 
-				cnpjCalculed += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);  
+                                cnpjCalculed += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);  
 
-				sum = 0;
+                                sum = 0;
 
-				for (int i = 0; i < 5; i++)
+                                for (int i = 0; i < 5; i++)
 
-					if (charCnpj[i] - 48 >= 0 && charCnpj[i] - 48 <= 9)
+                                        if (charCnpj[i] - 48 >= 0 && charCnpj[i] - 48 <= 9)
 
-						sum += (charCnpj[i] - 48) * (7 - (i + 1));
+                                                sum += (charCnpj[i] - 48) * (7 - (i + 1));
 
-				for (int i = 0; i < 8; i++)
+                                for (int i = 0; i < 8; i++)
 
-					if (charCnpj[i + 5] - 48 >= 0 && charCnpj[i + 5] - 48 <= 9)
+                                        if (charCnpj[i + 5] - 48 >= 0 && charCnpj[i + 5] - 48 <= 9)
 
-						sum += (charCnpj[i + 5] - 48) * (10 - (i + 1));
+                                                sum += (charCnpj[i + 5] - 48) * (10 - (i + 1));
 
-				dig = 11 - (sum % 11);
+                                dig = 11 - (sum % 11);
 
-				cnpjCalculed += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);
+                                cnpjCalculed += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);
 
-				valid = cnpj.equals(cnpjCalculed);
+                                valid = cnpj.equals(cnpjCalculed);
 
-			}  
+                        }  
 
-			if (!valid)
+                        if (!valid)
 
-				throw new InvalidValueException(newValue, new CnpjTag());
+                                throw new InvalidValueException(newValue, new CnpjTag());
 
-			setModelProperty(NUMBER_PROPERTY, newValue);
+                        setModelProperty(NUMBER_PROPERTY, newValue);
 
 
-		}
+                }
 
 
-	}
+        }
 
 
 }

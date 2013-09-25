@@ -10,6 +10,7 @@ import developen.common.framework.utils.I18N;
 import developen.common.framework.utils.LanguageChangeListener;
 import developen.common.framework.utils.LanguageChangedEvent;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 
 @SuppressWarnings("rawtypes")
 public class ComboBox extends JComboBox implements Nameable, LanguageChangeListener {
@@ -50,7 +51,7 @@ public class ComboBox extends JComboBox implements Nameable, LanguageChangeListe
 
 		I18N.addLanguageChangeListener(this);
 
-		setPreferredSize(new Dimension(115, 24));
+		setPreferredSize(new Dimension(115, UIConstants.DEFAULT_FIELD_HEIGHT));
 
 		addKeyListener(new KeyAdapter() {
 
