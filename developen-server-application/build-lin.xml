@@ -14,7 +14,7 @@
                 	../source/developen-common-persistence.jar
                 	../source/developen-common-finance.jar
                 	../source/developen-server-persistence.jar
-                	../source/postgresql-9.1-902.jdbc4.jar
+                	../source/postgresql-9.2-1004.jdbc41.jar
                 	"/>
             </manifest>
             <fileset dir="/home/diogo/git/developen/developen-server-application/bin"/>
