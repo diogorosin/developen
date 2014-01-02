@@ -354,7 +354,7 @@ public abstract class EntryController extends Controller {
 	protected void onSave() throws Exception{
 
 
-		Session session = DPA.getSessionFactory().createSession(); 
+		Session session = DPA.getSessionFactory().createSession();
 
 		if (isIncluding())
 
