@@ -4,7 +4,7 @@
     	<mkdir dir="c:\server\source"/>
     	<mkdir dir="c:\client\source"/>
         <jar destfile="c:\server\source\developen-common-finance.jar">
-            <fileset dir="c:\Users\Diogo\git\developen\developen-common-finance\bin"/>
+            <fileset dir="c:\git\developen\developen-common-finance\bin"/>
         </jar>
         <copy overwrite="yes" file="c:\server\source\developen-common-finance.jar" todir="c:\client\source"/>
     </target>

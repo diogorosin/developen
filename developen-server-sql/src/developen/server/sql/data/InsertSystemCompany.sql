@@ -1,0 +1,14 @@
+INSERT INTO "Subject"("denomination", "active") VALUES ('INDÚSTRIA E COMÉRCIO DE MÓVEIS HENN LTDA', true);
+INSERT INTO "Address"("identifier", "playArea", "number", "district", "city", "postalCode", "phone") VALUES (2, 'RUA ALEGRE', '812', 'CENTRO', 4474, 89893000, 4936743500);
+INSERT INTO "Company"("subject", "fancyName", "cnae") VALUES (2, 'MÓVEIS HEEN', '3101200');
+INSERT INTO "Cnpj"("identifier", "number") VALUES (2,85355592000117);
+INSERT INTO "Ie"("identifier", "number") VALUES (2,'ISENTO');
+INSERT INTO "SystemCompany"("company") VALUES (2);
+INSERT INTO "SystemPersonSystemCompany"("systemPerson","systemCompany") VALUES (1,2);
+INSERT INTO "Subject"("denomination", "active") VALUES ('TRANSPORTADORA HEEN LTDA', true);
+INSERT INTO "Address"("identifier", "playArea", "number", "district", "city", "postalCode", "phone") VALUES (3, 'RUA ALEGRE', '812', 'CENTRO', 4474, 89893000, 4991159377);
+INSERT INTO "Company"("subject", "fancyName", "cnae") VALUES (3, 'TRANSPORTES HEEN', '4930202');
+INSERT INTO "Cnpj"("identifier", "number") VALUES (3,3362917000124);
+INSERT INTO "Ie"("identifier", "number") VALUES (3,'1234567890');
+INSERT INTO "SystemCompany"("company") VALUES (3);
+INSERT INTO "SystemPersonSystemCompany"("systemPerson","systemCompany") VALUES (1,3);

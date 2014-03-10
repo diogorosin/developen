@@ -3,7 +3,7 @@
     <target name="developen-server-persistence">
     	<mkdir dir="c:\server\source"/>
     	<jar destfile="c:\server\source\developen-server-persistence.jar">
-            <fileset dir="c:\Users\Diogo\git\developen\developen-server-persistence\bin"/>
+            <fileset dir="c:\git\developen\developen-server-persistence\bin"/>
         </jar>
    	</target>
 </project>

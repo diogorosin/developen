@@ -12,10 +12,12 @@ import javax.swing.event.ChangeListener;
 
 import developen.client.commercial.search.IcmsCsosnSearch;
 import developen.client.commercial.search.IcmsCstSearch;
+import developen.client.commercial.search.IcmsRuleSearch;
 import developen.client.commercial.widget.DBIcmsRulePKField;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.mvc.ListEditorController;
 import developen.client.framework.mvc.ListEditorView;
+import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBNumberField;
@@ -54,6 +56,8 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 	private static final long serialVersionUID = -4306601465035148551L;
 
 	private DBIcmsRulePKField identifierField;
+	
+	protected Search identifierSearch;
 
 	private TabbedPane tabbedPane;
 
@@ -217,7 +221,7 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 			getController().addView(identifierField.getFromField());
 
 			getController().addView(identifierField.getToField());
-			
+
 			getController().addView(identifierField.getRuleField());
 
 		}
@@ -403,15 +407,6 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 											getController().changeIcmsSTStaffProperty(Double.valueOf(getIcmsSTStaffField().getValue().toString()));
 
-//										else
-//
-//											if (event.getCheckable()==getCfopGroupField())
-//
-//												getController().changeCfopGroupProperty(getCfopGroupField().getText().isEmpty() 
-//
-//														? new Long(0) 
-//
-//												: Long.valueOf(getCfopGroupField().getText()));
 
 	}
 
@@ -600,45 +595,45 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 			cfopGroupField.setCondition(new EditingOrIncludingListEditorCondition());
 
 			cfopGroupField.setPreferredSize(new Dimension(100,32));
-			
+
 			Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-			
+
 			labelTable.put(new Integer(1), new JLabel("1"));
-			
+
 			labelTable.put(new Integer(2), new JLabel("2"));
-			
+
 			labelTable.put(new Integer(3), new JLabel("3"));
-			
+
 			labelTable.put(new Integer(4), new JLabel("4"));
-			
+
 			cfopGroupField.setLabelTable( labelTable );
 
 			cfopGroupField.setPaintLabels(true);
-			
+
 			cfopGroupField.setPaintTrack(true);
-			
+
 			cfopGroupField.addChangeListener(new ChangeListener() {
-				
+
 				public void stateChanged(ChangeEvent e) {
 
 					JSlider source = (JSlider)e.getSource();
-					
-				    if (!source.getValueIsAdjusting()) {
-				    	
-				    	try {
-				    		
+
+					if (!source.getValueIsAdjusting()) {
+
+						try {
+
 							getController().changeCfopGroupProperty(new Integer(source.getValue()).longValue());
-							
+
 						} catch (Exception e1) {
 
 							e1.printStackTrace();
-							
+
 						}
 
-				    }
-					
+					}
+
 				}
-				
+
 			});
 
 			getController().addView(cfopGroupField);
@@ -649,5 +644,31 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 
 	}
+
+
+	public Search getSearch() {
+
+
+		if (identifierSearch==null){
+
+			identifierSearch = new IcmsRuleSearch();
+
+			identifierSearch.addSearchListener(new SearchAdapter(){
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+//					getController().changeIdentifierProperty(((IcmsRule)event.getSelectedRows().get(0)).getIdentifier());
+
+				}
+
+			});
+
+		}
+
+		return identifierSearch;
+
+
+	}
+
 
 }

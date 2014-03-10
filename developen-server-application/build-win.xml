@@ -14,10 +14,10 @@
                 	..\source\developen-common-persistence.jar
                 	..\source\developen-common-finance.jar
                 	..\source\developen-server-persistence.jar
-                	..\source\postgresql-9.1-902.jdbc4.jar
+                	..\source\postgresql.jar
                 	"/>
             </manifest>
-            <fileset dir="c:\Users\Diogo\git\developen\developen-server-application\bin"/>
+            <fileset dir="c:\git\developen\developen-server-application\bin"/>
         </jar>
    	</target>
 </project>

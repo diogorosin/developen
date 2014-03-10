@@ -3,7 +3,7 @@
     <target name="developen-client-commercial">
     	<mkdir dir="c:\client\source"/>
         <jar destfile="c:\client\source\developen-client-commercial.jar">
-            <fileset dir="c:\Users\Diogo\git\developen\developen-client-commercial\bin"/>
+            <fileset dir="c:\git\developen\developen-client-commercial\bin"/>
         </jar>
     </target>
 </project>

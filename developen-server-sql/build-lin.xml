@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-server-sql" name="Create Runnable Jar for Project developen-server-sql with libraries in sub-folder">
+    <target name="developen-server-sql">
+    	<mkdir dir="/home/diogo/server/sql"/>
+    	<mkdir dir="/home/diogo/server/sql/script"/>
+    	<mkdir dir="/home/diogo/server/sql/tables"/>
+    	<mkdir dir="/home/diogo/server/sql/views"/>
+    	<mkdir dir="/home/diogo/server/sql/data"/>
+   	</target>
+</project>

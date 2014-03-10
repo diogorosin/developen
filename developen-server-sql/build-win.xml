@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="developen-server-sql" name="Create Runnable Jar for Project developen-server-sql with libraries in sub-folder">
+    <target name="developen-server-sql">
+    	<mkdir dir="c:\server\sql"/>
+    	<mkdir dir="c:\server\sql\script"/>
+    	<mkdir dir="c:\server\sql\tables"/>
+    	<mkdir dir="c:\server\sql\views"/>
+    	<mkdir dir="c:\server\sql\data"/>
+   	</target>
+</project>

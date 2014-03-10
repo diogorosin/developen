@@ -9,6 +9,7 @@ import javax.swing.JInternalFrame;
 import developen.client.application.widget.LoggedInAndEntryActiveCondition;
 import developen.client.framework.i18n.OpenSearchTag;
 import developen.client.framework.mvc.EntryView;
+import developen.client.framework.mvc.ListEditorView;
 import developen.client.framework.widget.Condition;
 import developen.client.framework.widget.DBAction;
 import developen.client.osm.Client;
@@ -37,6 +38,9 @@ public class OpenSearchAction extends DBAction {
 			
 			((EntryView) f).getSearch().openSearchView(d);
 		
+		if (f instanceof ListEditorView)
+			
+			((ListEditorView) f).getSearch().openSearchView(d);
 
 	}	
 

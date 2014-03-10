@@ -10,6 +10,8 @@ public enum ListEditorAction {
 	
 	INCLUDE,
 
-	CLEAR_OR_CANCEL
+	CLEAR_OR_CANCEL,
+	
+	SEARCH
 	
 }

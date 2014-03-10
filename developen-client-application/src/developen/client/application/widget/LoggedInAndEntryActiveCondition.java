@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 
 import developen.client.application.mvc.ClientState;
 import developen.client.framework.mvc.EntryView;
+import developen.client.framework.mvc.ListEditorView;
 import developen.client.framework.widget.Condition;
 import developen.common.framework.mvc.View;
 
@@ -24,7 +25,7 @@ public class LoggedInAndEntryActiveCondition extends Condition {
 
 		if (event.getPropertyName().equals("ActiveFrame"))
 
-			setEntry(event.getNewValue() instanceof EntryView);
+			setEntry((event.getNewValue() instanceof EntryView) || (event.getNewValue() instanceof ListEditorView));
 
 		return isLogged() && isEntry();
 

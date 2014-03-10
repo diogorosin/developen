@@ -20,7 +20,7 @@
                 	..\source\developen-common-finance.jar
             	"/>
             </manifest>
-            <fileset dir="c:\Users\Diogo\git\developen\developen-client-osm\bin"/>
+            <fileset dir="c:\git\developen\developen-client-osm\bin"/>
         </jar>
     </target>
 </project>

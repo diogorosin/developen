@@ -1,0 +1,15 @@
+DELETE FROM "IpiCst";
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('00','ENTRADA COM RECUPERAÇÃO DE CRÉDITO');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('01','ENTRADA TRIBUTADA COM ALÍQUOTA ZERO');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('02','ENTRADA ISENTA');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('03','ENTRADA NÃO TRIBUTADA');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('04','ENTRADA IMUNE');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('05','ENTRADA COM SUSPENSÃO');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('49','OUTRAS ENTRADAS');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('50','SAÍDA TRIBUTADA');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('51','SAÍDA TRIBUTÁVEL COM ALÍQUOTA ZERO');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('52','SAÍDA ISENTA');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('53','SAÍDA NÃO TRIBUTADA');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('54','SAÍDA IMUNE');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('55','SAÍDA COM SUSPENSÃO');
+INSERT INTO "IpiCst" ("identifier", "denomination") VALUES ('99','OUTRAS SAÍDAS');

@@ -1,7 +1,9 @@
 package developen.client.framework.mvc;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 
@@ -16,7 +18,10 @@ import javax.swing.event.InternalFrameEvent;
 import developen.client.framework.action.CancelAction;
 import developen.client.framework.action.DeleteAction;
 import developen.client.framework.action.SaveAction;
+import developen.client.framework.action.SearchAction;
 import developen.client.framework.i18n.EntryTag;
+import developen.client.framework.search.Search;
+import developen.client.framework.widget.DBSearchableField;
 import developen.common.framework.messenger.Messenger;
 import developen.common.framework.mvc.ListEditorState;
 import developen.common.framework.widget.Button;
@@ -45,6 +50,8 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 	private Button saveButton;
 
 	private SaveAction saveAction;
+
+	private SearchAction searchAction;
 
 	private DeleteAction deleteAction;
 
@@ -164,6 +171,20 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 				KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0), 
 
 				ListEditorAction.DELETE);
+
+		getActionMap().put(ListEditorAction.SEARCH, getSearchAction());
+
+		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+
+				KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.SHIFT_DOWN_MASK), 
+
+				ListEditorAction.SEARCH);
+
+		getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+
+				KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0), 
+
+				ListEditorAction.SEARCH);
 
 		getContentPane().setLayout(new BorderLayout());
 
@@ -317,6 +338,57 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 	}
 
 
+	public SearchAction getSearchAction(){
+
+
+		if (searchAction == null){
+
+			searchAction = new SearchAction() {
+
+				private static final long serialVersionUID = 1L;
+
+				public void actionPerformed(ActionEvent e) {
+
+					JInternalFrame f = (JInternalFrame) e.getSource();
+					
+					if (e.getModifiers()==ActionEvent.SHIFT_MASK){
+
+						getSearch().openSearchView(getDesktopPane());
+
+					} else {
+
+						Component c = f.getFocusOwner();
+
+						if (c!=null){
+
+							if (c instanceof DBSearchableField)
+
+								((DBSearchableField) c).getSearch().openSearchView(getDesktopPane());
+
+							else
+
+								getSearch().openSearchView(getDesktopPane());
+
+						} else 
+
+							getSearch().openSearchView(getDesktopPane());
+
+					}
+
+				}
+
+			};
+
+			getController().addView(searchAction);
+
+		}
+
+		return searchAction;
+
+
+	}
+
+	
 	public CancelAction getCancelAction(){
 
 
@@ -442,5 +514,7 @@ public abstract class ListEditorView extends InternalFrame implements CheckListe
 
 	public abstract JComponent getComponentAtTop(); 
 
+	public abstract Search getSearch();
 
+	
 }

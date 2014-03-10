@@ -4,7 +4,7 @@
     	<mkdir dir="c:\server\source"/>
     	<mkdir dir="c:\client\source"/>
     	<jar destfile="c:\server\source\developen-common-persistence.jar">
-    	     <fileset dir="c:\Users\Diogo\git\developen\developen-common-persistence\bin"/>
+    	     <fileset dir="c:\git\developen\developen-common-persistence\bin"/>
     	</jar>
         <copy overwrite="yes" file="c:\server\source\developen-common-persistence.jar" todir="c:\client\source"/>
     </target>

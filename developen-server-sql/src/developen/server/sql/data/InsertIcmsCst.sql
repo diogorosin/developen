@@ -1,0 +1,12 @@
+DELETE FROM "IcmsCst";
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('51', 'COM DIFERIMENTO');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('70', 'COM REDUÇÃO BC E COBRANÇA ICMS SUBSTITUIÇÃO TRIBUTARIA');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('20', 'COM REDUÇÃO DE BASE DE CÁLCULO');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('50', 'COM SUSPENSÃO');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('60', 'ICMS COBRADO ANTERIORMENTE POR SUBSTITUIÇÃO TRIBUTARIA');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('40', 'ISENTA');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('30', 'ISENTA OU NÃO TRIBUTADA E COM COBRANÇA ICMS POR SUBSTITUIÇÃO TRIBUTARIA');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('41', 'NÃO TRIBUTADA');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('90', 'OUTRAS');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('10', 'TRIBUTADA E COM COBRANÇA ICMS POR SUBSTITUIÇÃO TRIBUTARIA');
+INSERT INTO "IcmsCst" ("identifier", "denomination") VALUES ('00', 'TRIBUTADA INTEGRALMENTE');
