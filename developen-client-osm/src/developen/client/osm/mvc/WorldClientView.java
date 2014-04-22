@@ -63,6 +63,7 @@ import developen.client.finance.mvc.PaymentConditionView;
 import developen.client.finance.mvc.ReceiptConditionController;
 import developen.client.finance.mvc.ReceiptConditionView;
 import developen.client.framework.util.DesktopPaneChangedEvent;
+import developen.client.osm.action.CascadeAction;
 import developen.client.osm.action.ChangePasswordAction;
 import developen.client.osm.action.CloseAction;
 import developen.client.osm.action.CompanyEntryAction;
@@ -172,6 +173,8 @@ public class WorldClientView extends ClientView{
 	
 	private ApplicationTag caption;
 
+	protected CascadeAction cascadeAction;
+	
 	protected CloseAction closeAction;
 
 	protected OpenEntryAction openEntryAction;
@@ -190,7 +193,7 @@ public class WorldClientView extends ClientView{
 
 	protected EnglishUSARadioButtonMenuItem englishUSARadioButtonMenuItem;
 
-	protected EntryAction changePasswordAction;
+	protected ChangePasswordAction changePasswordAction;
 
 	protected SystemPersonEntryAction systemPersonEntryAction;
 
@@ -242,7 +245,7 @@ public class WorldClientView extends ClientView{
 
 	protected PaymentConditionEntryAction paymentConditionEntryAction;
 
-
+	
 	public WorldClientView(ClientController controller) {
 
 		super(controller);
@@ -785,7 +788,7 @@ public class WorldClientView extends ClientView{
 
 		if (closeAction == null)
 
-			closeAction = new CloseAction(getController());
+			closeAction = new CloseAction();
 
 		return closeAction;
 
@@ -844,7 +847,24 @@ public class WorldClientView extends ClientView{
 	}
 
 
-	protected EntryAction getChangePasswordAction() {
+	protected CascadeAction getCascadeAction() {
+
+
+		if (cascadeAction == null){
+
+			cascadeAction = new CascadeAction();
+
+			getController().addView(cascadeAction);
+
+		}
+
+		return cascadeAction;
+
+
+	}
+
+	
+	protected ChangePasswordAction getChangePasswordAction() {
 
 
 		if (changePasswordAction == null){
@@ -1962,5 +1982,6 @@ public class WorldClientView extends ClientView{
 
 
 	}
+
 
 }

@@ -21,7 +21,7 @@ public class HelpAboutController extends Controller {
 	}
 	
 	
-	public void standBy() throws Exception{
+	public void clear() throws Exception{
 
 		
 		onBeforeClear();

@@ -28,11 +28,12 @@ import developen.client.framework.widget.AllwaysEnabledCondition;
 import developen.client.framework.widget.DBPasswordField;
 import developen.client.framework.widget.DBRowPanel;
 import developen.client.framework.widget.DBSearchField;
+import developen.client.framework.widget.NeverEnabledCondition;
 import developen.common.commercial.i18n.SystemPersonTag;
 import developen.common.commercial.mvc.SystemPerson;
 import developen.common.framework.messenger.Messenger;
-import developen.common.framework.mvc.Controller;
 import developen.common.framework.utils.Tag;
+import developen.common.framework.utils.UIConstants;
 import developen.common.framework.widget.Button;
 import developen.common.framework.widget.ButtonPanel;
 import developen.common.framework.widget.ButtonPanelAligment;
@@ -64,10 +65,9 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 	
 	private DBPasswordField confirmNewPasswordField;
 	
-	private SystemPersonSearch systemPersonSearch;
 	
 
-	public ChangePasswordView(Controller controller) {
+	public ChangePasswordView(ChangePasswordController controller) {
 
 		super(controller);
 
@@ -176,7 +176,7 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 	public void buildInterface(){
 
 		
-		setSize(new Dimension(650,300));
+		setSize(new Dimension(700,300));
 		
 		DBRowPanel l = new DBRowPanel(150);
 		
@@ -246,31 +246,27 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 	
 		if (systemPersonField == null){
 
-			systemPersonField = new DBSearchField(new SystemPersonTag(), ChangePasswordController.SYSTEMPERSON_PROPERTY){
+			SystemPersonSearch systemPersonSearch = new SystemPersonSearch(true);
+			
+			systemPersonSearch.addSearchListener(new SearchAdapter() {
+				
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
 
-				private static final long serialVersionUID = 1L;
-
-				public void modelPropertyChanged(PropertyChangeEvent evt) {
-
-					if (evt.getPropertyName().equals("ModelState")) {
-
-						setEnabled(false);
-
-					} else 
-
-						if (evt.getPropertyName().equals(getPropertyName()))
-
-							setText(evt.getNewValue()==null ? "" : evt.getNewValue().toString());
+					getController().changeSystemPersonProperty((SystemPerson)event.getSelectedRows().get(0));
 
 				}
+				
+			});
 
-			};
+			systemPersonField = new DBSearchField(new SystemPersonTag(), ChangePasswordController.SYSTEMPERSON_PROPERTY);
 			
 			systemPersonField.addCheckListener(this);
 			
-			systemPersonField.setColumns(27);
+			systemPersonField.setPreferredSize(new Dimension(400,UIConstants.DEFAULT_FIELD_HEIGHT));
 			
-			systemPersonField.setSearch(getSystemPersonSearch());
+			systemPersonField.setSearch(systemPersonSearch);
+			
+			systemPersonField.setCondition(new NeverEnabledCondition());
 			
 			getController().addView(systemPersonField);
 
@@ -291,7 +287,7 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 			
 			newPasswordField.addCheckListener(this);
 			
-			newPasswordField.setColumns(10);
+			newPasswordField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 			
 			newPasswordField.setCondition(new AllwaysEnabledCondition());
 			
@@ -328,7 +324,7 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 			
 			confirmNewPasswordField.addCheckListener(this);
 			
-			confirmNewPasswordField.setColumns(10);
+			confirmNewPasswordField.setPreferredSize(new Dimension(150,UIConstants.DEFAULT_FIELD_HEIGHT));
 			
 			getController().addView(confirmNewPasswordField);
 
@@ -475,29 +471,4 @@ public class ChangePasswordView extends InternalFrame implements CheckListener{
 	}
 
 	
-	public SystemPersonSearch getSystemPersonSearch(){
-
-		
-		if (systemPersonSearch == null){
-
-			systemPersonSearch = new SystemPersonSearch(true);
-			
-			systemPersonSearch.addSearchListener(new SearchAdapter() {
-				
-				public void onSearchConfirmed(SearchEvent event) throws Exception {
-
-					getController().changeSystemPersonProperty((SystemPerson)event.getSelectedRows().get(0));
-
-				}
-				
-			});
-
-		}
-		
-		return systemPersonSearch;
-
-		
-	}
-	
-
 }

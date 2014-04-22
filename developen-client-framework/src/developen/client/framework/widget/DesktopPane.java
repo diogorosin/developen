@@ -1,6 +1,7 @@
 package developen.client.framework.widget;
 
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,21 +20,21 @@ public class DesktopPane extends JDesktopPane {
 	private static final long serialVersionUID = -1663297939028752251L;
 
 	private List<DesktopPaneChangeListener> desktopPaneChangeListeners;
-	
-	
+
+
 	public List<DesktopPaneChangeListener> getDesktopPaneChangeListeners() {
 
-		
+
 		if (desktopPaneChangeListeners==null)
-			
+
 			desktopPaneChangeListeners = new ArrayList<DesktopPaneChangeListener>();
-		
+
 		return desktopPaneChangeListeners;
-		
-		
+
+
 	}
 
-	
+
 	public synchronized void addDesktopPaneChangeListener(DesktopPaneChangeListener listener) {
 
 
@@ -53,27 +54,27 @@ public class DesktopPane extends JDesktopPane {
 
 
 	public void fireInternalFrameActived(DesktopPaneChangedEvent event){
-		
-		
+
+
 		for (DesktopPaneChangeListener t : getDesktopPaneChangeListeners())
 
 			t.internalFrameActived(event);
 
-		
+
 	}
 
-	
+
 	public void fireInternalFrameDeactived(DesktopPaneChangedEvent event){
-		
-		
+
+
 		for (DesktopPaneChangeListener t : getDesktopPaneChangeListeners())
 
 			t.internalFrameDeactived(event);
 
-		
+
 	}
-	
-	
+
+
 	public Component add(Component component){
 
 
@@ -85,21 +86,21 @@ public class DesktopPane extends JDesktopPane {
 
 
 					DesktopPaneChangedEvent event = new DesktopPaneChangedEvent(arg0.getInternalFrame());
-					
+
 					fireInternalFrameActived(event);
 
-					
+
 				}
 
 
 				public void internalFrameDeactivated(InternalFrameEvent arg0) {
 
-					
+
 					DesktopPaneChangedEvent event = new DesktopPaneChangedEvent(arg0.getInternalFrame());
-					
+
 					fireInternalFrameDeactived(event);
 
-					
+
 				}
 
 
@@ -107,7 +108,37 @@ public class DesktopPane extends JDesktopPane {
 
 		return super.add(component);
 
-		
+
+	}
+
+
+	public void cascade(){
+
+		int separation = 24;
+
+		Rectangle dBounds = getBounds();
+
+		JInternalFrame[] frames = getAllFrames();
+
+		if (frames.length == 0) 
+
+			return;
+
+		int margin = frames.length * separation + separation;
+
+		int width = dBounds.width - margin;
+
+		int height = dBounds.height - margin;
+
+		for ( int i = 0; i < frames.length; i++) {
+
+			frames[i].setBounds(separation + dBounds.x + i * separation,
+
+					separation + dBounds.y + i*separation,
+
+					width, height );
+		}
+
 	}
 
 

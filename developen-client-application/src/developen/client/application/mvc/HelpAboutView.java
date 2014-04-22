@@ -19,7 +19,6 @@ import developen.client.application.i18n.HelpAboutTag;
 import developen.client.application.i18n.HelpTag;
 import developen.client.framework.action.CancelAction;
 import developen.common.framework.messenger.Messenger;
-import developen.common.framework.mvc.Controller;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.widget.Button;
 import developen.common.framework.widget.ButtonPanel;
@@ -44,7 +43,7 @@ public class HelpAboutView extends InternalFrame {
 	private Label infoLabel;	
 
 	
-	public HelpAboutView(Controller controller) {
+	public HelpAboutView(HelpAboutController controller) {
 
 		super(controller);
 

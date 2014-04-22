@@ -18,6 +18,7 @@ import developen.client.application.i18n.ModulesTag;
 import developen.client.application.i18n.ParameterizationTag;
 import developen.client.application.i18n.PreferencesTag;
 import developen.client.application.i18n.SecurityTag;
+import developen.client.application.i18n.WindowsTag;
 import developen.client.framework.util.DesktopPaneChangeListener;
 import developen.client.framework.widget.DesktopPane;
 import developen.common.framework.messenger.Messenger;
@@ -62,6 +63,8 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 	protected Menu preferencesIdiomMenu;
 
 	protected Menu helpMenu;
+	
+	protected Menu windowsMenu;
 
 	protected LoginModel loginModel;
 
@@ -140,6 +143,13 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 							getSystemCompanyEntryAction()
 
 						}
+
+					},
+					
+					new Object[]{
+						new WindowsTag(),
+
+						getCascadeAction()
 
 					}
 
@@ -358,6 +368,8 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 			menu.add(getAdministratorMenu());
 
 			menu.add(getPreferencesMenu());
+			
+			menu.add(getWindowsMenu());
 
 			menu.add(getHelpMenu());
 
@@ -502,6 +514,23 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 	}
 
 
+	protected Menu getWindowsMenu(){
+
+
+		if (windowsMenu==null){
+
+			windowsMenu = new Menu(new WindowsTag());
+
+			windowsMenu.add(getCascadeAction());
+			
+		}
+
+		return windowsMenu;
+
+
+	}
+
+	
 	protected Menu getHelpMenu(){
 
 
@@ -541,13 +570,16 @@ public abstract class ClientView extends Frame implements DesktopPaneChangeListe
 	protected abstract EnglishUSARadioButtonMenuItem getEnglishUSARadioButtonMenuItem();
 
 
+	protected abstract Action getCascadeAction();
+	
+	
 	protected abstract Action getHelpAboutAction();
 
 
 	protected abstract Action getHelpAction();
 
 
-	protected abstract EntryAction getChangePasswordAction();
+	protected abstract Action getChangePasswordAction();
 
 
 	protected abstract EntryAction getSystemCompanyEntryAction();
