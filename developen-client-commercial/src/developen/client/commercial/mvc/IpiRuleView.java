@@ -5,11 +5,13 @@ import java.awt.Dimension;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
+import developen.client.commercial.search.IcmsRuleSearch;
 import developen.client.commercial.search.IpiCstSearch;
 import developen.client.commercial.widget.DBIpiRulePKField;
 import developen.client.framework.exception.ManyRecordsFoundException;
 import developen.client.framework.mvc.ListEditorController;
 import developen.client.framework.mvc.ListEditorView;
+import developen.client.framework.search.Search;
 import developen.client.framework.search.SearchAdapter;
 import developen.client.framework.search.SearchEvent;
 import developen.client.framework.widget.DBNumberField;
@@ -36,6 +38,8 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 
 	private static final long serialVersionUID = -1296658874235394101L;
+
+	protected Search identifierSearch;
 
 	private DBIpiRulePKField identifierField;
 
@@ -301,6 +305,29 @@ public class IpiRuleView extends ListEditorView implements CheckListener {
 
 					getController().changeIpiStaffProperty(Double.valueOf(getIpiStaffField().getValue().toString()));
 
+
+	}
+
+
+	public Search getSearch() {
+
+		if (identifierSearch==null){
+
+			identifierSearch = new IpiRuleSearch();
+
+			identifierSearch.addSearchListener(new SearchAdapter(){
+
+				public void onSearchConfirmed(SearchEvent event) throws Exception {
+
+//					getController().changeIdentifierProperty(((IcmsRule)event.getSelectedRows().get(0)).getIdentifier());
+
+				}
+
+			});
+
+		}
+
+		return identifierSearch;
 
 	}
 

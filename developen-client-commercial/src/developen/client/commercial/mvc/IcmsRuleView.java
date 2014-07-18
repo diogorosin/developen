@@ -42,6 +42,7 @@ import developen.common.commercial.i18n.StaffTag;
 import developen.common.commercial.i18n.TributeSituationTag;
 import developen.common.commercial.mvc.IcmsCsosn;
 import developen.common.commercial.mvc.IcmsCst;
+import developen.common.commercial.mvc.IcmsRule;
 import developen.common.framework.utils.FormatFactory;
 import developen.common.framework.utils.Tag;
 import developen.common.framework.utils.UIConstants;

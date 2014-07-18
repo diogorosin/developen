@@ -1,7 +1,6 @@
 package developen.client.framework.widget;
 
 import java.awt.Component;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,22 +83,17 @@ public class DesktopPane extends JDesktopPane {
 
 				public void internalFrameActivated(InternalFrameEvent arg0) {
 
-
 					DesktopPaneChangedEvent event = new DesktopPaneChangedEvent(arg0.getInternalFrame());
 
 					fireInternalFrameActived(event);
 
-
 				}
 
-
 				public void internalFrameDeactivated(InternalFrameEvent arg0) {
-
 
 					DesktopPaneChangedEvent event = new DesktopPaneChangedEvent(arg0.getInternalFrame());
 
 					fireInternalFrameDeactived(event);
-
 
 				}
 
@@ -114,29 +108,34 @@ public class DesktopPane extends JDesktopPane {
 
 	public void cascade(){
 
-		int separation = 24;
+		try {
 
-		Rectangle dBounds = getBounds();
+			JInternalFrame[] frames = getAllFrames();
 
-		JInternalFrame[] frames = getAllFrames();
+			JInternalFrame selectedFrame = getSelectedFrame();
 
-		if (frames.length == 0) 
+			int x = 0;
 
-			return;
+			int y = 0;
 
-		int margin = frames.length * separation + separation;
+			for (int k = frames.length - 1; k >= 0; k--) {
 
-		int width = dBounds.width - margin;
+				frames[k].setLocation(x, y);
 
-		int height = dBounds.height - margin;
+				x += 25;
 
-		for ( int i = 0; i < frames.length; i++) {
+				y += 25;
 
-			frames[i].setBounds(separation + dBounds.x + i * separation,
+			}
 
-					separation + dBounds.y + i*separation,
+			if (selectedFrame != null)
 
-					width, height );
+				setSelectedFrame(selectedFrame);
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+
 		}
 
 	}

@@ -10,12 +10,10 @@ import java.beans.PropertyChangeEvent;
 import java.util.Locale;
 
 import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
@@ -23,7 +21,6 @@ import javax.swing.event.InternalFrameEvent;
 
 import developen.client.application.action.LoginAction;
 import developen.client.application.i18n.AccessControlTag;
-import developen.client.application.i18n.BannerTag;
 import developen.client.application.i18n.LoginTag;
 import developen.client.application.i18n.PasswordTag;
 import developen.client.application.i18n.PreferencesTag;
@@ -59,7 +56,6 @@ import developen.common.framework.widget.CheckEvent;
 import developen.common.framework.widget.CheckListener;
 import developen.common.framework.widget.ExtendedPanel;
 import developen.common.framework.widget.InternalFrame;
-import developen.common.framework.widget.Label;
 
 public class LoginView extends InternalFrame implements CheckListener {
 
@@ -75,8 +71,6 @@ public class LoginView extends InternalFrame implements CheckListener {
 	private Button cancelButton;
 
 	private Button loginButton;
-
-	private Label banner;
 
 	private SearchAction searchAction;
 
@@ -255,13 +249,9 @@ public class LoginView extends InternalFrame implements CheckListener {
 	public void buildInterface(){
 
 
-		setSize(new Dimension(600,500));
-
-		getNorthLayout().add(getBanner());
+		setSize(new Dimension(600,300));
 
 		DBRowPanel l = new DBRowPanel();
-		
-		l.setBorder(BorderFactory.createTitledBorder(""));
 		
 		l.addSeparator(new LoginTag());
 
@@ -314,27 +304,6 @@ public class LoginView extends InternalFrame implements CheckListener {
 	public ImageIcon getInternalFrameIcon() {
 
 		return new SecurityTag().getSmallIcon();
-
-	}
-
-
-	public Label getBanner(){
-
-
-		if (banner==null){
-
-			banner = new Label(new BannerTag());
-			
-			banner.setHorizontalAlignment(JLabel.CENTER);
-			
-			banner.setVerticalAlignment(JLabel.CENTER);
-			
-			banner.setPreferredSize(new Dimension(300,250));
-
-		}
-
-		return banner;
-
 
 	}
 
