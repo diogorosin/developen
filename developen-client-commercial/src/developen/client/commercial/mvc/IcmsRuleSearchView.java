@@ -7,7 +7,6 @@ import javax.swing.ListSelectionModel;
 import developen.client.framework.mvc.SearchController;
 import developen.client.framework.mvc.TableSearchView;
 import developen.common.commercial.i18n.FromTag;
-import developen.common.commercial.i18n.IcmsTag;
 import developen.common.commercial.i18n.RuleTag;
 import developen.common.commercial.i18n.RulesTag;
 import developen.common.commercial.i18n.ToTag;
@@ -21,13 +20,11 @@ public class IcmsRuleSearchView extends TableSearchView {
 
 	private static final long serialVersionUID = 3785608544833186584L;
 
-	public static final int ICMS_COLUMN_INDEX = 0;
+	public static final int FROM_COLUMN_INDEX = 0;
 
-	public static final int FROM_COLUMN_INDEX = 1;
+	public static final int TO_COLUMN_INDEX = 1;
 
-	public static final int TO_COLUMN_INDEX = 2;
-
-	public static final int RULE_COLUMN_INDEX = 3;
+	public static final int RULE_COLUMN_INDEX = 2;
 	
 	protected UneditableTableModel tableModel;
 
@@ -62,10 +59,6 @@ public class IcmsRuleSearchView extends TableSearchView {
 
 			recordTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-			recordTable.getColumnModel().getColumn(ICMS_COLUMN_INDEX).setPreferredWidth(150);
-
-			recordTable.getColumnModel().getColumn(ICMS_COLUMN_INDEX).setMaxWidth(150);
-
 			recordTable.getColumnModel().getColumn(FROM_COLUMN_INDEX).setPreferredWidth(150);
 
 			recordTable.getColumnModel().getColumn(FROM_COLUMN_INDEX).setMaxWidth(150);
@@ -73,10 +66,6 @@ public class IcmsRuleSearchView extends TableSearchView {
 			recordTable.getColumnModel().getColumn(TO_COLUMN_INDEX).setPreferredWidth(150);
 
 			recordTable.getColumnModel().getColumn(TO_COLUMN_INDEX).setMaxWidth(150);
-
-			recordTable.getColumnModel().getColumn(RULE_COLUMN_INDEX).setPreferredWidth(150);
-
-			recordTable.getColumnModel().getColumn(RULE_COLUMN_INDEX).setMaxWidth(150);
 
 		}
 
@@ -93,8 +82,6 @@ public class IcmsRuleSearchView extends TableSearchView {
 
 			tableModel = new UneditableTableModel();
 			
-			tableModel.addColumn(getIcmsColumn());
-
 			tableModel.addColumn(getFromColumn());
 
 			tableModel.addColumn(getToColumn());
@@ -104,19 +91,6 @@ public class IcmsRuleSearchView extends TableSearchView {
 		}
 
 		return tableModel;
-
-
-	}
-
-
-	public Column getIcmsColumn(){
-
-
-		if (icmsColumn == null)
-
-			icmsColumn = new Column(new IcmsTag(), ICMS_COLUMN_INDEX);
-
-		return icmsColumn;
 
 
 	}

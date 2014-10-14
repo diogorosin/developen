@@ -291,7 +291,7 @@ public abstract class EntryController extends Controller {
 		}
 
 
-	};
+	}
 
 
 	protected void onAfterRefresh() throws Exception{

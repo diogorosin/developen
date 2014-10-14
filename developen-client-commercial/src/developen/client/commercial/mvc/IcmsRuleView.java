@@ -658,8 +658,12 @@ public class IcmsRuleView extends ListEditorView implements CheckListener {
 
 				public void onSearchConfirmed(SearchEvent event) throws Exception {
 
-//					getController().changeIdentifierProperty(((IcmsRule)event.getSelectedRows().get(0)).getIdentifier());
-
+					getController().changeFromProperty(((IcmsRule)event.getSelectedRows().get(0)).getIdentifier().getFrom());
+				
+					getController().changeToProperty(((IcmsRule)event.getSelectedRows().get(0)).getIdentifier().getTo());
+				
+					getController().changeRuleProperty(((IcmsRule)event.getSelectedRows().get(0)).getIdentifier().getRule());
+				
 				}
 
 			});
